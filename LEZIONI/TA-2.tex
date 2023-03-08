@@ -1,0 +1,517 @@
+%%% Lecture 2
+
+\section{Fibrazioni}
+
+\lecture[Fibrazioni: proprietà generali. Proprietà del sollevamento dell'omotopia relativa per cofibrazioni. Successione di fibrato e definizione di fibra omotopica. Successione di fibrazione di Barratt-Puppe e successione esatta lunga di omotopia del fibrato e della coppia. Teorema di esistenza delle sezioni di Postnikov.]{2023-03-03}
+
+Lo scopo di oggi è costruire una successione esatta per
+le fibrazioni, analogamente a quanto fatto per la successione
+di Barret-Puppe.
+
+\begin{df}
+	L'\textbf{$n$-esimo gruppo di omotopia} di $X$ è
+	\begin{equation*}
+		\pi_{n}(X,\ast) := [(I^{n},\de I^{n}),(X,\ast)]\,.
+	\end{equation*}
+	Definiamo la versione relativa come
+	\begin{equation*}
+		\pi_{n}(X,A,\ast) := [(I^{n},\de I^{n}, J^{n-1}),(X,A,\ast)]\,,
+	\end{equation*}
+	dove $J^{k} := (\de I^{k} \times I) \cup ( I^{k} \times \{0\} )$
+	è $\de I^{n}$ a cui è stata levata la faccia $I^{n-1} \times \{1\}$.
+\end{df}
+
+Osseviamo che la restrizione alla faccia $I^{n-1} \times \{1\}$ induce
+\begin{equation*}
+	\pi_{n}(X,A,\ast) \to \pi_{n}(A,\ast)\,,
+\end{equation*}
+e ricordiamo che l'inclusione $\ast \subset A$ induce
+\begin{equation*}
+	\pi_{n+1}(X,\ast) \to \pi_{n+1}(X,A,\ast) \to \pi_{n+1}(X,A,\ast) \to \pi_{n}(A,\ast) \dots
+\end{equation*}
+
+Vogliamo dimostrare che questa è una successione esatta.
+\begin{df}
+	Una \textbf{fibrazione} è una mappa $p:E \to B$ che soddisfa
+	la \textbf{homotopy lifting property} (\textbf{HLP}) per ogni spazio $W$,
+	cioè ogni quadrato commutativo della forma
+	\begin{equation}\label{HLP}
+		\begin{tikzcd}
+			W \ar[r] \ar[d, "\iota_{0}"', hook] & E \ar[d, "p"] \\
+			I \times W \ar[r] \ar[ur, dashed] & B\,,
+		\end{tikzcd}\tag{HLP}
+	\end{equation}
+	ammette un sollevamento $I \times W \to E$ che fa commutare il diagramma.
+\end{df}
+
+\begin{exercise}
+	Le fibrazioni sono chiuse rispetto alle seguenti operazioni:
+	\begin{rmnumerate}	
+	\item \textbf{cambio di base}:
+	se $p:E \to B$ è una fibrazione,
+	e consideriamo il \emph{pullback}
+	lungo una qualsiasi mappa $X \to B$ continua 
+	\begin{equation*}
+		\begin{tikzcd}
+			f^*X := X \times_{B} E \ar[d] \ar[r] & E \ar[d, "p"] \\
+			X \ar[r, "f"] & B\,,
+		\end{tikzcd}
+	\end{equation*}
+	allora anche la mappa $X \times_{B} E \to X$ è una fibrazione;
+	
+	\item \textbf{prodotti arbitrari}: data una famiglia di fibrazioni $p_{i}:E_{i} \to B_{i}$,
+	allora anche $\prod E_{i} \to \prod B_{i}$ è una fibrazione;
+	
+	\item \textbf{composizione}: se $p: E \to  B$ e $q:B \to B'$ sono fibrazioni,
+	allora anche $q \circ p$ è una fibrazione; 
+	
+	\item \textbf{esponenziazione}:
+	se $p:E \to B$ è fibrazione,
+	allora per ogni spazio $A$ la mappa indotta per post-composizione
+	$E^{A} \to B^{A}$ è ancora una fibrazione.
+	\end{rmnumerate}
+	\begin{proof}[Una soluzione]
+		YE\todo{Fai esercizietto.}
+	\end{proof}
+\end{exercise}
+
+D'ora in poi lavoreremo nella categoria
+degli spazi puntati, con punto base \emph{non-degenere}.
+\begin{lemma}[HLP relativa]\label{relative-HLP}
+	Sia $A \subset X$ una cofibrazione chiusa
+	e sia $p:E \to B$ una fibrazione. Allora esiste un sollevamento
+	\begin{equation*}
+		\begin{tikzcd}
+			(X \times \{0\}) \cup (A \times I) \ar[d] \ar[r] & E \ar[d, "p"] \\
+			X \times I \ar[r] \ar[ur,dashed] & B\,.
+		\end{tikzcd}
+	\end{equation*}
+\end{lemma}
+
+\begin{prop}
+	Se $i:A \to B$ è una cofibrazione chiusa e puntata 
+	di spazi localmente compatti,
+	con punti base non degeneri, allora la mappa di restrizione di funzioni
+	\begin{equation*}
+		X_{*}^{B} \longrightarrow X_{*}^{A}\,,
+		\quad f \longmapsto f \circ i\,,
+	\end{equation*}
+	è una fibrazione.
+	\begin{proof}
+		Dato uno spazio $V$, consideriamo il diagramma
+		\begin{equation*}
+			\begin{tikzcd}
+				V \ar[r] \ar[d, "\iota_{0}"', hook] & X_{*}^{B} \ar[d] \\
+				I \times V \ar[r] & X_{*}^{A}\,,
+			\end{tikzcd}
+		\end{equation*}
+		e usando la legge esponenziale possiamo riscriverlo come
+		\begin{equation*}
+			\begin{tikzcd}
+				V \times A \ar[r, "\cat{1} \times i"] \ar[d, "\iota_{0}"', hook] 
+				& V \times B \ar[d, "\iota_{0}", hook] \ar[rdd, bend left] & \\
+				I \times V \times A \ar[r] \ar[rrd, bend right=20]
+				& I \times V \times B  \ar[dr, dashed] & \\
+				& & X \,,
+			\end{tikzcd}
+		\end{equation*}
+		e notiamo che la freccia tratteggiata esiste perché $i$ soddisfa la \eqref{HEP}.
+	\end{proof}
+\end{prop}
+
+\begin{oss}
+	L'ipotesi di locale compattezza ci è servita
+	per dire che l'aggiunzione
+	\begin{equation*}
+		C(V,C(A,X)) \simeq C(V \times A,X)
+	\end{equation*}
+	è un omeomorfismo (vedi \parencite[2.4]{tomdieck}).
+	Nel caso $(B,A,\ast) = (I,\de I, 0)$ abbiamo
+	\begin{equation*}
+		X^{I}_{\ast} = P(X) = \Set{\omega:I \to X | \omega(0) = \ast}\,,
+	\end{equation*}
+	quindi abbiamo una naturale mappa di valutazione al tempo $t=1$,
+	la quale definisce una mappa continua $ev_{1} : P(X) \to X$ che inoltre
+	è una fibrazione.
+\end{oss}
+
+Da Lemma~\ref{relative-HLP} otteniamo il seguente
+\begin{cor}\label{htp-lifting}
+	Sia $p:E \to B$ una fibrazione e siano
+	$g:W \to E, f:W \to B$ mappe tali che $p \circ g \sim f$,
+	cioè $g$ è un sollevamento di $f$ a meno di omotopia.
+	\begin{equation*}
+		\begin{tikzcd}[column sep=large]
+			& E \ar[d, "p"] \\
+			W \ar[r, "f"'] \ar[ru, "g", shift left=1ex] \ar[ru, "\overline{g}"', dashed, shift right=0.5ex, shorten=0.5ex]  & B\,.
+		\end{tikzcd}
+	\end{equation*}
+	Allora $g$ è omotopa a un vero sollevamento $\overline{g}$ di $f$,
+	cioè esiste $\overline{g}:W \to E$ tale che $p \circ \overline{g} = f$
+	e $\overline{g} \sim g$.
+\end{cor}
+
+Dal \hyperref[htp-lifting]{Corollario~\ref{htp-lifting}} 
+segue che $g:W \to E$ tale che $p \circ g \sim \ast$,
+allora $g$ è omotopa a $\overline{g}: W \to p^{-1}(\ast)$
+e quindi, posto $F:=p^{-1}(\ast)$, la \textbf{succesione di fibrato}
+\begin{equation*}
+	\begin{tikzcd}
+		F \ar[r] & E \ar[r, "p"] & B
+	\end{tikzcd}
+\end{equation*}
+è \textbf{esatta}, cioè per ogni spazio $W$ ben puntato,
+otteniamo una successione esatta di insiemi puntati 
+\begin{equation*}
+	\begin{tikzcd}
+		{[W,F]_{\ast}} \ar[r] & {[W,E]_{\ast}} \ar[r] & {[W,B]_{\ast}}\,.
+	\end{tikzcd}
+\end{equation*}
+
+
+Se $f:X \to Y$ non è una fibrazione, 
+possiamo fattorizzare
+\begin{equation*}
+	X \longrightarrow T(f) 
+	:= \Set{(x,\omega) \in X \times Y^{I} | \omega(1) = f(x)}\,,
+	\quad x \longmapsto (x, \omega_{f(x)})\,,
+\end{equation*}
+dove $\omega_{f(x)}$ è il cammino costante nel punto $f(x)$.
+Si osserva che questa ``inclusione'' è in realtà 
+un'equivalenza omotopica: per vederlo,
+è sufficiente ``riavvolgere'' ogni cammino sulla seconda
+componente fino al tempo $0$ in maniera continua.
+Otteniamo così il diagramma
+\begin{equation*}
+	\begin{tikzcd}
+		X \ar[rr] \ar[dr, "f"'] & & T(f) \ar[dl, "ev_{0}"] \\
+		& Y & \,.
+	\end{tikzcd}
+\end{equation*}
+
+\begin{exercise}
+	La valutazione $p=ev_{0}:T(f) \to Y$ è una fibrazione.
+\end{exercise}
+
+\begin{df}
+	La \textbf{fibra omotopica} di $f$
+	è la fibra di $p:T(f) \to Y$ nel punto base di $Y$,
+	che è data dallo spazio
+	\begin{equation*}
+		F(f) = \Set{(x,\omega) \in X \times Y^{I}_{\ast} | \omega(1) = f(x)}\,,
+	\end{equation*}
+	dove $0$ è il punto base dell'intervallo $I$.
+\end{df}
+
+La costruzione di $F(f)$ può essere descritta in
+maniera funtoriale come il pullback del seguente diagramma:
+\begin{equation}\label{htpfib-pullback}
+	\begin{tikzcd}
+		F(f) \ar[r] \ar[d, "p(f)"'] & P(Y) = Y^{I}_{\ast} \ar[d, "ev_{1}"] \\
+		X \ar[r, "f"] & Y \,.
+	\end{tikzcd}
+\end{equation}
+Nel caso in cui $f$ sia già una fibrazione,
+questa costruzione non ci dà nulla di nuovo,
+nel senso spiegato dal seguente
+
+\begin{lemma}
+	Se $p:E \to B$ è una fibrazione,
+	allora l'inclusione naturale $F \hookrightarrow F(p)$
+	è un'equivalenza omotopica.
+	\begin{proof}
+		Vediamo la fibra omotopica $F(p)$ come pullback
+		tramite $p$ di $PB \to B$,
+		dove lo spazio dei cammini liberi 
+		$PB = B^{I}_{\ast}$ è contraibile.
+		\begin{equation*}
+			\begin{tikzcd}
+			F(p) \ar[r] \ar[d, "p(f)"'] 
+			& E \ar[d, "p"] \\
+			PB \ar[r, "ev_{1}"'] & B \,.
+			\end{tikzcd}
+		\end{equation*}
+		Questo significa che ``l'inclusione della fibra di $F(p) \to PB$
+		in $F(p)$ è un'equivalenza omotopica'' (vedi Esercizio dopo),
+		tale che la fibra è proprio $F = p^{-1}(\ast)$.
+	\end{proof}
+\end{lemma}
+
+\begin{exercise}
+	In una fibrazione a base contraibile,
+	l'inclusione della fibra nello spazio totale $F \subset E$
+	è una equivalenza omotopica.
+\end{exercise}
+
+
+La mappa $p(f):F(p) \to X$ è una fibrazione, 
+con fibra lo spazio dei loop 
+\begin{equation*}
+	\Omega Y = \Set{\omega \in Y^{I}_{\ast} | \omega(1) = \omega(0) = \ast}\,,
+\end{equation*}
+quindi reiterando la costruzione
+si ottiene la \textbf{successione di fibrazione di Barret-Puppe}
+\begin{equation}
+	\begin{tikzcd}\label{BPfib}
+		\dots \ar[r] \Omega F(f) \ar[r, "\Omega p"]
+		& \Omega X \ar[r, "\Omega f"]
+		& \Omega Y \ar[r, "i"]
+		& F(f) \ar[r, "p"]
+		& X \ar[r,"f"]
+		& Y\,,
+	\end{tikzcd}
+\end{equation}
+che è una successione esatta,
+dato che ogni mappa è una fibrazione
+(a meno di omotopia).
+Dunque, siccome
+\begin{equation*}
+	[S^{0},\Omega^{k}X] = [S^{k}, X] = \pi_{k}(X,\ast)\,,
+\end{equation*}
+applicando il funtore $[S^{0},-]$ a \eqref{BPfib}
+otteniamo la \textbf{successione esatta lunga in omotopia}
+della fibrazione.
+
+\begin{lemma}[\textbf{della fibra omotopica}]\label{lemma-htpfib}
+	Sia $(X, A,\ast)$ una coppia puntata e sia $F$ la fibra
+	omotopica di $A \subset X$.
+	Allora, per ogni $n \ge 1$, c'è un isomorfismo naturale
+	\begin{equation*}
+		\pi_{n}(X,A,\ast) \simeq \pi_{n-1}(F,\ast)
+	\end{equation*}
+	tale che il seguente diagramma commuti:
+	\begin{equation*}
+		\begin{tikzcd}
+			\pi_{n}(X,\ast) \ar[r] \ar[dd, "\simeq"]
+			& \pi_{n}(X,A,\ast) \ar[dd, "\simeq"] \ar[dr] & \\
+			& & \pi_{n-1}(A, \ast) \\
+			\pi_{n-1}(\Omega X, \ast) \ar[r, "i"]
+			& \pi_{n-1}(F,\ast) \ar[ur, "p"] & \,.
+		\end{tikzcd}
+	\end{equation*}
+	\begin{proof}%[Dimostrazione del Lemma]
+		Notiamo innanzitutto che
+		\begin{equation*}
+			\pi_{1}(X,A,\ast) = [(I, \de I, 0), (X,A,\ast)]
+		\end{equation*}
+		corrisponde alle componenti connesse per archi di
+		\begin{equation*}
+			\Set{f:I \to A| f(0) = \ast, f(1) \in A} = F(A \to X)\,,
+		\end{equation*}
+		dunque $\pi_{0}(F, \ast)$. Invece, per $n \ge 1$ si ha
+		\begin{equation*}
+			\Set{f:(I^{n}, \de I^{n}, J^{n-1}) \to (X,A,\ast)}
+			= \Omega^{n-1} F(A \to X)\,,
+		\end{equation*}
+		e si verifica facilmente che il diagramma commuta.
+	\end{proof}
+\end{lemma}
+
+\begin{cor}
+	La succesione di omotopia della coppia è esatta
+	e per $n \ge 2$ è una successione esatta di gruppi,
+	mentre per $n \ge 3$ è successione esatta di gruppi abeliani.
+\end{cor}
+
+\begin{prop}
+	Sia $p:E \to B$ una fibrazione e,
+	date funzioni continue
+	$f_{0},f_{1}: X \to B$,
+	siano $E_{0}$ e $E_{1}$ i rispettivi
+	pullback di $p$.
+	Se $f_{0} \sim f_{1}$, allora $E_{0}$ e $E_{1}$ sono
+	omotopicamente equivalenti.
+	\begin{proof}
+		L'idea è costruire una fibrazione su $B^{X}$ 
+		tale che la fibra di $f$ sia $f^{*}E$,
+		cioè il pullback di $E$ tramite $f$.
+		Scriviamo
+		\begin{equation*}
+			\begin{tikzcd}
+				& E \times_{B} (B^{X} \times X) \ar[r] \ar[d]
+				& E \ar[d, "p"] \\
+				\ast \times X \ar[r] \ar[d] 
+				& B^{X} \times X \ar[r, "ev"] \ar[d, "\pi_{B^{X}}"] & B \\
+				\ast \ar[r, "in_{f}"] & B^{X} & \,,
+			\end{tikzcd}
+		\end{equation*}
+		dove $in_{f}: \ast \mapsto f$. Dato che la composizione
+		\begin{equation*}
+			\begin{tikzcd}[row sep=small]
+				X \ar[r] \ar[rr, bend left=20, "f", shorten=2ex] 
+				& B^{X} \times X \ar[r, "ev"'] & B \\
+				x \ar[r, mapsto] 
+				& (f,x) \ar[r, mapsto] & f(x)\,,
+			\end{tikzcd}
+		\end{equation*}
+		allora il diagramma sopra può essere completato da $f^*E$
+		nel quadrato in alto a sinistra:
+		\begin{equation*}
+			\begin{tikzcd}
+				f^*E \ar[d, dashed] \ar[r, dashed] 
+				& E \times_{B} (B^{X} \times X) \ar[r] \ar[d]
+				& E \ar[d, "p"] \\
+				\ast \times X \ar[r] \ar[d] 
+				& B^{X} \times X \ar[r, "ev"] \ar[d, "\pi_{B^{X}}"] & B \\
+				\ast \ar[r, "in_{f}"] & B^{X} & \,.
+			\end{tikzcd}
+		\end{equation*}
+		%dunque tutte le fibre sono omotopicamente equivalenti.
+		Siccome un'omotopia tra $f_{0}$ e $f_{1}$ 
+		corrisponde a un cammino in $B^{X}$,
+		si conclude grazie all'Esercizio che segue.
+	\end{proof}
+\end{prop}
+
+\begin{exercise}
+	Un cammino $\gamma : I \to B$ induce un'equivalenza omotopica
+	tra $p^{-1}(\gamma(0))$ e $p^{-1}(\gamma(1))$.
+	\begin{equation*}
+		\begin{tikzcd}
+			F_{\gamma(0)} \ar[r] \ar[d, "\iota_{0}"', hook] 
+			& E \ar[d] \\
+			I \times F_{\gamma(0)} \ar[r, "\gamma"] \ar[ur, "\Gamma", dashed]
+			& B\,.
+		\end{tikzcd}
+	\end{equation*}
+\end{exercise}
+
+\begin{lemma}
+	Data una fibrazione $p:E \to B$, con punti base
+	$e_{0} \in E, b_{0} \in B$ e $p(e_{0}) = b_{0}$,
+	allora
+	\begin{equation*}
+		p_{*} : \pi_{*}(E,F,e_{0}) \longrightarrow \pi_{*}(B,b_{0})
+	\end{equation*}
+	è un isomorfismo.
+	\begin{proof}
+		Nella dimostrazione scriveremo $\mathrm{htpfib}$ per indicare la fibra omotopica,
+		mentre $\mathrm{fib}$ è la semplice fibra (la controimmagine del punto base).
+		Dato che $F(p) \to E$ è una fibrazione,
+		sappiamo che $F \hookrightarrow F(p)$
+		è un'equivalenza omotopica.
+		La Proposizione ci dice che
+		\begin{equation*}
+			\mathrm{htpfib}(F \subset E) \simeq \mathrm{htpfib}(F(p) \to E)\,.
+		\end{equation*}
+		Inoltre, per il Lemma si ha
+		\begin{equation*}
+			\mathrm{htpfib}(F(p) \to E) \simeq \mathrm{fib}(F(p) \to E)\,,
+		\end{equation*}
+		dove quest'ultima è lo spazio
+		\begin{equation*}
+			\mathrm{fib}(F(p) \to E) = 
+			\Set{(e_{0},\omega) \in E \times B^{X} | \omega(1) = p(e_{0}) = b_{0}}
+			= \Omega B\,.
+		\end{equation*}
+		La tesi segue dunque dal seguente Esercizio.
+	\end{proof}
+\end{lemma}
+
+\begin{exercise}
+	L'isomorfismo ottenuto dalla composizione 
+	\begin{equation*}
+		\pi_{n}(E,F) \simeq \pi_{n-1}(\mathrm{htpfib}(F \subset E), \ast)
+		\to \pi_{n-1}(\Omega B, \ast) \to \pi_{n}(B, b_{0})
+	\end{equation*}
+	è la mappa indotta da $p$.
+\end{exercise}
+
+\begin{exercise}
+	Data la mappa puntata $f: \Sigma X \to Y$,
+	sia $\Hat{f}:X \to \Omega Y$ la mappa aggiunta.
+	Costruire $g:CX \to PY=Y^{I}_{*}$ tale che il diagramma
+	\begin{equation*}
+		\begin{tikzcd}
+			X \ar[r, hook] \ar[d, "\Hat{f}"] 
+			& CX \ar[d, "g"] \ar[r] 
+			& \Sigma Y \ar[d, "f"] \\ 
+			\Omega Y \ar[r] & PY \ar[r] & Y
+		\end{tikzcd}
+	\end{equation*}
+	commuti.
+\end{exercise}
+
+
+
+
+\chapter{Spazi di Eilenberg-MacLane}
+
+\section{Torri di Postnikov}
+
+Ricordiamo il seguente teorema di \textbf{approssimazione CW}.
+\begin{thm}[\textbf{di approssimazione CW}]\label{CW-approx}
+	Sia $A$ un CW complesso, $k \ge -1$ e $Y$ uno spazio topologico qualsiasi.
+	Sia $f:A \to Y$ tale che
+	$f_{*}:\pi_{i}(A,\ast) \to \pi_{i}(Y,\ast)$
+	siano isomorfismi per $i < k$ e surgettiva per $i = k$.
+	Allora per ogni $n > k$ (eventualmente anche $n=\infty$),
+	esiste un CW complesso $X$ tale che $A \subset X$ sottocomplesso,
+	e esiste un'estensione $F:X \to Y$ tale che
+	\begin{equation*}
+		F_{i} : \pi_{q}(X,\ast) \longrightarrow \pi_{q}(Y,\ast)
+	\end{equation*}
+	è un isomorfismo per $q < n$ e surgettiva per $q=n$
+	\begin{proof}[Idea della dimostrazione]
+		L'idea è di costruire $X$ 
+		incollando su $A$ celle di dimensione $d$,
+		con $k \le i \le n$,
+		sfruttando le informazioni contenute
+		negli isomorfismi dei gruppi di omotopia.
+	\end{proof}
+\end{thm}
+
+Un procedimento analogo mi dà:
+
+\begin{thm}[\textbf{Sezioni di Postnikov}]\label{sez-Postnikov}
+	Per ogni spazio topologico $X$ e
+	per ogni $n \ge 0$,
+	esiste uno spazio $P_{n}(X)$ e una mappa $X \to P_{n}(X)$
+	tale che per ogni punto base $\ast$
+	\begin{rmnumerate}
+		\item la mappa indotta
+		$\pi_{q}(X, \ast) \to \pi_{q}(P_{n}(X),\ast)$
+		è un isomorfismo per $q \le n$;
+		\item i gruppi di omotopia di grado $q > n$ si annullano: $\pi_{q}(P(X),\ast)=0$; 
+		\item la coppia $(P_{n}(X),X)$ è un CW complesso relativo 
+		con celle di dimensione almeno $n+2$.\footnote{Quindi capiamo che le celle sono nella ``parte non relativa'' $P_{n}(X) \setminus X$. Gli spazi $P_{n}$ sono ottenuti incollando su $X$ celle di dimensione $\ge n+2$, in modo tale che il loro bordo sia ($n+1$)-dimensionale e si riesca a ``uccidere'' l'omotopia in grado $\ge n$.}
+	\end{rmnumerate}
+	\begin{proof}
+		Possiamo assumere che $X$ sia connesso, lavorando una componente
+		connessa per volta. Il nostro scopo è quello di ``uccidere'' i
+		gruppi di omotopia superiore di $X$ andando a uccidere
+		una successione di spazi
+		\begin{equation*}
+			X = X(n) \longrightarrow X(n+1) \longrightarrow X(n+2) \longrightarrow \dots
+		\end{equation*}
+		con omotopia uguale a $\pi_{q}(X,\ast)$ per ogni $q \le n$,
+		ma l'$m$-esimo spazio avrà $\pi_{q}(X(m),\ast)=0$ per $n < q \le m$.
+		
+		Poniamo $X(n):=X$ e supponiamo di aver costruito $X(m-1)$.
+		Per ottenere $X(m)$ uccidendo $\pi_{m}(X(m-1),\ast)$
+		e senza ottenere nuove relazioni operiamo nel seguente modo:
+		scegliamo dei generatori $\gamma_{i}$ di $\pi_{m}(X(m-1),\ast)$
+		e dei loro rappresentanti $g_{i}:S^{m} \to X(m-1)$,
+		che usiamo come mappe di incollamento di $(m+1)$-celle su $X(m-1)$.
+		In questo modo, la coppia $\big(X(m),X(m-1)\big)$ così ottenuta 
+		è $m$-connessa\footnote{Ricordiamo che una coppia $(X,Y)$ è \textbf{$m$-connessa} 
+		se l'inclusione $Y \subset X$ induce un isomorfismo di $pi_{q}$ 
+		per ogni $0 \le q \le m$.},
+		dunque considerando la successione esatta lunga in omotopia
+		\begin{equation*}
+			\begin{tikzcd}[column sep=small]
+				\pi_{m+1}\big(X(m),X(m-1)\big) \ar[r, "\de"]
+				& \pi_{m}\big(X(m-1)\big) \ar[r]
+				& \pi_{m}\big(X(m)\big) \ar[r]
+				& \pi_{m}\big(X(m),X(m-1)\big) = 0\,,
+			\end{tikzcd}
+		\end{equation*}
+		deduciamo che $\pi_{m}\big(X(m),\ast\big)=0$ perché $\de$ è surgettiva per costruzione.
+		Si verifica infine che lo spazio $P_{n}(X) := \bigcup_{m \ge n} X(m)$
+		soddisfa le nostre richieste.
+	\end{proof}
+\end{thm}
+
+\begin{df}
+	Chiamiamo lo spazio $P_{n}(X)$ l'\textbf{$n$-esima sezione di Postnikov}.
+\end{df}

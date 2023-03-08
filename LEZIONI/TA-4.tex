@@ -1,0 +1,354 @@
+%%% Lecture 4
+
+%\section{Spazi di Moore}
+%
+%\lecture[Torri di Whitehead. Fattorizzazione di Moore-Postnikov. Unicità spazi di Eilenberg-MacLane CW complessi. Funtorialità della costruzione degli spazi di Eilenberg-MacLane. Definizione della classe fondamentale di un $K(pi,n)$. Teorema di rappresentabilità della coomologia. Esempi.]{2023-03-07}
+%
+%\textbf{COSE sta ripetendo la costruzione di ieri.}
+%
+%Costruiamo un CW complesso $X$ di dimensione $k+1$,
+%il cui scheletro è formato da
+%\begin{itemize}
+%	\item una $0$-cella $\ast$;
+%	\item le $k$-celle date da $\bigvee_{G_{0}} S^{k}$;
+%	\item le $(k+1)$-celle avranno come bordo le $k$-celle sopra.
+%\end{itemize}
+%
+%\textcolor{red}{Riscrivere questa parte nella lezione di ieri per aggiustare.}
+
+\section{Torri di Whitehead}
+
+Fissiamo un punto base $x \in X$ e consideriamo la fibra omotopica $F$
+dell' $n$-sezione di Postnikov $X \to \tau_{\le n} X$.
+Dato che i due spazi hanno la stessa omotopia fino al
+grado $n$ e per $q > n$ si ha $\pi_{q}(\tau_{\le n} X,\ast) = 0$,
+allora la successione esatta lunga in omotopia è
+\begin{equation*}
+	\begin{tikzcd}[column sep=small]
+		\dots \ar[r] & \pi_{n+1}(F,\ast) \ar[r, "\sim"]
+		& \pi_{n+1}(X,x) \ar[r]
+		% & \pi_{q+1}(\tau_{\le n}X, \ast) \ar[r]
+		& 0 \ar[r]
+		& \pi_{n}(F,\ast) \ar[r]
+		& \pi_{n}(X,x) \ar[r, "\sim"]
+		& \pi_{n}(\tau_{\le n} X,\ast) \ar[r]
+		& \dots
+	\end{tikzcd}
+\end{equation*}
+quindi deduciamo che la fibra ha omotopia
+\begin{equation*}
+	\pi_{q}(F,\ast) =
+	\begin{cases}
+		0\,, \quad & \text{se } q \le n\,; \\
+		\pi_{q}(X,x)\,, \quad & \text{se } q > n\,.
+	\end{cases}
+\end{equation*}
+Siccome la situazione in omotopia è l'opposto di quello che succede
+con le sezioni di Postnikov, denotiamo la fibra $\tau_{\ge n} X := F$.
+
+\begin{ex}
+	La fibra $\tau_{\ge 1}X$ è la componente connessa per archi del punto base $x \in X$,
+	se $X \to \pi_{0}(X,x)$ è continua.\todo{Che significa?}
+\end{ex}
+
+\begin{ex}
+	La sezione $\tau_{\ge 2}X$ è uno spazio semplicemente  connesso,
+	con la stessa omotopia superiore di $X$: deduciamo che è il
+	rivestimento univesale di $X$ (nel caso in cui $X$ sia connesso per archi
+	e ammette rivestimento universale).
+\end{ex}
+
+\begin{exercise}
+	La mappa $\tau_{\ge n+1} X \to X$ è unica a meno di omotopia \emph{puntata}
+	ed è la \textbf{mappa terminale} nella categoria $\textbf{HoTop}_{\ast}$
+	delle mappe da spazi $n$-connessi in $X$, i.e. se $Y$
+	è uno spazio con omotopia banale fino al grado $n$, 
+	allora ogni mappa continua $Y \to X$ fattorizza attraverso $\tau_{\ge n+1}X$.
+	\begin{equation*}
+		\begin{tikzcd}
+			Y \ar[dr] \ar[d, dashed, "\exists !"] & \\
+			\tau_{\ge n} X \ar[r] & X \,.
+		\end{tikzcd}
+	\end{equation*}
+\end{exercise}
+
+Partendo da $Y=X$ e ripetendo la costruzione induttivamente,
+otteniamo il diagramma
+\begin{equation}\label{TW}
+	\begin{tikzcd}
+		\dots \ar[d] & \\	
+		\tau_{\ge 2}X \ar[d, "t^{2}"'] \ar[ddr] & \\
+		\tau_{\ge 1}X \ar[d] \ar[dr] & \\
+		\tau_{\ge 0}X  \ar[r, equals] 
+		& X ,,
+	\end{tikzcd}\tag{TW}
+\end{equation}
+chiamato \textbf{torre di Whitehead}.
+In modo analogo a quanto accade per le torri di Postnikov,
+si verifica che la fibra di $t^{2}$
+è uno spazio di Eilenberg-MacLane.
+
+Esiste una costruzione più generale, 
+che enunciamo nel seguente teorema (che non dimostriamo).
+\begin{thm}[\textbf{Fattorizzazione di Moore-Postnikov}]
+	Data una mappa $f:X \to Y$ tra spazi topologici connessi per archi,
+	esiste una successione di spazi $T_{0}f, T_{1}f,\dots, T_{\infty}f$
+	e un diagramma commutativo
+	\begin{equation*}
+		\begin{tikzcd}
+			X \ar[rrrr, "f"] \ar[d, "\iota_{\infty}"'] 
+			\ar[rrd, "\iota_{n}"', shorten=2ex]
+			& & & & Y \\
+			T_{\infty} f \ar[r] 
+			& \dots \ar[r]
+			& T_{n} \ar[r] \ar[rru,"s_{n}", shorten=2ex]
+			& \dots \ar[r]
+			& T_{0} f \ar[u,"s^{0}"'] \,,
+		\end{tikzcd}
+	\end{equation*}
+	tale che $\pi_{q}(\iota_{n})$ sia un isomorfismo per ogni $q<n$
+	e $\pi_{q}(s_{n})$ sia un isomorfismo per ogni $q \le n$.
+	\begin{proof}
+		Vedi \parencite[hatcher]{Theorem~4.71}
+	\end{proof}
+\end{thm}
+
+
+\section{Rappresentabilità della coomologia}
+
+	Adesso che conosciamo la costruzione degli spazi $K(\pi,n)$,
+	possiamo vedere che questi spazi hanno una natura ``algebrica'',
+	che ci permettono di studiare la coomologia di spazi topologici.
+	
+	
+	\begin{lemma}
+		Sia $n > 0$ intero e $(Y,y)$ uno spazio puntato tale che $\pi_{q}(Y,y)=0$
+		per $q \ne n$. Posto $G := \pi_{n}(Y,y)$, sia $M = K(\pi,n)$.
+		La mappa indotta in omotopia
+		\begin{equation*}
+			\pi_{n} : [M,Y]_{\ast} \longrightarrow \Hom_{\cat{Grp}}(\pi,G)
+		\end{equation*}
+		è un isomorfismo. In particolare, se $\pi=G$, segue che $Y$
+		è omotopicamente equivalente a $M$.
+		\begin{proof}
+			Sia $F_{0} \to F_{1} \to \pi \to 0$ una risoluzione libera di gruppi abeliani,
+			e consideriamo la corrispondente successione di cofibrazione
+			\begin{equation*}
+				\bigvee_{I_{1}} S^{n} \longrightarrow
+				\bigvee_{I_{0}} S^{n} \longrightarrow
+				M\,.
+			\end{equation*}
+			Se denotiamo con $X$ il cono della mappa di incollamento celle
+			\begin{equation*}
+				X := C\left( \bigvee_{I_{1}} S^{k} \to \bigvee_{I_{0}} S^{k} \right)\,,
+			\end{equation*}
+			allora per la dimostrazione della \hyperref[CW-est]{Proposizione~\ref{CW-est}}\todo{Aiuto, è giusto?}
+			sappiamo che $\tau_{\le n} X \simeq X$; dato che la sezione
+			di Postnikov $X \to M$ è iniziale tra le mappe da $X$
+			agli spazi $Y$ con omotopia nulla sopra $n$,
+			questo significa che $[M,Y]_{\ast} \to [X,Y]_{\ast}$ è un isomorfismo.
+			Quindi ci basta mostrare che
+			\begin{equation*}
+				\widetilde{\pi_{n}} : [X,Y]_{\ast} \longrightarrow \Hom_{\cat{Grp}}(\pi,G)
+			\end{equation*}
+			è un isomorfismo.
+			Siccome $X$ è definito da una successione di cofibrazione,
+			quindi una successione co-esatta, applicando $[-,Y]_{\ast}$
+			otteniamo la successione esatta di insiemi puntati
+			\begin{equation*}
+				\begin{tikzcd}
+					\left[ \bigvee_{I_{1}} S^{n},  Y\right]_{\ast} \longleftarrow
+					\left[ \bigvee_{I_{0}} S^{n}, Y \right]_{\ast} \longleftarrow
+					\left[ M, Y \right]_{\ast} \longleftarrow
+					\left[ \bigvee_{I_{1}} S^{n+1},  Y\right]_{\ast}\,,
+				\end{tikzcd}
+			\end{equation*}
+			dove abbiamo usato che la sospensione commuta con fare il bouquet:
+			\begin{equation*}
+				\Sigma \bigvee S^{k} \simeq \bigvee S^{k+1}\,.
+			\end{equation*}
+			Riscrivendo $[S^{n},Y]_{\ast} = \pi_{n}(Y,y) \simeq \Hom(\Z,G)$,
+			si ha
+			\begin{equation*}
+				\left[\bigvee_{I_{i}} S^{n},Y \right]_{\ast} \simeq \Hom(F_{i},G)\,,
+			\end{equation*}
+			quindi la successione esatta di sopra diventa quindi
+			\begin{equation*}
+				\begin{tikzcd}
+					\Hom(F_{1},G) 
+					& \Hom(F_{0},G) \ar[l, "f"']
+					& {[X,Y]_{\ast}} \ar[l]
+					& 0 \,, \ar[l] 
+				\end{tikzcd}
+			\end{equation*}
+			dove $\ker f = \Hom(\pi,G)$.
+			
+			In particolare, se $\pi = G$ possiamo considerare l'unica classe
+			in $[M,Y]_{\ast}$ corrispondente all'identità $\cat{1}_{G} \in \Hom(G,G)$.
+			Questa mappa è un'equivalenza omotopica debole,
+			dunque se $Y$ è un CW complesso deduciamo che è un'equivalenza omotopica.
+		\end{proof}
+	\end{lemma}
+
+	Quindi due CW complessi $K(\pi,n)$ sono omotopicamente equivalenti tramite
+	una mappa \emph{unica} (\emph{a meno di omotopia}) che induce l'identità su $\pi_{n}$.
+	\begin{cor}
+		Per $n > 0$ esiste un funtore
+		\begin{equation*}
+			K(-,n) : \Ab \longmapsto \cat{HoCW}_{\ast}\,,
+			\quad \pi \longmapsto K(\pi,n)
+		\end{equation*}
+		che è unico a meno di isomorfismo.
+		Inoltre, per $n=1$ questo funtore si estende a 
+		\begin{equation*}
+			K(-,1) : \Grp \longmapsto \cat{HoCW}_{\ast}\,.
+		\end{equation*}
+	\end{cor}
+	
+	\begin{oss}
+		Grazie ai funtori $K(-,n)$ possiamo definire, in maniera puramente
+		\emph{topologica}, dei nuovi invarianti per gruppi, 
+		rispettivamente l'\textbf{omologia} e la \textbf{coomologia di gruppi}
+		a coefficienti in $G$:
+		\begin{align*}
+			\pi \longmapsto K(\pi,n) \longmapsto H_{*}(K(\pi,n);G)\,,
+			\quad \pi \longmapsto K(\pi,n) \longmapsto H^{*}(K(\pi,n);G)\,.
+		\end{align*}
+	\end{oss}
+	
+	\begin{ex}
+		La coomologia di $\Z/2$ a coefficienti in $\Z/2$ è
+		\begin{equation*}
+			\Z/2 \longmapsto H^{\ast}(\R\PP^{\infty}; \Z/2) \simeq \Z/2[x]\,.
+		\end{equation*}
+	\end{ex}
+	
+	Dato $n>0$ e $Y$ uno spazio $(n-1)$-connesso,
+	il \textbf{Teorema dei Coefficienti Universali} ci dice
+	che, per un gruppo abeliano $G$, si ha la successione esatta corta
+	\begin{equation*}
+		\begin{tikzcd}
+			0 \ar[r]
+			& \Ext(H_{q-1}(Y);G) \ar[r]
+			& H^{q}(Y;G) \ar[r]
+			& \Hom(H_{q}(Y);G) \ar[r]
+			& 0\,
+		\end{tikzcd}
+	\end{equation*}
+	 per ogni $q>0$, e quindi la coomologia $H^{q}(Y;G) = 0$ per $q < n$.
+	 Quando $q=n$, si annulla il termine $\Ext$ e quindi la coomologia
+	 è proprio il duale
+	 \begin{equation*}
+	 	H^{n}(Y;G) \simeq \Hom(H_{q}(Y),G)\,.
+	 \end{equation*}
+	Se $G=\pi_{n}(Y,y)$, allora l'inverso dell'isomorfismo di Hurewicz
+	appartiene a $\Hom(H_{n}(Y),G)$, dunque corrisponde a una classe
+	$\iota_{n} \in H^{n}(Y;G)$.
+	\begin{df}
+		Per $Y = K(\pi,n)$, otteniamo una classe canonica
+		\begin{equation*}
+			\iota_{n} \in H^{n}\big(K(\pi,n);\pi\big)
+		\end{equation*}
+		chiamata \textbf{classe fondamentale}.
+	\end{df}
+	La classe $\iota_{n}$ ci fornisce una trasformazione naturale
+	\begin{equation}\label{classe-k-pi-n}
+		\rho: [X,K(\pi,n)]_{\ast} \longrightarrow H^{n}(X;\pi)
+		\quad [f] \longmapsto f^{*}\iota_{n}\,.
+	\end{equation}
+	che permette di dare una visione più \emph{geometrica} ai gruppi di coomologia:
+	infatti, nel corso di Elementi di Topologia Algebrica abbiamo ottenuto $H^{n}$
+	tramite un processo \emph{algebrico astratto}, 
+	dualizzando il complesso di catene singolari di uno spazio $X$;
+	invece, adesso possiamo interpretare le classi di coomologia
+	come di uno spazio $X$ come mappe (a meno di omotopia) 
+	a valori in un opportuno spazio di Eilenberg-MacLane.
+	
+	\begin{thm}
+		Se $X$ ha il tipo di omotopia di un CW complesso,
+		allora $\rho$ è un isomorfismo.
+		\begin{proof}
+			Fissato $\pi$, consideriamo degli spazi di Eilenberg-MacLane
+			$K(\pi,n)$ per $n \ge 0$. Per prima cosa capiamo
+			la struttura di gruppo che esiste su membro di sinistra:%$[X,K(\pi,n)]_{\ast}$:
+			se $n=0$, allora $K(\pi,0)=\pi$ con la topologia discreta, dunque
+			\begin{equation*}
+				[X,K(\pi,0)]_{\ast} = \Set{f:X \to \pi | f \text{ è localmente costante} }
+				= H^{0}(X;\pi)\,.
+			\end{equation*}
+			
+			C'è una mappa naturale $K(\pi,n) \to \Omega K(\pi,n+1)$
+			che è isomorfismo per $\pi_{n}$, quindi mi dà un nuovo modello per $K(\pi,n)$,
+			così come anche $K(\pi,n) \to\Omega^{2} K(\pi, n+2)$.
+			Si deduce che $[-,K(\pi,n)]_{\ast}$ è un funtore a valori in $\Ab$
+			perché
+			\begin{equation*}
+				\left[X,\Omega^{2}K(\pi,n+2)\right]_{\ast} \simeq 
+				\left[\Sigma^{2} X, K(\pi,n+2)\right]_{\ast}\,.
+			\end{equation*}
+			Mostriamo che la mappa $\rho: [X,K(\pi,n)]_{\ast} \to \widetilde{H}^{n}(X;\pi)$ 
+			è un omomorfismo di gruppi: 
+			usando lo ``strozzamento'' $\Sigma X \to \Sigma X \vee \Sigma X$
+			per costruire la somma
+		\begin{equation*}
+			\widetilde{H}^{n+1}(\Sigma X;\pi) \times \widetilde{H}^{n+1}(\Sigma X;\pi)
+			\longrightarrow \widetilde{H}^{n+1}(\Sigma X \vee \Sigma X;\pi)
+			\longrightarrow \widetilde{H}^{n}(\Sigma X;\pi)\,,
+		\end{equation*}
+		questo induce l'operazione di gruppo su $\widetilde{H}^{n}(\Sigma X;\pi)$.
+		Analogamente, applicando $[-,K(\pi,n)]_{\ast}$ otteniamo un gruppo dato che
+		\begin{equation*}
+			[X,K(\pi,n)]_{\ast} = [X,\Omega K(\pi,n+1)]_{\ast} = [\Sigma X,K(\pi,n+1)]_{\ast}
+		\end{equation*}
+		e lo strozzamento della sospensione di $X$ induce la somma come prima.
+		
+		Mostriamo che $\rho$ induce un isomorfismo per induzione sullo scheletro di $X$.
+		Se $X=X^{(0)}$, allora
+		\begin{align*}
+			\Hom_{\cat{HoTop}_{\ast}}(X^{(0)},\pi) = \widetilde{H}^{0}\left(X^{(0)};\pi\right)\,, \\
+			\left[ X^{(0)}, K(\pi,n) \right] = 0 
+			= \widetilde{H}^{n}\left(X^{(0)};\pi\right)\,, \quad \text{per } n>0\,.
+		\end{align*}\todo{perché coomologia ridotta?}
+		e questo conclude il passo base. 
+		
+		Se assumiamo $X$ connesso di dimensione $q$ finita, c'è una successione di cofibrazione
+		\begin{equation*}
+			\bigvee_{} S^{q-1} \longrightarrow X^{(q-1)} \longrightarrow X^{(q)}
+		\end{equation*}
+		che è co-esatta, quindi $[-,K(\pi,n)]_{\ast}$ induce una successione esatta in 
+		coomologia ridotta. Usando il passo induttivo,
+		$\rho$ è un isomorfismo per $\bigvee S^{q-1}$ e per $X^{(q-1)}$,
+		che hanno dimensione al più $q-1$, quindi usando
+		il \textbf{Lemma dei 5} scopriamo che è isomorfismo anche per $X^{(q)}$.
+		
+		Se $X$ ha dimensione infinita, sfruttiamo un argomento di limite
+		e il fatto che, per ogni $N > q \ge 0$, abbiamo il diagramma commutativo
+		\begin{equation*}
+			\begin{tikzcd}
+				{\left[ X^{(N)}, K(\pi,n) \right] } \ar[r, "\simeq", "\rho"'] \ar[d, "\simeq"]
+				& {\widetilde{H}^{q}\left(X^{(N)};\pi\right)} \ar[d, "\simeq"] \\
+				{\left[ X^{}, K(\pi,n) \right] } \ar[r, dashed]
+				& \widetilde{H}^{q}(X;\pi)\,.
+			\end{tikzcd}
+		\end{equation*}
+		\end{proof}
+	\end{thm}
+	
+	\begin{ex}
+		Dato che $K(\Z,1) = S^{1}$, allora $H^{1}(X;\Z) = [X,S^{1}]_{\ast}$.
+	\end{ex}
+	
+	\begin{ex}
+		Dato $X$ uno spazio topologico, vediamo che la sua coomologia
+		\begin{equation*}
+			H^{1}(X;\Z/2) = [X;\R\PP^{\infty}]_{\ast}\,,
+		\end{equation*}
+		e vedremo più avanti che una mappa $X \to \R\PP^{\infty}$
+		induce un \emph{fibrato in rette}.\todo{copiare ultima frase.}
+	\end{ex}
+
+
+
+
+
+

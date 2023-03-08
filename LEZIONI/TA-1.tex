@@ -1,0 +1,475 @@
+%%% Lezione 1
+
+\chapter{Fibrazioni e cofibrazioni}
+
+\section{Cofibrazioni}
+
+\lecture[Cofibrazioni, proprietà ed esempi. Costruzione del mapping cone di una funzione continua, successione di cofibrazione, successioni coesatte e derivazione della successione di Barret-Puppe.]{2023-02-27}
+
+Dati due spazi topologici $X,Y$, 
+indichiamo con $Y^{X} := \Hom_{\cat{Top}}(X,Y)$
+l'insieme delle funzioni continue da $X$ a $Y$.
+Consideriamo un sottospazio $A \subset X$
+e indichiamo con $i:A \to X$ la mappa di inclusione.
+Notiamo che, per ogni funzione $f:X \to Y$,
+possiamo definire la \emph{restrizione} di $f$ ad $A$
+come la composizione $f\vert_{A} := f \circ i$;
+questo induce una funzione $Y^{X} \to Y^{A}$.
+
+\begin{df}
+	La mappa $Y^{X} \to Y^{A}$ data dalla restrizione è una
+	\textbf{fibrazione} se, dato un quadrato commutativo
+	\begin{equation}\label{fibI}
+		\begin{tikzcd}
+			W \ar[r] \ar[d, hook, "\iota_{0}"'] & Y^{X} \ar[d] \\
+			I \times W \ar[r] \ar[ur, dashed] & Y^{A}\,,
+		\end{tikzcd}
+	\end{equation}
+	esiste un sollevamento $I \times W \to Y^{X}$ che rende
+	il diagramma commutativo, dove $\iota_{t}$ è
+	l'inclusione al ``tempo $t$'' data da $\iota_{t}(w) := (t,w)$.
+\end{df}
+
+Per tutto il corso assumeremo che gli spazi topologici coinvolti siano
+localmente compatti e di Hausdorff:
+infatti, sotto queste ipotesi vale la \emph{legge esponenziale}
+\begin{equation*}
+	\Hom(X,Z^{Y}) \simeq \Hom(X \times Y, Z).
+\end{equation*}
+Dunque, se $X$ e $Y$ sono spazi localmente compatti e di Hausdorff,
+il diagramma \eqref{fibI} è equivalente a
+
+	\begin{equation*} %\label{fibII}
+		\begin{tikzcd}
+			W \times A  \ar[r, "\cat{1}_{W} \times i"]
+			 \ar[d, hook, "\iota_{0} \times \cat{1}_{A}"'] 
+			 & W \times X \ar[d]  \ar[ddr, bend left] & \\
+			I \times W \times A \ar[r]  \ar[drr, bend right=20pt]
+			& I \times W \times X \ar[dr, dashed] & \\
+			& & Y \,,
+		\end{tikzcd}
+	\end{equation*}
+	
+e riapplicando la legge esponenziale,
+portando $W$ ``all'esponente'',
+si può vedere anche come
+	
+	\begin{equation}\label{fibIII}
+		\begin{tikzcd}
+			A  \ar[r, "i"]
+			 \ar[d, hook, "\iota_{0}"'] 
+			 & X \ar[d]  \ar[ddr, bend left] & \\
+			I \times A \ar[r]  \ar[drr, bend right=20pt]
+			& I \times X \ar[dr, dashed] & \\
+			& & Y^{W} \,.
+		\end{tikzcd}
+	\end{equation}
+	
+Generalizziamo la proprietà descritta nel diagramma \eqref{fibIII}
+sostituendo un qualsiasi spazio topologico $Z$ a $Y^{W}$ per
+ottenere la seguente
+
+\begin{df}
+	Una \textbf{cofibrazione} $i:A \to X$ è una mappa continua che
+	per ogni $Z$ soddisfa la \textbf{homotopy extension property} 
+	(\textbf{HEP}), cioè per ogni diagramma commutativo del tipo
+	\begin{equation}\label{HEP}
+		\begin{tikzcd}
+			A  \ar[r, "i"]
+			 \ar[d, hook, "\iota_{0}"'] 
+			 & X \ar[d]  \ar[ddr, bend left] & \\
+			I \times A \ar[r]  \ar[drr, bend right=20pt]
+			& I \times X \ar[dr, dashed] & \\
+			& & Z \,,
+		\end{tikzcd}
+		\tag{\textbf{HEP}}
+	\end{equation}
+	esiste una mappa continua $I \times X \to Z$ che completa il diagramma.
+\end{df}
+
+Data una funzione continua $f:X \to Y$, 
+ricordiamo che il \textbf{mapping cylinder} è lo spazio topologico
+\begin{equation*}
+	M_{f} := \left( I \times X \sqcup Y \right) / \sim \,,
+\end{equation*}
+dove $\sim$ è la relazione d'equivalenza che identifica $(0,x) \sim f(x)$,
+per ogni $x \in X$, ed è banale altrove. Ricordiamo la seguente
+caratterizzazione delle cofibrazioni:
+
+\begin{thm}
+	I seguenti fatti sono equivalenti:
+	\begin{rmnumerate}
+		\item la mappa $i:A \to X$ è una cofibrazione;
+		\item la mappa $i$ ha la \eqref{HEP} per il mapping cylinder $M_{i}$;
+		\item la funzione $s:M_{i} \to I \times X$ ammette una retrazione,
+		i.e. esiste $r:I \times X \to M_{i}$ 
+		tale che $rs=\cat{1}_{M_{i}}$.
+	\end{rmnumerate}
+\end{thm}
+
+\begin{prop}
+	Una cofibrazione è un \textbf{embedding}.
+\end{prop}
+
+\begin{oss}
+	In generale, se $i:A \to X$ è un embedding,
+	allora $s:M_{i} \to I \times X$ è continua e iniettiva,
+	ma può \emph{non} essere un embedding.
+	Se $i:A \hookrightarrow X$ è un'inclusione di sottospazio,
+	allora $s$ mappa bigettivamente
+	\begin{equation*}
+		M_{i} \longrightarrow (I \times A) \cup (\{0\} \times X)\,.
+	\end{equation*}
+	Ora, se $A \subset X$ è \textbf{chiuso}, allora $s$ è un omeomorfismo
+	con l'immagine; altrimenti, se $A$ non chiuso oppure $i$ non è una
+	cofibrazione, la topologia di $M_{i}$ può non coincidere con quella
+	indotta su $N:=(I \times A) \cup (\{0\} \times X)$.
+\end{oss}
+
+\begin{ex}
+	Data l'inclusione di $A=(0,1]$ 
+	nell'intervallo chiuso $X=[0,1]$,
+	consideriamo la successione 
+	$\Set{\left(\frac{1}{n+1}, \frac{1}{n+1} \right)|n \in \N}$
+	sulla diagonale del quadrato $X^{2}$.
+	Notiamo che in $N \subset X^{2}$ con la topologia prodotto
+	la successione converge a $(0,0)$, mentre invece non converge
+	in $M_{i}$ perché nella topologia quoziente
+	esistono intorni aperti $U$ dell'origine che
+	intersecano la diagonale unicamente in $(0,0)$, come
+	ad esempio $U = \left( \{0\} \times X \right) \cup \Set{(x,y) | x<y }$.
+	Questo mostra che la topologia di $M_{i}$ è \emph{più fine} 
+	della topologia prodotto di $N$, quindi i due spazi non sono omeomorfi.
+\end{ex}
+
+Si può dimostrare che, se $X$ è di Hausdorff,
+allora l'immagine di una cofibrazione $i:A \to X$ è chiusa.
+Si può dedurre dunque che un'inclusione chiusa $A \subset X$
+è una cofibrazione se e solo se la mappa 
+$(I \times A) \cup (\{0\} \times X) \hookrightarrow I \times X$
+ha una retrazione.
+
+\begin{df}
+	Dato $x \in X$, diciamo che $x$ è un \textbf{punto base non degenere}
+	se $\{x\} \hookrightarrow X$ è una cofibrazione; in tal caso,
+	si dice che $(X,x)$ è \textbf{ben puntato}.
+\end{df}
+
+\begin{ex}
+	L'inclusione $S^{n-1} \subset D^{n}$ è una cofibrazione.
+\end{ex}
+
+\begin{exercise}
+	La classe delle cofibrazioni è chiusa per le seguenti operazioni:
+	\begin{rmnumerate}
+		\item \textbf{cambio di cobase}: se $i: A \to X$ è una cofibrazione
+		e $\alpha:A \to B$ una qualsiasi funzione continua, allora
+		la mappa $i^{B}$ in basso al diagramma di pushout
+		\begin{equation*}
+			\begin{tikzcd}
+			A \ar[r,"i"] \ar[d, "\alpha"'] & X \ar[d] \\
+			B \ar[r, "i^{B}"] & X \cup_{A} B\,,  
+			\end{tikzcd}
+		\end{equation*}
+		dove $X \cup_{A} B$ è ottenuto come quoziente di $X \sqcup B$
+		per la relazione d'equivalenza $\alpha(a) \sim i(a)$, per ogni $a \in A$.
+		
+		\item \textbf{coprodotto}: data una famiglia di cofibrazioni 
+		$\Set{A_{j} \to X_{j}}$, allora anche $\coprod A_{j} \to \coprod X_{j}$
+		è una cofibrazione.
+		
+		\item \textbf{composizione}: se $i:A \to X$ e $j:X \to Y$ sono
+		cofibrazioni, allora anche $j \circ i:A \to Y$ è a sua volta una cofibrazione.
+		
+	\end{rmnumerate}
+\end{exercise}
+
+\begin{ex}
+	L'inclusione $Y \subset X$ di un sottocomplesso CW è una cofibrazione.
+\end{ex}
+
+\begin{prop}\label{contr-htp}
+	Sia $i:A \to X$ una cofibrazione. Se $A$ è uno spazio contraibile, allora
+	la mappa quoziente $p:X \to X/A$ è un'equivalenza omotopica.
+	\begin{proof}
+		Sia $h:I \times A \to A$ omotopia di contrazione, cioè
+		tale che per ogni $a \in A$ valga $h(0,a) = a$ e $h(1,a) = x$,
+		per qualche $x \in A$. Siccome $i$ è una cofibrazione,
+		possiamo estendere $i \circ p$ a un'omotopia $H:I \times X \to X$,
+		ottenendo così il diagramma commutativo
+		\begin{equation*}
+		\begin{tikzcd}
+			A  \ar[r, "i"]
+			 \ar[d, hook, "\iota_{0}"'] 
+			 & X \ar[d]  \ar[ddr, bend left, "\cat{1}_{X}"] & \\
+			I \times A \ar[r]  \ar[drr, bend right=20pt, "i \circ h"']
+			& I \times X \ar[dr, dashed, "H"] & \\
+			& & X \,;
+		\end{tikzcd}
+		\end{equation*}
+		dal diagramma deduciamo che $H(1,a) = x$ per ogni $a \in A$,
+		quindi deduciamo che fattorizza attraverso la proiezione:
+		\begin{equation*}
+			\begin{tikzcd}
+				X \ar[rr, "H_{1}"] \ar[dr, "p"'] & & X \\
+				& X/A \ar[ur, dashed, "\pi"'] & \,.
+			\end{tikzcd}
+		\end{equation*}
+		Notiamo che $\pi \circ p = H_{1}$ è omotopa all'identità di $X$
+		dato che $H_{0} = \cat{1}_{X}$.
+		
+		Vogliamo ora costruire un'omotopia tra $p \circ \pi$ e $\cat{1}_{X/A}$
+		per concludere che $p$ è un'equivalenza omotopica. 
+		Siccome $H$ è un'omotopia che manda $I \times A \to A$,
+		definisce una mappa $\overline{H}$ che fa commutare il quadrato
+		\begin{equation*}
+			\begin{tikzcd}
+				I \times X \ar[r, "H"] \ar[d, "\cat{1}_{I} \times p"']
+				& X \ar[d, "p"] \\
+				I \times A \ar[r, "\overline{H}"] & A\,,
+			\end{tikzcd}
+		\end{equation*}
+		dove notiamo che $\overline{H}$ è un'omotopia tra 
+		$\overline{H}_{0} = \cat{1}_{X/A}$ e $\overline{H}_{1}=p \circ \pi$,
+		dunque si ha la tesi.
+	\end{proof}
+\end{prop}
+
+
+\section{Successione di cofibrazione}
+
+\begin{df}
+	Sia $\ast \in X$ un punto base. Un'\textbf{omotopia puntata} è una mappa
+	\begin{equation*}
+		X \wedge I_{\ast} := \left. X \times I \middle/ \ast \times I \right. 
+		\longrightarrow X\,.
+	\end{equation*}
+	Data una mappa $f:X \to Y$, definiamo il suo \textbf{mapping cylinder ridotto}
+	come lo spazio
+	\begin{equation*}
+		M(f) := \left(Y \times \{0\}  \right) \cup_{X \times \{0\}} 
+		\left(X \wedge I_{\ast}\right)\,.
+	\end{equation*}
+	Una \textbf{cofibrazione puntata} è una mappa $i:A \to X$
+	tale che $M(i)$ sia un retratto di $X \wedge I_{\ast}$.
+\end{df}
+
+\begin{fact}
+	Ogni mappa continua $f:X \to Y$ fattorizza attraverso
+	il proprio mapping cylinder ridotto
+	\begin{equation*}
+		\begin{tikzcd}
+			X \ar[r, "\iota_{1}"] \ar[rr, bend right, "f"']
+			& M(f) \ar[r]
+			& Y\,.
+		\end{tikzcd}
+	\end{equation*}
+	Si può inoltre dimostrare che l'immersione $\iota_{1} : X \to M(f)$
+	è una cofibrazione e $M(f) \to Y$ è un'equivalenza omotopica;
+	per questo motivo quando parliamo di cofibrazioni possiamo 
+	considerare delle \emph{inclusioni}.
+\end{fact}
+
+\begin{ex}
+	Dato uno spazio $X$, il \textbf{cono} di $X$ può essere visto come
+	\begin{equation*}
+		CX = M(X \to \ast)\,,
+	\end{equation*}
+	dunque abbiamo una fattorizzazione $X \to CX \to \ast$.
+\end{ex}
+
+\begin{df}
+	Definiamo il \textbf{mapping cone} di una mappa $f:X \to Y$
+	come il pushout $C(f)$ del seguente diagramma:
+	\begin{equation*}
+		\begin{tikzcd}
+			& X \ar[r] \ar[d, "\iota_{1}"]  \ar[dl,"f"'] & \ast \ar[d] \\
+			Y & M(f) \ar[l, "\sim"'] \ar[r] & C(f)\,.
+		\end{tikzcd}
+	\end{equation*}
+\end{df}
+
+\begin{ex}
+	Possiamo vedere la sospensione di uno spazio $X$ 
+	come il mapping cone di una mappa costante
+	\begin{equation*}
+		\Sigma X = C(X \to \ast)\,.
+	\end{equation*}
+\end{ex}
+
+\begin{oss}
+	Il pushout che definisce $C(f)$ può essere costruito anche in un altro modo:
+	se consideriamo la cofibrazione $\iota_{1}:X \to CX$ al posto della mappa costante,
+	possiamo definire il mapping cone di $f$ come il pushout del diagramma
+	\begin{equation*}
+		\begin{tikzcd}
+			& \ast 			 \\
+			X \ar[r, "\iota_{1}"'] \ar[d, "f"']  \ar[ur] & CX \ar[d] \ar[u] \\
+			Y \ar[r] & C(f)\,.
+		\end{tikzcd}
+	\end{equation*}
+	Le due costruzioni sono omeomorfe tramite la mappa che ``inverte il tempo'',
+	cioè $t \mapsto 1-t$.
+\end{oss}
+
+
+	Se $f$ è una cofibrazione, allora anche $CX \to C(f)$ è a sua volta
+	una cofibrazione (per cambio di cobase).
+	Dato che il cono $CX$ è contraibile, 
+	per \hyperref[contr-htp]{Proposizione~\ref*{contr-htp}}
+	deduciamo che $C(f)$ è omotopicamente equivalente a
+	\begin{equation*}
+		C(f) / CX \simeq Y/X\,.
+	\end{equation*}
+	Abbiamo così provato il seguente
+
+\begin{lemma}\label{cone-quotionet}
+	Sia $f:X \to Y$ una cofibrazione. La mappa $C(f) \to Y/X$
+	è un'equivalenza omotopica.
+\end{lemma}
+
+\begin{df}
+	Una \textbf{successione di cofibrazione}
+	è un diagramma omotopicamente equivalente a
+	\begin{equation*}
+		\begin{tikzcd}
+			X \ar[r, "f"] & Y \ar[r, "i(f)"] & C(f)\,,
+		\end{tikzcd}
+	\end{equation*}
+	per qualche $f$.
+\end{df}
+
+Si noti che la composizione $i(f) \circ f$ è
+omotopicamente banale, con omotopia
+\begin{equation*}
+	h:X \times I \longrightarrow C(f)\,, \quad
+	h(x,t) = [x,t]\,,
+\end{equation*}
+dove $h_{0} \sim f$ e $h_{1}$ è costante.
+
+\begin{fact}
+	La coppia di mappe $(i(f),h)$ soddisfa la seguente
+	proprietà universale:
+	data una qualsiasi funzione continua $g:Y \to Z$
+	e un'omotopia $H$ tale che $H_{0} = g \circ f$ e $H_{1}$
+	sia costante, esiste un'unica $C(f) \to Z$ che estende $g$
+	e induce $H$.
+	\begin{equation*}
+		\begin{tikzcd}
+			X \ar[r, "f"] \ar[drr, "g \circ f"']
+			& Y \ar[rr, "i(f)"] \ar[dr, "g"] & & C(f) \ar[dl, dashed, "\exists !"] \\
+			& & Z & \,.
+		\end{tikzcd}
+	\end{equation*}
+\end{fact}
+
+\begin{lemma}\label{cone-exactness}
+	Data una mappa di spazi puntati $f:(X,x) \to (Y,y)$
+	e un qualsiasi spazio puntato $(Z,z)$,
+	la sequenza di insiemi puntati
+		\begin{equation*}
+			\begin{tikzcd}
+				{[X,Z]} & {[Y,Z]} \ar[l, "f^*"'] & {[C(f),Z]} \ar[l,"i(f)^*"']
+			\end{tikzcd}
+		\end{equation*}
+		è \textbf{esatta}, cioè $\textrm{im}\left( i(f)^*\right) 
+		= \left( f^* \right)^{-1}([\ast])$.
+\end{lemma}
+
+\begin{df}
+	Una successione di mappe puntate $X \to Y \to Z$ si dice \textbf{coesatta}
+	se, per qualsiasi spazio puntato $(W,w)$, dopo aver applicato $[-,W]$
+	si ottiene una sequenza esatta come nel 
+	\hyperref[cone-exactness]{Lemma~\ref{cone-exactness}}.
+\end{df}
+
+\begin{ex}
+	Il \hyperref[cone-exactness]{Lemma~\ref{cone-exactness}} mostra che
+	la successione $X \to Y \to C(f)$ è coesatta.
+\end{ex}
+
+
+La costruzione del mapping cone $C(f)$ è funtoriale
+ed è determinata solamente da $f$. 
+Riapplicando la costruzione a $i(f) : Y \to C(f)$
+possiamo continuare la sequenza di mappe
+\begin{equation*}
+	\begin{tikzcd}
+		X \ar[r, "f"]
+		& Y \ar[r, "i(f)"]
+		& C(f) \ar[r, "i^2(f)"]
+		& C(i(f)) \ar[r, "i^3(f)"]
+		& \dots
+	\end{tikzcd}
+\end{equation*}
+
+Abbiamo visto che $i(f)$ è il pushout dell'inclusione
+$X \to CX$ lungo $f:X \to Y$; dato che il cono è contraibile,
+per la Proposizione~\ref{contr-htp} si ha che la mappa
+quoziente è un'equivalenza omotopica, dunque
+per il Lemma~\ref{cone-quotionet} deduciamo che
+\begin{equation*}
+	CX \xrightarrow{\sim} C(i(f))/CY = Cf/Y = \Sigma X\,. 
+\end{equation*}
+In questo modo otteniamo la sequenza
+\begin{equation*}
+	\begin{tikzcd}
+		X \ar[r, "f"]
+		& Y \ar[r,"i(f)"] 
+		& C(f) \ar[r,"i^2(f)"] \ar[dr] 
+		& C(i(f)) \ar[r,"i^3(f)"] \ar[d, "\simeq"']
+		& C(i^2(f)) \ar[r,"i^4(f)"] \ar[d, "\simeq"'] & \dots \\
+		& & & \Sigma X \ar[r, "-\Sigma f"]
+		& \Sigma Y \ar[r, "-\Sigma i(f)"]
+		& \dots
+	\end{tikzcd}
+\end{equation*}
+dove la sospensione di $f$ è definita come la mappa
+\begin{equation*}
+	-\Sigma f \left([t,x]\right) := [1-t,f(x)]\,.
+\end{equation*}
+Considerando dunque la riga inferiore, otteniamo la sequenza
+\begin{equation}\label{BPcofib}
+	X \xrightarrow{f} Y \to C(f) \to \Sigma X \to \Sigma Y 
+	\to \Sigma C(f) \to \Sigma^{2} X \to \dots
+\end{equation}
+detta \textbf{successione di Barret-Puppe}.
+La successione \eqref{BPcofib} è coesatta,
+cioè che ogni coppia di mappe consecutive è coesatta
+nel senso del Lemma~\ref{cone-exactness}.
+
+
+\begin{oss}
+	Data una coppia $(X,A)$, allora vale
+	\begin{equation*}
+		\widetilde{H}_{*}(X / CA) = H_{*}(X,A)\,,
+	\end{equation*}
+	infatti si ha
+	\begin{equation*}
+		H_{*}(X \cup CA) 
+		= H_{*}(X \cup CA, \ast)
+		= H_{*}(X \cup CA, CA)
+		= H_{*}(X \cup CA\vert_{\le \frac{1}{2}}, CA\vert_{\le \frac{1}{2}})
+		= H_{*}(X,A)\,,
+	\end{equation*}
+	mentre dal fatto che $i:A \to X$ è una cofibrazione
+	si ha $X \cup CA \simeq X/A$ e dunque $H_{*}(X \cup CA)  
+	= \widetilde{H}_{*}(X/CA)$.
+\end{oss}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

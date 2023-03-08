@@ -1,0 +1,289 @@
+%%% Lecture 3
+
+\lecture[Esistenza delle sezioni di Postnikov. Unicità delle sezioni di Postnikov a meno di equivalenza omotopica debole. Costruzione della torre di Postnikov. Spazi di Moore e spazi di Eilenberg-MacLane.]{2023-03-06}
+
+% L'ultima volta abbiamo concluso la lezione affermando che esistono
+% le \textbf{sezioni di Postnikov}.
+
+\begin{ex}
+	La sezione $P_{0}$ è uno spazio debolmente omotopicamente
+	equivalente a $\pi_{0}(X)$.
+\end{ex}
+
+\begin{ex}
+	Sia $X$ uno spazio connesso per archi.
+	La sezione $P_{1}(X)$ è uno spazio connesso per archi con
+	\begin{equation*}
+		\pi_{1}(P_{1}(X),\ast) \simeq \pi_{1}(X)
+	\end{equation*}
+	e con rivestimento universale \emph{debolmente contraibile}\footnote{Uno spazio $Y$ è \textbf{debolmente contraibile} se $\pi_{k}(Y,\ast) = 0$, per ogni $k>0$.}.
+\end{ex}
+
+\begin{df}
+	Uno spazio topologico $X$
+	si dice \textbf{asferico} se il suo 
+	rivestimento universale è contraibile.
+\end{df}
+
+\begin{oss}
+	Per ogni gruppo $\pi$,
+	esiste un CW complesso $K$ connesso per archi e asferico
+	tale che $\pi_{1}(K,\ast) = \pi$ .
+	Infatti, possiamo sempre considerare una presentazione
+	\begin{equation*}
+		\begin{tikzcd}
+			F_{1} \ar[r, "a"] & F_{0} \ar[r] & \pi \ar[r] & 0\,, 
+		\end{tikzcd}
+	\end{equation*}
+	con $F_{1}$ e $F_{0}$ gruppi liberi\footnote{Ricordiamo il \textbf{Teorema di Nielsen-Schreier}: un sottogruppo di un gruppo libero è a sua volta libero.};
+	quindi, denotando con $I_{j}$ un insieme libero di generatori per $F_{j}$,
+	possiamo definire una mappa
+	\begin{equation*}
+		\begin{tikzcd}
+			\bigvee_{I_{1}} S^{1} \ar[r, "\phi_{a}"] & \bigvee_{I_{0}} S^{1}\,.
+		\end{tikzcd}
+	\end{equation*}
+	Allora, grazie al \textbf{Teorema di Van Kampen} si può verificare
+	che il mapping cone $C_{\phi_{a}}$ è un CW complesso
+	che ha il gruppo fondamentale desiderato;
+	dato che vogliamo uno spazio asferico, allora consideriamo
+	la sua prima sezione di Postnikov
+	$P_{1}\left(C_{\phi_{a}}\right)$.
+\end{oss}
+
+\begin{oss}
+	Se $X$ è un CW complesso, 
+	posso ottenere $P_{n}(X)$ come CW complesso.
+\end{oss}
+
+Ci chiediamo dunque se le sezioni di Postnikov siano \emph{uniche}
+in qualche senso.
+\begin{prop}\label{CW-est}
+	Sia $n \ge 0$ e $Y$ uno spazio topologico tale che $\pi_{q}(Y, \ast)=0$,
+	per ogni $q>n$. Dato un CW complesso relativo $(X,A)$ in cui
+	tutte le celle in $X \setminus A$ hanno dimensione $\ge n+2$,
+	allora la mappa di restrizione
+	\begin{equation*}
+		[X,Y] \longrightarrow [A,Y]
+	\end{equation*}
+	è bigettiva. Se ci sono anche ($n+1$)-celle,
+	allora è iniettiva.
+	\begin{proof}
+		Usiamo che l'ipotesi $\pi_{q}(Y,\ast)=0$, per ogni $q > n$,
+		è equivalente al fatto che	
+		le mappe $S^{q} \to Y$ con immagine nella componente
+		connessa contenente $\ast$ si estendono a tutto $D^{q+1}$.
+		\begin{itemize}
+			\item \textbf{Surgettività}: data $f:A \to Y$,
+			per ogni $q \ge n+2$ la mappa di incollamento
+			\begin{equation*}
+				S^{q-1} \longrightarrow X^{q-1} \longrightarrow Y
+			\end{equation*}
+			è omotopicamente banale per ipotesi,
+			dunque si estende a una mappa $D^{q} \to Y$.
+			Ripetendo questo procedimento per tutte
+			le celle in $X \setminus A$, definiamo così
+			un'estensione $\overline{f}:X \to Y$;
+			
+			\item \textbf{Iniettività}:
+			consideriamo la coppia
+			\begin{equation*}
+				\Big(X \times I, (X \times \de I) \cup (A \times I) \Big)
+			\end{equation*}
+			come un CW complesso relativo.
+			Se $q \ge n+1$, per ipotesi sull'omotopia ogni $q$-cella di $X \setminus A$
+			è bordo di una cella di dimensione $q+1$,\todo{È giusto?}
+			quindi ogni coppia di mappe $f_{0},f_{1}:X \to Y$ 
+			le cui restrizioni ad $A$ sono omotope inducono un'omotopia
+			\begin{equation*}
+				F : \Big( X \times \de I \Big) \cup \Big( A \times I \Big)
+				\longrightarrow Y\,.
+			\end{equation*}
+			Ripetendo il ragionamento del punto precedente,
+			possiamo estendere $F$ una cella alla volta,
+			fino a ottenere un'omotopia $\widetilde{F}:X \times I \to Y$
+			tra $f_{0}$ e $f_{1}$.
+		\end{itemize}
+	\end{proof}
+\end{prop}
+
+\begin{cor}
+	Sia $X$ un CW complesso $n$-connesso e
+	$Y$ uno spazio con omotopia concentrata in grado al più $n$\footnote{Cioè tale che $\pi_{q}(Y,\ast) = 0$ per ogni $q > n$.}.
+	Ogni mappa $f:X \to Y$ è omotopa a una costante.
+	\begin{proof}
+		Per ipotesi, possiamo considerare $X$
+		come un CW complesso senza celle di dimensione $0< d < n+1$.
+		Poniamo $A = \{\ast\}$ il punto base di $X$.
+		Siccome l'$n$-scheletro di $X$ consiste del solo punto base,
+		i.e. $X_{n} = \{\ast\}$, allora la coppia $(X,\ast)$
+		soddisfa le ipotesi della \hyperref[CW-est]{Proposizione~\ref{CW-est}}
+		e abbiamo una bigezione $[X,Y] \to [\ast,Y]$.
+	\end{proof}
+\end{cor}
+
+Sia $f:X \to Y$ e consideriamo le mappe $X \to P_{m}(X)$ e $Y \to P_{n}(Y)$.
+Se $m \ge n$, allora per la \hyperref[CW-est]{Proposizione~\ref{CW-est}}
+abbiamo una bigezione $[X,P_{n}(Y)] \simeq [P_{m}(X),P_{n}(Y)]$,
+quindi \emph{esiste un'unica} mappa (\emph{a meno di omotopia}) tra
+le sezioni di Postnikov che fa commutare il seguente diagramma:
+\begin{equation*}
+	\begin{tikzcd}
+		X \ar[r, "f"] \ar[d] & Y \ar[d] \\
+		P_{m}(X) \ar[r, "\exists !", dashed] & P_{n}(Y)\,.
+	\end{tikzcd}
+\end{equation*}
+Se consideriamo il caso particolare in cui $X=Y$ e $f =\cat{1}_{X}$,
+allora per ogni $m \ge n$ abbiamo un'unica mappa
+\begin{equation*}
+	\begin{tikzcd}
+		& X \ar[dl] \ar[dr] & \\
+		P_{m}(X) \ar[rr, dashed, "\exists !"] & & P_{n}(X)\,,
+	\end{tikzcd}
+\end{equation*}
+dunque ponendo $m=n$ si deduce che deve essere un'equivalenza omotopica \emph{debole}:
+questo significa che tutte le costruzioni 
+che soddisfino le condizioni del \hyperref[sez-Postnikov]{Teorema~\ref{sez-Postnikov}}
+producono spazi topologici debolmente equivalenti.
+Quindi le sezioni di Postnikov sono uniche in questo senso!
+Questo implica che se è possibile ottenere $P_{n}(X)$ 
+come CW complessi (e.g. quando $X$ è un CW complesso),
+allora le sezioni di Postnikov sono uniche a meno di equivalenza omotopica.
+
+\begin{oss}
+	La mappa $X \to P_{m}(X)$ è \emph{iniziale} nella
+	categoria $\cat{HoTop}$ degli spazi topologici e 
+	funzioni continue a meno di omotopia
+	verso gli spazi con omotopia banale in grado $> n$:
+	più esplicitamente, se $Y$ è uno spazio con $\pi_{q}(Y,\ast)=0$
+	per $q > n$, allora ogni mappa $X \to Y$ fattorizza in maniera
+	unica (a meno di omotopia) attraverso l'$n$-esima sezione di Postnikov:
+	\begin{equation*}
+	\begin{tikzcd}
+		& P_{n}(X) \ar[d, "\exists !", dashed] \\
+		X  \ar[r] \ar[ur] & Y \,.
+	\end{tikzcd}
+\end{equation*}
+\end{oss}
+
+Partendo da $Y=P_{0}(X)$ e $n=1$, reiterando la costruzione sopra
+otteniamo una sorta di diagramma limite chiamato
+\textbf{torre di Postnikov}.
+\begin{equation}\label{TP}
+	\begin{tikzcd}
+		& \dots \ar[d] \\
+		& P_{2}(X) \ar[d] \\
+		& P_{1} (X) \ar[d] \\
+		X \ar[uur] \ar[ur] \ar[r] & P_{0}(X) \,.
+	\end{tikzcd} \tag{TP}
+\end{equation}
+
+\section{Spazi di Eilenberg-MacLane}
+
+\begin{prop}\label{Moore-exist}
+	Dato $k \ge 1$ e $A$ un gruppo abeliano,
+	esiste un CW complesso $X$ tale che
+	\begin{equation*}
+		\widetilde{H}_{k}(X) = A\,,
+		\quad \widetilde{H}_{q}(X) = 0 \text{ per } q \ne k\,.
+	\end{equation*}
+	Se $k > 1$, il complesso $X$ può essere costruito
+	semplicemente connesso.
+	\begin{proof}
+		Consideriamo una presentazione
+		\begin{equation*}
+			\begin{tikzcd}
+				0 \ar[r] & F_{1} \ar[r, "a"] & F_{0} \ar[r] & A \ar[r] & 0\,, 
+			\end{tikzcd}
+		\end{equation*}
+		con $F_{1}$ e $F_{0}$ gruppi abeliani liberi,
+		e sia $G_{i}$ una base di generatori per $F_{i}$.
+		Consideriamo allora il bouquet di circonferenze
+		\begin{equation*}
+			X^{(k)} := \bigvee_{a \in G_{0}} S^{k}_{a}
+		\end{equation*}
+		e definiamo la mappa di incollamento
+		\begin{equation*}
+			\alpha : \bigsqcup_{b \in G_{1}} S^{k}_{b}
+			\longrightarrow X^{(k)}
+		\end{equation*}
+		indotta tramite l'omomorfismo $F_{1} \longrightarrow F_{0}$
+		dato da $b \longmapsto \sum_{a \in G_{0}} n_{a} a$, cioè:
+		se $n_{a} \ne 0$, allora il disco $b$-esimo si incolla su $S_{a}^{k}$
+		con una mappa $S_{b}^{k} \to S_{a}^{k}$ di grado $n_{a}$.
+		\missingfigure{C'è un disegnetto con le sferette che si incollano.}
+		Per costruzione $\alpha$ realizza $F_{1} \to F_{0}$ in omologia,
+		quindi otteniamo
+		\begin{equation*}
+			\widetilde{H}_{q}(X) =
+			\begin{cases}
+				A\,, \quad &\text{se } q = k\,; \\
+				0\,, \quad &\text{altrimenti.}
+			\end{cases}\qedhere
+		\end{equation*}
+	\end{proof}
+\end{prop}
+
+\begin{df}
+	Uno spazio $X$ come nella \hyperref[Moore-exist]{Proposition~\ref{Moore-exist}}
+	si chiama \textbf{spazio di Moore} e si indica con $M(A,k)$.
+\end{df}
+
+\begin{fact}
+	Una costruzione analoga permette di costruire
+	anche CW complessi $X$ di dimensione $2$,
+	il cui gruppo fondamentale è $\pi_{1}(X,\ast) = \pi$,
+	per un qualsiasi gruppo $\pi$ prefissato.
+\end{fact}
+
+Il \textbf{Teorema di Hurewicz} ci dice che l'omotopia di
+uno spazio di Moore $M(\pi, n)$, con $n \ge 2$, 
+coincide con l'omologia
+fino al grado $n$, ma in grado superiore non sappiamo nulla;
+possiamo ``uccidere'' la sua omotopia in grado superiore a $n$
+considerando il ``troncato'' $n$-esimo, ovvero la sezione di Postnikov
+\begin{equation*}
+	\tau_{\le n}M := P_{n}(M)\,,
+\end{equation*}
+così da ottenere uno spazio con omotopia $\pi_{n}(\tau_{\le n}M, \ast) = \pi$ 
+e $\pi_{q}(\tau_{\le n}M,\ast)=0$ se $q \ne n$.
+
+\begin{df}
+	Uno spazio $X$ tale che $\pi_{n}(X,\ast)=\pi$ e
+	\begin{equation*}
+		\pi_{q}(X,\ast) = 0\,, \quad \text{se } q \ne n
+	\end{equation*}
+	si chiama \textbf{spazio di Eilenberg-MacLane} di tipo
+	$K(\pi,n)$.
+\end{df}
+
+\begin{ex}
+	Abbiamo già incontrato degli spazi di Eilenberg-MacLane nel
+	corso di Elementi di Topologia Algebrica, come ad esempio:
+	\begin{itemize}
+		\item $K(\Z,1) = S^{1}$, il cui rivestimento universale è la retta $\R$;
+		\item $K(\Z/2,1) = \R\PP^{\infty}$, 
+		il cui rivestimento universale è la sfera $S^{\infty}$;
+		\item $K(\Z,2) = \C\PP^{\infty}$, 
+		il cui rivestimento universale è sempre la sfera $S^{\infty}$.
+	\end{itemize}
+\end{ex}
+
+\begin{ex}
+Se consideriamo la torre di Postnikov
+\begin{equation*}
+	\begin{tikzcd}
+		& \dots	\ar[d] \\	
+		& \tau_{\le 2}X \ar[d, "t_{2}"] \\
+		& \tau_{\le 1}X \ar[d] \\
+		X \ar[r] \ar[ur] \ar[uur]
+		& \tau_{\le 0}X  \,,
+	\end{tikzcd}
+\end{equation*}
+la fibra omotopica di $t_{2}$ è lo\footnote{Nella prossima lezione dimostreremo, infatti, che gli spazi di Eilenberg-MacLane sono unici a meno di equivalenza omotopica.} spazio di Eilenberg-MacLane
+$F = K\big(\pi_{2}(X,\ast),2\big)$.\todo{Fai questo esercizio.}
+\end{ex}
+
+
+
+
