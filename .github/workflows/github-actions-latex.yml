@@ -1,0 +1,5 @@
+- name: Github Action for LaTeX
+  on: [push]
+  uses: xu-cheng/latex-action@v2
+  with:
+    root_file: "main.tex"
