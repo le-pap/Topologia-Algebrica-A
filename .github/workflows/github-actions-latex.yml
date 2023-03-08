@@ -1,5 +1,9 @@
-- name: Github Action for LaTeX
-  on: [push]
-  uses: xu-cheng/latex-action@v2
-  with:
-    root_file: "main.tex"
+name: Github Action for LaTeX
+on: [push]
+jobs:
+  build_latex:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: xu-cheng/latex-action@v2
+        with:
+          root_file: "main.tex"
