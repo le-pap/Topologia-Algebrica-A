@@ -1,0 +1,13 @@
+*.log
+*.zip
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.dvi
+*.lol
+*.out.ps
+*.pdf
+*.run.xml
+*.synctex.gz
+*.toc
