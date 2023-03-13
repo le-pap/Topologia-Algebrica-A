@@ -71,7 +71,49 @@ Vogliamo dimostrare che questa è una successione esatta.
 	$E^{A} \to B^{A}$ è ancora una fibrazione.
 	\end{rmnumerate}
 	\begin{proof}[Una soluzione]
-		YE\todo{Fai esercizietto.}
+		Le dimostrazioni dei punti (ii) e (iii) sono analoghi a quelli per le cofibrazioni,
+		ma con le frecce in direzione opposta.
+		\begin{rmnumerate}
+			\item Sia $W$ uno spazio qualsiasi e consideriamo una mappa $W \to B$
+			e un'omotopia $h:I \times W \to B$. 
+			Si ha dunque il diagramma commutativo
+			\begin{equation*}
+				\begin{tikzcd}
+					W \ar[r] \ar[d, "\iota_{0}"', hook] & X \times_{B} E \ar[d] \ar[r] & E \ar[d, "p"] \\
+					I \times W \ar[r, "h"'] \ar[rru, dashed, "h'", crossing over, near start] 
+					& X \ar[r, "f"'] & B\,,
+				\end{tikzcd}
+			\end{equation*}
+			e sfruttiamo che $p$ è una fibrazione per sollevare $f \circ h$
+			a un'omotopia $h':I \times W \to E$. Il sollevamento $H:I \times W \to X \times_{B} E$ 
+			si ottiene dunque dalla costruzione del pullback:
+			\begin{equation*}
+			\begin{tikzcd}
+				I \times W \ar[dr, dashed] \ar[rrd, "h'", bend left=20pt] 
+				\ar[ddr, "h"', bend right=20pt] & & \\
+				& X \times_{B} E \ar[d] \ar[r] & E \ar[d, "p"] \\
+				& X \ar[r, "f"] & B\,.
+			\end{tikzcd}
+			\end{equation*}
+			
+			\addtocounter{enumi}{2}
+			
+			\item Ricordiamo che per la \emph{legge esponenziale}, 
+			i due diagrammi sotto sono equivalenti
+			\begin{equation*}
+				\begin{tikzcd}
+					W \ar[r] \ar[d, "\iota_{0}"', hook] & E^{A} \ar[d, "p \circ -"{name=S}] 
+					& & & W \times A \ar[r] \ar[d, "\iota_{0}"'{name=E}, hook] & E \ar[d, "p"]\\
+					I \times W \ar[r] & B^{A}
+					& & & I \times (W \times A) \ar[r] \ar[ur, dashed] & B\,,
+					\ar[from=S, to=E, shorten=14pt, "\eqref{exp-law}", leftrightarrow]
+				\end{tikzcd}
+			\end{equation*}
+			quindi guardando il quadrato di destra troviamo un sollevamento 
+			$I \times W \times A \to E$ perché
+			$p$ è una fibrazione, e quindi la troviamo anche a livello degli esponenziali
+			riapplicando l'aggiunzione \eqref{exp-law}.
+		\end{rmnumerate}
 	\end{proof}
 \end{exercise}
 
@@ -191,6 +233,22 @@ Otteniamo così il diagramma
 
 \begin{exercise}
 	La valutazione $p=ev_{0}:T(f) \to Y$ è una fibrazione.
+	\begin{proof}[Una soluzione]
+		Dato uno spazio $W$ qualsiasi e diagramma commutativo
+		\begin{equation*}
+			\begin{tikzcd}
+				W \ar[r, "g"] \ar[d, "\iota_{0}"', hook] & F(f) \ar[d, "ev_{0}"] \\
+				I \times W \ar[r] \ar[ur, "H", dashed] & Y \,,
+			\end{tikzcd}
+		\end{equation*}
+		ricordiamo che $g$ è della forma $g_{X} \times g_{Y^{I}}$, 
+		con $g_{X}:W \to X$ e $g_{Y^{I}}:W \to Y^{I}$ tali che $f(g_{X}(w))=g_{Y^{I}}(w)(0)$,
+		quindi possiamo sempre trovare un sollevamento $H$ che fa commutare il diagramma
+		definendo
+		\begin{equation*}
+			H(t,w) := \Big( g_{X}(w), g_{Y^{I}}(w)(t) \Big)\,.
+		\end{equation*}
+	\end{proof}
 \end{exercise}
 
 \begin{df}

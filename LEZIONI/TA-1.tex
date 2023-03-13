@@ -33,9 +33,9 @@ questo induce una funzione $Y^{X} \to Y^{A}$.
 Per tutto il corso assumeremo che gli spazi topologici coinvolti siano
 localmente compatti e di Hausdorff:
 infatti, sotto queste ipotesi vale la \emph{legge esponenziale}
-\begin{equation*}
+\begin{equation}\label{exp-law}
 	\Hom(X,Z^{Y}) \simeq \Hom(X \times Y, Z).
-\end{equation*}
+\end{equation}
 Dunque, se $X$ e $Y$ sono spazi localmente compatti e di Hausdorff,
 il diagramma \eqref{fibI} è equivalente a
 
@@ -171,7 +171,7 @@ ha una retrazione.
 			B \ar[r, "i^{B}"] & X \cup_{A} B\,,  
 			\end{tikzcd}
 		\end{equation*}
-		dove $X \cup_{A} B$ è ottenuto come quoziente di $X \sqcup B$
+		è una cofibrazione, dove $X \cup_{A} B$ è ottenuto come quoziente di $X \sqcup B$
 		per la relazione d'equivalenza $\alpha(a) \sim i(a)$, per ogni $a \in A$.
 		
 		\item \textbf{coprodotto}: data una famiglia di cofibrazioni 
@@ -182,6 +182,92 @@ ha una retrazione.
 		cofibrazioni, allora anche $j \circ i:A \to Y$ è a sua volta una cofibrazione.
 		
 	\end{rmnumerate}
+	\begin{proof}[Una soluzione]
+		\begin{rmnumerate}
+			\item Sia $Z$ uno spazio topologico qualsiasi e consideriamo
+			due mappe $h:I \times B \to Z$ e $f : X \cup_{A} B$. 
+			Componendole con le mappe del pushout,
+			queste inducono un'omotopia $h \circ (\cat{1}_{I} \times \alpha): I \times A \to Z$
+			e una funzione continua $X \to Z$; siccome $i$ è una cofibrazione,
+			allora $h \circ (\cat{1}_{I} \times \alpha)$ si estende a un'omotopia
+			$h':I \times X \to Z$, quindi otteniamo il seguente diagramma commutativo
+			\begin{equation*}
+				\begin{tikzcd}
+					I \times A \ar[r] \ar[d, "\cat{1}_{I} \times \alpha"'] 
+					& I \times X \ar[d] \ar[ddr, bend left, "h'"] & \\
+					I \times B \ar[r] \ar[rrd,  bend right=20pt, "h"', near start] 
+					& I \times \left(X \cup_{A} B\right) & \\
+					& & Z\,,
+				\end{tikzcd}
+			\end{equation*}
+			che tramite l'aggiunzione \eqref{exp-law} diventa equivalente a
+			\begin{equation*}
+				\begin{tikzcd}
+					A \ar[r] \ar[d, "\alpha"] 
+					& X \ar[d] \ar[ddr, bend left] & \\
+					B \ar[r] \ar[rrd,  bend right=20pt] 
+					& X \cup_{A} B \ar[dr, dashed] & \\
+					& & Z^{I} \,,
+				\end{tikzcd}
+			\end{equation*}
+			e quindi per la proprietà del pushout vediamo che esiste un'estensione
+			$X \cup_{A} B \to Z^{I}$ che rende commutativo il diagramma.
+			
+			\item Per prima cosa, si noti che lo spazio $I \times \left(\coprod A_{j} \right)$
+			è omeomorfo al coprodotto $\coprod \left(I \times A_{j}\right)$: infatti,
+			ricordiamo che una mappa $f:\coprod A_{j} \to Z$ equivale a dare una famiglia
+			di mappe $f_{j}:A_{j} \to Z$, quindi per ogni spazio topologico $Z$
+			si hanno le \emph{bigezioni} naturali
+			\begin{align*}
+				\Hom_{\cat{Top}}\left( I \times \left(\coprod A_{j} \right), Z \right)
+				&\simeq \Hom_{\cat{Top}}\left(\coprod A_{j} , Z^{I} \right) \\
+				&\simeq \prod \Hom_{\cat{Top}}\left( A_{j}, Z^{I} \right) \\
+				&\simeq \prod \Hom_{\cat{Top}}\left( I \times A_{j}, Z \right)\,,
+			\end{align*}
+			e quindi si conclude che $I \times \left(\coprod A_{j} \right) 
+			\simeq \coprod \left(I \times A_{j}\right)$ per il \textbf{Lemma di Yoneda}.
+			Dunque, data una famiglia di cofibrazioni $A_{j} \to X_{j}$ e uno
+			spazio $Z$ qualsiasi, tutte le omotopie nei diagrammi
+			\begin{equation*}
+				\begin{tikzcd}
+					A_{j} \ar[r] \ar[d] & X_{j} \ar[d] \ar[ddr, bend left] & \\
+					I \times A_{j} \ar[r] \ar[rrd,  bend right=20pt] 
+					& I \times X_{j} \ar[dr, "H_{j}", dashed] & \\
+					& & Z
+				\end{tikzcd}
+			\end{equation*}
+			si estendono a omotopie $H_{j}:I \times X_{j} \to Z$, 
+			e quindi inducono una mappa $H:\coprod \left(I \times Z_{j}\right) \to Z$ che,
+			dopo aver composto con l'omeomorfismo del ragionamento sopra, 
+			rende commutativo il seguente diagramma
+			\begin{equation*}
+				\begin{tikzcd}
+					\coprod A_{j} \ar[r] \ar[d] & \coprod X_{j} \ar[d] \ar[ddr, bend left] & \\
+					I \times \left( \coprod A_{j} \right) \ar[r] \ar[rrd, bend right=20pt] 
+					& I \times \left( \coprod X_{j} \right) \ar[dr, "H", dashed] & \\
+					& & Z\,.
+				\end{tikzcd}
+			\end{equation*}
+			
+			\item Dato un qualsiasi spazio topologico $Z$ e due mappe
+			$f:Y \to Z,\, f: I \times A \to Z$, consideriamo il diagramma commutativo
+			\begin{equation*}
+				\begin{tikzcd}
+					A \ar[r, "i"] \ar[d] & X \ar[d] \ar[r, "j"] 
+					& Y \ar[d] \ar[ddr, bend left] & \\
+					I \times A \ar[r] \ar[rrrd, "h"', near start, bend right=20pt] 
+					& I \times X \ar[rrd, "h'"', near start, bend right=10pt, dashed] \ar[r]
+					& I \times Y \ar[dr, "H", dashed] & \\
+					& & & Z\,.
+				\end{tikzcd}
+			\end{equation*}
+			Siccome $i$ è una cofibrazione, allora possiamo estendere $h$ a un'omotopia
+			$h':I \times X$, quindi in un secondo momento possiamo concentrarci sul quadrato
+			più a destra e usare la \eqref{HEP} di $j$ per ottenere un'estensione
+			$H:I \times Y \to Z$ che rende commutativo il quadrato; questo mostra
+			che $j \circ i$ è una cofibrazione.
+		\end{rmnumerate}
+	\end{proof}
 \end{exercise}
 
 \begin{ex}

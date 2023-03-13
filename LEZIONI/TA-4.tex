@@ -2,7 +2,6 @@
 
 %\section{Spazi di Moore}
 %
-%\lecture[Torri di Whitehead. Fattorizzazione di Moore-Postnikov. Unicità spazi di Eilenberg-MacLane CW complessi. Funtorialità della costruzione degli spazi di Eilenberg-MacLane. Definizione della classe fondamentale di un $K(pi,n)$. Teorema di rappresentabilità della coomologia. Esempi.]{2023-03-07}
 %
 %\textbf{COSE sta ripetendo la costruzione di ieri.}
 %
@@ -17,6 +16,8 @@
 %\textcolor{red}{Riscrivere questa parte nella lezione di ieri per aggiustare.}
 
 \section{Torri di Whitehead}
+
+\lecture[Torri di Whitehead. Fattorizzazione di Moore-Postnikov. Unicità spazi di Eilenberg-MacLane CW complessi. Funtorialità della costruzione degli spazi di Eilenberg-MacLane. Definizione della classe fondamentale di un $K(\pi,n)$. Teorema di rappresentabilità della coomologia. Esempi.]{2023-03-07}
 
 Fissiamo un punto base $x \in X$ e consideriamo la fibra omotopica $F$
 dell' $n$-sezione di Postnikov $X \to \tau_{\le n} X$.
@@ -264,13 +265,13 @@ che enunciamo nel seguente teorema (che non dimostriamo).
 	come di uno spazio $X$ come mappe (a meno di omotopia) 
 	a valori in un opportuno spazio di Eilenberg-MacLane.
 	
-	\begin{thm}
+	\begin{thm}\label{coh-rep}
 		Se $X$ ha il tipo di omotopia di un CW complesso,
 		allora $\rho$ è un isomorfismo.
 		\begin{proof}
 			Fissato $\pi$, consideriamo degli spazi di Eilenberg-MacLane
 			$K(\pi,n)$ per $n \ge 0$. Per prima cosa capiamo
-			la struttura di gruppo che esiste su membro di sinistra:%$[X,K(\pi,n)]_{\ast}$:
+			la struttura di gruppo che esiste su membro di sinistra: %$[X,K(\pi,n)]_{\ast}$:
 			se $n=0$, allora $K(\pi,0)=\pi$ con la topologia discreta, dunque
 			\begin{equation*}
 				[X,K(\pi,0)]_{\ast} = \Set{f:X \to \pi | f \text{ è localmente costante} }
@@ -308,7 +309,7 @@ che enunciamo nel seguente teorema (che non dimostriamo).
 			\Hom_{\cat{HoTop}_{\ast}}(X^{(0)},\pi) = \widetilde{H}^{0}\left(X^{(0)};\pi\right)\,, \\
 			\left[ X^{(0)}, K(\pi,n) \right] = 0 
 			= \widetilde{H}^{n}\left(X^{(0)};\pi\right)\,, \quad \text{per } n>0\,.
-		\end{align*}\todo{perché coomologia ridotta?}
+		\end{align*}
 		e questo conclude il passo base. 
 		
 		Se assumiamo $X$ connesso di dimensione $q$ finita, c'è una successione di cofibrazione
@@ -341,10 +342,12 @@ che enunciamo nel seguente teorema (che non dimostriamo).
 	\begin{ex}
 		Dato $X$ uno spazio topologico, vediamo che la sua coomologia
 		\begin{equation*}
-			H^{1}(X;\Z/2) = [X;\R\PP^{\infty}]_{\ast}\,,
+			H^{1}(X;\Z/2) = [X;\R\PP^{\infty}]_{\ast}\,.
 		\end{equation*}
-		e vedremo più avanti che una mappa $X \to \R\PP^{\infty}$
-		induce un \emph{fibrato in rette}.\todo{copiare ultima frase.}
+		Vedremo più avanti che una mappa $X \to \R\PP^{\infty}$
+		induce un \emph{fibrato in rette}, e mappe omotope
+		inducono fibrati isomorfi; deduciamo quindi che 
+		$H^{1}(X;\Z/2)$ parametrizza le classi d'equivalenza di fibrati in rette su $X$.
 	\end{ex}
 
 

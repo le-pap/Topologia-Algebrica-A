@@ -1,5 +1,221 @@
-%%% Lezione 5
+%%% Lecture *
 
-\section{Viva Fra e Antonio}
+% \section{Torri di Whitehead}
 
-È lunedì, ho preso appunti.
+
+
+\begin{df}
+	Dato un oggetto $X$ in una categoria $\Cc$, il funtore covariante
+	\begin{equation*}
+		\Cc \longrightarrow \cat{Set}\,, \quad Y \longmapsto \Hom_{\Cc}(X,Y)
+	\end{equation*}
+	si dice \textbf{corappresentato} da $X$, mentre il funtore controvariante
+	\begin{equation*}
+		\Cc^{op} \longrightarrow \cat{Set}\,, \quad Y \longmapsto \Hom_{\Cc}(Y,X)
+	\end{equation*}
+	è \textbf{rappresentato} da $X$.
+\end{df}
+
+Dato un funtore $G:\Cc \longrightarrow \cat{Set}$,
+un elemento $x \in G(X)$ determina una trasformazione naturale
+\begin{equation*}
+	\theta_{x}: \Hom_{\Cc}(X,-) \longrightarrow G\,,
+	\quad \Big(f:X \to Y \Big) \longmapsto \theta_{x}f := G(f)(x) \in G(Y)\,.
+\end{equation*}
+Questo ci permette di enunciare uno dei teoremi più importanti
+della teoria delle categorie:
+\begin{thm}[Lemma di Yoneda]\label{yoneda-lemma}
+	L'associazione $x \to \theta_{x}$ definisce una bigezione di insiemi
+	\begin{equation*}
+		G(X) \longrightarrow \cat{Nat}(\Hom_{\Cc}(X,-),G)
+	\end{equation*}
+	che è naturale sia in $X$, sia in $G$.
+\end{thm}
+
+\lecture[Copia argomenti da e-learning.]{2023-03-13}
+
+In particolare, se $G$ è corappresentato da un oggetto $Y$,
+allora abbiamo una bigezione
+\begin{equation*}
+	\cat{Nat}(\Hom_{\Cc}(X,-), \Hom_{\Cc}(Y,-)) \simeq \Hom_{\Cc}(Y,X)\,,
+\end{equation*}
+che significa che ogni trasformazione naturale $\Hom_{\Cc}(X,-) \to \Hom_{\Cc}(Y,-)$
+è indotta da un'\emph{unica} mappa $Y \to X$.
+In particolare, ogni isomorfismo naturale di funtori è indotto
+da un isomorfismo di oggetti $Y \simeq X$.
+
+
+\begin{fact}
+Si potrebbe utilizzare un approccio ``inverso'',
+dimostrando prima che la coomologia $H^{n}(-,\pi)$
+è un \textbf{funtore rappresentabile} sui CW complessi,
+e definire quindi gli spazi di Eilenberg-MacLane di tipo
+$K(\pi,n)$ come gli oggetti che lo rappresentano,
+cioè come quegli spazi topologici per cui vale
+\begin{equation*}
+	\Hom_{\cat{HoCW}_{\ast}}(X,K(\pi,n)) = [X,K(\pi,n)]_{\ast} = H^{n}(X;\pi)\,.
+\end{equation*}
+% e questo è proprio il contenuto del \hyperref[coh-rep]{Teorema~\ref{coh-rep}}.
+Questo è espresso dal \textbf{Teorema di rappresentabilità di Brown}.
+\end{fact}
+
+Nel caso della coomologia, abbiamo visto che
+\begin{equation*}
+	\theta(m,n,A,B) := \cat{Nat}\Big(H^{m}(-;A), H^{n}(-;B) \Big)
+	= [K(A,m),K(B,n)]_{\ast} = H^{n}(K(A,m);B)\,,
+\end{equation*}
+quindi queste trasformazioni naturali non sono più
+così astratti, ma possiamo ``toccarli con mano'' nel caso in
+cui sappiamo calcolare la coomologia di questi spazi di Eilenberg-MacLane.
+Inoltre, questo procedimento ci suggerisce che
+potremmo trovare un arricchimento della struttura
+della coomologia, come ad esempio nuove \emph{operazioni}
+naturali, che la classica struttura di anello sulla coomologia
+non esprime.
+
+\begin{ex}
+	Dato un primo $p$, consideriamo la successione esatta corta
+	\begin{equation*}
+		\begin{tikzcd}
+			0 \ar[r]
+			& \Z/p \ar[r]
+			& \Z/p^{2} \ar[r]
+			& \Z/p \ar[r]
+			& 0\,.
+		\end{tikzcd}
+	\end{equation*}
+	Prendendo le cocatene singolari di uno spazio $X$,
+	otteniamo una successione esatta di complessi
+	\begin{equation*}
+		\begin{tikzcd}
+			0 \ar[r]
+			& C^{\bullet}(X;\Z/p) \ar[r]
+			& C^{\bullet}(X;\Z/p^{2}) \ar[r]
+			& C^{\bullet}(X;\Z/p) \ar[r]
+			& 0\,,
+		\end{tikzcd}
+	\end{equation*}
+	la quale induce una successione esatta lunga in coomologia;
+	l'omomorfismo di connessione $\beta:H^{n}(X;\Z/p) \to H^{n+1}(X;\Z/p)$
+	è detto \textbf{omomorfismo di Bockstein}.
+\end{ex}
+
+Le trasformazioni naturali di $H^{*}(-,\Z/2)$
+con l'operazione di composizione sono un'algebra 
+(in generale \emph{non} commutativa) su $\Z/2$
+che ci porterà a studiare le \textbf{operazioni di Steenrod}
+per descrivere $H^{*}\big( K(\Z/2,n),\Z/2 \big)$.
+
+\begin{df}
+	Chiamiamo il gruppo $\Theta(m,n,A,B)$ \textbf{operazioni coomologiche}.
+\end{df}
+
+\begin{oss}
+	Le operazioni coomologiche possono solo \emph{aumentare} il grado:\todo{recupera}
+\end{oss}
+
+\begin{oss}
+	L'isomorfismo di sospensione in coomologia
+	\begin{equation*}
+		\widetilde{H}^{n}(X;G) \simeq \widetilde{H}^{n+1}(\Sigma X;G)
+	\end{equation*}
+	è rappresentato da un'equivalenza omotopica debole
+		$K(\pi,n) \to \Omega K(\pi,n+1),$
+	poiché usando l'aggiunzione tra sospensione e loop si ha
+	\begin{equation*}
+		 [X,K(\pi,n)]_{\ast} \simeq  [X,\Omega K(\pi,n+1)]_{\ast} \simeq  [\Sigma X,K(\pi,n)]_{\ast}\,.
+	\end{equation*}
+\end{oss}
+
+\begin{df}
+	Una successione di spazi $\dots, E_{0}, E_{1}, \dots$ e mappe
+	\begin{equation*}
+		E_{n} \longrightarrow \Omega E_{n+1}
+		\quad (\text{oppure } \Sigma E_{n} \longrightarrow E_{n+1})
+	\end{equation*}
+	si chiama \textbf{spettro topologico};
+	si dice \textbf{$\Omega$-spettro} se inoltre le mappe sono equivalenze omotopiche deboli.
+\end{df}
+
+Quanto visto per gli spazi di Eilenberg-MacLane per la coomologia singolare
+si generalizza per \emph{teorie coomologiche} più generali.
+
+\begin{df}
+	Dato un' $\Omega$-spettro $\Set{E_{n}}$, i gruppi 
+	\begin{equation*}
+		\overline{E}^{n}(X) := [X,E_{n}]_{\ast}
+	\end{equation*}
+	sono \textbf{gruppi di una teoria} (\textbf{ridotta}) \textbf{coomologica generalizzata}
+	se soddisfano i seguenti assiomi:
+	\begin{itemize}
+		\item \textbf{omotopia}: se $f,g:(X,A) \to (Y,B)$ sono mappe omotope, 
+		allora inducono la stessa mappa $h^{n}(f) = h^{n}(g)$ tra i gruppi $\overline{E}^{n}(X)$;
+		
+		\item \textbf{esattezza}: una coppia $(X,A)$ induce una successione esatta
+		lunga di gruppi $\overline{E}^{n}$;
+		
+		\item \textbf{escissione}: dato un aperto $U \subset X$ tale che 
+		$\overline{U} \subset A \subset X$, allora c'è un isomorfismo
+		\begin{equation*}
+			\overline{E}^{n}(X,A) \simeq \overline{E}^{n}(X \setminus U, A \setminus U)\,;
+		\end{equation*}
+		\item \textbf{riduzione}: $\widetilde{h}(X) : \ker h(\ast \to X)$.\todo{Che è?}
+	\end{itemize}
+\end{df}
+
+
+\section{Operazioni coomologiche stabili}
+
+	\begin{df}
+		Definiamo un'\textbf{operazione coomologica stabile} di tipo
+		$(r,\pi,G)$ una successione di trasformazioni naturali 
+		$\phi_{n} \in \Theta(n,n+r, \pi G)$, con $n > 0$, che
+		commutano con l'isomorfismo di sospensione:
+		esplicitamente, per ogni spazio $X$ e per ogni $n$,
+		il seguente diagramma commuta:
+		\begin{equation*}
+			\begin{tikzcd}
+				H^{n}(X;G) \ar[r, "\phi_{n}"] \ar[d, "\Sigma"]
+				& H^{n+r}(X;\pi) \ar[d, "\Sigma"] \\
+				H^{n+1}(\Sigma X;G) \ar[r, "\phi_{n+1}"] 
+				& H^{n+r+1}(\Sigma X;\pi) \,. 
+			\end{tikzcd}
+		\end{equation*}
+		Indichiamo con $\cat{Stab}\Theta(r,\pi,G)$ l'insieme delle
+		operazioni stabili.
+	\end{df}
+	
+	\begin{thm}
+		Sia $(X,A)$ una coppia CW (o più in generale $A \hookrightarrow X$ una cofibrazione).
+		Un'operazione coomologica stabile è compatibile con la successione esatta lunga della coppia,
+		cioè per ogni $\phi \in \cat{Stab}\Theta(r,\pi,G)$ abbiamo
+		il diagramma commutativo
+%		\begin{equation*}
+%			\begin{tikzcd}
+%				H^{n}(X;\pi) \ar[r, "i^{*}"] \ar[d, "\phi_{n}"]
+%				& 	H^{n}(A;\pi) \ar[r, "\delta^{*}"] \ar[d, "\phi_{n}"]
+%				& H^{n+1}(X,A;\pi) \ar[d, "\phi_{n+1}"] \ar[r, "j^{*}"]
+%				& H^{n+1}(X;\pi) \ar[d, "\phi_{n+1}"] \\
+%				H^{n+r}(X;G) \ar[r, "i^{*}"]
+%				& 	H^{n+r}(A;G) \ar[r, "\delta^{*}"]
+%				& H^{n+1+r}(X,A;G)  \ar[r, "j^{*}"]
+%				& H^{n+1+r}(X;G) \ar[d, "\phi_{n+1}"]
+%			\end{tikzcd}
+%		\end{equation*}			
+		dove l'operazione $\phi$ è definita sulla coomologia relativa
+		della coppia come $\phi_{X/A}$\footnote{Sappiamo che nel caso di una successione di cofibrazione la coomologia relativa è in realtà la coomologia del quoziente $X/A$.}
+	\end{thm}
+	
+	\begin{oss}
+		Si verifica che l'omomorfismo $\delta^{*}$ nel diagramma
+		è la composizione
+		\begin{equation*}
+			\begin{tikzcd}
+				H^{n}(A;\pi) \ar[r, "\Sigma"]
+				& H^{n+1}(X;\pi)
+			\end{tikzcd}
+		\end{equation*}
+		che è indotta in realtà dalla mappa di proiezione
+			$p:X \cup CA \to (X \cup CA)/X \simeq \Sigma A$,
+		e da questo segue la naturalità.
+	\end{oss}
