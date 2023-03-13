@@ -16,6 +16,9 @@
 	è \textbf{rappresentato} da $X$.
 \end{df}
 
+
+\lecture[Cenni al teorema di rappresentabilità. Definizine di Omega-spettro. Lemma di Yoneda e applicazione alla rappresentazione della coomologia: operazioni coomologiche come gruppi di omologia di spazi di Eilenberg-Mac Lane. Omomorfismo di Bockstein.]{2023-03-13}
+
 Dato un funtore $G:\Cc \longrightarrow \cat{Set}$,
 un elemento $x \in G(X)$ determina una trasformazione naturale
 \begin{equation*}
@@ -25,24 +28,23 @@ un elemento $x \in G(X)$ determina una trasformazione naturale
 Questo ci permette di enunciare uno dei teoremi più importanti
 della teoria delle categorie:
 \begin{thm}[Lemma di Yoneda]\label{yoneda-lemma}
-	L'associazione $x \to \theta_{x}$ definisce una bigezione di insiemi
+	L'associazione $x \mapsto \theta_{x}$ definisce una bigezione di insiemi
 	\begin{equation*}
 		G(X) \longrightarrow \cat{Nat}(\Hom_{\Cc}(X,-),G)
 	\end{equation*}
 	che è naturale sia in $X$, sia in $G$.
 \end{thm}
 
-\lecture[Copia argomenti da e-learning.]{2023-03-13}
 
-In particolare, se $G$ è corappresentato da un oggetto $Y$,
+In particolare, se $G$ è rappresentato da un oggetto $Y$,
 allora abbiamo una bigezione
 \begin{equation*}
-	\cat{Nat}(\Hom_{\Cc}(X,-), \Hom_{\Cc}(Y,-)) \simeq \Hom_{\Cc}(Y,X)\,,
+	\cat{Nat}(\Hom_{\Cc}(-,X), \Hom_{\Cc}(-,Y)) \simeq \Hom_{\Cc}(X,Y)\,,
 \end{equation*}
 che significa che ogni trasformazione naturale $\Hom_{\Cc}(X,-) \to \Hom_{\Cc}(Y,-)$
-è indotta da un'\emph{unica} mappa $Y \to X$.
+è indotta da un'\emph{unica} mappa $X \to Y$.
 In particolare, ogni isomorfismo naturale di funtori è indotto
-da un isomorfismo di oggetti $Y \simeq X$.
+da un isomorfismo di oggetti $X \simeq Y$.
 
 
 \begin{fact}
@@ -61,7 +63,7 @@ Questo è espresso dal \textbf{Teorema di rappresentabilità di Brown}.
 
 Nel caso della coomologia, abbiamo visto che
 \begin{equation*}
-	\theta(m,n,A,B) := \cat{Nat}\Big(H^{m}(-;A), H^{n}(-;B) \Big)
+	\Theta(m,n,A,B) := \cat{Nat}\Big(H^{m}(-;A), H^{n}(-;B) \Big)
 	= [K(A,m),K(B,n)]_{\ast} = H^{n}(K(A,m);B)\,,
 \end{equation*}
 quindi queste trasformazioni naturali non sono più
@@ -102,7 +104,7 @@ non esprime.
 
 Le trasformazioni naturali di $H^{*}(-,\Z/2)$
 con l'operazione di composizione sono un'algebra 
-(in generale \emph{non} commutativa) su $\Z/2$
+(in generale \emph{non} commutativa) su $\Z/2$,
 che ci porterà a studiare le \textbf{operazioni di Steenrod}
 per descrivere $H^{*}\big( K(\Z/2,n),\Z/2 \big)$.
 
@@ -123,7 +125,7 @@ per descrivere $H^{*}\big( K(\Z/2,n),\Z/2 \big)$.
 		$K(\pi,n) \to \Omega K(\pi,n+1),$
 	poiché usando l'aggiunzione tra sospensione e loop si ha
 	\begin{equation*}
-		 [X,K(\pi,n)]_{\ast} \simeq  [X,\Omega K(\pi,n+1)]_{\ast} \simeq  [\Sigma X,K(\pi,n)]_{\ast}\,.
+		 [X,K(\pi,n)]_{\ast} \simeq  [X,\Omega K(\pi,n+1)]_{\ast} \simeq  [\Sigma X,K(\pi,n+1)]_{\ast}\,.
 	\end{equation*}
 \end{oss}
 
@@ -219,3 +221,5 @@ si generalizza per \emph{teorie coomologiche} più generali.
 			$p:X \cup CA \to (X \cup CA)/X \simeq \Sigma A$,
 		e da questo segue la naturalità.
 	\end{oss}
+	
+	UAA

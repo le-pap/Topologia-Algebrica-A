@@ -10,4 +10,5 @@
 *.pdf
 *.run.xml
 *.synctex.gz
+*.tks
 *.toc
