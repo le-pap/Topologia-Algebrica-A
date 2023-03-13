@@ -9,9 +9,12 @@ jobs:
       - uses: xu-cheng/latex-action@v2
         with:
           root_file: "main.tex"
-      - name: Release PDF
-        uses: softprops/action-gh-release@v1
+      - name: move
+        run: mkdir -p github_deploy && mv main.pdf github_deploy/
+      - name: deploy on orphan branch
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          files: main.pdf
-          tag_name: version
-          name: Pdf degli appunti
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./github_deploy
+          publish_branch: build
+          force_orphan: true
