@@ -1696,6 +1696,20 @@ INPUT LEZIONI/TA-5.tex
 INPUT ./LEZIONI/TA-5.tex
 INPUT ./LEZIONI/TA-5.tex
 INPUT LEZIONI/TA-5.tex
+INPUT ./LEZIONI/TA-6.tex
+INPUT ./LEZIONI/TA-6.tex
+INPUT ./LEZIONI/TA-6.tex
+INPUT LEZIONI/TA-6.tex
+INPUT ./LEZIONI/TA-6.tex
+INPUT ./LEZIONI/TA-6.tex
+INPUT LEZIONI/TA-6.tex
+INPUT ./LEZIONI/TA-7.tex
+INPUT ./LEZIONI/TA-7.tex
+INPUT ./LEZIONI/TA-7.tex
+INPUT LEZIONI/TA-7.tex
+INPUT ./LEZIONI/TA-7.tex
+INPUT ./LEZIONI/TA-7.tex
+INPUT LEZIONI/TA-7.tex
 INPUT main.aux
 INPUT main.run.xml
 OUTPUT main.run.xml
@@ -1732,4 +1746,5 @@ INPUT /usr/local/texlive/2022/texmf-dist/fonts/type1/public/lm/lmsy7.pfb
 INPUT /usr/local/texlive/2022/texmf-dist/fonts/type1/public/lm/lmsy8.pfb
 INPUT /usr/local/texlive/2022/texmf-dist/fonts/type1/public/lm/lmtt10.pfb
 INPUT /usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb
+INPUT /usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm7.pfb
 INPUT /usr/local/texlive/2022/texmf-dist/fonts/type1/public/old-arrows/oasy10.pfb

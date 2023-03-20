@@ -13,24 +13,27 @@
 	\begin{equation*}
 		\Cc^{op} \longrightarrow \cat{Set}\,, \quad Y \longmapsto \Hom_{\Cc}(Y,X)
 	\end{equation*}
-	è \textbf{rappresentato} da $X$.
+	è \textbf{rappresentato} da $X$. Diremo che un funtore covariante $F:\Cc \to \CSet$
+	è \textbf{corappresentabile} se esiste un oggetto $X \in \Cc$ tale che $F \simeq \Hom_{\Cc}(X,-)$,
+	e analogamente diremo che un funtore controvariante $G:\Cc^{op} \to \CSet$
+	è \textbf{rappresentabile} se $G \simeq \Hom_{\Cc}(-,X)$, per qualche $X \in \Cc$.
 \end{df}
 
 
-\lecture[Cenni al teorema di rappresentabilità. Definizine di Omega-spettro. Lemma di Yoneda e applicazione alla rappresentazione della coomologia: operazioni coomologiche come gruppi di omologia di spazi di Eilenberg-Mac Lane. Omomorfismo di Bockstein.]{2023-03-13}
+\lecture[Cenni al teorema di rappresentabilità. Lemma di Yoneda e applicazione alla rappresentazione della coomologia: operazioni coomologiche come gruppi di omologia di spazi di Eilenberg-Mac Lane. Omomorfismo di Bockstein. Definizine di $\Omega$-spettro.]{2023-03-13}
 
-Dato un funtore $G:\Cc \longrightarrow \cat{Set}$,
+Dato un funtore $G:\Cc^{op} \longrightarrow \cat{Set}$,
 un elemento $x \in G(X)$ determina una trasformazione naturale
 \begin{equation*}
-	\theta_{x}: \Hom_{\Cc}(X,-) \longrightarrow G\,,
-	\quad \Big(f:X \to Y \Big) \longmapsto \theta_{x}f := G(f)(x) \in G(Y)\,.
+	\theta_{x}: \Hom_{\Cc}(-,X) \longrightarrow G\,,
+	\quad \Big(f: Y \to X \Big) \longmapsto \theta_{x}f := G(f)(x) \in G(Y)\,.
 \end{equation*}
 Questo ci permette di enunciare uno dei teoremi più importanti
 della teoria delle categorie:
-\begin{thm}[Lemma di Yoneda]\label{yoneda-lemma}
+\begin{thm}[\textbf{Lemma di Yoneda}\footnote{Solitamente con \textbf{Lemma di Yoneda} si fa riferimento alla versione per funtori controvarianti, come quella riportata qui; tuttavia, esiste un risultato analogo anche per funtori covarianti.}]\label{yoneda-lemma}
 	L'associazione $x \mapsto \theta_{x}$ definisce una bigezione di insiemi
 	\begin{equation*}
-		G(X) \longrightarrow \cat{Nat}(\Hom_{\Cc}(X,-),G)
+		G(X) \longrightarrow \cat{Nat}(\Hom_{\Cc}(-,X),G)
 	\end{equation*}
 	che è naturale sia in $X$, sia in $G$.
 \end{thm}
@@ -58,8 +61,23 @@ cioè come quegli spazi topologici per cui vale
 	\Hom_{\cat{HoCW}_{\ast}}(X,K(\pi,n)) = [X,K(\pi,n)]_{\ast} = H^{n}(X;\pi)\,.
 \end{equation*}
 % e questo è proprio il contenuto del \hyperref[coh-rep]{Teorema~\ref{coh-rep}}.
-Questo è espresso dal \textbf{Teorema di rappresentabilità di Brown}.
+Questo risultato è espresso dal \textbf{Teorema di rappresentabilità di Brown}.
 \end{fact}
+
+
+\begin{oss}
+	L'isomorfismo di sospensione in coomologia ridotta
+	\begin{equation*}
+		\widetilde{H}^{n}(X;G) \simeq \widetilde{H}^{n+1}(\Sigma X;G)
+	\end{equation*}
+	è rappresentato da un'equivalenza omotopica debole
+		$K(\pi,n) \to \Omega K(\pi,n+1)$
+	che induce la sospensione della classe fondamentale di $K(\pi,n)$,
+	poiché usando l'aggiunzione tra sospensione e loop si ha
+	\begin{equation*}
+		 [X,K(\pi,n)]_{\ast} \simeq  [X,\Omega K(\pi,n+1)]_{\ast} \simeq  [\Sigma X,K(\pi,n+1)]_{\ast}\,.
+	\end{equation*}
+\end{oss}
 
 Nel caso della coomologia, abbiamo visto che
 \begin{equation*}
@@ -67,13 +85,40 @@ Nel caso della coomologia, abbiamo visto che
 	= [K(A,m),K(B,n)]_{\ast} = H^{n}(K(A,m);B)\,,
 \end{equation*}
 quindi queste trasformazioni naturali non sono più
-così astratti, ma possiamo ``toccarli con mano'' nel caso in
-cui sappiamo calcolare la coomologia di questi spazi di Eilenberg-MacLane.
+troppo astratte, ma possiamo ``toccarle con mano'' nel caso in
+cui siamo in grado di calcolare la coomologia 
+di questi spazi di Eilenberg-MacLane.
 Inoltre, questo procedimento ci suggerisce che
-potremmo trovare un arricchimento della struttura
-della coomologia, come ad esempio nuove \emph{operazioni}
-naturali, che la classica struttura di anello sulla coomologia
+potremmo arricchire la struttura
+della coomologia, ad esempio trovando nuove \emph{operazioni}
+naturali che la classica struttura di anello %sulla coomologia
 non esprime.
+
+
+\begin{df}
+	Chiameremo i gruppi $\Theta(m,n,A,B)$ \textbf{operazioni coomologiche}.
+\end{df}
+
+
+
+\begin{ex}
+%	Le trasformazioni naturali del funtore $H^{*}(-;\Z/2)$
+%	formano un'algebra su $\Z/2$ che ci porterà a studiare
+%	le \emph{operazioni di Steenrod} e descrivere
+%	$H^{*}(K(\Z/2,n);\Z/2)$.
+Le trasformazioni naturali di $H^{*}(-,\Z/2)$
+con l'operazione di composizione sono un'algebra 
+(in generale \emph{non} commutativa) su $\Z/2$,
+che ci porterà a studiare le \textbf{operazioni di Steenrod}
+per descrivere $H^{*}\big( K(\Z/2,n),\Z/2 \big)$.
+\end{ex}
+
+\begin{oss}
+	Le operazioni coomologiche \emph{non} possono diminuire di grado:
+	infatti, siccome uno spazio di tipo $K(A,m)$ è $(m-1)$-connesso,
+	allora $H^{n}(K(A,m);B)=0$ per ogni $n < m$, per qualsiasi gruppo $B$.
+	Deduciamo quindi che $\Theta(m,n,A,B)$ è banale se $n<m$.
+\end{oss}
 
 \begin{ex}
 	Dato un primo $p$, consideriamo la successione esatta corta
@@ -102,32 +147,6 @@ non esprime.
 	è detto \textbf{omomorfismo di Bockstein}.
 \end{ex}
 
-Le trasformazioni naturali di $H^{*}(-,\Z/2)$
-con l'operazione di composizione sono un'algebra 
-(in generale \emph{non} commutativa) su $\Z/2$,
-che ci porterà a studiare le \textbf{operazioni di Steenrod}
-per descrivere $H^{*}\big( K(\Z/2,n),\Z/2 \big)$.
-
-\begin{df}
-	Chiamiamo il gruppo $\Theta(m,n,A,B)$ \textbf{operazioni coomologiche}.
-\end{df}
-
-\begin{oss}
-	Le operazioni coomologiche possono solo \emph{aumentare} il grado:\todo{recupera}
-\end{oss}
-
-\begin{oss}
-	L'isomorfismo di sospensione in coomologia
-	\begin{equation*}
-		\widetilde{H}^{n}(X;G) \simeq \widetilde{H}^{n+1}(\Sigma X;G)
-	\end{equation*}
-	è rappresentato da un'equivalenza omotopica debole
-		$K(\pi,n) \to \Omega K(\pi,n+1),$
-	poiché usando l'aggiunzione tra sospensione e loop si ha
-	\begin{equation*}
-		 [X,K(\pi,n)]_{\ast} \simeq  [X,\Omega K(\pi,n+1)]_{\ast} \simeq  [\Sigma X,K(\pi,n+1)]_{\ast}\,.
-	\end{equation*}
-\end{oss}
 
 \begin{df}
 	Una successione di spazi $\dots, E_{0}, E_{1}, \dots$ e mappe
@@ -139,31 +158,32 @@ per descrivere $H^{*}\big( K(\Z/2,n),\Z/2 \big)$.
 	si dice \textbf{$\Omega$-spettro} se inoltre le mappe sono equivalenze omotopiche deboli.
 \end{df}
 
-Quanto visto per gli spazi di Eilenberg-MacLane per la coomologia singolare
-si generalizza per \emph{teorie coomologiche} più generali.
+Quanto visto per gli spazi di Eilenberg-MacLane e la coomologia singolare
+si adattare per \emph{teorie coomologiche} più generali.
 
-\begin{df}
-	Dato un' $\Omega$-spettro $\Set{E_{n}}$, i gruppi 
+\begin{fact}
+	Dato un' $\Omega$-spettro $\{\dots,E_{n}, E_{n+1}, \dots \}$, i gruppi 
 	\begin{equation*}
-		\overline{E}^{n}(X) := [X,E_{n}]_{\ast}
+		h^{n}(X) := [X,E_{n}]_{\ast}
 	\end{equation*}
-	sono \textbf{gruppi di una teoria} (\textbf{ridotta}) \textbf{coomologica generalizzata}
-	se soddisfano i seguenti assiomi:
+	sono \textbf{gruppi di una teoria coomologica} (\textbf{ridotta}) \textbf{generalizzata},
+	cioè soddisfano i seguenti assiomi:
 	\begin{itemize}
 		\item \textbf{omotopia}: se $f,g:(X,A) \to (Y,B)$ sono mappe omotope, 
-		allora inducono la stessa mappa $h^{n}(f) = h^{n}(g)$ tra i gruppi $\overline{E}^{n}(X)$;
+		allora inducono la stessa mappa $h^{n}(f) = h^{n}(g)$;
 		
 		\item \textbf{esattezza}: una coppia $(X,A)$ induce una successione esatta
-		lunga di gruppi $\overline{E}^{n}$;
+		lunga di gruppi $h^{n}$;
 		
 		\item \textbf{escissione}: dato un aperto $U \subset X$ tale che 
 		$\overline{U} \subset A \subset X$, allora c'è un isomorfismo
 		\begin{equation*}
-			\overline{E}^{n}(X,A) \simeq \overline{E}^{n}(X \setminus U, A \setminus U)\,;
+			h^{n}(X,A) \simeq h^{n}(X \setminus U, A \setminus U)\,;
 		\end{equation*}
+		
 		\item \textbf{riduzione}: $\widetilde{h}(X) : \ker h(\ast \to X)$.\todo{Che è?}
 	\end{itemize}
-\end{df}
+\end{fact}
 
 
 \section{Operazioni coomologiche stabili}
@@ -171,7 +191,7 @@ si generalizza per \emph{teorie coomologiche} più generali.
 	\begin{df}
 		Definiamo un'\textbf{operazione coomologica stabile} di tipo
 		$(r,\pi,G)$ una successione di trasformazioni naturali 
-		$\phi_{n} \in \Theta(n,n+r, \pi G)$, con $n > 0$, che
+		$\phi_{n} \in \Theta(n,n+r, \pi, G)$, con $n > 0$, che
 		commutano con l'isomorfismo di sospensione:
 		esplicitamente, per ogni spazio $X$ e per ogni $n$,
 		il seguente diagramma commuta:
@@ -189,37 +209,47 @@ si generalizza per \emph{teorie coomologiche} più generali.
 	
 	\begin{thm}
 		Sia $(X,A)$ una coppia CW (o più in generale $A \hookrightarrow X$ una cofibrazione).
-		Un'operazione coomologica stabile è compatibile con la successione esatta lunga della coppia,
-		cioè per ogni $\phi \in \cat{Stab}\Theta(r,\pi,G)$ abbiamo
+		Un'operazione coomologica stabile è compatibile con la successione esatta lunga della coppia:
+		per ogni $\phi \in \cat{Stab}\Theta(r,\pi,G)$, abbiamo
 		il diagramma commutativo
-%		\begin{equation*}
-%			\begin{tikzcd}
-%				H^{n}(X;\pi) \ar[r, "i^{*}"] \ar[d, "\phi_{n}"]
-%				& 	H^{n}(A;\pi) \ar[r, "\delta^{*}"] \ar[d, "\phi_{n}"]
-%				& H^{n+1}(X,A;\pi) \ar[d, "\phi_{n+1}"] \ar[r, "j^{*}"]
-%				& H^{n+1}(X;\pi) \ar[d, "\phi_{n+1}"] \\
-%				H^{n+r}(X;G) \ar[r, "i^{*}"]
-%				& 	H^{n+r}(A;G) \ar[r, "\delta^{*}"]
-%				& H^{n+1+r}(X,A;G)  \ar[r, "j^{*}"]
-%				& H^{n+1+r}(X;G) \ar[d, "\phi_{n+1}"]
-%			\end{tikzcd}
-%		\end{equation*}			
-		dove l'operazione $\phi$ è definita sulla coomologia relativa
-		della coppia come $\phi_{X/A}$\footnote{Sappiamo che nel caso di una successione di cofibrazione la coomologia relativa è in realtà la coomologia del quoziente $X/A$.}
-	\end{thm}
-	
-	\begin{oss}
-		Si verifica che l'omomorfismo $\delta^{*}$ nel diagramma
-		è la composizione
 		\begin{equation*}
 			\begin{tikzcd}
-				H^{n}(A;\pi) \ar[r, "\Sigma"]
-				& H^{n+1}(X;\pi)
+				H^{n}(X;\pi) \ar[r, "i^{*}"] \ar[d, "\phi_{n}"]
+				& 	H^{n}(A;\pi) \ar[r, "\delta^{*}"] \ar[d, "\phi_{n}"]
+				& H^{n+1}(X,A;\pi) \ar[d, "\phi_{n+1}"] \ar[r, "j^{*}"]
+				& H^{n+1}(X;\pi) \ar[d, "\phi_{n+1}"] \\
+				H^{n+r}(X;G) \ar[r, "i^{*}"]
+				& 	H^{n+r}(A;G) \ar[r, "\delta^{*}"]
+				& H^{n+1+r}(X,A;G)  \ar[r, "j^{*}"]
+				& H^{n+1+r}(X;G) \,,
 			\end{tikzcd}
-		\end{equation*}
-		che è indotta in realtà dalla mappa di proiezione
+		\end{equation*}			
+		dove l'operazione $\phi$ è definita sulla coomologia relativa
+		della coppia come $\phi_{X/A}$\footnote{Sappiamo che nel caso di una successione di cofibrazione la coomologia relativa è in realtà la coomologia del quoziente $X/A$.}
+		\begin{proof}
+			Siccome l'operazione coomologica $\phi$ è una trasformazione naturale,
+			sappiamo che i quadrati laterali commutano, pertanto resta da verificare
+			la commutatività del quadrato centrale.
+			
+			Si verifica che l'omomorfismo di connessione
+			\begin{equation*}
+				\delta^{*}: H^{n}(A;\pi) \longrightarrow H^{n+1}(X,A;\pi) \simeq H^{n+1}(X/A;\pi)
+			\end{equation*}
+			coincide con la composizione
+			\begin{equation*}
+				\begin{tikzcd}
+					H^{n}(A;\pi) \ar[r, "\Sigma"]
+					& H^{n+1}(\Sigma A;\pi) \ar[r, "p^{*}"]
+					& H^{n+1}(X \cup CA;\pi) \ar[r, equals]
+					& H^{n+1}(X/A;\pi)\,,
+				\end{tikzcd}
+			\end{equation*}
+			dove $p^{*}$ è indotta dalla mappa di proiezione
 			$p:X \cup CA \to (X \cup CA)/X \simeq \Sigma A$,
-		e da questo segue la naturalità.
-	\end{oss}
-	
-	UAA
+			e l'ultima uguaglianza segue dall'equivalenza omotopica
+			$X \cup CA \simeq X/A$. Siccome lo stesso ragionamento
+			vale per la seconda riga, concludiamo che il quadrato commuta
+			poiché $\phi$ commuta con $p^{*}$ per naturalità,
+			e con $\Sigma$ per stabilità.
+		\end{proof}
+	\end{thm}

@@ -1,5 +1,372 @@
-%%% Lecture *
+%%% Lecture 6
 
-% \section{Torri di Whitehead}
 
-\lecture[Copia argomenti da e-learning.]{2023-03-07}
+\lecture[Algebra delle operazioni coomologiche stabili. Definizione di algebra di Steenrod. Introduzione alle successioni spettrali: definizioni, filtrazioni, convergenza, modulo graduato associato ad una filtrazione, filtrazioni limitate, limite di una successione spettrale.]{2023-03-14}
+
+
+Se prendiamo un'operazione $\phi \in \cat{Stab}\Theta(r,\pi,G)$, 
+la pensiamo come una famiglia di trasformazioni naturali
+$\phi_{n} \in \Theta(n,n+r,\pi,G) = H^{n+r}(K(\pi,n);G)$ che soddisfa la condizione di
+stabilità $\Sigma \phi = \phi \Sigma$, ovvero gli omomorfismi
+\begin{equation*}
+	\begin{tikzcd}
+		f_{n} \, : \, H^{n+r}(K(\pi,n);G) \ar[r, "i_{n+r}^{*}"]
+		& H^{n+r}(\Sigma K(\pi,n-1);G) \ar[r, "\Sigma^{-1}"]
+		& H^{n+r-1}(K(\pi,n-1);G)\,,
+	\end{tikzcd}
+\end{equation*}
+soddisfano la condizione di stabilità $f_{n}(\phi_{n}) = \phi_{n-1}$,
+dove il primo omomorfismo è indotto da $\cat{1}_{\pi}$
+attraverso la seguente identificazione:
+\begin{equation*}
+	\begin{tikzcd}
+		\Hom_{\cat{Grp}}(\pi,\pi) \ar[r, equals] \ar[d, equals]
+		& H^{n-1}(K(\pi,n-1);\pi) \ar[d, "\Sigma", "\simeq"'] \\
+		H^{n}(K(\pi,n);\pi) \ar[r,"i^{*}_{n}"]
+		& H^{n}(\Sigma K(\pi,n-1);\pi)\,;
+	\end{tikzcd}
+\end{equation*}
+ricordiamo che tramite l'identificazione
+$H^{n-1}(K(\pi,n-1);\pi) \simeq [K(\pi,n-1),K(\pi,n)]_{\ast}$,
+questa classe in coomologia induce un'unica mappa
+$i_{n}:\Sigma K(\pi,n-1) \to K(\pi,n)$ a meno di omomotopia.
+
+\begin{oss}
+	La mappa $i_{n}$ è l'aggiunta di $K(\pi,n-1) \to \Omega K(\pi,n)$,
+	che ricordiamo essere un'equivalenza omotopica debole.
+\end{oss}
+
+Quindi le operazioni stabili si possono vedere come il limite inverso
+\begin{equation*}
+	\cat{Stab}\Theta(r,\pi,G) = \varprojlim_{n}\left( H^{n+r}(K(\pi,n);G),f_{n}\right)\,,
+\end{equation*}
+e nel caso in cui $G$ è un anello, $H^{*}(K(\pi,n);G))$ è un anello
+che \emph{non} induce la moltiplicazione in $\cat{Stab}\Theta(r,\pi,G)$.
+Tuttavia, la composizione di mappe rende  $\bigoplus_{r \ge 0}\cat{Stab}\Theta(r,\pi,G)$
+un \textbf{anello graduato}, unitario e in generale \emph{non} commutativo.
+La coomologia $H^{*}(X;G)$ è un modulo su tale anello e una
+qualsiasi funzione continua $f:X \to Y$ induce un omomorfismo di moduli.
+Inoltre, se $G=k$ è un campo, allora le operazioni coomologiche diventano
+una $k$-algebra, nel caso in cui $G=\Z/p$, con $p$ primo,
+viene chiamata \textbf{algebra di Steenrod} $\AA_{p}$.
+
+
+\section{Successioni spettrali}
+
+Vogliamo studiare la (co)omologia di un complesso di (co)catene 
+``affettandolo'' attraverso delle \emph{filtrazioni},
+le quali ci permetteranno di studiare il complesso come se fosse un \emph{libro}:
+infatti, otterremo tanti bicomplessi chiamati \emph{pagine},
+ognuna delle pagine produrrà un nuovo complesso,
+ciascuno con un nuovo differenziale che ci sposta ``in su'' di una diagonale.
+\missingfigure{Magari mettere il diagrammino di una paginetta.}
+Se la situazione è favorevole, i differenziali produrranno definitivamente
+(co)omologia banale, e la successione delle pagine si \emph{stabilizza}.
+
+
+Sia $(C_{\bullet}, d)$ un complesso di catene.
+Ricordiamo che la sua omologia in grado $i$ è il quoziente 
+$H_{i}(C_{\bullet}) = \ker d_{i}/\mathrm{im} d_{i+1}$.
+In presenza di un complesso di cocatene $(C^{\bullet},d)$
+usiamo invece la notazione \emph{crescente},
+e quindi la sua coomologia in grado $i$ è 
+$H^{i}(C^{\bullet}) = \ker d^{i}/\mathrm{im} d^{i-1}$.
+
+\begin{df}
+	Dato un $R$-modulo $A$, una famiglia di sottomoduli 
+	totalmente ordinata per inclusione si chiama
+	\begin{itemize}
+		\item una \textbf{filtrazione decrescente} se 
+			\begin{equation*}
+				F^{\bullet}A : \quad
+				\dots \subset F^{p+1}A \subset F^{p}A \subset F^{p-1}A \subset \dots
+			\end{equation*}
+			
+		\item una \textbf{filtrazione crescente} se 
+			\begin{equation*}
+				F_{\bullet}A : \quad
+				\dots \subset F_{p-1}A \subset F_{p}A \subset F_{p+1}A \subset \dots
+			\end{equation*}
+	\end{itemize}
+\end{df}
+
+
+\begin{ex}
+	Una filtrazione descrescente $F^{\bullet}$ sul gruppo abeliano $A = \Z$ è data da
+	$F^{i}A = \Z$ per $i \le 0$ e $F^{i}A = 2^{i}\Z$ per $i > 0$:
+	\begin{equation*}
+		0 \subset \dots \subset 16\Z \subset 8\Z \subset 4\Z \subset 2\Z \subset \Z\,.
+	\end{equation*}
+\end{ex}
+
+
+\begin{df}
+	Diciamo che un \textbf{complesso} di catene $(C_{\bullet}, d)$ è \textbf{filtrato}
+	se è un $R$-modulo $C = \bigoplus_{j \in \Z} C_{j}$ filtrato $F_{\bullet}$ tale
+	che il differenziale sia compatibile rispetto alla filtrazione: 
+	nel caso di una filtrazione $F^{\bullet}$ decrescente,
+	richiediamo che per ogni $i \in \Z$ valga
+	 $d\left(F^{i}C\right) \subset F^{i}C$.
+	 In maniera analoga, possiamo definire un complesso di cocatene filtrato,
+	 dotato di una filtrazione crescente $F_{\bullet}$, 
+	 oppure decrescente $F^{\bullet}$.
+\end{df}
+
+	Notiamo che, se $(C_{\bullet},d)$ è un complesso filtrato da $F_{\bullet}$,
+	allora i sottomoduli $F_{p}C_{\bullet}=\bigoplus_{j \in \Z}F_{p}C_{j}$
+	ereditano una naturale struttura di complesso di catene
+	una volta che restringiamo il differenziale:
+	\begin{equation*}
+		d\vert_{F_{p}C_{\bullet}} : F_{p}C_{j} \longmapsto F_{p}C_{j-1}\,.
+	\end{equation*}
+
+\begin{df}
+	Dato $(A,F)$ un $R$-modulo filtrato, il suo \textbf{modulo graduato associato} è
+	\begin{itemize}
+		\item l'$R$-modulo $E^{0}(A) = \bigoplus_{p \in \Z} E^{0}_{p}(A)$, 
+		dove $E^{0}_{p}(A) := F_{p}A/F_{p-1}A$ se $F_{\bullet}$ è crescente;
+		
+		\item l'$R$-modulo $E_{0}(A) = \bigoplus_{p \in \Z} E_{0}^{p}(A)$, 
+		dove $E^{p}_{0}(A) := F^{p}A/F^{p+1}A$ se $F^{\bullet}$ è decrescente.
+	\end{itemize}
+\end{df}
+
+\begin{ex}
+	Consideriamo la filtrazione $0 \subset 2\Z \subset \Z$ sul gruppo abeliano $\Z$.
+	Lo $\Z$-modulo graduato associato alla filtrazione è $E^{0}(\Z)=2\Z \oplus \Z/2$;
+	si osservi che non è isomorfo a $\Z$.
+\end{ex}
+
+\begin{oss}
+	In generale, anche se la filtrazione $F^{\bullet}$ è \emph{limitata}, cioè
+	\begin{equation*}
+		0 = F^{m+n+1}A \subsetneq F^{m+n}A \subset \dots \subset F^{m}A = A\,,
+	\end{equation*}
+	il modulo $E^{p}_{0}(A)$ non determina il modulo $A$: 
+	questo fatto è conosciuto come il \textbf{problema di estensione}.
+	Infatti, se consideriamo grado per grado $F^{n+m}A \simeq E^{n+m}_{0}(A)$
+	e le successioni esatte corte
+	\begin{equation*}
+		\begin{tikzcd}
+			0 \ar[r]
+			& F^{i+1}A \ar[r]
+			& F^{i}A \ar[r]
+			& E^{i}_{0}(A) \ar[r]
+			& 0\,,
+		\end{tikzcd}
+	\end{equation*}
+	in generale il termine $F^{i}A$ \emph{non} è univocamente determinato:
+	si pensi ad esempio
+	\begin{equation*}
+		\begin{tikzcd}
+			0 \ar[r] & \Z/2 \ar[r] & A \ar[r] & \Z/2 \ar[r] & 0\,,
+		\end{tikzcd}
+	\end{equation*}
+	dove $A$ può essere $\Z/4$ oppure $\Z/2 \oplus \Z/2$.
+\end{oss}
+
+
+\begin{ex}
+	Sia $X$ un CW complesso e indichiamo con $X^{(p)}$ il suo $p$-scheletro.
+	Il complesso $C_{\bullet}(X)$ delle catene singolari di $X$ ammette 
+	la filtrazione crescente $F_{p}C_{\bullet} := C_{\bullet}\left( X^{(p)} \right)$.
+	Passando alle cocatene, invece, il complesso $C^{\bullet}(X) = \Hom_{R}(C_{\bullet}(X),R)$
+	ammette la filtrazione decrescente
+	\begin{equation*}
+		F^{p}C^{\bullet} := \Set{\phi \in C^{\bullet}(X) | F_{p-1}C_{\bullet} \subset \ker \phi}
+		= \mathrm{Ann}\left( F_{p-1}C_{\bullet} \right)\,.
+	\end{equation*}
+	I moduli graduati associati corrispondono alle (co)catene relative agli scheletri di
+	dimensioni successive: più precisamente, abbiamo
+	\begin{align*}
+		E^{0}_{p}\left(C_{\bullet}\right) = C_{\bullet}\left( X^{(p)}, X^{(p-1)} \right)\,,
+		\quad E_{0}^{p}\left(C^{\bullet}\right) = C^{\bullet}\left( X^{(p)}, X^{(p-1)} \right)\,.
+	\end{align*}
+\end{ex}
+
+\begin{df}
+	Data una mappa di complessi $f:D_{\bullet} \to C_{\bullet}$
+	e una filtrazione $F_{\bullet}$ su $C_{\bullet}$,
+	allora definiamo una filtrazione $G_{\bullet}$
+	indotta sul modulo $D_{\bullet}$ da
+	\begin{equation*}
+		G_{p}D_{\bullet} = f^{-1}\left(F_{p}C_{\bullet}\right)\,.
+	\end{equation*}
+\end{df}
+
+\begin{oss}
+	Se $(C_{\bullet}, d)$ è un complesso di catene con una filtrazione 
+	crescente $F_{\bullet}$,
+	allora anche l'omologia $H_{*}(C_{\bullet})$ è un modulo filtrato,
+	dove
+	\begin{equation*}
+		F_{p}H_{*}(C_{\bullet}) := 
+		\mathrm{im}\left( H_{*}(F_{p}C_{\bullet}) \to H_{*}(C_{\bullet}) \right)
+	\end{equation*}
+	determina una filtrazione crescente su $H_{*}$.
+	In maniera duale, dato un complesso di cocatene 
+	 $(C^{\bullet}, d)$ con una filtrazione $F$ decrescente,
+	allora anche la sua coomologia $H^{*}(C^{\bullet})$ 
+	è un modulo filtrato in maniera naturale,
+	dove la filtrazione decrescente è data da
+	\begin{equation*}
+		F^{p}H^{*}(C^{\bullet}) := 
+		\ker \left( H^{*}(C^{\bullet}) \to H^{*}(F^{p-1}C^{\bullet}) \right)\,.
+	\end{equation*}
+\end{oss}
+
+\begin{df}
+	Un \textbf{modulo bigraduato} $E_{\bullet,\bullet}$ 
+	(indicato con $E^{\bullet,\bullet}$ se usiamo la notazione coomologica)
+	è una somma diretta di $R$-moduli,
+	i cui gradi sono definiti da due interi $(s,t) \in \Z^{2}$.
+	Un tale modulo $E$ si dice \textbf{differenziale} 
+	se c'è una mappa $d:E \to E$, tale che $d^{2}=0$ e abbia:
+		\begin{itemize}
+		\item \textbf{bigrado $(-r,r-1)$}, cioè il differenziale
+		in grado $(s,t)$ è $d_{s,t}:E_{s,t} \to E_{s-r,t+r-1}$;
+		
+		\item oppure \textbf{bigrado $(r,-r+1)$},
+		cioè il differenziale
+		in grado $(s,t)$ è $d^{s,t}:E^{s,t} \to E^{s+r,t-r+1}$.
+		\end{itemize}
+	Nel primo caso il differenziale ci fa ``scendere'' di diagonale nel bimodulo,
+	nel secondo caso ``saliamo'' sulla diagonale superiore,
+	come rappresentato in figura.
+	\missingfigure{Paginetta}
+\end{df}
+
+
+\begin{oss}
+	Un modulo bigraduato $E_{\bullet,\bullet}$ dà origine ad un complesso di catene
+	\begin{equation*}
+		K_{n} := \bigoplus_{s+t=n} E_{s+t}\,,
+	\end{equation*}
+	e in maniera duale, se il modulo ha la convenzione coomologica $E^{\bullet, \bullet}$,
+	allora dà origine a un complesso di cocatene $K^{\bullet}$.
+\end{oss}
+
+Dato un modulo bigraduato $(E_{\bullet,\bullet},d)$, 
+dato che $d^{2}=0$, possiamo calcolare la sua omologia $(p,q)$-esima 
+come il quoziente
+\begin{equation*}
+	H_{p,q}(E_{\bullet,\bullet},d) := \dfrac{\ker\left( d : E_{p,q} \to E_{p-r,q+r-1} \right)}{\mathrm{im}\left( d: E_{p+r,q-r+1} \to E_{p,q} \right)}\,,
+\end{equation*}
+e la stessa cosa accade per la coomologia di $E^{\bullet,\bullet}$. 
+
+\begin{df}
+	Una \textbf{successione spettrale} di tipo \textbf{omologico}
+	è una collezione di $R$-moduli differenziali bigraduati 
+	$\Set{ \left(E^{r}_{\bullet,\bullet},d^{r}\right)}_{r \ge k}$,
+	con $d^{r}$ di bigrado $(-r,r-1)$ tale che 
+	\begin{equation*}
+		E^{r+1}_{p,q} \simeq H_{p,q} \left( E_{\bullet,\bullet}^{r}, d^{r} \right)\,.
+	\end{equation*}
+	Analogamente, una \textbf{successione spettrale} di tipo \textbf{coomologico}
+	è una collezione di $R$-moduli differenziali bigraduati 
+	$\Set{ \left(E_{r}^{\bullet,\bullet},d_{r}\right)}_{r \ge k}$,
+	con $d_{r}$ di bigrado $(r,-r+1)$ tale che 
+	\begin{equation*}
+		E_{r+1}^{p,q} \simeq H^{p,q} \left( E^{\bullet,\bullet}_{r}, d_{r} \right)\,.
+	\end{equation*}
+\end{df}
+
+D'ora in avanti enunceremo definizioni e teoremi per uno solo dei due tipi
+(per lo più il caso coomologico), ma è bene tenere a mente che
+le costruzioni calgono in maniera analoga per entrambe le situazioni.
+
+\begin{oss}
+	Per definizione, la pagina $r$-esima $(E_{r}^{\bullet,\bullet},d_{r})$
+	determina $E_{r+1}^{p,q}$, ma in generale
+	\emph{non} determina il differenziale $d_{r+1}$ della pagina successiva.
+\end{oss}
+
+Una successione spettrale va pensata come una successione di pagine,
+proprio come in un libro; in quanto tale, vorremmo conoscere
+il suo comportamento ``alla fine'', ovvero studiare il suo \emph{limite}.
+Per ogni $r \ge k$, indichiamo con $Z_{r}=\ker d_{r}$ i \textbf{cocicli} 
+e con $B_{r}=\mathrm{im}d_{r}$ i \textbf{cobordi} del differenziale;
+dato che $E_{r+1}=Z_{r}/B_{r}$, possiamo vedere il differenziale $(r+1)$-esimo
+come un omomorfismo $d_{r+1} : Z_{r}/B_{r} \to Z_{r}/B_{r}$ e quindi 
+considerare i suoi cocicli $Z_{r+1}$ come un (\emph{quoziente di un})
+sottomodulo di $Z_{r}$ che contiene i cobordi $r$-esimi,
+e lo stesso vale per $B_{r+1}$, quindi
+\begin{equation*}
+	B_{r} \subset B_{r+1} \subset Z_{r+1} \subset Z_{r}\,. 
+\end{equation*}
+Reiterando questo ragionamento per tutte le pagine, si ottiene la catena di inclusioni
+\begin{equation*}
+	B_{k} \subset B_{k+1} \subset B_{k+2} \subset \dots \subset Z_{k+2} \subset Z_{k+1} \subset Z_{k}\,.
+\end{equation*}
+
+\begin{df}
+	Usando la convenzione sopra,
+	poniamo $B_{\infty} := \cup_{i} B_{i}$ e $Z_{\infty} := \cap_{i} Z_{i}$.
+	Definiamo il \textbf{limite della successione spettrale} come il quoziente
+	$$E_{\infty} := Z_{\infty}/B_{\infty}\,.$$
+\end{df}
+
+Dalla definizione schietta è pressoché impossibile
+calcolare il limite di una successione spettrale:
+di solito speriamo che le cose vadano particolarmente bene
+e quindi riuscire a aggirare questo problema di calcolo.
+Introduciamo così una nozione di \emph{convergenza}.
+
+\begin{df}
+	Una successione spettrale $\Set{(E_{r}^{\bullet,\bullet},d_{r})}_{r \ge k}$
+	si dice \textbf{convergente a $H^{*}$} se esiste 
+	una filtrazione decrescente $F^{\bullet}$ su $H^{*}$ tale che
+	\begin{equation*}
+		E_{\infty}^{p,q} \simeq E_{0}^{p}(H^{p+q})\,.
+	\end{equation*}
+\end{df}
+
+Sotto opportune ipotesi,
+possiamo trovare delle situazioni dove il limite è più ``addomesticabile'',
+ad esempio quando ogni bicomplesso $E^{\bullet,\bullet}_{r}$ vive nel primo quadrante,
+cioè $E^{p,q}_{r} \ne 0$ solo per $p,q \ge 0$.
+Allora i differenziali $d_{r}$ sono \emph{definitivamente nulli},
+quindi la successione spettrale converge in un senso più forte:
+si dice che la successione \textbf{stabilizza} se, per ogni $(p,q)$,
+esiste un intero $r(p,q)$ tale che,
+i differenziali $d_{r}^{p,q}=0$ e $d^{p-r,q+r-1}_{r}=0$ per ogni $r \ge r(p,q)$.
+Da questo segue che $E_{r+1}^{p,q}=E_{r}^{p,q}$, da cui deduciamo che
+se la successione in $(p,q)$ stabilizza, allora
+\begin{equation*}
+	E^{p,q}_{r} = E^{p,q}_{r+1} = E^{p,q}_{r+2} = \dots = E^{p,q}_{\infty}\,.
+\end{equation*}
+
+\begin{df}
+	Diremo che una successione spettrale \textbf{collassa} alla pagina $N$
+	se $d_{r}=0$ per ogni $r \ge N$.
+\end{df}
+
+\begin{df}
+	Una filtrazione si dice \textbf{convergente} se $\cup_{s} F_{s}A = A$
+	e $\cap_{s} F_{s}A = \{0\}$.
+	Una filtrazione su un $R$-modulo graduato $A$ si dice 
+	\begin{itemize}
+		\item  \textbf{limitata dall'alto} se per ogni grado $t \in \Z$, 
+		esiste un termine della filtrazione $s(t) \in \Z$ tale che $F_{s(t)}A_{t}=A_{t}$;
+		\item  \textbf{limitata dal basso} se per ogni $t \in \Z$, esiste $u(t) \in \Z$
+		tale che $F_{u(t)}A_{t} = 0$.
+	\end{itemize}
+\end{df}
+
+\begin{thm}
+	Un complesso di catene graduato e filtrato $(A,d,F)$ determina una successione spettrale
+	$\Set{(E_{\bullet,\bullet}^{r},d^{r})}$ tale che
+	$E_{s,t}^{1} = H_{s+t}(F_{s}A/F_{s-1}A)$ e il differenziale $d^{1}$ è
+	l'operatore di bordo della tripla $(F_{s}A,F_{s-1}A,F_{s-2})$.
+	Se la filtrazione $F_{\bullet}$ è convergente e limitata sia dal basso, sia dall'alto,
+	allora la successione spettrale stabilizza e converge al limite $E^{\infty}_{p,q}$
+	che è isomorfo al quoziente $F_{p}H_{p+q}(A)/F_{p-1}H_{p+q}(A)$.
+\end{thm}
+
+
+
+
+
+
+
+
