@@ -1,0 +1,337 @@
+ %%% Lezione 8
+
+
+\lecture[Lezione 8.]{2023-03-21}
+
+
+\begin{df}
+	Dato un fibrato vettoriale $\xi = (E,p)$,
+	una \textbf{metrica} su $\xi$ è un prodotto scalare definito positivo
+	sulle fibre $E_{b}$ che \emph{varia con continuità}: più precisamente,
+	è una mappa continua $\mu:E \to \R$ che ristretta a ogni fibra
+	$E_{b}$ è una forma quadratica definita positiva,
+\end{df}
+
+\begin{oss}
+	Le metriche definite positive formano un insieme convesso.
+\end{oss}
+
+
+\begin{prop}
+	Se $B$ ammette una partizione dell'unità (e.g. $B$ è paracompatto),
+	ogni fibrato vettoriale su $B$ ammette una metrica.
+	\begin{proof}
+		Preso un ricoprimento banalizzante $\{U_{i}\}$ di $B$,
+prendiamo una metrica $\mu_{i}$ definita positiva
+su ciascun $\xi\vert_{U_{i}} \simeq U_{i} \times \R^{n}$.
+Sia $\phi_{i}:U_{i}\to [0,1]$ una partizione dell'unità, i.e.
+per ogni $b \in B$ si ha $\sum \phi_{i}(b) = 1$.
+Allora $\mu := \sum_{i} \phi_{i}\mu_{i}$ è una metrica definita positiva su $\xi$.
+	\end{proof}
+\end{prop}	
+
+
+\begin{cor}
+	Ogni successione esatta\footnote{Una successione di fibrati è \textbf{esatta} se, fibra per fibra, dà origine a una successione esatta di spazi vettoriali.} di fibrati sulla stessa base $B$  \emph{spezza}.
+	\begin{equation*}
+		\begin{tikzcd}
+			0 \ar[r]
+			& \xi' \ar[r]
+			& \xi \ar[r]
+			& \xi'' \ar[r] \ar[l, bend right, dashed]
+			& 0\,.
+		\end{tikzcd}
+	\end{equation*}
+	\begin{proof}
+		Si costruisce $\xi^{\perp} \subset \xi$ utilizzando la metrica.
+		Siccome l'ultima mappa è surgettiva, la corrispondenza è un isomorfismo.
+	\end{proof}
+\end{cor}
+
+\begin{df}
+	Data una varietà differenziabile,
+	una metrica euclidea su $\tau_{M}$ si chiama \textbf{metrica riemanniana}.
+\end{df}
+
+Sia $B$ uno spazio topologico, indichiamo con
+\begin{equation*}
+	\mathrm{Vect}(B) := \Set{\text{fibrati vettoriali su } B}/\simeq
+\end{equation*}
+Notiamo che due fibrati isomorfi $\xi \simeq \xi'$ su $B$
+inducono pullback isomorfi: infatti, data $f:B' \to B$,
+allora
+\missingfigure{Diagrammino}
+dunque possiamo definire $f^{*}h : E(f^{*}\xi) \to E(f^{*}\xi')$ mandando $(b',e) \mapsto (b',h(e))$;
+questo mostra che $f^{*}\xi \simeq f^{*}\xi'$.
+Il pullback è una costruzione funtoriale poiché vale
+\begin{equation*}
+	(g \circ f)^{*}\xi = (f^{*} \circ g^{*})\xi\,, \quad \cat{1}_{}^{*} = \cat{1}\,.
+\end{equation*}
+Deduciamo che $\mathrm{Vect}$ definisce un \emph{funtore controvariante} 
+\begin{equation*}
+	\mathrm{Vect} : \cat{Top}^{op} \longmapsto \CSet\,.
+\end{equation*}
+
+
+
+Indichiamo con $I = [0,1]$ l'intervallo unitario chiuso.
+\begin{thm}
+	La proiezione $\mathrm{pr}_{1}:X \times I \to X$ induce un isomorfismo
+	$\mathrm{pr}_{1}^{*} : \mathrm{Vect}(X) \simeq \mathrm{Vect}(X \times I)$.
+	\begin{proof}
+		La parte facile consiste nel dimostrare l'\textbf{iniettività}:
+		dato che $\mathrm{pr}_{1}$ ammette la sezione 
+		\begin{equation*}
+			s : X \longrightarrow X \times I\,, \quad
+			x \longmapsto (x,0)\,,
+		\end{equation*}
+		allora per funtorialità vediamo che 
+		\begin{equation*}
+			s^{*} \circ \mathrm{pr}_{1}^{*} = \cat{1}\,,
+		\end{equation*}
+		da cui deduciamo l'iniettività.
+		La surgettività è più difficile, e la dimostriamo in seguito.
+	\end{proof}
+\end{thm}
+
+\begin{cor}
+	Date $f_{0},f_{1}:B' \to B$ due funzioni omotope e $\xi = (E,p)$ fibrato su $B$,
+	allora i pullback $f_{0}^{*}\xi$ e $f_{1}^{*}\xi$ sono isomorfi.
+	\begin{proof}
+		Consideriamo le inclusioni di $B'$ in $B' \times I$ al tempo $0$ e al tempo $1$:
+		\begin{equation*}
+			\begin{tikzcd}
+				& B' \ar[dl, equals] \ar[dr, "f_{0}"] \ar[d, "\iota_{0}"] & \\
+				B' 
+				& B' \times I \ar[l] \ar[r, "H"]
+				& B \\
+				& B' \ar[ul, equals] \ar[ur, "f_{1}"] \ar[u, "\iota_{1}"] &
+			\end{tikzcd}
+		\end{equation*}
+	\end{proof}
+\end{cor}
+
+
+\begin{cor}
+	Se $f:B' \to B$ è un'equivalenza omotopica, allora $f^{*}$ 
+	induce un isomorfismo $\mathrm{Vect}(B') \simeq \mathrm{Vect}(B)$.
+	\begin{proof}
+		Data $g:B \to B'$ inversa in omotopia di $f$, allora
+		$g^{*} \circ f^{*} = \cat{1}$ e $f^* \circ g^{*} = \cat{1}$.
+	\end{proof}
+\end{cor}
+
+Segue che il funtore dei fibrati vettoriali
+discende alla categoria omotopica $\mathrm{Vect}:cat{hTop}^{op} \to \CSet$.
+
+Quanto appena visto per i fibrati vettoriali può essere studiato
+per fibrati topologici più generali, in cui la fibra $F = E_{b}$ può essere un \emph{gruppo}
+qualsiasi.
+
+\begin{df}
+	Un \textbf{fibrato principale} su un gruppo topologico $G$ è uno spazio topologico $P$
+	dotato di un'azione \emph{destra} di $G$ tale che
+	\begin{itemize}
+		\item l'azione di $G$ è libera;
+		\item la proiezione sullo spazio delle orbite $p: P \to P/G$
+		è un fibrato topologico con fibre omeomorfe a $G$.
+	\end{itemize}
+\end{df}
+
+Dato un aperto banalizzante $U$ di un fibrato pr
+
+\begin{df}
+	Un'azione $P \times G \to P$ ha \textbf{sezioni locali} se, per ogni $x \in P/G$,
+	esiste un intorno $U \ni x$ e una sezione $s:U \to P$.
+\end{df}
+
+\begin{prop}
+	Se uno spazio $P$ ammette una $G$-azione destra libera con sezioni locali,
+	allora $p:P \to P/G$ è un fibrato principale.
+	\begin{proof}
+		Preso $x \in P/G$ e una sezione $s:U \to P$ definita su un intorno di $x$,
+		allora possiamo ottenere una banalizzazione locale definendo
+		\begin{equation*}
+			\psi : U \times G \longrightarrow p^{-1}(U)\,, \quad
+			\psi(y,g) = s(y) \cdot g\,.
+		\end{equation*}
+	\end{proof}
+\end{prop}
+
+\begin{thm}
+	Data una varietà differenziabile $P$ con un'azione libera di un gruppo di Lie compatto $G$,
+	allora la proiezione $p$ ha sezioni locali e quindi $p:P \to P/G$ è un fibrato principale.
+	\begin{proof}
+		Non lo dimostriamo.
+	\end{proof}
+\end{thm}
+
+\begin{ex}
+	Se $G$ è un gruppo di Lie e $H \subset G$ un sottogruppo di Lie,
+	allora $G \to G/H$ è un fibrato principale su $H$.
+\end{ex}
+
+
+Sia $G$ un gruppo che agisce (a destra) transitivamente su uno spazio $X$.
+Se $x \in X$, considero la funzione $p(g) := x \cdot g$, che è surgettiva.
+Denotiamo con $H \subset G$ lo stabilizzatore di $X$. Allora
+\begin{equation*}
+	Hg' = \Set{g \in G | x \cdot g = x \cdot g'}
+\end{equation*}
+per qualche $g'$ fissato è una classe laterale destra di $H$ in $G$,
+quindi $p:G/H \to X$ è una bigezione continua.
+Se anche l'inversa è continua (e.g. $G/H$ compatto, oppure $p$ aperta),
+allora $p$ è un omeomorfismo.
+
+\begin{ex}
+	Detto $N \in S^{n-1}$ il polo nord, il gruppo ortogonale $O(n)$ agisce sulla sfera $S^{n-1}$ e
+	\begin{equation*}
+	 	\mathrm{Stab}(N) \simeq O(n-1)\,.
+	 \end{equation*} 
+	 Allora $O(n)/O(n-1) \simeq S^{n-1}$, da cui deduciamo che $O(n) \to S^{n-1}$
+	 è un fibrato principale su $O(n-1)$.
+\end{ex}
+
+\begin{ex}
+	sia $V_{k}'(\R^{n})$ lo spazio dei $k$-frame ortonormali in $\R^{n}$.
+	Allora $O(n)$ agisce su $V_{n}'(\R^{n})$ e lo stabilizzatore in ogni $k$-frame
+	può essere identificato con $O(n-k)$. Quindi $O(n) \to V_{k}'(\R^{n})$ è un
+	fibrato principale con gruppo $O(n-k)$.
+\end{ex}
+
+\begin{ex}
+	Il gruppo ortogonale $O(n)$ agisce sulle grassmaniane $Gr_{k}(\R^{n})$,
+	in cui lo stabilizzatore delle prime $k$ colonne è formato da matrici a blocchi,
+	pertanto può essere identificato con $O(k) \times O(n-k)$.
+	La proiezione $O(n) \to Gr_{k}(\R^{n})$ è un fibrato principale con gruppo
+	$O(k) \times O(n-k)$.
+\end{ex}
+
+%\begin{ex}
+%	\begin{rmnumerate}
+%		\item La proiezione $p : S^{2n+1} \to \C\PP^{n}$ sul quoziente rispetto all'azione di $S^{1}$
+%		è un fibrato principale su $G = S^{1}$;
+%		
+%		\item se indichiamo con $V_{k}(\R^{n})$ i $k$-frame in $\R^{n}$,
+%		allora la proiezione $p : V_{k}(\R^{n}) \to Gr_{k}(\R^{n})$ ha sezioni
+%		locali rispetto all'azione di $G = \mathrm{GL}(k,\R)$;\todo{ricontrolla questi esempi, alla luce di quelli scritti prima (erano la correzione)}
+%		
+%		\item sia $V_{k}'(\R^{n})$ lo spazio dei $k$-frame ortonormali in $\R^{n}$.
+%		Allora $p:V_{k}'(\R^{n}) \to Gr_{k}(\R^{n})$ è un fibrato preincipale su $O(k)$.
+%	\end{rmnumerate}
+%\end{ex}
+
+
+\begin{prop}
+	Un fibrato principale su $G$ è banale se e solo se $P \to P/G$ ha una sezione globale.
+	\begin{proof}
+		Ovviamente un fibrato banale ha sempre una sezione globale; viceversa,
+		se abbiamo $s:B \to P$ una sezione, possiamo banalizzare $P$ tramite la mappa
+		\begin{equation*}
+			\psi : B \times G \longrightarrow P\,,
+			\quad \psi(b,g) := s(b) \cdot g\,.
+		\end{equation*}
+	\end{proof}
+\end{prop}
+
+
+Nel caso in cui $G$ è discreto, la proiezione $p : P \to P/G$ è semplicemente un rivestimento
+con gruppo $G$. 
+
+Supponiamo che $B$ abbia rivestimento universale\footnote{è sufficiente $B$ connesso e semi-localmente semplicemente connesso.}. Allora il gruppo $G:=\pi_{1}(B,\ast)$ agisce liberamente
+sulle fibre del rivestimento universale $\widetilde{B} \to B$, quindi possiamo identificare
+$B = \widetilde{B}/G$. In generale, $\pi_{1}(B,\ast)$ agisce sulle fibre $F = p^{-1}(B)$ 
+di un rivestimento di $p:E \to B$, quindi $F$ diventa un $G$-insieme.ì (con azione \emph{sinistra}).
+Viceversa, dato un $G$-insieme $F$, si può costruire un rivestimento di $B$ con
+fibra $G$ tramite il prodotto
+\begin{equation*}
+	\widetilde{B} \times_{G} F = \widetilde{B} \times F / \sim\,,
+\end{equation*}
+dove la relazione d'equivalenza identifica $(g,g\cdot z) \sim ($\todo{Non capisco nulla della notazione}
+
+
+Dato che l'azione di $G$ sulle fibre del rivestimento è libera, $p^{-1}(x_{0})$
+ha un unico rappresentante del tipo $(y_{0},z)$, con $z \in F$, quindi la fibra
+si identifica con $F$.
+
+\begin{exercise}
+	$E'$ si ottiene dal rivestimento universale
+	dividendo per la relazione $E=\widetilde{B}/\sim$ 
+	che è data fibra per fibra da $g_{1} \cdot x = g_{2} \cdot x$,
+	$x \in F$.
+\end{exercise}
+
+Tutto questo discorso si riassume nel seguente
+
+\begin{thm}
+	C'è un'equivalenza di categorie tra
+	\begin{equation*}
+		\Set{\pi_{1}(B,\ast)\text{-insiemi}}/\text{bigezioni } \pi_{1}(B,\ast)\text{-equivarianti}
+	\end{equation*}
+	e la categoria dei rivestimenti su $B$, a meno di isomorfismo.
+\end{thm}
+
+Vogliamo generalizzare queste costruzioni anche nel caso di gruppi \emph{non} discreti.
+Se $\xi = (E,p)$ è un fibrato principale sul gruppo $G$, allora $F$ è un $G$-spazio (a \emph{sinistra})
+e possiamo creare un fibrato associato a $\xi$ con fibra $F$ come prima:
+posto $(g \cdot y,z) \sim (y, g \cdot z)$, poniamo
+\begin{equation*}
+	q : P \times_{G} F  := P \times F/\sim \longrightarrow B\,,
+	\quad {[y,z]} \longmapsto p(y)\,.
+\end{equation*}
+
+Come prima, lefibre si identificano con $F$, infatti se $x_{0} \in B$ e $y_{0} \in p^{-1}(x_{0})$,
+allora $q^{-1}(x_{0})$ contiene tutte le coppie del tipo $\Set{(g \cdot y_{0},g^{-1} \cdot z) | g \in G}$,
+quindi abbiamo una mappa $q^{-1}(x_{0}) \simeq F$. L'inversa è data da $z \mapsto [(y_{0},z)]$,
+che è un omeomorfismo.
+
+Se $F$ è uno spazio vettoriale con $G$ che avisce liberamente su $F$,
+allora otteniamo un nuovo fibrato vettoriale (e.g. quando $G = \mathrm{GL}(n,\R)$).
+Viceversa, dato un fibrato $\xi = (E,p)$ di rango $n$,
+gli si può associare un fibrato principale $P(\xi)$ su $G=\mathrm{GL}(n,\R)$:
+prendiamo
+\begin{equation*}
+	P(\xi)_{b} = \Set{\text{basi in } F(\xi)_{b} = \mathrm{Iso}(\R^{n},E(\xi)_{b})}
+\end{equation*}
+in cui la topologia è la stessa che si ottiene attaccando i pezzi di fibrato banale
+$$U_{i} \times \R^{n} \to U_{i} \times \mathrm{Iso}(\R^{n},\R^{n}) 
+\simeq U_{i} \times \mathrm{GL}(n,\R)\,,$$
+che sulle intersezioni è data da\todo{boh, non si capisce un cazzo quando parla.}
+
+Date banalizzazioni $\Psi_{i}:U_{i} \times \R^{n} \to p^{-1}(U_{i})$,
+sulle intersezioni abbiamo le mappe di transizione
+\begin{equation*}
+	(U_{i} \cap U_{j}) \times \R^{n} \longrightarrow (U_{i} \cap U_{j}) \times \R^{n} \,,
+	\quad (x,y) \longmapsto (x, g_{ij}(x) y)\,,
+\end{equation*}
+dove $g_{ij}(x) \in \mathrm{GL}(n,\R)$. Allora incollo $U_{i} \times \mathrm{GL}(n,\R)$
+con $U_{j} \times \mathrm{GL}(n,\R)$ sull'intersezione 
+$(U_{i} \cap U_{j}) \times \mathrm{GL}(n,\R)$ tramite le stesse funzioni di transizione,
+poiché le $\{g_{ij}\}$ soddisfano le condizioni di cociclo.
+In questo modo otteniamo una corrispondenza $\xi \leftrightarrow P(\xi)$.
+
+\begin{thm}
+	La corrispondenza
+	\begin{equation*}
+		\mathrm{Princ}_{G} := \Set{G\text{-fibrati principali su } B}/\text{iso}
+	\end{equation*}
+	è un funtore controvariante $\mathrm{Princ}_{G}:\cat{Top}^{op} \to \CSet$.
+\end{thm}
+
+\begin{thm}
+	C'è un isomorfismo di funtori $\mathrm{Princ}_{\mathrm{GL}(n,\R)} \simeq \mathrm{Vect}(B)$.
+\end{thm}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

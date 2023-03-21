@@ -1,11 +1,11 @@
 # Fdb version 3
-["biber main"] 1679314619 "main.bcf" "main.bbl" "main" 1679314631
-  "main.bcf" 1679314631 107575 191ab9b44796bb3a120086b01b7ee1c8 "pdflatex"
+["biber main"] 1679314619 "main.bcf" "main.bbl" "main" 1679323823
+  "main.bcf" 1679323822 107575 191ab9b44796bb3a120086b01b7ee1c8 "pdflatex"
   "res.bib" 1679314267 1480 12c175a4b004715a9fc5b78a2830f676 ""
   (generated)
   "main.bbl"
   "main.blg"
-["pdflatex"] 1679314621 "main.tex" "main.pdf" "main" 1679314631
+["pdflatex"] 1679323813 "main.tex" "main.pdf" "main" 1679323823
   "/usr/local/texlive/2022/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc" 1254269338 2375 baa924870cfb487815765f9094cf3728 ""
   "/usr/local/texlive/2022/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc" 1202520719 3486 c7eadf5dcc57b3b2d11736679f6636ba ""
   "/usr/local/texlive/2022/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc" 1202520719 2405 5dcf2c1b967ee25cc46c58cd52244aed ""
@@ -340,13 +340,13 @@
   "LEZIONI/TA-4.tex" 1678732472 13509 dc743198f751577145372da3d81cc886 ""
   "LEZIONI/TA-5.tex" 1679314391 9710 a83785b697151449f7db1da3d1f2bdd6 ""
   "LEZIONI/TA-6.tex" 1679314113 15096 38ecfd3861e463241c555ae82524197b ""
-  "LEZIONI/TA-7.tex" 1679314619 596 e3cbf8fe2682fc8104774aaf0ca87e94 ""
-  "main.aux" 1679314631 16268 3a74e170cd92384d9bbc6a9ccada77af "pdflatex"
+  "LEZIONI/TA-7.tex" 1679323813 10142 644a766b6a34c11556a7204adeb73147 ""
+  "main.aux" 1679323822 17583 2c560319f78a9d78a390a370c915daf4 "pdflatex"
   "main.bbl" 1679314621 6801 ab98caad90298b89dab73c4273247294 "biber main"
-  "main.lol" 1679314631 3137 c10f95652c6c00704b4c802baeed04c9 "pdflatex"
-  "main.run.xml" 1679314631 2304 68e50c381c6e543616f95120d6031df8 "pdflatex"
+  "main.lol" 1679323822 3137 c10f95652c6c00704b4c802baeed04c9 "pdflatex"
+  "main.run.xml" 1679323822 2304 68e50c381c6e543616f95120d6031df8 "pdflatex"
   "main.tex" 1679314455 4688 962915cc2a07b08ecb682ad4bf0ea584 ""
-  "main.toc" 1679314631 1148 425417897b9ba2c74f9922ac6fefff93 "pdflatex"
+  "main.toc" 1679323822 1148 769700b63a7e583f46f5e30197dcf42a "pdflatex"
   "shortcutsITA.sty" 1678301720 15923 e1c61c74c0ad1b5ce57268961037170c ""
   "styleITA.sty" 1678301726 13131 0c428f6305cd53afd90fd019c131e62b ""
   (generated)
