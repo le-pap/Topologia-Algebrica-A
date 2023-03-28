@@ -1,6 +1,231 @@
- %%% Lezione 8
+%%% Lezione 10
 
 
-\lecture[Lezione 8.]{2023-03-21}
+\lecture[Lezione 10.]{2023-03-28}
 
 
+Dato un $G$-fibrato principale $\xi'(p':E' \to X)$,
+chiamiamo \textbf{mappa classificante} di $\xi'$
+la mappa $f:X \to B$ tale che $\xi' \simeq f^{*}\xi$.
+
+\begin{oss}
+	I fibrati universali sono \emph{unici} nel seguente senso:	
+	dati $\xi, \xi'$ due $G$-fibrati universali le cui basi sono
+	CW complessi, allora $B$ e $B'$ sono omotopicamente equivalenti.
+	Infatti, per universalità esistono due mappe 
+	$f:B \to B'$ e $g:B' \to B$ tali che $f^{*}\xi' \simeq \xi$
+	e $ g^{*}\xi \simeq \xi'$.  Per funtorialità del pullback
+	segue che $(g \circ f)^{*}\xi = f^{*}(g^{*}\xi) = f^{*} \xi' = \xi$
+	e quindi per il Teorema deduciamo che $g \circ f \simeq \cat{1}_{B}$;
+	analogamente si vede che $f \circ g \simeq \cat{1}_{B'}$.
+\end{oss}
+
+Vogliamo trovare una caratterizzazione dei fibrati universali.
+
+\begin{thm}
+	Un $G$-fibrato principale $\xi = (E,p)$ su $B$ è universale
+	se e solo se $E$ è connesso per archi e debolmente contraibile.
+	\begin{proof}
+		Sia $\xi$ è universale. Per ogni $n \ge 0$,
+		data una mappa $f:S^{n} \to B$ dove $S^{n}=\de D^{n+1}$,
+		vogliamo dimostrare che $f$ si estende a tutto il disco.
+		Definiamo la mappa
+		\begin{equation*}
+			\widetilde{f} : S^{n} \times G \longrightarrow E\,,
+			\quad \widetilde{f}(x,g) := f(x) \cdot g\,,
+		\end{equation*}
+		notando che è una bundle map che copre $f$.
+		Per ipotesi, $\widetilde{f}$ si estende a una bundle map 
+		$\widetilde{f}':D^{n+1} \times G \to E$; componendo con la proiezione,
+		consideriamo dunque $f':D^{n+1} \to E$ l'applicazione indotta su $D^{n+1}$
+		da $\widetilde{f}'$. Per costruzione, si vede che $f'$ estende $f$,
+		quindi $\pi_{i}(E,\ast) = 0$ per ogni $i \ge 0$.
+		
+		Viceversa, ora supponiamo che una qualsiasi bundle map
+		$h:S^{n} \times G \to E$ si estende a tutto $D^{n+1} \times G \to E$.
+		Data una mappa $h_{1}:S^{n} \to E$ definita da $h_{1}(x) = h(x,1)$,
+		per ipotesi si estende a $\widetilde{h}_{1}:D^{n+1} \to E$.
+		Ma allora possiamo estendere la mappa a $D^{n+1} \times G$
+		facendo agire il gruppo sulla destra, cioè
+		\begin{equation*}
+			\widetilde{h} : D^{n+1} \times G \longrightarrow E\,,
+			\quad \widetilde{h}(x,g) := \widetilde{h}_{1}(x) \cdot g\,.
+		\end{equation*}
+		Per costruzione, questa mappa estende $h$ a $S^{n} \times G$ poiché
+		\begin{equation*}
+			h(x,g) = h(x,1 \cdot g) = h(x,1) \cdot g = \widetilde{h}_{1}(x) \cdot g\,.
+		\end{equation*}
+		Sia ora $X$ un CW complesso e $L \subset X$ un suo sottocomplesso.
+		Consideriamo $\pi':E' \to X$ un $G$-fibrato principale e
+		supponiamo sia data una bundle map $h:(p')^{-1}(L) \to E$.
+		Allora riusciamo a estenderla a tutto $E'$ per induzione sullo scheletro di $X$:
+		per prima cosa estendiamo $h$ a $L \cup X^{(0)}$. Se $v \in X^{(0)} \setminus L$,
+		allora mando $E'_{v}$ su una qualunque fibra $E_{w}$, con $w \in B$.
+		Questo estende $h$ a una bundle map $h_{0}:p^{-1}(L \cup X^{(0)}) \to E$.
+		Per induzione, suppongo di aver esteso $h$ a $p^{-1}(L \cup X^{(n-1)})$
+		e costruisco l'estensione su $p^{-1}(L \cup X^{(n)})$.
+		Se $c:D^{n} \to X^{(n)}$ è la mappa caratteristica di una $n$-cella di $X^{(n)}$,
+		con $c':\de D^{n} = S^{n-1} \to X^{n-1}$ funzione di attaccamento,
+		anche la restrizione a $\de D^{n}$ è banale.
+		Siccome per induzione abbiamo già costruito la bundle map
+		$h': E(c^{*}\xi)\vert_{S^{n-1}} : S^{n-1} \times G \to E$,
+		allora per il passo precedente si estende $D^{n} \times G$.
+	\end{proof}
+\end{thm} 
+
+
+Ricordiamo che nella caegoria dei CW complessi, l'equivalenza debole
+corrisponde all'equivalenza omotopica, quindi lo spazio totale
+di un $G$-fibrato principale è contraibile.
+Un $G$-CW-complesso libero e contraibile si indica con $EG$
+e il suo spazio delle orbite $EG/G \simeq BG$.
+La mappa di proiezione $p:EG \to BG$ è un $G$-fibrato universale
+e la base $BG$ si dice \textbf{spazio classificante} del gruppo $G$.
+
+
+Il problema è costruire $BG$.
+Quando $G$ è discreto, notiamo che $BG$ è uno spazio
+di Eilenberg-MacLane di tipo $K(G,1)$:
+la fibra è discreta e $\xi$ è un rivestimento con fibre omeomorfe a $G$.
+Ricordiamo che $p_{*} : \pi_{i}(E,\ast) \to \pi_{i}(B,\ast)$
+è in \emph{isomorfismo} per ogni $i \ge 2$, pertanto
+\begin{equation*}
+	\pi_{i}(B,\ast) \simeq 
+	\begin{cases}
+		0\,, \quad &\text{se }i \ne 1\,; \\
+		G\,, \quad &\text{se } i = 1\,.
+	\end{cases}
+\end{equation*}
+In breve, per CW complessi, $BG$ ha $\pi_{1}(B,\ast) \simeq G$ e rivestimento universale contraibile.
+
+\begin{ex}
+	\begin{rmnumerate}
+		\item Se $G=\Z$, abbiamo visto che $K(\Z,1) \simeq S^{1}$.
+		
+		\item Se $G = \Z/2$
+		
+		\item Se $G = S^{1} \subset \C$, considero la filtrazione
+		\begin{equation*}
+			S^{1} \subset S^{3} \subset S^{5} \subset \dots 
+			\subset S^{2n-1} \subset S^{2n+1} \subset
+			\dots \subset S^{\infty}\,,
+		\end{equation*}
+		dove $S^{2n-1} \subset \C^{n}$ è la sfera unitaria immersa in uno spazio vettoriale complesso.
+		L'azione di $G$ sulle sfere è per moltiplicazione, quindi deduciamo che
+		$S^{\infty} / S^{1} \simeq \C\PP^{\infty}$ ...
+		Si noti che $S^{1}$ \emph{non} è un gruppo discreto e 
+		quindi lo spazio classificante di $G$ \emph{non} è necessariamente 
+		di tipo $K(G,1)$.
+	\end{rmnumerate}
+\end{ex}
+
+...
+
+\begin{thm}[\textbf{Peter-Weyl}]\label{Peter-Weyl}
+	Ogni gruppo di Lie compatto ha una rappresentazione fedele finito-dimensionale
+	e unitaria (i.e. $U_{n} \subset \mathrm{GL}(n,\C)$).
+\end{thm}
+
+Alla luce di questo teorema, per studiare gli spazi di classificazione
+di gruppi di Lie compatti è sufficiente studiare
+il caso delle matrici unitarie $U(n)$. Infatti,
+se $G \hookrightarrow U(n)$, allora $EG \simeq E\,U(n)$
+e lo spazio classificante si otterrà come quoziente $BG \simeq E\,U(n) / G$.
+Vogliamo dunque trovare un modello conveniente per lo spazio classificante di $U(n)$.
+
+\begin{lemma}
+	Sia $B$ compatto e di Hausdorff. Ogni fibrato vettoriale $\xi = (E,p)$
+	ha un morfismo iniettivo in un fibrato banale.
+	\begin{proof}
+		Consideriamo un ricoprimento banalizzante $U_{1}, \dots, U_{k}$
+		e consideriamo $\{ u_{i} \}$ una partizione dell'unità associata.
+		Sia 
+		\begin{equation*}
+			\Phi_{i} : p^{-1}(U_{i}) \longrightarrow U_{i} \times \R^{n}\,,
+			\quad \Phi_{i}(e) = (p(e), \phi_{i}(e))\,,
+		\end{equation*}
+		dove $\phi_{i}$ induce isomorfismi sulle fibre. Definiamo
+		\begin{equation*}
+			\Phi : E \longrightarrow \left( \R^{n} \right)^{k} \simeq \R^{nk}\,,
+			\quad \Phi(e) = \Big( u_{1}(p(e)) \phi_{1}(e), \dots, u_{k}(p(e)) \phi_{k}(e) \Big)
+		\end{equation*}
+		e questa ci permette di trovare il seguente morfismo in un fibrato banale:
+		\begin{equation*}
+			E \longrightarrow B \times \R^{nk}\,,
+			\quad e \longmapsto \Big( p(e), \Phi(e) \Big)\,.
+		\end{equation*}
+	\end{proof}
+\end{lemma}
+
+\begin{cor}
+	Se $B$ è uno spazio compatto, ogni fibrato vettoriale $\xi$
+	ha un complemento ortogonale $\xi^{\perp}$ e la somma
+	di Whitney $\xi \oplus \xi^{\perp}$ è banale.
+	\begin{proof}
+		Dato un fibrato banale $\eta$ in cui $\xi$ si immerge,
+		è sufficiente dotare $\eta$ di una metrica Riemanniana e 
+		considerare l'ortogonale fibra per fibra.
+	\end{proof}
+\end{cor}
+
+
+\begin{oss}
+	Se $\xi$ ha rango $n$, allora $\phi(E_{b})$ è un sottospazio di dimensione $n$
+	in qualche $\R^{nk}$, quindi un elemento $\phi^{n}(\R^{nk})$.
+	Troviamo così una bundle map
+	\begin{equation*}
+		\begin{tikzcd}
+			E \ar[d, "p"] \ar[r, "\phi'"] 
+			& E(\gamma_{nk,n}) \ar[d] \\
+			B \ar[r, "\phi"] & Gr_{n}(\R^{nk})\,,
+		\end{tikzcd}
+	\end{equation*}
+	quindi $\xi = f^{*}\gamma_{nk,n}$.
+	
+	Se vogliamo classificare tutti i fibrati vettoriali di rango $n$ su $B$,
+	dato che $\R^{nk}$ ha dimensione arbitrariamente grande,
+	allora è necessario passare alla grassmaniana su $\R^{\infty}$,
+	dove ricordiamo che è dato dalla filtrazione
+	\begin{equation*}
+		\R \subset \R^{2} \subset \dots \subset \R^{n} \subset \dots \subset \R^{\infty}\,,
+	\end{equation*}
+	e quindi possiamo vederlo come l'insieme delle successioni
+	$(x_{1}, x_{2}, \dots)$ definitivamente nulle.
+	Indichiamo allora con $Gr_{n}(\R^{\infty})$ l'insieme dei sottospazi
+	$n$-dimensionali in $\R^{\infty}$.
+	Generalizzando la mappa di Gauss che abbiamo nel caso di varietà differenziabili,
+	per fibrati vettoriali di rango $n$ su una base $B$ paracompatta
+	si guarda $E(\gamma_{n}) \to Gr_{n}(\R^{\infty})$ è un fibrato universale.
+	Per una discussione dettagliata, vedi \parencite[$\S 5$]{mi-sta}.
+\end{oss}
+
+\begin{ex}
+	Detta $\Vv_{n}(\C^{n+h})$ la varietà di Stiefel degli $n$-frames ortonormali in $\C^{n+h}$,
+	la proiezione $p: \Vv_{n}(\C^{n+h}) \to Gr_{n}(\C^{n+h})$ è un fibrato principale,
+	con fibre $U(n)$. Notiamo che $U(q)$ agisce su $S^{2n-1} \subset \C^{n}$,
+	con stabilizzatore $U(q-1)$, quindi $U(q)/U(q-1) \simeq S^{2q-1}$.
+	Usando il fatto che, dati sottogruppi $H \subset K \subset G$, il quoziente $G/H \to G/K$
+	è un fibrato con fibre $K/H$, allora otteniamo il seguente diagramma
+	\begin{equation*}
+		\begin{tikzcd}
+			U(h+1)/U(h) \simeq S^{2h+1} \ar[r, hook] \ar[d] & U(n+h)/U(h) \ar[d] \ar[r, "\simeq"] & \Vv_{n}(\C^{n+h}) \ar[d] \\
+			U(h+2)/U(h+1) \simeq S^{2h+3} \ar[r, hook] \ar[d] & U(n+h)/U(h+1) \ar[d] \ar[r, "\simeq"] & \Vv_{n-1}(\C^{n+h}) \ar[d] \\
+			U(h+3)/U(h+2) \simeq S^{2h+5} \ar[r, hook] \ar[d] & U(n+h)/U(h+2) \ar[d] \ar[r, "\simeq"] & \Vv_{n-2}(\C^{n+h}) \ar[d] \\
+			\vdots & \vdots \ar[d] & \vdots \ar[d] \\
+			& U(n+h)/U(n+h-1) \ar[r, "\simeq"] & \Vv_{1}(\C^{n+h}) \simeq S^{2(n+h)-1}\,.
+		\end{tikzcd}
+	\end{equation*}
+	Usando la successione esatta dei fibrati, si deduce che $\Vv_{n}(\C^{n+h})$
+	è uno spazio $2n$-connesso.
+	Quindi, per trovare il fibrato universale facciamo il \emph{limite} su $n$
+	e si ottiene $$\Vv_{n}(\C^{\infty}) \to Gr_{n}(\C^{\infty})\,.$$
+%	\begin{equation*}
+%		\begin{tikzcd}
+%			\Vv_{n}(\C^{\infty}) \ar[d] \\
+%			Gr_{n}(\C^{\infty})\,.
+%		\end{tikzcd}
+%	\end{equation*}
+	
+	Si può studiare analogamente il caso \emph{reale} sostituendo alle matrici
+	unitarie $U(n)$ i gruppi ortogonali $O(n)$.
+\end{ex}

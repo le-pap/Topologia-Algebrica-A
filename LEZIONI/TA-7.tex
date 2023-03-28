@@ -3,38 +3,34 @@
 \chapter{Fibrati vettoriali}
 
 
-\begin{thm}
-	Un complesso di catene graduato e filtrato $(A,d,F)$ determina una successione spettrale
-	$\Set{(E_{\bullet,\bullet}^{r},d^{r})}$ tale che
-	$E_{s,t}^{1} = H_{s+t}(F_{s}A/F_{s-1}A)$ e il differenziale $d^{1}$ è
-	l'operatore di bordo della tripla $(F_{s}A,F_{s-1}A,F_{s-2})$.
-	Se la filtrazione $F_{\bullet}$ è convergente e limitata sia dal basso, sia dall'alto,
-	allora la successione spettrale stabilizza e converge al limite $E^{\infty}_{p,q}$
-	che è isomorfo al quoziente $F_{p}H_{p+q}(A)/F_{p-1}H_{p+q}(A)$.
-\end{thm}
-
-
 \lecture[Lezione.]{2023-03-20}
 
-Data una varietà differenziabile $M$, lo spazio tangente al punto $p \in M$
+Data una varietà differenziabile $M$, lo \emph{spazio tangente} al punto $p \in M$
 è lo spazio vettoriale $T_{p}M$ delle derivazioni in $p$ e ``varia con continuità''
 al variare del punto. Si può descrivere intrinsecamente
-come l'insieme delle classi d'equivalenza di curve passanti in $p$.
+come l'insieme delle classi d'equivalenza di curve di curve lisce
+\begin{equation*}
+	\gamma : (\R,0) \longrightarrow (M,p)\,, \quad \gamma(0) = p\,,
+\end{equation*}
+dove $\gamma_{1} \sim \gamma_{2}$ se e solo se $\gamma_{1}'(0) = \gamma_{2}'(0)$.
+La dimensione di ogni spazio vettoriale $T_{p}M$ è 
+la stessa della dimensione (come varietà) di $M$.
 Tutti gli spazi tangenti sono incollati all'interno
 del \emph{fibrato tangente} $TM$, che può essere pensato come
 una famiglia di spazi vettoriali 
-parametrizzati con continuità dalla varietà $M$.
+parametrizzati \emph{con continuità} dalla varietà $M$.
 
 La generalizzazione di questo concetto è espresso dalla nozione
 di \textbf{fibrato vettoriale}.
 
 \begin{df}
 	Dato uno spazio topologico $B$, definiamo la categoria $\cat{Top}/B$
-	come la categoria avente come oggetti delle mappe continue $E \to B$,
-	e come morfismi dei triangoli commutativi di mappe continue
+	come la categoria i cui oggetti $\xi = (E,p)$ sono mappe continue $E \to B$
+	e i morfismi $\mu : \xi \to \xi'$ sono
+	funzioni continue $\mu :E \to E'$ che rendono commutativi i triangoli
 	\begin{equation*}
 		\begin{tikzcd}
-			E \ar[rr, "\mu"] \ar[dr] & & E' \ar[dl] \\
+			E \ar[rr, "\mu"] \ar[dr, "p"'] & & E' \ar[dl,, "p'"] \\
 			& B & \,.
 		\end{tikzcd}
 	\end{equation*}
@@ -42,53 +38,99 @@ di \textbf{fibrato vettoriale}.
 
 \begin{ex}
 	Dato uno spazio topologico $F$, il prodotto cartesiano $E = F \times B$
-	è un fibrato topologico detto \textbf{fibrato banale}.
+	dotato della proiezione $\mathrm{pr}_{1}:B \times F \to B$ è un
+	%fibrato topologico 
+	oggetto su $B$ detto \textbf{fibrato banale}.
 \end{ex}
 
-La categoria $\cat{Top}/B$ ha prodotti finiti: dati due oggetti $(E,p)$
-e $(E',p')$, il loro prodotto in $\cat{Top}/B$ è dato dal prodotto fibrato
-$E \times_{B} E'$ in $\cat{Top}$.
+\begin{thm}
+	Un fibrato vettoriale è una \textbf{fibrazione}.
+	\begin{proof}
+		Vedi \parencite[Proposition~4.48]{hatcher}.
+	\end{proof}
+\end{thm}
+
+La categoria $\cat{Top}/B$ ha prodotti finiti: dati due oggetti $\xi = (E,p)$
+e $\xi' = (E',p')$, il loro prodotto $\xi \times \xi'$ in $\cat{Top}/B$ 
+è dato dal prodotto fibrato in $\cat{Top}$
+\begin{equation*}
+	E \times_{B} E' = \Set{(e,e') \in E \times E' | p(e) = p'(e')}\,.
+\end{equation*}
+Nella categoria $\cat{Top}/B$ troviamo anche l'oggetto finale $u = (B,\cat{1}_{B})$,
+infatti ogni $\xi = (E,p)$ ha un'unico morfismo $\xi \to u$
+dato da $p:E \to B$.
 
 \begin{df}
 	Detta $ u = (B,\cat{1}_{B})$ l'identità della base,
-	una \textbf{sezione} è un morfismo $s:u \to p$,
+	una \textbf{sezione} è un morfismo $s:u \to \xi$,
 	cioè una mappa $s:B \to E$ tale che $p \circ s = \cat{1}_{B}$.
+	\begin{equation*}
+		\begin{tikzcd}
+			E \ar[rr,"p"'] \ar[dr,"p"'] & & B \ar[ll, "s"', bend right, dashed] \ar[dl, equals] \\
+			& B &
+		\end{tikzcd}
+	\end{equation*}
 \end{df}
 
-\begin{df}
-	Definiamo un \textbf{gruppo abeliano} su $B$ un oggetto $(E,p)$
-	dotato di una mappa
+\begin{ex}
+	Dato un fibrato banale su $B$, è facile costruire delle sezioni:
+	fissato un punto $x_{0} \in F$, la mappa 
 	\begin{equation*}
-		E \times_{B} E \longrightarrow E\,, \quad (e,e') \longmapsto e + e'\,,
+		\iota_{x_{o}} : B \longrightarrow B \times F\,,
+		\quad (b,x_{0})
 	\end{equation*}
-	dotato di un \textbf{elemento neutro} $v \in E$ tale che ...
+	definisce una sezione.
+\end{ex}
+
+\begin{df}
+	Definiamo un \textbf{gruppo abeliano} su $B$ come 
+	un oggetto gruppo nella categoria $\cat{Top}/B$,
+	cioè $\xi = (E,p)$ dotato di una mappa
+	\begin{equation*}
+		+ : E \times_{B} E \longrightarrow E\,, \quad (e,e') \longmapsto e + e'\,,
+	\end{equation*}
+	e una sezione $s:u \to \xi$ che identifica ogni punto di $B$
+	come  l'\textbf{elemento neutro} sulla corrispondente fibra di $p$:
+	più precisamente, per ogni $e,e' \in E$ vale
+	\begin{equation*}
+		s(p(e)) + e' = e'\,, \quad e' + s(p(e)) = e'\,.
+	\end{equation*}
 \end{df}
+
+Ogni volta che abbiamo un oggetto gruppo $\xi$,
+chiamiamo $s$ la sua \textbf{zero sezione}
+e identifichiamo la base come un sottoinsieme dello spazio totale $B \subset E$.
 
 Siamo interessati al caso in cui le fibre su $B$ sono \emph{spazi vettoriali},
-in cui non ci siano ``salti di dimensione'' negli spazi parametrizzati
-(e.g. $xy=0$ in $\R^{2}$ non ci piace).
+in cui non ci siano ``salti di dimensione'' tra le fibre parametrizzate:
+non consideriamo oggetti del tipo
+\begin{equation*}
+	\mathrm{pr}_{1} : E := \Set{(x,y) \in \R^{2} | xy=0} \longrightarrow \R\,.
+\end{equation*}
 
 \begin{df}
-	Un \textbf{fibrato vettoriale} su $B$ è un oggetto $(E,p)$ \emph{localemente banale},
-	cioè per ogni $b \in B$, esiste un intorno aperto $U \ni p$ tale che
-	\begin{equation*}
-		p : p^{-1}(U) \longrightarrow U \times \R^{n}
-	\end{equation*}
-	è un omeomorfismo.\todo{aggiusta}
+	Un \textbf{fibrato vettoriale di rango $n$} su $B$ è un oggetto 
+	$\xi=(E,p)$ \emph{localmente banale} con fibra $F=\R^{n}$,
+	cioè per ogni $b \in B$, esiste un intorno aperto $U$ di $b$ tale che
+	$\left( p^{-1}(U) , p\vert_{p^{-1}(U)} \right)$
+	è isomorfo al fibrato banale:
+	\begin{equation}\label{banalizzazione}
+		\begin{tikzcd}
+			p^{-1}(U_{i}) \ar[rr, "\Phi_{i}"', "\simeq"] \ar[dr, "p"'] 
+			& & U_{i} \times \R^{n} \ar[dl, "\mathrm{pr}_{1}"] 
+			\ar[ll, bend right, "\Psi_{i}"', dashed] \\
+			& U_{i} &
+		\end{tikzcd}
+	\end{equation}
+	
 	Lo spazio $E$ viene detto \textbf{spazio totale}, $B$ è detto \textbf{spazio base}
-	e un aperto $U$ che soddisfa la condizione sopra è detto
+	e un aperto $U_{i}$ che soddisfa la condizione \eqref{banalizzazione} è detto
 	\textbf{aperto banalizzante}.
 \end{df}
 
-Gli isomorfismi banalizzanti
-\begin{equation*}
-	\begin{tikzcd}
-		p^{-1}(U_{i}) \ar[rr, "\Phi_{i}"] \ar[dr] 
-		& & U_{i} \times \R^{n} \ar[dl] \ar[ll, bend right, "\Psi_{i}"'] \\
-		& U_{i} &
-	\end{tikzcd}
-\end{equation*}
-inducono isomorfismi \emph{di spazi vettoriali} sulle fibre $p^{-1}(b)$, per tutti i $b \in B$.
+Gli isomorfismi $\Phi_{i}$ nel diagramma \eqref{banalizzazione} si
+chiamano \textbf{banalizzazioni} e inducono isomorfismi 
+\emph{di spazi vettoriali} sulle fibre $p^{-1}(b)$, per tutti i $b \in B$.
 Indichiamo con
 \begin{equation*}
 	\Phi_{i,b} := \Phi_{i}\vert_{p^{-1}(b)} : p^{-1}(b) \longrightarrow \{b\} \times \R^{n}\,,
@@ -97,18 +139,31 @@ Indichiamo con
 
 Nell'intersezione di due aperti banalizzanti $U_{i} \cap U_{j}$ possiamo
 \emph{cambiare banalizzazione}
-\missingfigure{copiare le notazioni.}
+\begin{equation*}
+	\begin{tikzcd}[column sep=large]
+		(U_{i} \cap U_{j}) \times \R^n  \ar[r, "\Psi_{j}"', "\simeq"]
+            & p^{-1}(U_{i} \cap U_{j}) \ar[r, "\Phi_{i}"', "\simeq"]
+            & (U_{i} \cap U_{j}) \times \R^n \\
+            \textcolor{black!50}{(b, v)} \ar[rr, mapsto, black!50] 
+            & & \textcolor{black!50}{(b, g_{ij}(b) \cdot v)} \\
+            & U_{i} \cap U_{j} \ar[from=uu, crossing over, "p",  near end] 
+            \ar[from=uul, crossing over] \ar[from=uur, crossing over]
+            & \,,
+	\end{tikzcd}
+\end{equation*}
+dove $g_{ij}(b) = \Phi_{i,b} \circ \Phi_{j,b}^{-1}$ è un isomorfismo lineare.
 Otteniamo così delle funzioni
 \begin{equation*}
 	g_{ij} : U_{i} \cap U_{j} \longrightarrow \mathrm{GL}(n,\R)
 \end{equation*}
-dette \textbf{funzioni di transizione}.
+dette \textbf{funzioni di transizione} del fibrato.
 
 \begin{oss}
-	Si può verificare che valgono le seguenti \textbf{condizioni di cociclo}:
+	Si può verificare che per ogni $b \in B$
+	valgono le seguenti \textbf{condizioni di cociclo}:
 	\begin{itemize}
-		\item $g_{ji}(x) = \big( g_{ij}(x) \big)^{-1}$;
-		\item per ogni tripla di indici $i,j,h$ si ha $g_{ij} g_{jh} = g_{ih}$. 
+		\item $g_{ji}(b) = \big( g_{ij}(b) \big)^{-1}$;
+		\item per ogni tripla di indici $i,j,h$ si ha $g_{ij}(b) g_{jh}(b) = g_{ih}(b)$. 
 	\end{itemize}
 	Tutte le informazioni di un fibrato vettoriale possono essere 
 	lette in termine delle funzioni di transizione $\{g_{ij}\}$ su
@@ -116,14 +171,34 @@ dette \textbf{funzioni di transizione}.
 	dato un morfismo di fibrato vettoriali $f: \xi \to \xi'$ su una stessa base $B$,
 	possiamo considerare un ricoprimento banalizzante $\{U_{i}\}$ comune
 	per entrambi i fibrati e ``leggere'' $f$ tramite le coordinate
-	date dalle banalizzazioni, cioè
-%	\begin{equation*}
-%		\begin{tikzcd}
-%			p^{-1}(U_{i}) \ar[]
-%		\end{tikzcd}
-%	\end{equation*}
-	e $f$ induce così una famiglia $f_{ij}:U_{i} \cap U_{j} \to \mathrm{GL}(n,\R)$
-	di funzioni che soddisfano le condizioni\todo{Copia condizioni} 
+	date dalle banalizzazioni
+	\begin{equation*}
+		\begin{tikzcd}[row sep=small]
+			(U_{i} \cap U_{j}) \times \R^n  \ar[r, "\Psi_{j}"]
+            & p^{-1}(U_{i} \cap U_{j}) \ar[r, "f"]
+            & p'^{-1}(U_{i} \cap U_{j}) \ar[r, "\Phi_{i}'"]
+            & (U_{i} \cap U_{j}) \times \R^k \\
+            (b,v) \ar[rrr, mapsto]
+            & & & \left(b, \Phi'_{i,b} \circ f_{b} \circ \Phi_{j,b}^{-1} (v) \right)\,,
+		\end{tikzcd}
+	\end{equation*}
+	dove $f_{b} : E_{b} \to E'_{b}$. Otteniamo quindi delle funzioni
+	\begin{equation*}
+		\overline{f}_{ij} : U_{i} \cap U_{j} \longrightarrow \Hom_{\R}(\R^{n},\R^{k})\,,
+		\quad \overline{f}_{ij}(b) = \Phi'_{i,b} \circ f_{b} \circ \Phi_{j,b}^{-1}
+	\end{equation*}
+	che nell'intersezione di tre aperti $U_{i} \cap U_{j} \cap U_{k}$ soddisfano
+	\begin{equation}\label{cociclo}
+		\begin{cases}
+			\overline{f}_{ij} \circ g_{jk} &= \overline{f}_{ik}\,, \\
+			g'_{ij} \circ \overline{f}_{jk} &= \overline{f}_{ik}\,.
+		\end{cases}
+	\end{equation}
+
+	Viceversa, una famiglia di funzioni $ \{ f_{ij} \} $ che soddisfa
+	le condizioni di cociclo \eqref{cociclo} inducono
+	un morfismo di fibrati vettoriali $f : \xi \to \xi'$,
+	definito su $U_{i}$ da $f_{i} := (\Phi'_{i})^{-1} \circ \overline{f}_{ii} \circ \Phi_{i}$.
 \end{oss}
 
 \begin{thm}
@@ -131,42 +206,87 @@ dette \textbf{funzioni di transizione}.
 	allora $\xi \simeq \xi'$ se e solo se esistono $\lambda_{i}:U_{i} \to \mathrm{GL}(n,\R)$
 	che ``collegano'' le funzioni di transizione nel seguente modo:
 	\begin{equation*}
-		g_{ij}'(x) = \big( \lambda_{i}(x) \big)_{-1} g_{ij}(x) \lambda_{j}(x)\,.
+		g_{ij}'(b) = \lambda_{i}(b) ^{-1} g_{ij}(b) \lambda_{j}(b)\,,
+		\quad \text{per ogni } b \in U_{i} \cap U_{j}\,.
 	\end{equation*}
+	\begin{proof}
+		Dato un isomorfismo $f:\xi \simeq \xi'$, 
+		otteniamo delle funzioni $f_{ij}:U_{i} \cap U_{j} \to \mathrm{GL}(n,\R)$
+		che soddisfano \eqref{cociclo}. 
+		Se per ogni $i$ poniamo $\lambda_{i} := f_{ii}^{-1}$,
+		allora vale
+		\begin{equation*}
+			g'_{ij} = f_{ii} \circ f_{ij}^{-1}
+			= f_{ii} \circ g_{ij} \circ f_{ii}^{-1}
+			= \lambda_{i}^{-1} g_{ij} \lambda_{i}\,.
+		\end{equation*}
+		
+		Viceversa, date $\{\lambda_{i}\}$ come sopra, per ogni $b \in U_{i} \cap U_{j}$
+		definiamo $f_{ij}(b) := \lambda_{i}(b)^{-1} g_{ij}(b)$.
+		Queste mappe soddisfano le condizioni \eqref{cociclo}, infatti
+		\begin{align*}
+			f_{ij} g_{jk} &= \lambda_{i}^{-1} g_{ij} g_{jk} 
+			= \lambda_{i}^{-1}g_{ik} =  \overline{f}_{ik}\,, \\
+			g'_{ij} f_{jk} &= g'_{ij} \lambda_{j}^{-1} g_{jk} 
+			= \lambda_{i}^{-1} g_{ij} \lambda_{j} \lambda_{j}^{-1} g_{jk} \\
+			&= \lambda_{i}^{-1} g_{ij} g_{jk} = \lambda_{i}^{-1} g_{ik} = f_{ik}\,.
+		\end{align*}
+		Questo significa che le $f_{ij}$ definiscono una mappa $f:\xi \to \xi'$
+		che è un isomorfismo, la cui inversa è indotta dalla famiglia $h_{ij} := g'_{ij} \lambda_{j}$.
+	\end{proof}
 \end{thm}
 
 \begin{thm}[\textbf{di esistenza}]
 	Dato un ricoprimento $\{U_{i}\}$ di $B$ e delle funzioni 
 	$g_{ij}:U_{i} \cap U_{j} \to \mathrm{GL}(n,\R)$ che soddisfano le \textbf{condizioni di cociclo},
-	allora esiste un fibrato vettoriali di rango $n$ su $B$ che ha le $g_{ij}$ come
+	esiste un fibrato vettoriale di rango $n$ su $B$ che ha le $g_{ij}$ come
 	funzioni di transizione.
 	\begin{proof}[Idea della dimostrazione]
 		Partendo da $\coprod_{i} U_{i} \times \R^{n}$,
-		si identificano le coppie tramite la relazione d'equivalenza
-		$(x,y)_{i} \sim (x,g_{ij}(x)y)_{j}$.
+		si identificano le coppie con indici diversi 
+		tramite la relazione d'equivalenza
+		\begin{equation*}
+			(b,v)_{i} \sim (b, g_{ij}(b) \cdot v)\,, \quad
+			\text{se } b \in U_{i} \cap U_{j}\,. \qedhere
+		\end{equation*}
 	\end{proof}
 \end{thm}
 
 \begin{ex}
 	\begin{rmnumerate}
-		\item Il \textbf{fibrato banale} su $B$ è $\mathrm{pr}_{1}:B \times \R^{n} \to \R^{n}$.
+		\item Il \textbf{fibrato banale} di rango $n$ su 
+		$B$ è $\mathrm{pr}_{1}:B \times \R^{n} \to \R^{n}$.
 		
 		\item Sia $\KK = \R$ oppure $\KK = \C$.
-		Posto $V := \KK^{n}$, la \textbf{Grassmaniana} $Gr_{k}(V)$ si può topologizzare
-		\todo{Non si legge niente} 
+		Posto $V := \KK^{n}$, la \textbf{Grassmaniana} 
+		\begin{equation*}
+			Gr_{n}(V) := \Set{\text{sottospazi } k\text{-dimensionali di } V}
+		\end{equation*}
+		si può topologizzare asserendo che ogni $W \in Gr_{n}(V)$
+		è individuato da un $k$-frame $(w_{1}, \dots, w_{k})$ di $W$
+		a meno dell'azione di $\mathrm{GL}(k,\KK)$ su di lui.
+		Identificando le $n$-uple di vettori come matrici $n \times n$,
+		le $n$-uple di rango $k$ formano un aperto di $M_{n \times n}(\KK)$
+		chiamato \textbf{varietà di Stiefel} $\Vv_{n,k}$. 
 		
-		
+		La grassmaniana $Gr_{k}(V)$ è il quoziente di $\Vv_{n,k}$
+		per l'azione di $\mathrm{GL}(n,\KK)$, che è libera,
+		quindi $Gr_{k}(V)$ è una varietà di dimensione
+		\begin{equation*}
+			\dim Gr_{k}(V) = kn - k^2 = k(n-k)\,.
+		\end{equation*}
 		La grassmaniana $Gr_{k}(V)$ si può ricoprire con $\binom{n}{k}$ aperti
 		che corrispondono alle matrici $M$ in cui $k$ colonne fissate sono indipendenti.
-		I parametri che \todo{aiuto non si legge proprio}
+		Tramite $\mathrm{GL}(k,\KK)$, si riportano tali colonne a un blocco $I_{k}$
+		e i $k(n-k)$ parametri rimanenti parametrizzano i punti di un aperto di $Gr_{k}(V)$.
 		
-		\textbf{Fibrato $\xi_{n,k}$}: costruiamo un fibrato su $\mathrm{GL}(n,\R)$
+		\textbf{Fibrato $\xi_{n,k}$} - costruiamo un fibrato su $Gr_{k}(V)$
 		con spazio totale
 		\begin{equation*}
-			E(\xi_{n,k}) = \Set{(W,x) \in Gr_{n}(V) \times V | x \in W}
+			E(\xi_{n,k}) = \Set{(W,x) \in Gr_{k}(V) \times V | x \in W}
 		\end{equation*}
 		e proiezione $p(W,x)=W$. In questo modo,
-		la fibra su $W$ si identifica con $W$.
+		la fibra su $W$ si identifica con $W$ stesso.
 		Se $k=1$, allora $Gr_{1}(V) = \PP(V) = \PP^{n-1}(\KK)$ e chiamiamo
 		$\xi_{n,1}$ un \textbf{fibrato in rette}.
 		
@@ -178,8 +298,8 @@ dette \textbf{funzioni di transizione}.
 		(a meno di isomorfismo). Chi è $\xi_{2,1}$?
 		Consideriamo su $\PP^{1}(\R)$ i due aperti seguenti:
 		\begin{equation*}
-			U_{1} := \Set{(x,1) | x \in \R}\,, \quad
-			U_{2} := \Set{(1,y) | y \in \R}\,.
+			U_{1} := \Set{ | x \in \R}\,, \quad
+			U_{2} := \Set{ | y \in \R}\,.
 		\end{equation*}
 		Su questi aperti abbiamo le banalizzazioni
 		\begin{equation*}
@@ -191,7 +311,7 @@ dette \textbf{funzioni di transizione}.
 		\begin{equation*}
 			\begin{tikzcd}
 				(q_{y},\mu) \ar[r, "\Psi_{2}"]
-				& {\left([1:y], \mu [1:y] \right)} \ar[r,equals]
+				& {\left({[1:y]}, \mu {[1:y]} \right)} \ar[r,equals]
 				& f
 			\end{tikzcd}
 		\end{equation*}

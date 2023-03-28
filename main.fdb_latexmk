@@ -1,11 +1,11 @@
 # Fdb version 3
-["biber main"] 1679314619 "main.bcf" "main.bbl" "main" 1679323823
-  "main.bcf" 1679323822 107575 191ab9b44796bb3a120086b01b7ee1c8 "pdflatex"
-  "res.bib" 1679314267 1480 12c175a4b004715a9fc5b78a2830f676 ""
+["biber main"] 1679996154 "main.bcf" "main.bbl" "main" 1679996179
+  "main.bcf" 1679996179 107769 d32a19dae1879958f4d454b537261d77 "pdflatex"
+  "res.bib" 1679996153 2365 18f149f93798d24f13eac2d40cef4068 ""
   (generated)
   "main.bbl"
   "main.blg"
-["pdflatex"] 1679323813 "main.tex" "main.pdf" "main" 1679323823
+["pdflatex"] 1679996167 "main.tex" "main.pdf" "main" 1679996179
   "/usr/local/texlive/2022/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc" 1254269338 2375 baa924870cfb487815765f9094cf3728 ""
   "/usr/local/texlive/2022/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc" 1202520719 3486 c7eadf5dcc57b3b2d11736679f6636ba ""
   "/usr/local/texlive/2022/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc" 1202520719 2405 5dcf2c1b967ee25cc46c58cd52244aed ""
@@ -335,18 +335,21 @@
   "/usr/local/texlive/2022/texmf-var/web2c/pdftex/pdflatex.fmt" 1676992302 2826441 41a0a4f85b64046dbeb45dba58f72504 ""
   "/usr/local/texlive/2022/texmf.cnf" 1647878952 577 209b46be99c9075fd74d4c0369380e8c ""
   "LEZIONI/TA-1.tex" 1678705097 19255 6c1e1205745ef5195240568662e5b502 ""
+  "LEZIONI/TA-10.tex" 1679996101 9979 4262ae4239f9c1878d8b558427d3414d ""
   "LEZIONI/TA-2.tex" 1678709211 20274 f60e2df3b728fd019d6e66e396f4bcb7 ""
   "LEZIONI/TA-3.tex" 1678276566 10482 a99631a0c8f3ed702ea2996395cc5e0a ""
   "LEZIONI/TA-4.tex" 1678732472 13509 dc743198f751577145372da3d81cc886 ""
   "LEZIONI/TA-5.tex" 1679314391 9710 a83785b697151449f7db1da3d1f2bdd6 ""
   "LEZIONI/TA-6.tex" 1679314113 15096 38ecfd3861e463241c555ae82524197b ""
-  "LEZIONI/TA-7.tex" 1679323813 10142 644a766b6a34c11556a7204adeb73147 ""
-  "main.aux" 1679323822 17583 2c560319f78a9d78a390a370c915daf4 "pdflatex"
-  "main.bbl" 1679314621 6801 ab98caad90298b89dab73c4273247294 "biber main"
-  "main.lol" 1679323822 3137 c10f95652c6c00704b4c802baeed04c9 "pdflatex"
-  "main.run.xml" 1679323822 2304 68e50c381c6e543616f95120d6031df8 "pdflatex"
-  "main.tex" 1679314455 4688 962915cc2a07b08ecb682ad4bf0ea584 ""
-  "main.toc" 1679323822 1148 769700b63a7e583f46f5e30197dcf42a "pdflatex"
+  "LEZIONI/TA-7.tex" 1679920830 15326 44c273e0ac31c369ee087d50086af8f1 ""
+  "LEZIONI/TA-8.tex" 1679920851 12229 6be3552ab5d564442cc4c95727a21b21 ""
+  "LEZIONI/TA-9.tex" 1679945153 9885 f07899be925bb079d6da84b93226b605 ""
+  "main.aux" 1679996179 19459 7b0da07326d2c7cdb412e6327242fa46 "pdflatex"
+  "main.bbl" 1679996156 9389 c0ce8985422084680cf1afb8aaae76cf "biber main"
+  "main.lol" 1679996179 3806 fcc009c40e7ed08854a72898489a5150 "pdflatex"
+  "main.run.xml" 1679996179 2304 68e50c381c6e543616f95120d6031df8 "pdflatex"
+  "main.tex" 1679988000 4685 5be4231faa56163fa7a0ee7f60155513 ""
+  "main.toc" 1679996179 1225 9861c446453779cbb74573556fe7abb5 "pdflatex"
   "shortcutsITA.sty" 1678301720 15923 e1c61c74c0ad1b5ce57268961037170c ""
   "styleITA.sty" 1678301726 13131 0c428f6305cd53afd90fd019c131e62b ""
   (generated)

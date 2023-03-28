@@ -4,4 +4,257 @@
 \lecture[Lezione 9.]{2023-03-27}
 
 
-BALASBASdasd
+
+\begin{thm}
+	C'è un isomorfismo di funtori $\mathrm{Princ}_{\mathrm{GL}(n,\R)} \simeq \mathrm{Vect}_{n}(B)$.
+	\begin{proof}
+		\begin{itemize}
+			\item \textbf{Caso semplice: sia $X$ contraibile.} Allora ogni fibrato su $X$ è banale.
+			Per mostrarlo è sufficiente costruire una sezione di $p:P \to X$.
+			Dato $x_{0} \in X$, sappiamo che $\cat{1}_{X}$ è omotopa alla mappa costante in $x_{0}$.
+			Preso un punto $q \in p^{-1}(x_{0})$, solleviamo la costante a una mappa $c:X \to P$
+			tale che $p(q)=x_{0}$.
+			\begin{equation*}
+				\begin{tikzcd}
+					& P \ar[d, "p"] \\
+					X \ar[r, "x_{0}"] \ar[ur, "c"] & X\,.
+				\end{tikzcd}
+			\end{equation*}
+			Presa $H: X \times I \to X$ un'omotopia di contrazione tale che
+			 $H_{0} = x_{0}$ e $H_{1} = \cat{1}_{X}$, 
+			 siccome $p$ è una fibrazione, 
+			 allora $H$ si solleva a $\widetilde{H}_{t} : X \to P$ tale
+			 che $\widetilde{H}_{0}=c$ e $\widetilde{H}_{1}$ è una sezione di $p$.
+			 Quindi...
+			 
+			 \item \textbf{Caso generale: sia $X$ CW complesso.}
+		\end{itemize}
+	\end{proof}
+\end{thm}
+
+\begin{df}
+	Chiamiamo \textbf{$G$-CW-coppia} una coppia CW $(X,A)$ 
+	con un'azione (destre) di $G$ su $X$ tale che esista una filtrazione
+	\begin{equation*}
+		A =: F^{-1}X \subset F^{0}X \subset F^{1}X \subset \dots  
+		\subset F^{n}X \subset \dots
+		\subset \bigcup_{n \ge 0} F^{n}X = X
+	\end{equation*}
+	tale che $F^{n}X$ è ottenuto da $F^{n-1}X$ attaccando delle celle equivarianti del tipo
+	\begin{equation*}
+		D^{n} \times \left( H \backslash G \right)\,,
+	\end{equation*}
+	con $H \subset G$ sottogruppo e $H \backslash G = \{hG\}$ con azione di $G$ sulla destra.
+	Possiamo vedere questa costruzione come il pushout del seguente diagramma:
+	\begin{equation*}
+	 	\begin{tikzcd}
+	 		\coprod_{i} \de D_{i}^{n} \times \left( H \backslash G \right)
+	 	\end{tikzcd}
+	 \end{equation*}
+	 dove $X$ ha la topologia del limite diretto (o topologia debole). 
+\end{df}
+
+\begin{oss}
+	Banalmente, ogni CW complesso è un $G$-CW-complesso con $G=1$.
+	...
+\end{oss}
+
+Se $\xi:P \xrightarrow{p} X$ è un fibrato principale su $G$, dove $X$ è un CW complesso,
+lo scheletro di $X$ si solleva a un $G$-CW-complesso su $P$:
+\begin{equation*}
+	\begin{tikzcd}
+		E(c^{*} \xi) \ar[r, "\widetilde{c}"] \ar[d] & P \ar[d] \\
+		D^{n} \ar[r, "c"] & X\,,
+	\end{tikzcd}
+\end{equation*}
+dove $c^{*}\xi$ è banale, con spazio totale $D^{n} \times G$.
+
+\begin{df}
+	Dati due fibrati $\xi = (E,p), \xi'=(E',p')$ con stessa fibra $F$,
+	chiamiamo\textbf{bundle map} di $\xi$ su $\xi'$ un'applicazione continua
+	$h:E \to E'$ che manda ogni fibra $E_{b}$ omeomorficamente in una fibra $E'_{b'}$.
+	Quindi, questa mappa induce $\overline{h} : B \to B'$ che rende commutativo il diagramma
+	\begin{equation*}
+		\begin{tikzcd}
+			E \ar[d, "p"] \ar[r, "h"] & E' \ar[d, "p'"] \\
+			B \ar[r, "\overline{h}"] & B'\,.
+		\end{tikzcd}
+	\end{equation*}
+	Se $\xi$ e $\xi'$ sono fibrati vettoriali richiediamo che
+	$h_{b}:E_{b} \to E'_{b'}$ sia un isomorfismo lineare.
+	Se $\xi$ e $\xi'$ sono fibrati principali sullo stesso gruppo $G$,
+	richiediamo che sia $G$-invariante, i.e. $h(e \cdot g) = h(e) \cdot g$.
+\end{df}
+
+\begin{prop}
+	Se $h:\xi \to \xi'$ è una bundle map,
+	allora c'è un isomorfismo $g:\xi \simeq \overline{h}^{*}\xi'$
+	tale che $h=\mathrm{pr}_{2} \circ g$.
+	\begin{equation*}
+		\begin{tikzcd}
+			E(\xi) \ar[r, "\simeq"] \ar[d, "p"]
+			& E(\overline{h}^{*}\xi') \ar[r, "\mathrm{pr}_{2}"] \ar[d]
+			& E(\xi') \ar[d, "p'"] \\
+			B \ar[r, equals] 
+			& B \ar[r, "\overline{h}"]
+			& B'\,.
+		\end{tikzcd}
+	\end{equation*}
+	Se inoltre $\xi$ e $\xi'$ sono fibrati pringipali su $G$,
+	allora gli isomorfismi sono $G$ invarianti.
+	\begin{proof}
+		Definiamo $g: E(\xi) \to E(\overline{h}^{*}\xi')$ come
+		\begin{equation*}
+			g(e) = \left( p(e), h(e) \right)\,.
+		\end{equation*}
+		Si verifica che $g$ è continua e manda ciascuna fibra $E_{b}$
+		isomorficamente sulle fibre $E({\overline{h}^{*}\xi')_{b}}$,
+		cioè è bigettiva con inversa continua (è sufficiente verificarlo
+		localmente sulle banalizzazioni),
+		e quindi concludiamo che è un isomorfismo.
+	\end{proof}
+\end{prop}
+
+In parole povere, avere una bundle map è equivalente
+a dire che il fibrato che stiamo considerando è in realtà un pullback.
+
+\textbf{Torniamo alla dimostrazione:}\todo{Aggiustare l'ordine di queste cose!!!}
+
+Per il caso semplice, sappiamo che 
+$\mathrm{pr}_{1}^{*}:\mathrm{Princ}_{G}X \to \mathrm{Princ}_{G}(X  \times I)$
+è surgettiva, quindi ogni fibrato $\xi : P \xrightarrow{p} X \times I$
+è il pullback di qualche fibrato $p':E' \to B$, cioè
+\begin{equation*}
+	P \simeq \Set{ \big( (x,t),e' \big) | x = p'(e') }\,.
+\end{equation*}
+In altri termini si ha
+ $$P = P\vert_{X \times \{0\}} \times I : (e,t) \to (p(e),t) \in X \times I \,,$$
+e quindi basta dimostrare che ogni fibrato su $X \times I$
+è il pullback lungo la restrizione a $X \times \{0\} \simeq X$.
+
+Per la Proposizione ci basta trovare una bundle map
+\begin{equation*}
+	h : P \to P_{0}:=p^{-1}(X \times \{0\})\,.
+\end{equation*}
+L'idea è quella di estendere l'identità $P_{0} = P_{0}$
+successivamente a una bundle map
+\begin{equation*}
+	P_{n} := p^{-1}\Big(X \times \{0\} \cup (X_{n-1} \times I) \Big)\,,
+\end{equation*}
+dove $Y_{n}$ si ottiene da $Y_{n-1}$ attaccando delle celle $D^{n-1} \times I$
+come pushout del diagramma:
+\begin{equation*}
+	\begin{tikzcd}
+		\coprod \Big( \de D^{n-1} \times I \Big) \ar[r] \ar[d]
+		& \coprod \Big( \de D^{n-1} \times I \Big) \ar[d] \\
+		Y_{n-1} \ar[r] & Y_{n}\,.
+	\end{tikzcd}
+\end{equation*}
+Cella per cella, vogliamo estendere la mappa da $Y_{n-1}$ a tutto $Y_{n}$:
+\begin{equation*}
+	\begin{tikzcd}
+		\Big( (D^{n-1} \times \{0\}) \cup (\de D^{n} \times I) \Big) \times G \ar[rr] \ar[d]
+		& & \xi\vert_{(D^{n-1} \times \{0\}) \cup (\de D^{n} \times I) } \ar[d, "h_{n-1}"] \\
+		(D^{n-1} \times I) \times G \ar[r] \ar[rr, bend right, "\widetilde{h}_{n}"]
+		& \xi\vert_{D^{n-1} \times I} \ar[r, "h_{n}", dashed]
+		& \xi\vert_{D^{n-1} \times \{0\}}
+	\end{tikzcd}
+\end{equation*}
+
+Devo trovare $\widetilde{h}$ che estende $h_{n-1} \circ d$.
+Dato che abbiamo l'omeomorfismo di coppie
+\begin{equation*}
+	\beta: \Big(D^{n-1} \times I , (D^{n-1} \times \{0\}) \cup (\de D^{n} \times I) \Big) 
+	\simeq \Big(D^{n-1} \times I, D^{n-1} \times \{0\} \Big)\,,
+\end{equation*}
+allora per la (\hyperref[HLP]{\textbf{HLP}}) possiamo sollevare la seguente omotopia
+\begin{equation*}
+	\begin{tikzcd}
+		D^{n-1} \times \{0\} \ar[r, "h_{n-1}"]
+		& P_{0} \ar[d] \\
+		D^{n-1} \times I \ar[r, "\mathrm{pr}_{1} \circ \beta"] \ar[ur, dashed]
+		& X \times \{0\}\,, 
+	\end{tikzcd}
+\end{equation*}
+e quindi, facendo agire $G$, riusciamo a costruire una bundle map 
+\begin{equation*}
+	h_{n} : (D^{n-1} \times I) \times G \longrightarrow P_{0}\,,
+	\quad \left(\overline{h}(x,t),g \right) \longmapsto \overline{h}(x,t) \cdot g\,.
+\end{equation*}
+
+\begin{cor}
+	Se $f,g : X \to B$ sono mappe omotope, allora $f^{*}\xi \simeq g^{*}\xi$.
+	Segue che la mappa $[X,B] \to \mathrm{Princ}_{G}(X)$ è ben definita.
+\end{cor}
+
+\begin{df}
+	Un $G$-fibrato principale $p:E \to B$ si dice \textbf{universale} 
+	se per ogni $G$-fibrato principale $\xi' = (E',p')$ su un CW complesso $X$,
+	per ogni $L \subset X$ sottocomplesso e per ogni bundle map $h^{-1}(L) \to E$,
+	allora $h$ si estende a una bundle map $h:E' \to E$.
+	\begin{equation*}
+		\begin{tikzcd}
+			XXX
+		\end{tikzcd}
+	\end{equation*}
+\end{df}
+
+Nel linguaggio dei $G$-CW-complessi, la definizione è equivalente a
+dare un fibrato principale su $G$ tale che per ogni $G$-CW-coppia $(E',A')$,
+allora ogni mappa $G$-equivariante $A' \to E$ si estende a una mappa $h':E' \to E$.
+
+\begin{thm}[\textbf{Teorema di classificazione}]
+	Sia $\xi = (E,p)$ un $G$-fibrato universale su $B$.
+	Per ogni CW complesso $X$, si ha una \textbf{bigezione}
+	\begin{equation*}
+		[X,B] \longrightarrow \mathrm{Princ}_{G}(X)\,,
+		\quad [f] \longmapsto f^{*}\xi\,. 
+	\end{equation*}
+	\begin{proof}
+		Siccome mappe omotope hanno pullback isomorfi,
+		sappiamo che la mappa è ben definita.
+		
+		\textbf{Surgettività:} sia $p':E' \to X$ un fibrato principale su $G$.
+		Per la definizione di $\xi$, prendendo il sottocomplesso $L = \emptyset$,
+		per la Proposizione
+		si ha una bundle map $h : E' \to E$ tale che $\xi' = \overline{h}^{*}\xi$,
+		dove $\overline{h}:X \to B$ è indotta da $h$.
+		
+		\textbf{Iniettività:} siano $f_{0},f_{1}:X \to B$ tali che $f_{0}^{*}\xi \simeq f_{1}^{*}\xi$.
+		Dato che il prodotto $X \times I$ è un CW complesso, consideriamo il suo sottocomplesso
+		$L = X \times \{0,1\}$ e notiamo che il fibrato
+		\begin{equation*}
+			\begin{tikzcd}
+				\xi' \ar[r, equals]
+				& f_{0}^{*}\xi \times I \ar[r, " p'' "]
+				& X \times I
+			\end{tikzcd}
+		\end{equation*}
+		è isomorfo a $(f_{0} \circ \mathrm{pr}_{1})^{*}\xi$
+		(questo ci dice che a ogni tempo stiamo parametrizzando sempre lo stesso fibrato pullback).
+		
+		Siano $h_{i}:f_{i}^{*}\xi 	\to \xi$ le due bundle map.
+		Definiamo 
+		\begin{equation*}
+			h: \left( p'' \right)^{-1}(L) \longrightarrow E\,,
+		\end{equation*}
+		tale che $h\vert_{\left( p'' \right)^{-1}(X \times \{0\})} = h_{0}$
+		e $h\vert_{\left( p'' \right)^{-1}(X \times \{1\})} = h_{1} \circ \kappa$,
+		dove $\kappa : E(f_{0}^{*}\xi) \to E(f_{1}^{*}\xi)$ deriva
+		dall'ipotesi $f_{0}^{*}\xi \simeq f_{1}^{*}\xi$.
+		Quindi $h$ è una bundle map che su $X \times \{1\}$
+		induce la stessa mappa di $h_{1}$, cioè $f_{1}$.
+		
+		Per universalità di $\xi$, sappiamo che $h$ si estende a una bundle map $h':E(\xi') \to E$,
+		e l'applicazione indotta da $h'$ dà un'omotopia
+		\begin{equation*}
+			\overline{h'} : X \times I \longrightarrow B\,,
+			\quad \overline{h'}_{0} = f_{0},\, \overline{h'}_{1} = f_{1}\,.
+		\end{equation*}
+	\end{proof}
+\end{thm}
+
+\begin{thm}
+	Se $\xi$ è un $G$-fibrato principale con spazio totale $E(\xi)$
+	debolmente contraibile, allora è universale.
+\end{thm}
