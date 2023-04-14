@@ -1,6 +1,265 @@
- %%% Lezione 8
+ %%% Lezione 11
 
 
-\lecture[Lezione 8.]{2023-03-21}
+\lecture[Lezione 11.]{2023-04-03}
 
 
+Abbiamo introdotto i \emph{fibrati universali}
+come oggetti che permettono di estendere bundle map parziali.
+Se $\xi=(E,p)$ è un $G$-fibrato principale su un CW complesso $B$
+tale che $[X,B] \simeq \mathrm{Princ}_{G}(X)$,
+allora $\xi$ è universale: infatti,
+se $\widetilde{f}:S^{n} \to E$, possiamo ottenere
+una bundle map $h:S^{n} \times G \to E$ facendo agire il gruppo
+a destra 
+\begin{equation*}
+	h(x,g) := \widetilde{f}(x) \cdot g\,.
+\end{equation*}
+Quindi il fibrato banale su $S^{n}$ è il pullback $f^{*}\xi$.
+Chiaramente il fibrato banale è indotto dalla mappa costante $S^{n} \to \{b_{0}\} \subset B$,
+quindi per la corrispondenza bigettiva provata nel Teorema,
+deduciamo che $f \sim b_{0}$, cioè $f$ si estende a tutto $D^{n+1}$.
+Questo significa che anche $\widetilde{f}$ si estende su tutto $D^{n+1}$.
+????
+
+\begin{prop}
+	Sia $p:EG \to BG$ un $G$-fibrato universale.
+	Allora per ogni $n \ge 1$ si hanno gli isomorfismi
+	\begin{equation*}
+		\pi_{n}(BG,\ast) \simeq \pi_{n-1}(G,\ast)\,.
+	\end{equation*}
+	\begin{proof}
+		È sufficiente considerare la successione in omotopia del fibrato;
+		dato che $EG$ è debolmente contraibile, si ha la tesi per $n \ge 2$.
+		Se $G$ è connesso per archi, allora $\pi_{1}(BG,\ast)=0$.
+	\end{proof}
+\end{prop}
+
+\begin{ex}
+	\begin{rmnumerate}
+		\item Per ogni $n \ge 1$, l'isomorfismo della Proposizione può essere visto come
+		\begin{equation*}
+			\pi_{n}(BG,\ast) \simeq [S^{n},BG] \simeq \mathrm{Princ}_{G}(S^{n}) \simeq \pi_{n-1}(G)\,,
+		\end{equation*}
+		e quindi si può studiare indipendentemente dal \textbf{Teorema di classificazione},
+		calcolando le classi di isomorfismo dei $G$-fibrati principali delle sfere.
+		In molti testi, questa costruzione viene mostrata esplicitamente:
+		l'idea è spezzare la sfera $S^{n}$ in due calotte contraibili,
+		sulle quali abbiamo i fibrati banali $S^{n}_{-} \times G$ e $S^{n}_{+} \times G$.
+		Un fibrato principale si ottiene incollando le fibre lungo l'equatore $S^{n-1} \subset S^{n}$:
+		questo incollamento è descritto da una mappa $S^{n-1} \to G$, 
+		cioè un rappresentante di un elemento di $\pi_{n-1}(G,\ast)$.
+		
+		\item Lo spazio classiicante $BS^{1} = BU(1) = \C\PP^{\infty}$ dato che
+		\begin{equation*}
+			\pi_{n}(BU(1),\ast) = \pi_{n-1}(S^{1},\ast) \simeq
+			\begin{cases}
+				\Z\,, \quad &\text{se } n=2\,; \\
+				0\,, \quad &\text{se } n \ne 2\,.
+			\end{cases}
+		\end{equation*}
+		Quindi lo spazio $BU(1) \simeq K(\Z,2)$.
+	\end{rmnumerate}
+\end{ex}
+
+\begin{thm}
+	\begin{equation*}
+		\mathrm{Vect}_{\C}(X) \simeq \mathrm{Princ}_{G}(X)
+		\simeq [X,BU(1)] \simeq ...
+	\end{equation*}\todo{finisci:classi di chern}
+\end{thm}
+
+\begin{thm}
+	Abbiamo la seguente classificazione dei fibrati in rette reali:
+	\begin{equation*}
+		\mathrm{Vect}_{1}^{\R}(X) 
+		\simeq \mathrm{Princ}_{O(1)}(X)
+		\simeq [X,BO(1)]
+		\simeq [X,\R\PP^{\infty}]
+		\simeq [X,K(\Z/2,1)]
+		\simeq H^{1}(X;\Z/2)\,,
+	\end{equation*}
+	dove $f:X \to \R\PP^{\infty}$ va nella classe
+	\begin{equation*}
+		w_{1} := f^{*}w \in H^{1}(X;\Z/2)\,,
+	\end{equation*}
+	dove $w \in H^{1}(\R\PP^{\infty};\Z/2)$ è il generatore.
+	La classe $w_{1}$ che corrisponde al fibrato $\xi \in \mathrm{Vect}_{1}^{\R}(X)$
+	si chiama \textbf{prima classe di Stiefel-Whitney}.
+\end{thm}
+
+Si è visto che nella fibrazione\todo{Sta facendo nuovamente la fibrazione sulle varietà di Stiefel, ma scordando l'ultimo vettore del frame} 
+\begin{equation*}
+	F \hookrightarrow \Vv_{n}(\C^{n+k}) \longrightarrow \Vv_{n-1}(\C^{n+k})
+\end{equation*}
+la fibra è $(2n-1)$-connessa. Boh.
+
+Abbiamo visto quindi che lo spazio classificante di $U(n)$
+è lo stesso di $\mathrm{GL}(n,\C)$. Considerando il seguente diagramma
+\begin{equation*}
+	% https://tikzcd.yichuanshen.de/#N4Igdg9gJgpgziAXAbVABwnAlgFyxMJZABgBpiBdUkANwEMAbAVxiRAB12A1GgCk4DCAPWCcsYAGY4AngF8AlCFml0mXPkIoAjKS1VajFm049+7YaPbipc+QHoAqrzCLlq7HgJEyAJn31mVkQQAHEAJwB9YDBZMwsxSRkFJRUQDA8NIh0-agCjYIAhTgBbOhwACzDi4BCAGViwUkFXVPT1LxQfXX9DIJACpxclfRgoAHN4IlAJMIhipDIQHAgkHQNAtjQAci2U6dn5xEXlpC71-LSQagY6ACMYBgAFNU9NEDCsMfKcPZAZudW1BOiDOeT6AEdfv9DmdgQBma53B7PDIdEAMGBSK4gcowOhQNiQMCsa7iPpQCBMW4Y7E4OhYBiEgisNx-A6ApYrRAAFmouPxTOJ2IYZLYFKpNKB9MZwSJLIosiAA
+\begin{tikzcd}
+\Vv_{n}(\C^{\infty}) \arrow[rd, "p''"] \arrow[dd, "p"'] &                                                                      &       \\
+                                                    & \Vv_{n}(\C^{\infty})/U(n) \arrow[ld, "q"] \arrow[r,equals] & BU(n) \\
+Gr_{n}(\C^{\infty}) \arrow[r,equals]  & {B\mathrm{GL}(n,\C)}                                                 &      \,,
+\end{tikzcd}
+\end{equation*}
+notiamo quindi che 
+\begin{equation*}
+	\Vv_{n}(\C^{\infty})/ \mathrm{GL}(n,\C) \simeq (\Vv_{n}(\C^{\infty})/U(n))/(\mathrm{GL}(n,\C)/U(n))\,.
+\end{equation*}
+Esiste un'equivalenza omotopica $\Vv_{n} \simeq \Vv'_{n}$ data essenzialmente
+dall'algoritmo di ortonormalizzazione di Gram-Schmidt, che induce un'equivalenza omotopica
+tra $\Vv_{n}/U(n)$ e $\Vv'_{n}/U(n)$.
+Consideriamo dunque un'inversa omotopica $q':Gr_{n}(\C^{\infty}) \to \Vv_{n}(\C^{\infty})$.
+Se $\lambda$ è un...
+Siccome $f \sim q \circ q' \circ f$, allora
+\begin{equation*}
+	\lambda \simeq f^{*}\xi \simeq f^{*}((q')^{*}(q^{*}\xi)))\,,
+\end{equation*}
+quindi troviamo  $\widetilde{f}:X \to BH$ un un sollevamento di $f$ (a meno di omotopia)
+tale che il seguente diagramma in $\cat{hTop}$ commuti:
+\begin{equation*}
+	\begin{tikzcd}
+		f^{*}\xi = Y \ar[dd] & & E(q^{*}\xi) \ar[r] \ar[d]
+		& E \ar[dd, "p"] \ar[dl,"p''"'] \\
+		& & BH \ar[dr, "q"'] & \\
+		X \ar[rrr, "f"'] \ar[rru, "\widetilde{f}"] 
+		& & & BG = E/G \ar[ul, "q'"', bend right, dashed]\,.
+	\end{tikzcd}
+\end{equation*}
+
+\begin{lemma}
+	Il pullback tramite $q$ è un $G$-fibrato principale su $BH$.
+	\begin{proof}
+		Basta trovare una bundle map $l:E \times_{H} G \to E$
+		che induca $\overline{l} =q$. Per questo scopo basta considerare
+		$[(e,g)] \mapsto e \cdot g$ e notare che passa al quoziente.
+	\end{proof}
+\end{lemma}
+
+\begin{df}
+	Sia $H \subset G$ un sottogruppo.
+	Un $G$-fibrato principale $\xi'= (E',p')$ su $B$ si dice
+	\textbf{indotto da un $H$-fibrato principale} $\xi''=(E'',p'')$
+	su una base $B''$ se $\xi' \simeq \left( E'' \times G \to B \right)$.
+	In altre parole, $\xi$ è isomorfo a un $G$-fibrato con funzioni di transizione in $H$.
+	Se un $G$-fibrato principale è indotto da un $H$-fibrato,
+	si dirà allora che $G$ si \textbf{riduce} a $H$.
+\end{df}
+
+\begin{oss}
+	Si ha la catena di isomorfismi
+	\begin{equation*}
+		f^{*}\xi \simeq \widetilde{f}^{*} (q^{*}\xi) 
+		\simeq \widetilde{f}^{*}\left(E \times_{H} G \right)
+		\simeq E(\widetilde{f}^{*}\xi) \times_{H} G\,,  
+	\end{equation*}
+	dove l'ultimo isomorfismo è indotto da
+	\begin{equation*}
+		E(f^{*}\xi) = B' \times_{B} E = \Set{(b',e) | f(b') = p(e)}\,,
+	\end{equation*}
+	quindi
+	\begin{equation*}
+		\widetilde{f}^{*}(E \times_{H} G)
+		= X \times_{BH} (E \times_{H} G)
+		= (X \times_{BH} E) \times_{H} G
+		= (\widetilde{f}^{*}E) \times_{H} G\,.
+	\end{equation*}
+\end{oss}
+
+Quindi se esiste $\widetilde{f}$, allora $f^{*}\xi$ è indotta da $\widetilde{f}^{*}(E)$.
+Viceversa, se $f^{*}\xi \simeq \widetilde{f}^{*}(E) \times_{H} G = \widetilde{f}^{*}(E \times_{H} G = \widetilde{f}^{*}(q^{*}\xi)$, allora il teorema di classificazione ci dà un'omotopia
+$\widetilde{f} \sim f \circ q$.
+
+\begin{thm}
+	Sia $H \subset G$ un sottogruppo tale che $G \to G/H$ sia un fibrato localmente banale
+	(equivalentemente ha sezioni locali). Allora i seguenti fatti sono equivalenti:
+	\begin{rmnumerate}
+		\item il $G$-fibrato principale $\xi = (E,p)$ su $B$ è indotto da un $H$-fibrato principale;
+		\item la mappa classificante $f:B \to BG$ si solleva (a meno di omotopia)
+		a una mappa $\widetilde{f}:B \to BH$.
+	\end{rmnumerate}
+\end{thm}
+
+\begin{ex}
+	\item La fibrazione $BSO(n) \to BO(n)$ ha fibra $O(n)/SO(n) \simeq \Z/2$.
+	
+	\item Una matrice su un fibrato classificato da $B \to B\mathrm{GL}(n,\R)$ 
+	è un sollevamento $\widetilde{f}:B \to BO(n)$.
+\end{ex}
+
+
+\begin{prop}
+	$s:BG \to BH$, allora ogni $G$-fibrato classificato da una $f:B \to BG$
+	ha riduzione del gruppo ad $H$, cioè esiste un sollevamento $\widetilde{f}:B \to BH$.
+	\begin{proof}
+		Basta considerare $\widetilde{f} := s \circ f$.
+	\end{proof}
+\end{prop}
+
+%\section{Costruzione degli spazi classificanti}
+%
+%Presentiamo una costruzione di $BG$ molto \emph{categoriale}.
+%Definiamo la \textbf{categoria simplesso} $\Delta$ come
+%la categoria con oggetti gli insiemi
+%\begin{equation*}
+%	[n] := \Set{0, 1, \dots, n}\,,
+%	\quad n \ge 0\,,
+%\end{equation*}
+%e come morfismi le funzioni \emph{non decrescenti} $f:[n] \to [m]$.
+%
+%\begin{ex}
+%	$i$-codeg e cofacce
+%\end{ex}
+%
+%\begin{lemma}
+%	Per ogni $i \le $, le cofacce e le mappe codegeneri soddisfano le seguenti relazioni:
+%	\begin{equation*}
+%		d^{i}d^{j} = d^{i}...
+%	\end{equation*}
+%\end{lemma}
+%
+%\begin{fact}
+%	I morfismi $d^{i}$ e $s^{i}$ generano tutti i morfismi nella categoria $\Delta$.
+%\end{fact}
+%
+%La categoria opposta $\Delta^{op}$ ha gli stessi oggetti di $\Delta$,
+%e morfismi
+%\begin{equation*}
+%	\Hom_{\Delta^{op}}([n],[m]) = \Hom_{\Delta}([m],[n])\,,
+%\end{equation*}
+%quindi vediamo che la cofaccia $i$-esima $d^{i}:[n-1] \to [n]$
+%corrisponde a un morfismo
+%\begin{equation*}
+%	d_{i}:[n] \longrightarrow [n-1]\,,
+%\end{equation*}
+%e...
+%
+%Ricordiamo che un complesso simpliciale $X$ è un'unione di simplessi.
+%Se $X_{n}$ è un insieme di indici che parametrizza gli $n$-simplessi,
+%allora
+%\begin{equation*}
+%	X = \left( \bigcup_{n \ge 0} \Delta^{n} \times X_{n} \right) / \sim\,,
+%\end{equation*}
+%dove $\Delta^{n}$ è l'$n$-simplesso standard in $\R^{n+1}$,
+%e $\sim$ è la relazione d'equivalenza che identifica le coppie
+%allora ci descrive come non si capisce un cazzo.
+%
+%Vogliamo generalizzare questa idea topologica a livello categoriale.
+%\begin{df}
+%	Un \textbf{simpliciale} $X$ è una collezione di insiemi $X_{n}$, con $n \ge 0$,
+%	e applicazioni $d_{i}:X_{n} \to X_{n-1}, s_{j}:X_{n} \to X_{n-1}$ che soddisfano
+%	le relazioni sopra. 
+%\end{df}
+%
+%In modo più formale, si può dire che un insieme simpliciale è un funtore
+%$F : \Delta^{op} \to \CSet$ tale che
+%\begin{equation*}
+%	\begin{tikzcd}
+%		{[n]} \ar[rr, "F"] & & X_{n} \ar[d, "F(d_{i})"] \\
+%		{[n-1]} \ar[rr, "F"] \ar[u, bend right, "s_{j}"] & & X_{n-1} \ar[u, bend right, "F(s_{j})"]\,.
+%	\end{tikzcd}
+%\end{equation*}
+%Nel caso più generale, al posto di $\CSet$ si può considerare una categoria $\Cc$ qualsiasi
+%e definire un insieme simpliciale come un funtore $F:\Delta^{op} \to \Cc$.

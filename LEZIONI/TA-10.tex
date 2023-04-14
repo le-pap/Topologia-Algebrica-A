@@ -3,10 +3,12 @@
 
 \lecture[Lezione 10.]{2023-03-28}
 
-
-Dato un $G$-fibrato principale $\xi'(p':E' \to X)$,
+\begin{df}
+Sia $xi = (E,p)$ un fibrato universale per $G$ sula base $B$.
+Dato un $G$-fibrato principale $\xi'= (E',p')$ su $X$,
 chiamiamo \textbf{mappa classificante} di $\xi'$
 la mappa $f:X \to B$ tale che $\xi' \simeq f^{*}\xi$.
+\end{df}
 
 \begin{oss}
 	I fibrati universali sono \emph{unici} nel seguente senso:	
@@ -16,7 +18,8 @@ la mappa $f:X \to B$ tale che $\xi' \simeq f^{*}\xi$.
 	$f:B \to B'$ e $g:B' \to B$ tali che $f^{*}\xi' \simeq \xi$
 	e $ g^{*}\xi \simeq \xi'$.  Per funtorialità del pullback
 	segue che $(g \circ f)^{*}\xi = f^{*}(g^{*}\xi) = f^{*} \xi' = \xi$
-	e quindi per il Teorema deduciamo che $g \circ f \simeq \cat{1}_{B}$;
+	e quindi per il \hyperref[teo-classificazione]{Teorema di classificazione}
+	deduciamo che $g \circ f \simeq \cat{1}_{B}$;
 	analogamente si vede che $f \circ g \simeq \cat{1}_{B'}$.
 \end{oss}
 
@@ -69,21 +72,21 @@ Vogliamo trovare una caratterizzazione dei fibrati universali.
 		anche la restrizione a $\de D^{n}$ è banale.
 		Siccome per induzione abbiamo già costruito la bundle map
 		$h': E(c^{*}\xi)\vert_{S^{n-1}} : S^{n-1} \times G \to E$,
-		allora per il passo precedente si estende $D^{n} \times G$.
+		allora per il passo precedente si estende a $D^{n} \times G$.
 	\end{proof}
 \end{thm} 
 
 
-Ricordiamo che nella caegoria dei CW complessi, l'equivalenza debole
+Ricordiamo che nella categoria dei CW complessi, l'equivalenza debole
 corrisponde all'equivalenza omotopica, quindi lo spazio totale
 di un $G$-fibrato principale è contraibile.
 Un $G$-CW-complesso libero e contraibile si indica con $EG$
-e il suo spazio delle orbite $EG/G \simeq BG$.
+e il suo spazio delle orbite $BG := EG/G$.
 La mappa di proiezione $p:EG \to BG$ è un $G$-fibrato universale
 e la base $BG$ si dice \textbf{spazio classificante} del gruppo $G$.
 
 
-Il problema è costruire $BG$.
+Il problema è come costruire $BG$.
 Quando $G$ è discreto, notiamo che $BG$ è uno spazio
 di Eilenberg-MacLane di tipo $K(G,1)$:
 la fibra è discreta e $\xi$ è un rivestimento con fibre omeomorfe a $G$.
@@ -102,7 +105,44 @@ In breve, per CW complessi, $BG$ ha $\pi_{1}(B,\ast) \simeq G$ e rivestimento un
 	\begin{rmnumerate}
 		\item Se $G=\Z$, abbiamo visto che $K(\Z,1) \simeq S^{1}$.
 		
-		\item Se $G = \Z/2$
+		\item Identificando $G = \Z/2$ con $S^{0}$, la filtrazione
+		\begin{equation*}
+			\begin{tikzcd}
+				S^{0} \ar[r, hook]
+				& S^{1} \ar[r, hook] \ar[d]
+				& S^{2} \ar[r, hook] \ar[d]
+				& \dots \ar[r, hook]
+				& S^{\infty} \ar[d] \\
+				& \R\PP^{1} \ar[r, hook]
+				& \R\PP^{2} \ar[r, hook]
+				& \dots
+				& \R\PP^{\infty}
+			\end{tikzcd}
+		\end{equation*}
+		mostra che $S^{\infty}$ è un CW complesso,
+		dunque la mappa $S^{\infty} \to \R\PP^{\infty}$ è un fibrato universale su $\Z/2$,
+		dato che $S^{\infty}$ è contraibile.
+		
+		\begin{fact}
+			Se $G$ è un gruppo dotato di torsione, allora il suo spazio classificante
+			è necessariamente un CW complesso di dimensione infinita.
+			Questo fatto ha una motivazione profonda,
+			ed è legato all'\textbf{omologia del gruppo} $G$.
+			Infatti, dato un gruppo, si può definire un invariante 
+			$H_{*}(G)$ in termini puramente algebrici:
+			 nel caso di gruppi di torsione, esistono infiniti
+			 gruppi di omologia $H_{n}(G)$ non banali.
+			Ad esempio
+			\begin{equation*}
+				H_{2n-1}(\Z/r) \simeq \Z/r \ne 0\,.
+			\end{equation*}
+			D'altra parte, ammesso di sapere che per ogni gruppo $G$
+			esiste lo spazio classificante $BG$,
+			allora potremmo definire $H_{*}(G) := H_{*}(BG;\Z)$.
+			Queste due nozioni coincidono, e questo permette
+			di studiare i gruppi da un punto di vista topologico.
+			Per uni'introduzione, si veda .
+		\end{fact}
 		
 		\item Se $G = S^{1} \subset \C$, considero la filtrazione
 		\begin{equation*}
@@ -112,14 +152,22 @@ In breve, per CW complessi, $BG$ ha $\pi_{1}(B,\ast) \simeq G$ e rivestimento un
 		\end{equation*}
 		dove $S^{2n-1} \subset \C^{n}$ è la sfera unitaria immersa in uno spazio vettoriale complesso.
 		L'azione di $G$ sulle sfere è per moltiplicazione, quindi deduciamo che
-		$S^{\infty} / S^{1} \simeq \C\PP^{\infty}$ ...
+		per ogni $i \ge 1$ si ha $S^{2i-1} / S^{1} \simeq \C\PP^{i}$.
+		Dalla filtrazione sopra deduciamo che 
+		$S^{1} \hookrightarrow S^{\infty}  \to \C\PP^{\infty}$ 
+		è un fibrato principale con spazio totale contraibile,
+		quindi è universale.
 		Si noti che $S^{1}$ \emph{non} è un gruppo discreto e 
-		quindi lo spazio classificante di $G$ \emph{non} è necessariamente 
+		quindi lo spazio classificante $BG$ \emph{non} è necessariamente 
 		di tipo $K(G,1)$.
 	\end{rmnumerate}
 \end{ex}
 
-...
+\begin{oss}
+	Se $G$ agisce liberamente su uno spazio contraibile $E$,
+	e $H \subset G$ è un gruppo che agisce ancora liberamente su $E$,
+	allora $E \to E/H = BH$ è un $H$-fibrato universale.
+\end{oss}
 
 \begin{thm}[\textbf{Peter-Weyl}]\label{Peter-Weyl}
 	Ogni gruppo di Lie compatto ha una rappresentazione fedele finito-dimensionale

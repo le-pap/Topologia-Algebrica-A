@@ -1,6 +1,341 @@
- %%% Lezione 8
+ %%% Lezione 12
 
 
-\lecture[Lezione 8.]{2023-03-21}
+\lecture[Lezione 12.]{2023-04-04}
 
 
+\section{Costruzione di Milnor}
+
+
+Presentiamo una costruzione di $BG$ molto \emph{categoriale}.
+Definiamo la \textbf{categoria simplesso} $\Delta$ come
+la categoria con oggetti gli insiemi
+\begin{equation*}
+	[n] := \Set{0, 1, \dots, n}\,,
+	\quad n \ge 0\,,
+\end{equation*}
+e come morfismi le funzioni \emph{non decrescenti} $f:[n] \to [m]$.
+
+\begin{ex}
+	$i$-codeg e cofacce
+\end{ex}
+
+\begin{lemma}
+	Per ogni $i \le $, le cofacce e le mappe codegeneri soddisfano le seguenti relazioni:
+	\begin{equation*}
+		d^{i}d^{j} = d^{i}...
+	\end{equation*}
+\end{lemma}
+
+\begin{fact}
+	I morfismi $d^{i}$ e $s^{i}$ generano tutti i morfismi nella categoria $\Delta$.
+\end{fact}
+
+La categoria opposta $\Delta^{op}$ ha gli stessi oggetti di $\Delta$,
+e morfismi
+\begin{equation*}
+	\Hom_{\Delta^{op}}([n],[m]) = \Hom_{\Delta}([m],[n])\,,
+\end{equation*}
+quindi vediamo che la cofaccia $i$-esima $d^{i}:[n-1] \to [n]$
+corrisponde a un morfismo
+\begin{equation*}
+	d_{i}:[n] \longrightarrow [n-1]\,,
+\end{equation*}
+e...
+
+Ricordiamo che un complesso simpliciale $X$ è un'unione di simplessi.
+Se $X_{n}$ è un insieme di indici che parametrizza gli $n$-simplessi,
+allora
+\begin{equation*}
+	X = \left( \bigcup_{n \ge 0} \Delta^{n} \times X_{n} \right) / \sim\,,
+\end{equation*}
+dove $\Delta^{n}$ è l'$n$-simplesso standard in $\R^{n+1}$,
+e $\sim$ è la relazione d'equivalenza che identifica le coppie
+allora ci descrive come non si capisce un cazzo.
+
+Vogliamo generalizzare questa idea topologica a livello categoriale.
+\begin{df}
+	Un \textbf{simpliciale} $X$ è una collezione di insiemi $X_{n}$, con $n \ge 0$,
+	e applicazioni $d_{i}:X_{n} \to X_{n-1}, s_{j}:X_{n} \to X_{n-1}$ che soddisfano
+	le relazioni sopra. 
+\end{df}
+
+In modo più formale, si può dire che un insieme simpliciale è un funtore
+$F : \Delta^{op} \to \CSet$ tale che
+\begin{equation*}
+	\begin{tikzcd}
+		{[n]} \ar[rr, "F"] & & X_{n} \ar[d, "F(d_{i})"] \\
+		{[n-1]} \ar[rr, "F"] \ar[u, bend right, "s_{j}"] & & X_{n-1} \ar[u, bend right, "F(s_{j})"]\,.
+	\end{tikzcd}
+\end{equation*}
+Nel caso più generale, al posto di $\CSet$ si può considerare una categoria $\Cc$ qualsiasi
+e definire un insieme simpliciale come un funtore $F:\Delta^{op} \to \Cc$.
+
+
+Finora abbiamo parlato di spazi $BG$, ma non abbiamo mai assicurato la loro esistenza.
+Descriviamo una costruzione funtoriale per associare
+a un gruppo $G$ uno spazio topologico,
+che in effetti sarà lo spazio classificante $BG$.
+
+Il \textbf{join} di due spazi $X$ e $Y$
+è l'unione di tutti i segmenti da un punto di $X$ e un punto di $Y$:
+più precisamente definiamo
+\begin{equation*}
+	X \star Y = X \times I \times Y/ \sim
+\end{equation*}
+dove la relazione $\sim$ identifica gli estremi dei segmenti che arrivano
+nello stesso punto, cioè
+\begin{equation*}
+	(x,0,y) \sim (x,0,y')\,, \quad (x,1,y) \sim (x',1,y)\,.
+\end{equation*}
+Indichiamo un punto del join come una combinazione convessa
+$t_{1}x + t_{2}y := (x,t,y)$,.
+
+\begin{ex}
+	\begin{rmnumerate}
+		\item Se $Y = \{y\}$, allora il join è il cono poichè
+		$X \star Y \simeq X \times I/ X \times \{1\} \simeq CX$,
+		quindi è contraibile.
+		
+		\item Se $Y = S^{0}$, allora il join è la sospensione:
+		\begin{equation*}
+			X \star Y = \Sigma X\,.
+		\end{equation*}
+		In particolare notiamo che $S^{n} \star S^{0} = S^{n+1}$
+		e in maniera simile vale che $S^{n} \star S^{m} = S^{n+m+1}$.
+		
+		\item Se consideriamo $x_{0}, x_{1}, \dots, x_{n}$ punti distinti,
+		allora il loro join è l'inviluppo convesso con vertici questi $n+1$ punti,
+		quindi $x_{0} \star x_{1} \star \dots \star x_{n} \simeq \Delta^{n}$.
+	\end{rmnumerate}
+\end{ex}
+
+\begin{exercise}
+	La costruzione $X \star Y$ aumenta la connessione dello spazio:
+	se $X$ è $(m-1)$-connesso e $Y$ è $(n-1)$-connesso,
+	allora $X \star Y$ è $(m+n)$-connesso.
+\end{exercise}
+
+
+Abbiamo delle inclusioni ovvie $i:X \subset X \star Y$ e $j:Y \subset X \star Y$.
+
+\begin{lemma}
+	Le inclusioni $i$ e $j$ sono omotopicamente banali.
+	\begin{proof}
+		Fissato $y_{0} \in Y$, si ha
+		\begin{equation*}
+			X \hookrightarrow X \star y_{0} \subset X \star Y\,.
+		\end{equation*}
+		Siccome $X \star y_{0}$ è contraibile, allora deduciamo che
+		$i \sim y_{0}$. Lo stesso ragionamento vale per $j$.
+	\end{proof}
+\end{lemma}
+
+
+Sia $G$ un gruppo topologico e consideriamo il join iterato
+\begin{equation*}
+	G^{\star(k+1)} = \underbrace{G \star G \star \dots \star G}_{k+1 \text{ fattori}}\,,
+\end{equation*}
+i cui elementi verranno indicati con combinazioni convesse, cioè 
+$\sum_{i=0}^{k}t'_{i}g_{i}$ con $\sum_{i=0}^{k}t'_{i}=1$ e tutti $t'_{i} \ge 0$.
+
+Notiamo che c'è un'azione libera di $G$ su $G^{\star(k+1)}$,
+data dall'azione diagonale
+\begin{equation*}
+	(g_{0}, t_{1}g_{1}, t_{2}g_{2}, \dots, t_{k}g_{k}) \cdot g
+	= (g_{0}\cdot g, t_{1}g_{1}\cdot g, t_{2}g_{2}\cdot g, \dots, t_{k}g_{k}\cdot g)\,,
+\end{equation*}
+che con la notazione delle combinazioni convesse si scrive semplicemente 
+$\left( \sum_{i=0}^{k}t'_{i}g_{i} \right) \cdot g = \sum_{i=0}^{k}t'_{i}(g_{i} \cdot g)$. 
+
+
+\begin{exercise}
+	C'è una mappa $G$-equivariante 
+	\begin{equation*}
+		\phi: \Delta^{k} \times G^{\star(k+1)} \longrightarrow G^{\star(k+1)}\,,
+		\quad \Big((t_{0}, t_{1}, \dots, t_{k}), (g_{0}, g_{1}, \dots, g_{k}) \Big)
+		\longmapsto \sum_{i=0}^{k}t_{i}g_{i}\,,
+	\end{equation*}
+	che è un omeomorfismo su  $(\Delta^{k})^{o} \times G^{\star(k+1)}$
+	e $G$ agisce banalmente sul simplesso, mentre ha l'azione diagonale su $G^{\star(k+1)}$.
+	In questo modo si ottiene un $G$-CW-complesso
+	\begin{equation*}
+		G^{\star(k+1)} = \left. \coprod_{i} \Delta^{k}_{i} \times G \middle/ \sim \right. \,.
+	\end{equation*}
+\end{exercise}
+
+\begin{df}
+	Dato un gruppo topologico $G$, definiamo lo spazio
+	\begin{equation*}
+		J(G) := \lim_{k \to \infty} G^{\star(k+1)}\,,
+	\end{equation*}
+	dove il limite è preso rispetto alle inclusioni 
+	$i:G^{\star(k+1)} \subset G^{\star(k+2)}$.
+	Siccome tutte le inclusioni sono $G$-equivarianti,
+	notiamo che $G$ agisce su $J(G)$.
+\end{df}
+
+Siccome fare il join aumenta la connessione dello spazio,
+consideriamo questa costruzione limite per ottenere
+uno spazio contraibile.
+
+
+\begin{thm}
+	Il quoziente $p:J(G) \to J(G)/G$ è un principale universale per $G$.
+	\begin{proof}
+		Per l'osservazione precedente,
+		$J(G)$ è uno spazio (debolmente) contraibile...
+	\end{proof}
+\end{thm}
+
+\begin{df}
+	Un \textbf{insieme simpliciale} $X_{*}$ in una categoria $\Cc$ 
+	è una famiglia di oggetti $X_{n}$, con $n \in \N$, e applicazioni
+	\begin{equation*}
+		d_{i}: X_{n} \longrightarrow X_{n-1}\,, \quad s_{j}:X_{n} \longrightarrow X_{n-1}\,,
+	\end{equation*}
+	tali che soddisfino le seguenti relazioni:
+	\begin{align*}
+		d_{i}d_{j} &= d_{j-1} d_{i}\,, \quad \text{se } i<j\,,\\
+		s_{i}s_{j} &= s_{j-1} s_{i}\,, \quad \text{se } i<j\,,\\
+		d_{i}s_{j} &=
+		\begin{cases}
+			s_{j-1}d_{i}\,, \quad &\text{se } i < j\; \\
+			1\,, \quad &\text{se }\,;\\
+			s_{j}d_{j-1}\,, \quad &\text{se } i > j+1\,.
+		\end{cases}
+	\end{align*}
+\end{df}
+
+Sono le relazioni che si ottengono per i simplessi standard $\Delta^{n}$
+---
+
+Un insieme simpliciale si può vedere come un funtore
+$F: \Delta^{op} \to \CSet$, dove per ogni $n \ge 0$ si ha un quadrato commutativo
+\begin{equation*}
+	\begin{tikzcd}
+		{[n]} \ar[rr, "F"] & & X_{n} \ar[d, "F(d_{i})"] \\
+		{[n-1]} \ar[rr, "F"] \ar[u, bend right, "s_{j}"] & & X_{n-1} \ar[u, bend right, "F(s_{j})"]\,.
+	\end{tikzcd}
+\end{equation*}
+Per capire come effettivamente si attaccano i complessi,
+realizzo le cofacce e le cogenerazioni in $\Delta$ 
+paragonandolo al caso dei simplessi standard $\Delta^{n} = [e_{0}, e_{1}, \dots, e_{n}]$,
+con $\{e_{i}\}$ base canonica di $\R^{n+1}$. Allora
+\begin{equation*}
+	d^{i}: \Delta^{n-1} \longrightarrow \Delta^{n}\,,
+	\quad d^{i}(t_{1}, \dots, t_{n}) =
+	\begin{cases}
+		(t_{1}, \dots, t_{i-1}, 0, t_{i+1}, \dots, t_{n})\,, \quad &\text{se } i \ge 0\,; \\
+		\left(1-\sum_{i=1}^{n} t_{i}, t_{1},  \dots , t_{n} \right)\,, \quad &\text{se } i = 0\,.
+	\end{cases}
+\end{equation*}
+mentre le codegenerazioni sono date da
+\begin{equation*}
+	s^{i}: \Delta^{n-1} \longrightarrow \Delta^{n}\,,
+	\quad s^{i}(t_{1}, \dots, t_{n}) =
+	\begin{cases}
+		(t_{1}, \dots, t_{i-1}, t_{i}+t_{i+1}, t_{i+2}, \dots, t_{n})\,, \quad &\text{se } i \ge 0\,; \\
+		\left(t_{2}, t_{3},  \dots , t_{n} \right)\,, \quad &\text{se } i = 0\,.
+	\end{cases}
+\end{equation*}
+
+\begin{df}
+	La \textbf{realizzazione geometrica} di un insieme simpliciale $X_{*}$
+	è lo spazio
+	\begin{equation*}
+		|X_{*}| = \left. \coprod_{n \ge 0} X_{n} \times \Delta^{n} \middle/ \sim \right. \,,
+	\end{equation*}
+	dove la relazione $\sim$ attacca i punti di un $(n-1)$-simplesso con
+    quelli di un $n$-simplesso tramite la cofaccia, cioè
+    \begin{equation*}
+    	(t, d_{i}(x)) \sim (d^{i}(t),x)\,, \quad \text{con } (t,x) \in \Delta^{n-1} \times X_{n}\,,
+    \end{equation*}
+    mentre i complessi ``superflui'' vengono eliminati dalle codegenerazioni
+    \begin{equation*}
+    	(t, s_{j}(x)) \sim (s^{j}(t),x)\,, \quad \text{ce } (t,x) \in \Delta^{n+1} \times X_{n}\,,
+    \end{equation*}
+    che incollano gli $(n+1)$-simplessi degeneri come facce di $n$-simplessi.
+    La topologia di $X_{n}$ si assume discreta,
+    quindi $\Delta_{n} \times X_{n}$ è un insieme di $n$-simplessi discreto.
+    Ne segue che la realizzazione $|X_{*}|$ è un CW complesso con $n$-scheletro
+    \begin{equation*}
+    	|X_{*}|_{n} = \coprod_{k \ge n} (\Delta^{n} \times X_{k})/\sim\,.
+    \end{equation*}
+\end{df}
+
+Vedi Peter May ``Simplicial object'' per una cosa dettagliata,
+oppure il paper carino ``An elementary illustrated introduction to simplicial sets'' di Greg Friedman.
+
+\begin{prop}
+	Se $X_{*}$ è un insieme simpliciale,
+	possiamo associargli il complesso di catene
+	$C_{\bullet}(X_{*})$, dove
+	\begin{equation*}
+		C_{n}(X_{*}) = \bigoplus_{x \in X_{n}} \Z x
+	\end{equation*}
+	è il gruppo abeliano libero generato da $X_{n}$,
+	le cui mappe di bordo sono
+	\begin{equation*}
+		\de_{i}: C_{n}(X_{*}) \longrightarrow C_{n-1}(X_{*})\,,
+		\quad \de_{i}(x) = \sum_{i=0}^{n}(-1)^{i}d_{i}(x)\,.
+	\end{equation*}
+	Allora $H_{*}(X_{*};\Z)$ è l'omologia di $C_{\bullet}(X_{*})$.
+\end{prop}
+
+Sia $G$ un gruppo topologico, e definiamo $\epsilon G_{*}$
+l'insieme simpliciale con
+\begin{equation*}
+	\epsilon G_{n} = G^{\star(n+1)}\,,
+\end{equation*}
+in cui le facce sono
+\begin{equation*}
+	d_{i}: G^{\star(n+1)} \longrightarrow G^{\star n)}\,,
+	\quad d_{i}(g_{0}, \dots, g_{n}) = (g_{0}, \dots, \widehat{g_{i}}, \dots, g_{n})\,,
+\end{equation*}
+mentre le degenrazioni sono date da
+\begin{equation*}
+	s_{j}: G^{\star(n+1)} \longrightarrow G^{\star n)}\,,
+	\quad s_{j}(g_{0}, \dots, g_{n}) = (g_{0}, \dots, \widehat{g_{i}}, \dots, g_{n})\,,
+\end{equation*}
+
+...
+
+Notiamo che $G$ agisce (a destra) su $|\epsilon G_{*}|$ tramite l'azione diagonale
+\begin{equation*}
+	\Big( t, (g_{0}, \dots, g_{n})\Big) \cdot g = \Big( t, (g_{0}\cdot g, \dots, g_{n}\cdot g)\Big)\,.
+\end{equation*}
+Ponendo $E := |\epsilon G_{*}|$, siccome è uno spazio asferico, allora
+\begin{equation*}
+	p : EG \longrightarrow EG/G = BG
+\end{equation*}
+è un $G$-fibrato universale. 
+La base $BG$ ha una struttura di insieme simpliciale indotta da $\epsilon G_{*}$, 
+più precisamente si ha $BG_{n} = G^{n}$,
+con facce date da
+\begin{equation*}
+	d_{i}(g_{0}, \dots, g_{n}) =
+\end{equation*}
+e degenrazioni 
+\begin{equation*}
+	s_{j}(g_{0}, \dots, g_{n}) =
+	\begin{cases}
+		(1,g_{0}, \dots, g_{n})\,, \quad &\text{se } j=0\,;\\
+		(g_{0}, \dots, g_{j}, 1, g_{j+1}, \dots, g_{n})\,, \quad &\text{se } j>0\,.
+	\end{cases}
+\end{equation*}
+In questo modo, possiamo realizzare il fibrato $p_{*}: \epsilon G_{*} \to BG_{*}$
+come
+\begin{equation*}
+	p(g_{0}, g_{1},\dots, g_{n}) = (g_{0} g_{1}^{-1}, g_{1}g_{2}^{-1},\dots, g_{n-1}g_{n}^{-1})\,,
+\end{equation*}
+che induce $p:| \epsilon G_{*} | \to |BG_{*}|\simeq BG$ tra le realizzazioni geometriche.
+
+La costruzione appena descritta genera il \textbf{bar complex}.
+
+\begin{oss}
+Siccome la costruzione di $BG_{*}$ utilizza solamente la moltiplicazione del gruppo $G$
+e il suo elemento neutro, ma \emph{non} elementi inversi, allora
+lo stesso ragionamento può essere generalizzato per realizzare lo
+\textbf{spazio classificante di un monoide}, e ancora più in generale di una \textbf{categoria} $\Cc$.
+\end{oss}

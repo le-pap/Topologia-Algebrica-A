@@ -27,7 +27,7 @@ di \textbf{fibrato vettoriale}.
 	Dato uno spazio topologico $B$, definiamo la categoria $\cat{Top}/B$
 	come la categoria i cui oggetti $\xi = (E,p)$ sono mappe continue $E \to B$
 	e i morfismi $\mu : \xi \to \xi'$ sono
-	funzioni continue $\mu :E \to E'$ che rendono commutativi i triangoli
+	funzioni continue $\mu :E \to E'$ che rendono commutativi i triangoli del tipo
 	\begin{equation*}
 		\begin{tikzcd}
 			E \ar[rr, "\mu"] \ar[dr, "p"'] & & E' \ar[dl,, "p'"] \\
@@ -52,7 +52,7 @@ di \textbf{fibrato vettoriale}.
 
 La categoria $\cat{Top}/B$ ha prodotti finiti: dati due oggetti $\xi = (E,p)$
 e $\xi' = (E',p')$, il loro prodotto $\xi \times \xi'$ in $\cat{Top}/B$ 
-è dato dal prodotto fibrato in $\cat{Top}$
+è dato dal prodotto fibrato in $\cat{Top}$, cioè dallo spazio
 \begin{equation*}
 	E \times_{B} E' = \Set{(e,e') \in E \times E' | p(e) = p'(e')}\,.
 \end{equation*}
@@ -77,7 +77,7 @@ dato da $p:E \to B$.
 	fissato un punto $x_{0} \in F$, la mappa 
 	\begin{equation*}
 		\iota_{x_{o}} : B \longrightarrow B \times F\,,
-		\quad (b,x_{0})
+		\quad \iota_{x_{0}}(b) := (b,x_{0})
 	\end{equation*}
 	definisce una sezione.
 \end{ex}
@@ -91,9 +91,9 @@ dato da $p:E \to B$.
 	\end{equation*}
 	e una sezione $s:u \to \xi$ che identifica ogni punto di $B$
 	come  l'\textbf{elemento neutro} sulla corrispondente fibra di $p$:
-	più precisamente, per ogni $e,e' \in E$ vale
+	più precisamente, per ogni $(e,e') \in E \times_{B} E$ vale
 	\begin{equation*}
-		s(p(e)) + e' = e'\,, \quad e' + s(p(e)) = e'\,.
+		s(p(e)) + e' = e'\,, \quad e + s(p(e')) = e\,.
 	\end{equation*}
 \end{df}
 
@@ -134,7 +134,7 @@ chiamano \textbf{banalizzazioni} e inducono isomorfismi
 Indichiamo con
 \begin{equation*}
 	\Phi_{i,b} := \Phi_{i}\vert_{p^{-1}(b)} : p^{-1}(b) \longrightarrow \{b\} \times \R^{n}\,,
-	\quad \Phi_{i}(e) = \big( p(e), \phi_{i}(e) \big)\,.
+	\quad \Phi_{i}(e) = \big( p(e), \phi_{i,b}(e) \big)\,.
 \end{equation*}
 
 Nell'intersezione di due aperti banalizzanti $U_{i} \cap U_{j}$ possiamo
@@ -151,7 +151,7 @@ Nell'intersezione di due aperti banalizzanti $U_{i} \cap U_{j}$ possiamo
             & \,,
 	\end{tikzcd}
 \end{equation*}
-dove $g_{ij}(b) = \Phi_{i,b} \circ \Phi_{j,b}^{-1}$ è un isomorfismo lineare.
+dove $g_{ij}(b) = \phi_{i,b} \circ \phi_{j,b}^{-1}$ è un isomorfismo lineare.
 Otteniamo così delle funzioni
 \begin{equation*}
 	g_{ij} : U_{i} \cap U_{j} \longrightarrow \mathrm{GL}(n,\R)
@@ -162,8 +162,8 @@ dette \textbf{funzioni di transizione} del fibrato.
 	Si può verificare che per ogni $b \in B$
 	valgono le seguenti \textbf{condizioni di cociclo}:
 	\begin{itemize}
-		\item $g_{ji}(b) = \big( g_{ij}(b) \big)^{-1}$;
-		\item per ogni tripla di indici $i,j,h$ si ha $g_{ij}(b) g_{jh}(b) = g_{ih}(b)$. 
+		\item nell'intersezione $U_{i} \cap U_{j}$ si ha $g_{ji}= g_{ij}^{-1}$;
+		\item per ogni tripla di indici $i,j,h$ vale $g_{ij} g_{jh} = g_{ih}$. 
 	\end{itemize}
 	Tutte le informazioni di un fibrato vettoriale possono essere 
 	lette in termine delle funzioni di transizione $\{g_{ij}\}$ su
@@ -182,7 +182,7 @@ dette \textbf{funzioni di transizione} del fibrato.
             & & & \left(b, \Phi'_{i,b} \circ f_{b} \circ \Phi_{j,b}^{-1} (v) \right)\,,
 		\end{tikzcd}
 	\end{equation*}
-	dove $f_{b} : E_{b} \to E'_{b}$. Otteniamo quindi delle funzioni
+	dove $f_{b} = f\vert_{E_{b}}: E_{b} \to E'_{b}$. Otteniamo quindi delle funzioni
 	\begin{equation*}
 		\overline{f}_{ij} : U_{i} \cap U_{j} \longrightarrow \Hom_{\R}(\R^{n},\R^{k})\,,
 		\quad \overline{f}_{ij}(b) = \Phi'_{i,b} \circ f_{b} \circ \Phi_{j,b}^{-1}
@@ -196,12 +196,12 @@ dette \textbf{funzioni di transizione} del fibrato.
 	\end{equation}
 
 	Viceversa, una famiglia di funzioni $ \{ f_{ij} \} $ che soddisfa
-	le condizioni di cociclo \eqref{cociclo} inducono
+	le condizioni di cociclo \eqref{cociclo} induce
 	un morfismo di fibrati vettoriali $f : \xi \to \xi'$,
 	definito su $U_{i}$ da $f_{i} := (\Phi'_{i})^{-1} \circ \overline{f}_{ii} \circ \Phi_{i}$.
 \end{oss}
 
-\begin{thm}
+\begin{thm}\label{iso-fibrati-vettoriali}
 	Dati due fibrati $\xi, \xi'$ su $B$ e un ricoprimento $\{U_{i}\}$ che banalizza entrambi,
 	allora $\xi \simeq \xi'$ se e solo se esistono $\lambda_{i}:U_{i} \to \mathrm{GL}(n,\R)$
 	che ``collegano'' le funzioni di transizione nel seguente modo:
@@ -226,7 +226,7 @@ dette \textbf{funzioni di transizione} del fibrato.
 		Queste mappe soddisfano le condizioni \eqref{cociclo}, infatti
 		\begin{align*}
 			f_{ij} g_{jk} &= \lambda_{i}^{-1} g_{ij} g_{jk} 
-			= \lambda_{i}^{-1}g_{ik} =  \overline{f}_{ik}\,, \\
+			= \lambda_{i}^{-1}g_{ik} =  f_{ik}\,, \\
 			g'_{ij} f_{jk} &= g'_{ij} \lambda_{j}^{-1} g_{jk} 
 			= \lambda_{i}^{-1} g_{ij} \lambda_{j} \lambda_{j}^{-1} g_{jk} \\
 			&= \lambda_{i}^{-1} g_{ij} g_{jk} = \lambda_{i}^{-1} g_{ik} = f_{ik}\,.
@@ -236,7 +236,7 @@ dette \textbf{funzioni di transizione} del fibrato.
 	\end{proof}
 \end{thm}
 
-\begin{thm}[\textbf{di esistenza}]
+\begin{thm}[\textbf{di esistenza}]\label{teo-esisteza-fibrato}
 	Dato un ricoprimento $\{U_{i}\}$ di $B$ e delle funzioni 
 	$g_{ij}:U_{i} \cap U_{j} \to \mathrm{GL}(n,\R)$ che soddisfano le \textbf{condizioni di cociclo},
 	esiste un fibrato vettoriale di rango $n$ su $B$ che ha le $g_{ij}$ come
@@ -246,13 +246,13 @@ dette \textbf{funzioni di transizione} del fibrato.
 		si identificano le coppie con indici diversi 
 		tramite la relazione d'equivalenza
 		\begin{equation*}
-			(b,v)_{i} \sim (b, g_{ij}(b) \cdot v)\,, \quad
+			(b,v)_{i} \sim \big(b, g_{ij}(b) \cdot v \big)_{j}\,, \quad
 			\text{se } b \in U_{i} \cap U_{j}\,. \qedhere
 		\end{equation*}
 	\end{proof}
 \end{thm}
 
-\begin{ex}
+\begin{ex!}\label{esempi-fibrati}
 	\begin{rmnumerate}
 		\item Il \textbf{fibrato banale} di rango $n$ su 
 		$B$ è $\mathrm{pr}_{1}:B \times \R^{n} \to \R^{n}$.
@@ -260,9 +260,9 @@ dette \textbf{funzioni di transizione} del fibrato.
 		\item Sia $\KK = \R$ oppure $\KK = \C$.
 		Posto $V := \KK^{n}$, la \textbf{Grassmaniana} 
 		\begin{equation*}
-			Gr_{n}(V) := \Set{\text{sottospazi } k\text{-dimensionali di } V}
+			Gr_{k}(V) := \Set{\text{sottospazi } k\text{-dimensionali di } V}
 		\end{equation*}
-		si può topologizzare asserendo che ogni $W \in Gr_{n}(V)$
+		si può topologizzare asserendo che ogni $W \in Gr_{k}(V)$
 		è individuato da un $k$-frame $(w_{1}, \dots, w_{k})$ di $W$
 		a meno dell'azione di $\mathrm{GL}(k,\KK)$ su di lui.
 		Identificando le $n$-uple di vettori come matrici $n \times n$,
@@ -270,15 +270,16 @@ dette \textbf{funzioni di transizione} del fibrato.
 		chiamato \textbf{varietà di Stiefel} $\Vv_{n,k}$. 
 		
 		La grassmaniana $Gr_{k}(V)$ è il quoziente di $\Vv_{n,k}$
-		per l'azione di $\mathrm{GL}(n,\KK)$, che è libera,
+		per l'azione di $\mathrm{GL}(k,\KK)$, che è libera,
 		quindi $Gr_{k}(V)$ è una varietà di dimensione
 		\begin{equation*}
 			\dim Gr_{k}(V) = kn - k^2 = k(n-k)\,.
 		\end{equation*}
-		La grassmaniana $Gr_{k}(V)$ si può ricoprire con $\binom{n}{k}$ aperti
+		Infatti, la grassmaniana $Gr_{k}(V)$ si può ricoprire con $\binom{n}{k}$ aperti
 		che corrispondono alle matrici $M$ in cui $k$ colonne fissate sono indipendenti.
-		Tramite $\mathrm{GL}(k,\KK)$, si riportano tali colonne a un blocco $I_{k}$
-		e i $k(n-k)$ parametri rimanenti parametrizzano i punti di un aperto di $Gr_{k}(V)$.
+		Tramite $\mathrm{GL}(k,\KK)$, si trasforma il minore corrispondente
+		in un blocco $I_{k}$ e i $k(n-k)$ parametri rimanenti parametrizzano 
+		i punti di un aperto di $Gr_{k}(V)$.
 		
 		\textbf{Fibrato $\xi_{n,k}$} - costruiamo un fibrato su $Gr_{k}(V)$
 		con spazio totale
@@ -287,56 +288,68 @@ dette \textbf{funzioni di transizione} del fibrato.
 		\end{equation*}
 		e proiezione $p(W,x)=W$. In questo modo,
 		la fibra su $W$ si identifica con $W$ stesso.
-		Se $k=1$, allora $Gr_{1}(V) = \PP(V) = \PP^{n-1}(\KK)$ e chiamiamo
+		Se $k=1$, allora $Gr_{1}(V) = \PP(V) = \KK\PP^{n-1}$ e chiamiamo
 		$\xi_{n,1}$ un \textbf{fibrato in rette}.
 		
 		\item Ponendo $n=2$ e $\KK = \R$ nell'esempio precedente,
-		allora $Gr_{1}(\R^{2}) = \PP^{1}(\R) \simeq S^{1}$.
+		allora $Gr_{1}(\R^{2}) = \R\PP^{1} \simeq S^{1}$.
 		Conosciamo due fibrati in rette sulla circonferenza:
 		il cilindro $S^{1} \times \R$ e il nastro di Möebius.
 		Vedremo che questi sono gli \emph{unici} fibrati in rette su $S^{1}$
-		(a meno di isomorfismo). Chi è $\xi_{2,1}$?
+		a meno di isomorfismo: come già anticipato 
+		nell'\hyperref[line-bundle-spoiler]{Esempio~\ref{line-bundle-spoiler}},
+		questo è legato al fatto che
+		\begin{equation*}
+			[S^{1},\R\PP^{\infty}] \simeq H^{1}(S^{1};\Z/2) \simeq \Z/2
+		\end{equation*}
+		ha solo due classi d'equivalenza.
+		
+		Chi è $\xi_{2,1}$?
 		Consideriamo su $\PP^{1}(\R)$ i due aperti seguenti:
 		\begin{equation*}
-			U_{1} := \Set{ | x \in \R}\,, \quad
-			U_{2} := \Set{ | y \in \R}\,.
+			U_{1} := \Set{ [x:1] | x \in \R}\,, \quad
+			U_{2} := \Set{ [1:y] | y \in \R}\,.
 		\end{equation*}
 		Su questi aperti abbiamo le banalizzazioni
 		\begin{equation*}
-			\Psi_{1} : (p_{x}, \lambda p_{x} ) \longmapsto (p_{x}, \lambda) \in U_{1} \times \R\,,
-			\quad \Psi_{2} : (q_{y}, \mu q_{y}) \longmapsto (q_{y},\mu) \in U_{2} \times \R\,.
+			\Phi_{1} : (p_{x}, \lambda p_{x} ) \longmapsto (p_{x}, \lambda) \in U_{1} \times \R\,,
+			\quad \Phi_{2} : (q_{y}, \mu q_{y}) \longmapsto (q_{y},\mu) \in U_{2} \times \R\,.
 		\end{equation*}
-		Notiamo che l'intersezione $U_{1} \cap U_{2}$ è sconnessa,
-		e su questo aperto la funzione di transizione è data da
+		Notiamo che l'intersezione degli aperti banalizzanti è sconnessa,
+		dato che
+		\begin{align*}
+		 	U_{1} \cap U_{2} &= \Set{[x:1] | x>0 } \cup \Set{[x:1] | x<0 } \\
+		 	&= \Set{[1:y] | y>0 } \cup \Set{[1:y] | y<0 }
+		 \end{align*} 
+		e su questo aperto vale $[1:y] = [y^{-1}:1]$, 
+		quindi la funzione di transizione $g_{12}$ è data da
 		\begin{equation*}
 			\begin{tikzcd}
-				(q_{y},\mu) \ar[r, "\Psi_{2}"]
-				& {\left({[1:y]}, \mu {[1:y]} \right)} \ar[r,equals]
-				& f
+				({[1:y]},\mu) \ar[r, "\Psi_{2}"]
+				& {\big({[1:y]}, \mu {[1:y]} \big)} \ar[r,equals]
+				& {\left(\left[\frac{1}{y}:1 \right], y \mu \left[\frac{1}{y}:1 \right]\right)} 
+				\ar[r, "\Phi_{1}"]
+				& {\left(\left[\frac{1}{y}:1 \right], y \mu \right)} \,.
 			\end{tikzcd}
 		\end{equation*}
-		e dato che il determinante cambia segno nelle due componenti
-		connesse, deduciamo che $\xi_{2,1}$ \textbf{non} è banale.
+		Il determinante di $g_{12}(q_{y})(v) = yv$ cambia segno nelle due componenti
+		connesse, per cui deduciamo che $\xi_{2,1}$ \textbf{non} è banale:
+		si tratta del nastro di Möebius.
 	\end{rmnumerate}
-\end{ex}
+\end{ex!}
 
-\begin{exercise}
-	Dimostrare che per ogni $n \ge 2$ il fibrato $\xi_{n,1}$ è non banale.
-\end{exercise}
 
-\begin{ex}
-	Un fibrato in rette banale ha una sezione mai nulla
+\begin{oss}
+	Un fibrato in rette banale ha sempre una sezione mai nulla, ad esempio
 	\begin{equation*}
 		B \longrightarrow B \times \R\,,
 		\quad b \longmapsto (b,1)\,.
 	\end{equation*}
-\end{ex}
-
-\begin{oss}
-	Un fibrato di rango $n$ è banale se e solo se ammette
+	In realtà, questo fatto è equivalente alla banalità del fibrato:
+	più precisamente, un fibrato di rango $n$ è banale se e solo se ammette
 	$n$ sezioni linearmente indipendenti.
 	Infatti, dato $\xi:B \times \R^{n} \to B$ possiamo definire
-	se sezioni $s_{i}(b) := (b, e_{i})$. Viceversa,
+	le sezioni $s_{i}(b) := (b, e_{i})$. Viceversa,
 	se abbiamo $s_{1}(b), \dots, s_{n}(b)$ linearmente indipendenti per ogni $b \in B$,
 	allora possiamo banalizzare il fibrato tramite l'isomorfismo
 	\begin{equation*}
@@ -345,19 +358,55 @@ dette \textbf{funzioni di transizione} del fibrato.
 	\end{equation*}
 \end{oss}
 
+
+\begin{exercise}
+	Dimostrare che per ogni $n \ge 2$ il fibrato $\xi_{n,1}$ è non banale.
+	\begin{proof}[Una soluzione]
+		Il ragionamento fatto per $\xi_{2,1}$ non è efficace,
+		dato che le classi d'equivalenza dei fibrati in rette su $\R\PP^{n-1}$
+		potrebbero essere più di due. Risulta più conveniente usare l'Osservazione sopra:
+		consideriamo una sezione $s:\R\PP^{n-1} \to E(\xi_{n,1})$. 
+		Allora la composizione
+		\begin{equation*}
+			\begin{tikzcd}
+				S^{n-1} \ar[r, "\pi"]
+				& \R\PP^{n-1} \ar[r, "s"]
+				& E(\xi_{n,1}) \,,
+				& x \ar[r, mapsto]
+				& {[x]} \ar[r, mapsto]
+				& ({[x]}, \sigma(x) \cdot x)
+			\end{tikzcd}
+		\end{equation*}
+		induce una funzione continua $\sigma : S^{n-1} \to \R$ dispari,
+		cioè $\sigma(-x) = -\sigma(x)$. Per continuità si deduce che $\sigma$
+		deve avere uno zero, quindi la sezione $s$ si annulla in un punto.
+		Per arbitrarietà di $s$, concludiamo che $\xi$ non è
+		banale perché non ha sezioni mai nulle.
+	\end{proof}
+\end{exercise}
+
 \begin{exercise}
 	L'oggetto $\xi_{n,k}$ definito sopra è un \textbf{fibrato vettoriale}.
 	\begin{proof}[Una soluzione]
 		Si verifica che una banalizzazione $p^{-1}(U) \to U \times \R^{k}$ è data da
 		\begin{equation*}
-			\left( 
-				\begin{pmatrix}
-					1 & & 0 & a_{1,k+1} & & a_{1,n} \\
-					& & & & & \\
-					0 & & 1 & a_{k,k+1} & & a_{k,n}
-				\end{pmatrix},
+			\left( \left[
+				\begin{array}{c}
+					A_{1} \\ \vdots \\ A_{k}
+				\end{array} \right]
+				\left[
+				\begin{array}{ccc|ccc}
+					1 & \dots & 0 & a_{1,k+1} & \dots & a_{1,n} \\
+					\vdots & \ddots & \vdots & \vdots & \ddots & \vdots \\
+					0 & \dots & 1 & a_{k,k+1} & \dots & a_{k,n}
+				\end{array}\right] ,
 				\lambda_{1}A_{1} + \dots + \lambda_{k}A_{k}
 			\right)
+			 \mapsto 
+			 \left(
+				\left[\ddots\right] ,
+				(\lambda_{1}, \dots ,\lambda_{k})
+			\right)\,.
 		\end{equation*}
 	\end{proof}
 \end{exercise}
@@ -372,13 +421,14 @@ possiamo ottenere nuovi fibrati vettoriali con costruzioni
 simili a operazioni che conosciamo sugli spazi vettoriali:
 \begin{itemize}
 	\item \textbf{prodotto}: dati
-	$\begin{tikzcd}
-		\xi : E \ar[r, "p"] & B
-	\end{tikzcd}$ e 
-	$\begin{tikzcd}
-		\xi' : E' \ar[r, "p'"] & B
-	\end{tikzcd}$,
-	definiamo $\xi \times \xi'$ come il fibrato $p \times p' : E \times E' \to B$;
+%	$\begin{tikzcd}
+%		\xi : E \ar[r, "p"] & B
+%	\end{tikzcd}$ e 
+%	$\begin{tikzcd}
+%		\xi' : E' \ar[r, "p'"] & B
+%	\end{tikzcd}$,
+	$\xi = (E,p)$ su $B$ e $\xi'=(E',p')$ su $B'$,
+	definiamo $\xi \times \xi'$ come il fibrato $p \times p' : E \times E' \to B times B'$;
 	
 	\item \textbf{somma di Whitney}: dati $\xi,\xi'$ sulla stessa base $B$,
 	il fibrato $\xi \oplus \xi'$
@@ -391,10 +441,20 @@ simili a operazioni che conosciamo sugli spazi vettoriali:
 		\end{tikzcd}
 	\end{equation*}
 	e si verifica che le fibre sono date da $\left( \xi \oplus \xi' \right)_{b} = E_{b} \oplus E_{b}'$.
+	
+	\item a ogni operazione tra spazi vettoriali ne corrisponde una tra fibrati:
+	il \textbf{prodotto tensore} $\xi \otimes \xi'$ si ottiene facendo $\otimes_{\R}$ fibra per fibra;
+	se $\xi \subset B \times \R^{n}$, per qualche $n$ sufficientemente grande, 
+	%considerando un prodotto scalare su $\R^{n}$, 
+	allora possiamo definire $\xi^{\perp}$
+	localmente come 
+	\begin{equation*}
+		\Set{(x,y) \in U \times \R^{n} | \langle x , y \rangle = 0}\,.
+	\end{equation*}
 \end{itemize}
 
 \begin{exercise}
-	Verificare che $T\,Gr_{k}(\R^{n}) \simeq \Hom_{\xi}(\xi_{n,k},\xi_{n,k}^{\perp})$.
+	Verificare che $\tau Gr_{k}(\R^{n}) \simeq \Hom\left(\xi_{n,k},\xi_{n,k}^{\perp}\right)$.
 \end{exercise}
 
 
