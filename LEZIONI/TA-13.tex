@@ -1,0 +1,303 @@
+ %%% Lezione 13
+
+
+\lecture[Lezione 13.]{2023-04-17}
+
+Dato un complesso di catene \emph{filtrato} e \emph{graduato} $(A,d,f)$,
+questo determina in maniera naturale una successione spettrale:
+una volta capito il ``modo giusto'' per mettere d'accordo il grado
+(co)omologico e il grado della filtrazione, il seguente Teorema
+fornisce un macchinario per costruire successioni spettrali.
+
+\begin{thm}\label{SS-machine}
+	Un complesso di catene graduato e filtrato $(A,d,F)$ determina una successione spettrale
+	$\Set{(E_{\bullet,\bullet}^{r},d^{r})}$ tale che
+	$E_{s,t}^{1} = H_{s+t}(F_{s}A/F_{s-1}A)$ e il differenziale $d^{1}$ è
+	l'operatore di bordo della tripla $(F_{s}A,F_{s-1}A,F_{s-2})$.
+	Se la filtrazione $F_{\bullet}$ è convergente e limitata sia dal basso, sia dall'alto,
+	allora la successione spettrale stabilizza e converge al limite $E^{\infty}_{p,q}$
+	che è isomorfo al quoziente $F_{p}H_{p+q}(A)/F_{p-1}H_{p+q}(A)$.
+	\begin{proof}
+		Per non appesantire la scrittura, 
+		sopprimiamo la notazione del grado omologico.
+		Consideriamo i moduli
+		\begin{equation*}
+			Z_{s}^{r} := \Set{c \in F_{s}A | dc \in F_{s-r}A}\,,
+			\quad Z_{s}^{\infty} := \Set{c \in F_{s}A | dc = 0}\,,
+		\end{equation*}
+		e definiamo
+		\begin{equation*}
+			E^{r}_{s} := \left. Z_{s}^{r} \middle/ (Z_{s-1}^{r-1} + dZ^{r-1}_{s+r-1}) \right. \,,
+			\quad E^{\infty}_{s} := \left. Z^{\infty}_{r} \middle/ (Z_{s-1}^{\infty} + dA \cap F_{s}A) \right. \,.
+		\end{equation*}
+		In questo modo il differenziale
+		\begin{equation*}
+			d: Z^{r}_{s} \longrightarrow Z_{s-r}^{r}
+		\end{equation*}
+		ha bigrado $(-r,r-1)$. 
+		Calcoliamo i primi passaggi per capire cosa succede:
+		\begin{equation*}
+			E_{s}^{0} = F_{s}A/F_{s-1}A\,, \quad
+			d^{0}: F_{s}A/F_{s-1}A \longrightarrow F_{s}A/F_{s-1}A\,,
+		\end{equation*}
+		dove il differenziale è indotto da $d$. Allora alla prima pagina avremo
+		\begin{equation*}
+			E_{s}^{1} = Z_{s}^{1}/(Z_{s-1}^{0} + dZ_{s}^{0})\,,
+		\end{equation*}
+		e di conseguenza $Z^{1}_{s}/Z^{0}_{s-1}$ sono i \emph{cicli} di $F_{s}A/F_{s-1}A$,
+		mentre $(Z^{0}_{s-1} + dZ_{s}^{0})/Z^{0}_{s-1}$ sono i \emph{bordi} di $F_{s}A/F_{s-1}A$.
+		Ne segue che l'inclusione $Z_{s,t}^{1} \to F_{s}A$ induce un isomorfismo
+		\begin{equation*}
+			E^{1}_{s,t} \simeq H_{s+t}\left( F_{s}A/F_{s-1}A \right)\,,
+		\end{equation*}
+		e il differenziale indotto da $d$ è l'omomorfismo di connessione della tripla
+		$(F_{s}A, F_{s-1}A, F_{s-2}A)$, infatti abbiamo il diagramma
+		\begin{equation*}
+			\begin{tikzcd}
+				\dots \ar[r] & F_{s}A_{s+t}/F_{s-2}A_{s+t} \ar[r] \ar[d, "d"] 
+				& F_{s}A_{s+t}/F_{s-1}A_{s+t} \ar[r] & 0 \\
+				0 \ar[r] & F_{s-1}A_{s+t-1}/F_{s-2}A_{s+t-1} \ar[r]
+				& F_{s}A_{s+t-1}/F_{s-2}A_{s+t-1} \ar[r] & \dots
+			\end{tikzcd}
+		\end{equation*}
+		che induce l'omomorfismo di connessione e commuta con gli isomorfismi 
+		che collegano il diagramma con 
+		$d : Z^{1}_{s,t} \to Z^{1}_{s-1,t}$.
+		
+		Ora verifichiamo che $H_{*}(E^{r}) = E^{r+1}$: i cicli sono dati da
+		\begin{align*}
+			\ker \left( d^{r}: E^{r}_{s} \longrightarrow E^{r}_{s-r} \right)
+			&= \frac{\Set{c \in Z^{r}_{s} | dc \in Z^{r-1}_{s-r-1} + dZ^{r-1}_{s-1}}}{Z^{r-1}_{s-1} + dZ^{r-1}_{s+r-1}} \\
+			&= \frac{\Set{c \in Z^{r}_{s} | dc \in Z^{r-1}_{s-r-1}} + \Set{c \in Z^{r}_{s} | dc \in dZ^{r-1}_{s-1}}}{Z^{r-1}_{s-1} + dZ^{r-1}_{s+r-1}} \\
+			&= \frac{Z^{r+1}_{s} + Z_{s-1}^{r-1}}{Z^{r-1}_{s-1} + dZ^{r-1}_{s+r-1}}\,,
+		\end{align*}
+		mentre i bordi sono
+		\begin{align*}
+			\im \left( d^{r} : E^{r}_{s+r} \longrightarrow E^{r}_{s} \right)
+			&= \frac{dZ_{s+r}^{r}}{Z^{r-1}_{s-1} + dZ_{s+r-1}^{r-1}} \\
+			&= \frac{dZ_{s+r}^{r} + Z^{r-1}_{s-1}}{Z^{r-1}_{s-1} + dZ_{s+r-1}^{r-1}} \\
+			&= \frac{Z^{r+1}_{s}}{Z_{s}^{r+1} \cap (Z^{r-1}_{s-1} + dZ_{s+r}^{r})} \\
+			&= \frac{Z^{r+1}_{s}}{Z^{r}_{s-1} + dZ_{s+r}^{r}} = E^{r+1}_{s}\,.
+		\end{align*}
+		Infine, per studiare il limite, vediamo che
+		\begin{align*}
+			E^{r}_{s} &= \frac{Z^{r}_{s}}{Z^{r-1}_{s-1} + dZ_{s+r-1}^{r-1}} \\
+			&= \frac{Z^{r}_{s} + F_{s-1}A}{F_{s-1}A + dZ_{s+r-1}^{r-1}}
+		\end{align*}
+		ha numeratore che \emph{decresce con $r$},
+		mentre al contrario il sottomodulo per cui quozientiamo
+		\emph{cresce con $r$}: questo significa che
+		\begin{align*}
+			\frac{\bigcap_{r}(Z^{r}_{s} + F_{s-1}A)}{\bigcup_{r} (F_{s-1}A + dZ_{s+r-1}^{r-1})}
+			&= \frac{Z^{\infty}_{s} + F_{s-1}A}{F_{s-1}A + (dA \cap F_{s}A)} \\
+			&=  \frac{Z^{\infty}_{s}}{F_{s-1}A + (dA \cap F_{s}A)} \\
+			&= \frac{Z^{\infty}_{s}}{Z^{\infty}_{s-1} + (dA \cap F_{s}A)} = E^{\infty}_{s}\,.
+		\end{align*}
+		L'ipotesi che $F$ sia limitata ci dice che per ogni coppia di indici $s,t$,
+		esiste un intero $r = r(s,t)$ tale che $E^{\infty}_{s,t} = E^{r}_{s,t}$.
+		Pertanto il limite è
+		\begin{equation*}
+			F_{s}H_{s+t}(A) = 
+			\im \left( H_{s+t}(F_{s}A) \longrightarrow H_{s+t}(A) \right) \,,
+		\end{equation*}
+		quindi $F_{s}H_{*}(A) = Z^{\infty}_{s}/(dA \cap F_{s}A)$ e inoltre
+		\begin{align*}
+			\frac{F_{s}H_{*}(A)}{F_{s-1}H_{*}(A)}
+			&= \frac{\big(Z_{s}^{\infty}/(dA \cap F_{s}A) \big)}{\big(Z_{s-1}^{\infty}/(dA \cap F_{s-1}A) \big)} \\
+			&= \frac{Z_{s}^{\infty}}{\big(Z_{s-1}^{\infty} + (dA \cap F_{s-1}A) \big)} 
+			= E^{\infty}_{s}\,. 
+		\end{align*}
+	\end{proof}
+\end{thm}
+
+
+\section{Esempi di applicazioni delle successioni spettrali}
+
+In questa dimostrazione non c'è nulla di particolarmente illuminante,
+ma possiamo usare questo risultato per provare risultati interessanti
+e cercare di capire il meccanismo delle successioni spettrali.
+In particolare, questo risultato si rivela molto utile 
+per comparare due diverse costruzioni omologiche.
+
+\begin{prop}[\textbf{Omologia singolare e cellulare}]
+	Dato un CW complesso $X$, esiste un isomorfismoo tra
+	la sua omologia cellulare $H^{\mathrm{cell}}_{*}(X)$
+	e la sua omologia singolare $H_{*}(X)$.
+	\begin{proof}
+	Consideriamo la filtrazione sulle catene singolari di $X$ data da
+	\begin{equation*}
+		F_{p}C_{*}(X) := C_{*}\left( X^{(p)} \right)\,,
+	\end{equation*}
+	e definiamo la pagina numero $0$ tramite
+	\begin{equation*}
+		E^{0}_{p,q} := C_{p+q}\left( X^{(p)} \right) / C_{p+q}\left( X^{(p-1)} \right)\,,
+	\end{equation*}
+	su cui è definito il differenziale $d^{0}$ naturale. 
+	Possiamo così mettere in moto il meccanismo del 
+	\hyperref[SS-machine]{Teorema~\ref{SS-machine}} e ottenere
+	\begin{equation*}
+		E^{1}_{p,q} = H_{p+q}\left( X^{(p)}, X^{(p-1)} \right) =
+		\begin{cases}
+			C_{p}^{\mathrm{cell}}(X)\,, \quad &\text{se } q = 0\,; \\
+			0\,, \quad &\text{altrimenti,}
+		\end{cases}
+	\end{equation*}
+	la cui mappa di bordo è data dall'omomorfismo di connessione
+	$$\de : C_{p}^{\mathrm{cell}}(X) \to C_{p-1}^{\mathrm{cell}}(X)$$
+	della tripla CW $\left( X^{(p)}, X^{(p-1)}, X^{(p-1)}\right)$.
+	Questo mostra in particolare che $E^{1}_{\bullet,\bullet}$ è concentrato sulla riga $q=0$
+	\missingfigure{disegna}
+	Finire
+	\end{proof}
+\end{prop}
+
+\begin{ex}
+	Dati $(C_{*},d)$ e $(D_{*},\de)$ due complessi di catene su un campo $\KK$,
+	allora vale la \textbf{formula di Künneth}
+	\begin{equation*}
+		H_{s}\left( C_{*} \otimes D_{*} \right)
+		= \left( H_{*}(C_{*}) \otimes H_{*}(D_{*}) \right)_{s}\,.
+	\end{equation*}
+	\begin{proof}
+		Posto $T_{*} := C_{*} \otimes D_{*}$, siccome
+		\begin{equation*}
+			T_{p} = \bigoplus_{i+j=p}C_{i} \otimes_{\KK} D_{j}\,,
+		\end{equation*}
+		consideriamo la filtrazione data da
+		\begin{equation*}
+			F_{p}(T_{q}) := \bigoplus_{i \le p} C_{i} \otimes_{\KK} D_{q-i}\,. 
+		\end{equation*}
+		Se la $0$-esima pagina è definita da $E^{0}_{p,q} := C_{p} \otimes_{\KK} D_{q}$,
+		con differenziale $d^{0} := (-1)^{p} \cat{1}_{C} \otimes \de$,
+		e la prima pagina è $E^{1}_{p,q} = C_{p} \otimes_{\KK} H_{q}(D_{*})$
+		con differenziale $d^{1} = d \otimes \cat{1}_{H_{*}(D)}$,
+		la seconda pagina sarà $E^{2}_{p,q} = H_{p}(C_{*}) \otimes H_{q}(D_{*})$
+		con differenziali tutti nulli.
+		Dato che $E^{2} = E^{\infty}$, allora per il Teorema segue
+	\begin{equation*}
+		H_{s}\left( C_{*} \otimes D_{*} \right)
+		= \bigoplus_{p+q=s} H_{p}(C_{*}) \otimes_{\KK} H_{*}(D_{q}) \,.
+	\end{equation*}
+	\end{proof}
+\end{ex}
+
+\begin{ex}
+	Dimostriamo che esiste un isomorfismo tra la \textbf{coomologia
+	di Cech}\todo{Trova la v tipica sulla C} e la \textbf{coomologia di de Rham}
+	di una varietà differenziabile reale.
+	
+	\begin{df}
+		Data una $M$ varietà differenziabile reale,
+		denotiamo con $\Omega^{k}(M)$ lo spazio delle $k$-forme
+		$C^{\infty}$ su $M$, cioè lo spazio delle sezioni $C^{\infty}$
+		del fibrato $\bigwedge^{k} TM$.
+	\end{df}
+	
+	Ricordiamo che un elemento
+		$\alpha \in \Omega^{k}(M)$ su un aperto coordinato
+		è della forma
+		\begin{equation*}
+			\alpha = \sum_{|I| = k} \alpha_{I}(x) dx_{I}\,,
+		\end{equation*}
+		con $I$ un $k$-multiindice che rappresenta $i_{1} \le i_{2} \le \dots \le i_{k}$.
+		Detto 
+		\begin{equation*}
+			d : \Omega^{k}(M) \longrightarrow \Omega^{k+1}(M)\,,
+			\quad d\alpha = \sum_{j=1}^{n}\sum_{|I|=k} \frac{\de}{\de x_{j}} \alpha_{I}(x) dx_{j} \wedge dx_{I}
+		\end{equation*}
+		il differenziale esterno, $(\Omega^{\bullet}(M),d)$ è il \textbf{complesso di de Rham}
+		e indichiamo con $H^{*}_{\mathrm{dR}}(M)$ la sua coomologia.
+	
+	\begin{lemma*}[Poincarè]
+		Ogni forma chiusa su un aperto contraibile $A \subset \R^{n}$ è esatta.
+		In altri termini, se $A$ è contraibile allora vale
+		\begin{equation*}
+			H^{k}_{\mathrm{dR}}(A) \simeq
+			\begin{cases}
+				\R\,, \quad &\text{se } k=0\,;\\
+				0\,, \quad &\text{se } k>0\,.
+			\end{cases}
+		\end{equation*}
+	\end{lemma*}
+		
+		Sia $M$ una $n$-varietà differenziabile e $\Uu$ un buon ricoprimento di $M$.
+		Dimostriamo che 
+		\begin{equation*}
+			H^{*}(M;\Uu) \simeq H^{*}_{\mathrm{dR}}(M)\,.
+		\end{equation*} 
+		\begin{proof}
+			Definiamo il \emph{complesso doppio di Cech-de Rham} come
+			\begin{equation*}
+				C^{p,q} := \prod_{i_{0} \le i_{1} \le \dots \le i_{p}} \Omega^{q}(U_{i_{0} \dots i_{p}})\,,
+			\end{equation*}
+			su cui consideriamo il differenziale $D := \delta + (-1)^{p}d$.
+			\begin{equation*}
+				\begin{tikzcd}
+					\prod \Omega^{2}(U_{i_{0}}) \ar[r, "\delta"] 
+					& \prod \Omega^{2}(U_{i_{0} i_{1}})  \ar[r] & \dots \\
+					\prod \Omega^{1}(U_{i_{0}}) \ar[r, "\delta"] \ar[u, "d"] 
+					& \prod \Omega^{1}(U_{i_{0} i_{1}})  \ar[u, "d"] \ar[r] & \dots  \\
+					\prod \Omega^{0}(U_{i_{0}}) \ar[r, "\delta"] \ar[u, "d"] 
+					& \prod \Omega^{0}(U_{i_{0} i_{1}})  \ar[u, "d"] \ar[r] & 
+					\prod \Omega^{0}(U_{i_{0} i_{1}} i_{2})  
+				\end{tikzcd}
+			\end{equation*}
+			Prendiamo dunque il complesso $C^{\bullet}$ associato al bicomplesso,
+			cioè
+			\begin{equation*}
+				C^{n} := \bigoplus_{p+q=n} C^{p,q}\,,
+			\end{equation*}
+			con differenziale $D$ e su questo consideriamo due
+			diverse filtrazioni:
+			\begin{itemize}
+				\item sia dapprima $F^{p}C^{n} := \bigoplus_{i \ge p} C^{i,n-i}$.
+				Su questa, abbiamo le pagine
+				\begin{equation*}
+					E_{0}^{p,q} = C^{p,q}\,, d_{0} = (-1)^{p}d\,,
+					\quad E_{1}^{p,q} = \prod H_{\mathrm{dR}}^{q}(U_{i_{0} \dots i_{1}} i_{p})\,, d_{1} = 0\,.
+				\end{equation*}
+				Con queste scelte si ha che
+				\begin{equation*}
+					H^{0}_{\mathrm{dR}}(U_{i_{0} \dots i_{1}} i_{p}) = C(U_{i_{0} \dots i_{1}} i_{p};\R)
+				\end{equation*}
+				e il suo differenziale è $d_{1}=\delta$. Dato che la successione
+				collassa alla seconda pagina, allora il limite è dato da
+				\begin{equation*}
+					E_{\infty}^{p,q} = E_{2}^{p,q}\,,
+				\end{equation*}
+				su cui leggiamo che $H^{*}(C^{\bullet},D) = H^{*}(M;\Uu)$.
+				
+				\item consideriamo ora la filtrazione $G^{p}C^{n}=\bigoplus_{i \ge p} C^{n-i,i}$.
+				Come prima prendiamo
+				\begin{equation*}
+					E_{0}^{p,q} = C^{p,q}\,, d_{0} = (-1)^{p}d\,.
+%					\quad E_{1}^{p,q} = \prod H_{\mathrm{dR}}^{q}(U_{i_{0} \dots i_{1}} i_{p})\,, d_{1} = 0\,.
+				\end{equation*}
+				
+				\begin{lemma}
+					C'è un'omotopia di catene
+					\begin{equation*}
+						\kappa : \prod \Omega^{\bullet} (U_{i_{0} \dots i_{1}} i_{p})
+						\longrightarrow \prod \Omega^{\bullet} (U_{i_{0} \dots i_{1}} i_{p-1})
+					\end{equation*}
+					tra l'identità e la mappa nulla.
+					\begin{proof}
+						Sia $\Set{\rho_{i}}_{i}$ una partizione dell'unità
+						sbordinata al ricoprimento $\Uu$, è sufficiente porre
+						\begin{equation*}
+							(\kappa \omega)_{i_{0} \dots i_{p-1}} 
+							:= \sum_{i} \rho_{i} \omega_{i\,i_{0} \dots i_{p-1}}\,. \qedhere
+						\end{equation*}
+					\end{proof}
+				\end{lemma}
+				Come conseguenza di questo Lemma, segue che in $E^{p,q}_{1}$
+				sopravvive solo la colonna $p=0$. 
+				Dato che $\ker \delta$ è costituito dalle $k$-forme \emph{globali},
+				
+			\end{itemize}
+		\end{proof}
+\end{ex}
+
+
+
+

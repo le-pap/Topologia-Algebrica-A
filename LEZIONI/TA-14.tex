@@ -1,0 +1,258 @@
+ %%% Lezione 14
+
+
+\lecture[Lezione 14.]{2023-04-18}
+
+\begin{ex}[Successione di una coppia]
+	Consideriamo uno spazio topologico $X$, su cui prendiamo la filtrazione
+	\begin{equation*}
+		\emptyset \subset Y \subset X\,,
+	\end{equation*}
+	o in altri termini consideriamo la coppia $(X,Y)$.
+	Questo determina una filtrazione sulle catene singolari di $X$,
+	dalla quale otteniamo la successione spettrale
+	\begin{equation*}
+		E^{1}_{p,q} = H_{p+q}(X_{p},X_{p-1}) = 
+		\begin{cases}
+			H_{q}(Y) \,, \quad &\text{se } p=0\,; \\
+			H_{q+1}(X,Y) \,, \quad &\text{se } p=1\,\\
+			0\,, \quad &\text{altrimenti.}
+		\end{cases}
+	\end{equation*}
+	\missingfigure{Fai disegno}
+	La mappa di bordo sulla prima pagina è
+	\begin{equation*}
+		d^{1}: E^{1}_{1,q} \longrightarrow E^{1}_{0,q}\,,
+	\end{equation*}
+	e si può verificare che questo è proprio l'omomorfismo di connessione della coppia
+	\begin{equation*}
+		\de : H_{q+1}(X,Y) \longrightarrow H_{q}(Y)\,.
+	\end{equation*}
+	
+	Viceversa, supponiamo di avere il dato della successione spettrale;
+	vogliamo ricostruire la successione della coppia.
+	Il termine limite è per definizione
+	\begin{equation*}
+		E^{\infty}_{0,q} =
+		\frac{\im \left( H_{q}(Y) \longrightarrow H_{q}(X) \right)}{\im \left( H_{q}(\emptyset) \longrightarrow H_{q}(X) \right)}
+		= \im \left( i: H_{q}(Y) \longrightarrow H_{q}(X) \right)\,,
+	\end{equation*}
+	e l'altro termine non nullo è
+	\begin{equation*}
+		E^{\infty}_{1,q} = \frac{H_{q+1}(X)}{\im \left( i: H_{q+1}(Y) \longrightarrow H_{q+1}(X) \right)}\,.
+	\end{equation*}
+	Confrontiamo $E^{\infty}$ con la pagina $E^{2}$:\todo{finisci}
+\end{ex}
+
+
+
+
+\section{Successioni spettrali di Serre}
+
+Ricordiamo la seguente definizione.
+
+\begin{df}
+	Una mappa $\pi : E \to B$ è una \textbf{fibrazione di Serre} se
+	vale la \eqref{HLP} sui cubi:
+	\begin{equation}\label{Serre-HLP}
+		\begin{tikzcd}
+			I^{n} \times \{0\} \ar[r] \ar[d, "\iota_{0}"', hook] & E \ar[d, "\pi"] \\
+			I^{n+1} \ar[r] \ar[ur, dashed] & B\,. \tag{HLP'}
+		\end{tikzcd}
+	\end{equation}
+\end{df}
+
+Se $B$ è uno spazio connesso per archi che ammette un rivestimento universale $\widetilde{B}$,
+allora per il \textbf{Teorema di approssimazione} possiamo trovare un'equivalenza
+omotopica debole $f: B' \to B$, con $B'$ un CW complesso. Siccome le fibrazioni
+sono una classe chiusa per pullback, allora anche $f^{*}E \to B'$ 
+è una fibrazione di Serre, pertanto assumeremo 
+senza perdita di generalità che la base $B$ sia un CW complesso.
+
+Fissato $x \in B$, consideriamo  $E_{x} = \pi^{-1}(x)$ e
+a questa fibra associamo $H_{*}(E_{x})$. 
+Adesso vorremmo associare un omomorfismo 
+$\gamma_{*} : H_{*}(E_{x}) \to H_{*}(E_{x'})$
+per ogni cammino
+$\gamma : x \to x'$ in $B$. 
+Presa $\alpha_{0} : A_{x} \to E_{x}$ un'approssimazione CW della fibra su $x$,
+possiamo usare la \eqref{Serre-HLP} induttivamente sullo scheletro di $A_{x}$
+per poter sollevare l'omotopia 
+\begin{equation*}
+	\Gamma: A_{x} \times I \longrightarrow B\,, \quad
+	\Gamma(z,t) := \gamma(t)\,,
+\end{equation*}
+per ottenere così una mappa diagonale
+\begin{equation*}
+	\begin{tikzcd}
+		A_{x} \times \{0\} \ar[r, "\alpha_{0}"] \ar[d, "\iota_{0}"', hook] & E \ar[d, "\pi"] \\
+		A_{x} \times I \ar[r] \ar[ur, dashed, "\alpha"] & B\,. 
+	\end{tikzcd}
+\end{equation*}
+Allora $\alpha_{1} :A_{x} \to E_{x'}$ induce in omotopia un omomorfismo
+$\gamma_{*} : H_{*}(E_{x}) \to H_{*}(E_{x'})$.
+Notiamo inoltre che se $\gamma \sim \gamma'$ sono omotopi \emph{a estremi fissati},
+allora producono lo stesso omomorfismo in omologia; in particolare,
+se $x=x'$, notiamo allora che $\pi_{1}(B,x)$ agisce su
+$H_{*}(E_{x})$ e si verifica che $\gamma$ è costante induce $\gamma_{*} = \cat{1}_{H_{*}(E_{x})}$.
+Questo appena descritto è un esempio di \emph{sistema locale}.
+
+\begin{df}
+	Un \textbf{sistema locale di gruppi} $\Gg = \Set{G_{x},\tau_{\gamma}}$ 
+	su uno spazio topologico $X$ è un funtore che associa a ogni punto $x \in X$
+	un gruppo $G_{x}$ e a ogni cammino $\gamma : I \to X$ da $x_{0}$ a $x_{1}$
+	associa un omomorfismo
+	\begin{equation*}
+		\tau_{\gamma} : G_{x_{0}} \longrightarrow G_{x_{1}}
+	\end{equation*}
+	che dipende solamente dalla classe
+	\begin{equation*}
+		[\gamma] \in [(I, \de I) ; (X, \{x_{0}, x_{1} \})]\,,
+	\end{equation*}
+	con la condizione che se $\gamma$ è costante in $x$, 
+	allora l'omomorfismo associato è $\tau_{\gamma} = \cat{1}_{G_{x}}$.
+\end{df}
+
+\begin{oss}
+	Il gruppo fondamentale $\pi_{1}(B,x)$ agisce (da \emph{sinistra})
+	sul gruppo $G_{x}$.
+\end{oss}
+
+
+\begin{oss}
+	Siccome ogni cammino $\gamma$ può essere ripercorso in senso
+	contrario e produrre il cammino opposto $\overline{\gamma}$
+	in modo che la composizione $\gamma \overline{\gamma}$ sia omotopo a una costante,
+	deduciamo che ogni $\tau_{\gamma}$ è un isomorfismo.
+	In particolare, se $X$ è connesso per archi, allora tutti i $G_{x}$
+	di un sistema locale sono isomorfi.
+\end{oss}
+
+\begin{df}
+	Se l'azione di $\pi_{1}(B,x)$ su $G_{x}$ è banale,
+	allora diremo che il sistema locale $\Gg$ è \textbf{banale}.
+\end{df}
+
+\begin{ex}
+	Ogni sistema locale su uno spazio semplicemente connesso è banale.
+\end{ex}
+
+
+Supponiamo ora che $X$ sia uno spazio connesso per archi
+che ammette rivestimento universale $\widetilde{X}$.
+Allora $\pi_{1}(X,x_{0})$ agisce (da \emph{destra})
+su $\widetilde{X}$ per \textbf{traslazione}, ovvero
+\begin{equation*}
+	\widetilde{X} \times \pi_{1}(X,x_{0})\,, \quad
+	(x,\gamma) \longmapsto x'
+\end{equation*}
+dove $x'$ è \todo{noccapito}
+
+In particolare questo induce un'azione \emph{destra} di $\pi_{1}(X,x_{0})$
+sulle catene singolari $C_{*}(\widetilde{X})$ per traslazione,
+e si verifica che questa azione commuta con il differenziale $d$.
+
+\begin{df}
+	Dato $x_{0}$ in $X$ connesso per archi, il complesso
+	\begin{equation*}
+		C_{*}(X;\Gg) := C_{*}(\widetilde{X}) \otimes_{\Z[\pi_{1}(X,x_{0})]} G_{x_{0}}
+	\end{equation*}
+	viene chiamato \textbf{complesso delle catene singolari a coefficienti in $\Gg$},
+	il cui bordo è indotto da $d:C_{*}(\widetilde{X}) \to C_{*}(\widetilde{X})$.
+	Passando al duale, definiamo le \textbf{cocatene singolari a coefficienti in $\Gg$}
+	come
+	\begin{equation*}
+		C^{*}(X;\Gg) := \Hom_{\Z[\pi_{1}(X,x_{0})]}\left(C_{*}(\widetilde{X};G_{x_{0}}\right)\,.
+	\end{equation*}
+	L'\textbf{omologia}, risp. la \textbf{coomologia}, a coefficienti
+	in un sistema locale $\Gg$ sarà indicata con
+	\begin{equation*}
+		H_{*}(X;\Gg) := H_{*}(C_{*}(X;\Gg))\,, \quad
+		\text{resp. } H^{*}(X;\Gg) := H^{*}(C^{*}(X;\Gg))\,.
+	\end{equation*}
+\end{df}
+
+
+\begin{thm}[\textbf{Successione spettrale di Serre}]\label{Serre-SS}
+	Sia $M$ uno $\Z$-modulo.\todo{Oppure modulo su un qualunque anello?}	
+	Data una fibrazione di Serre $\pi:E \to B$,
+	esiste una successione spettrale $\Set{(E^{r}_{p,q},d^{r})}_{r \ge 2}$
+	concentrata nel primo quadrante data da
+	\begin{equation*}
+		E_{p,q}^{r} = H_{p}\left(B; \Set{H_{q}(E_{x};M)}\right)\,,
+	\end{equation*}
+	convergente a $E^{\infty}_{p,q} = F_{p}H_{p+q}(E;M)$,
+	per una qualche filtrazione $F$ dell'omologia 
+	$H_{*}(E;M)$.
+\end{thm}
+
+\begin{oss}
+	Si noti che nel \hyperref[Serre-SS]{Teorema~\ref{Serre-SS}}
+	non vengono nemmeno citati i differenziali della successione spettrale!
+\end{oss}
+
+Prima di dimostrare questo risultato,
+vediamo alcuni esempi per capirne il funzionamento.
+
+\begin{ex}
+	Sia $SU(n)$ il gruppo delle matrici complesse unitarie con determinante $1$.
+	Ad esempio, per $n=2$ abbiamo
+	\begin{equation*}
+		SU(2) : \Set{ \begin{bmatrix} \alpha & \beta \\ \overline{\beta} & \overline{\alpha} \end{bmatrix}	
+		| {|alpha|}^{2}	+ {|\beta|}^{2} = 1 }
+		\simeq S^{3}\,.
+	\end{equation*}
+	La topologia di $SU(3)$ invece è più complicata
+	e usiamo il \hyperref[Serre-SS]{Teorema~\ref{Serre-SS}}
+	per studiarne l'omologia. La mappa 
+	
+	In maniera analoga possiamo studiare l'omologia
+	di $SU(4)$, infatti presa la fibrazione
+	\begin{equation*}
+		SU(3) \hookrightarrow SU(4) \longrightarrow S^{7}\,,
+	\end{equation*}
+	otteniamo la successione spettrale la cui pagina $E^{2}_{\bullet,\bullet}$ 
+	è data da
+	\missingfigure{Pagina}
+	e quindi concludiamo che
+	\begin{equation*}
+		H_{p}\left( SU(4) \right) =
+		\begin{cases}
+			\Z\,, \quad &\text{se } p = 0,3,5,7,8,10,12\,;\\
+			0\,, \quad &\text{altrimenti.}
+		\end{cases}
+	\end{equation*}
+	
+	Infine, vorremmo studiare anche l'omologia di $SU(5)$ 
+	utilizzando la fibrazione
+	\begin{equation*}
+		SU(4) \hookrightarrow SU(5) \longrightarrow S^{9}\,.
+	\end{equation*}
+	A questo punto $E^{2}_{\bullet,\bullet}$ 
+	è data da
+	\missingfigure{pagina con differenziali non banali}
+	e notiamo che potrebbero esserci due differenziali non banali.
+	Purtroppo non conosciamo la struttura di $d^{9}$,
+	quindi (per ora) non sappiamo come calcolare $H_{*}\left( SU(5) \right)$.
+\end{ex}
+
+Dato uno spazio topologico $X$, ricordiamo che possiamo costruire la fibrazione
+\begin{equation*}
+	\begin{tikzcd}
+		\Omega X \ar[r] & PX \ar[r, "ev_{1}"] & X\,,
+	\end{tikzcd}
+\end{equation*}
+dove lo spazio dei cammini $PX$ è contraibile. 
+Se supponiamo che $X$ sia $n$-connesso,
+preso il sistema locale $\Set{H_{q}(P_{x_{0}}^{x}X)}$,
+per il  \hyperref[Serre-SS]{Teorema~\ref{Serre-SS}} si ha
+\begin{equation*}
+	E^{2}_{p,q} = H_{q}(X;\Set{H_{q}(P_{x_{0}}^{x}X)})\,,
+\end{equation*}
+e \todo{Finire che non sto capendo}
+
+
+
+
+
+
