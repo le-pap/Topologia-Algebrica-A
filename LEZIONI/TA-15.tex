@@ -1,0 +1,290 @@
+ %%% Lezione 15
+
+
+\lecture[Lezione 15.]{2023-04-24}
+
+	Abbiamo ricavato nuovamente il teorema di Hurewicz
+	per gruppi di omotopia superiore,
+	assumendo il risultato vero solo per $\pi_{1}$.\todo{recupera}
+	
+	\begin{ex}
+		Studiamo i loop sulla sfera $S^{n}$.
+		Supponiamo che $n > 1$ così da avere la base semlicemente connessa.
+		Dalla fibrazione
+		\begin{equation*}
+			\begin{tikzcd}
+				\Omega S^{n} \ar[r] & PS^{n} \ar[r] & S^{n}
+			\end{tikzcd}
+		\end{equation*}
+		otteniamo la successione spettrale
+		\begin{equation*}
+			E^{2}_{p,q} = H_{p}\big(S^{n},H_{q}(\Omega S^{n}) \big)\,.
+		\end{equation*}
+		La colonna $p=0$ è lo $0$-esimo gruppo di omologia di uno spazio connesso
+		a coefficienti in $H_{q}(\Omega S^{n})$, quindi la prima colonna è in realtà
+		l'omologia della fibra $H_{q}(\Omega S^{n})$. 
+		Tutte le altre colonne hanno gruppi banali, fino a quando
+		$p = n$, in cui ritroviamo l'omologia in grado $n$ di $S^{n}$
+		a coefficienti in $H_{q}(\Omega S^{n})$, che è isomorfa a $\Z$ per $q=n-1$.
+		\missingfigure{Devo mettere una bella pagina di sta roba.}
+		
+		Procedendo per induzione, questo dimostra che per ogni $k \in \N$
+		l'omologia di $\Omega S^{n}$ è
+		\begin{equation*}
+			H_{k(n-1)}(\Omega S^{n}) \simeq \Z
+		\end{equation*}
+		ed è banale in tutti gli altri gradi.\todo{non ho capito la roba della formula di Künneth e il limite...}
+	\end{ex}
+	
+	
+	
+	\section{Confronto di successioni spettrali}
+	
+	
+	La costruzione del \hyperref[SS-machine]{Teorema~\ref{SS-machine}}
+	che associa ad un complesso filtrato graduato $(C,d,F)$ una successione spettrale
+	è \emph{funtoriale}, nel senso che un morfismo tra complessi filtrati e graduati
+	induce in maniera naturale un morfismo di successioni spettrali.
+	
+	\begin{thm}
+		Sia $\tau : C \to C'$ una mappa di complessi differenziali graduati e filtrati.
+		Supponiamo che le filtrazioni in omologia 
+		\begin{equation*}
+			\bigcup_{s} F_{s}H_{n} = H_{n}
+		\end{equation*}
+		siano convergenti e limitate dal basso.
+		Se per qualche $r \ge 1$ la mappa $\tau^{r} : E^{r} \to (E')^{r}$ è un isomorfismo,
+		allora per tutte le pagine $t \ge r$ si ha $E^{t} \simeq (E')^{t}$ e
+		la mappa in omologia
+		\begin{equation*}
+			\tau_{*} : H_{*}(C) \longrightarrow H_{*}(C')
+		\end{equation*}
+		è un isomorfismo.
+		\begin{proof}
+			\`E chiaro che se le successioni spettrali
+			coincidono alla pagina $r$, siccome le pagine successive
+			sono determinate da quelle precedenti, allora
+			$\tau^{t}$ è un isomorfismo per ogni $t \ge r$.
+			In particolare, anche il limite
+			\begin{equation*}
+				\tau^{\infty} : E^{\infty} \longrightarrow (E')^{\infty}
+			\end{equation*}
+			è un isomorfismo.
+			
+			Abbiamo un diagramma commutativo
+			\begin{equation*}
+				\begin{tikzcd}
+					0 \ar[r]
+					& F_{s-1}H_{n}(C) \ar[r] \ar[d]
+					& F_{s}H_{n}(C) \ar[r] \ar[d]
+					& E^{\infty}_{s,n-s} \ar[r] \ar[d]
+					& 0 \\
+					0 \ar[r]
+					& F_{s-1}H_{n}(C') \ar[r]
+					& F_{s}H_{n}(C') \ar[r]
+					& (E')^{\infty}_{s,n-s} \ar[r]
+					& 0 \,.
+				\end{tikzcd}
+			\end{equation*}
+			Fissato $n$, per valori abbastanza piccoli di $s$
+			si ha $F_{s-1}H_{n}(C) = 0$ e $F_{s-1}H_{n}(C')$ perché la filtrazione è limitata dal basso;
+			di conseguenza, per induzione su $s$ otteniamo
+			\begin{equation*}
+				\tau_{*} : F_{s}H_{n}(C) \simeq F_{s}H_{n}(C')\,,
+				\quad \text{per ogni } s\,.
+			\end{equation*}
+			Siccome la filtrazione dà tutta l'omologia, si conclude che
+			\begin{equation*}
+				H_{*}(C) = \bigcup_{s} F_{s}H_{*}(C)
+				\simeq  \bigcup_{s} F_{s}H_{*}(C') = H_{*}(C')\,. \qedhere
+			\end{equation*}
+		\end{proof}
+	\end{thm}
+	
+	
+	\begin{proof}[Dimostrazione della successione spettrale di Serre~\ref{Serre-SS}]
+		A meno di approssimazione CW, possiamo assumere che la base $B$
+		sia un CW complesso. Detto $B^{(n)}$ l'$n$-scheletro di $B$,
+		consideriamo la filtrazione data dagli scheletri
+		\begin{equation*}
+			\emptyset = B^{(-1)} \subset B^{(0)} \subset B^{(1)} \subset \dots
+			\subset B^{(n)} \subset B^{(n+1)} \subset \dots \subset B\,.
+		\end{equation*}
+		Tramite $\pi : E \to B$, 
+		ponendo $E^{i} := \pi^{-1}\left(B^{(i)}\right)$
+		otteniamo una filtrazione su $E$ e di conseguenza
+		questa induce una filtrazione sulle sue catene singolari $C_{*}(E)$.
+		
+		Definiamo $E^{0}_{p,q} := C_{p+1}\left( E^{p}, E^{p-1} \right)$
+		e consideriamo $d^{0}$ come il differenziale indotto da
+		$C_{*}(E)$. Mettendo in moto la macchina del
+		\hyperref[SS-machine]{Teorema~\ref{SS-machine}}, si ottiene
+		\begin{equation*}
+			E^{1}_{p,q} = H_{p+q}\left( E^{p}, E^{p-1} \right)
+			\simeq H_{p+q}\left( E^{p}, \pi^{-1}(B^{(p)} \setminus \cup_{i}\{c_{i}\} \right)
+		\end{equation*}
+		dove l'isomorfismo di destra è dato per \emph{escissione},
+		rimuovendo i centri $c_{i}$ dei dischi $D^{p}$ nel $p$-scheletro.
+		Segue quindi che
+		\begin{align*}
+			E^{1}_{p,q} &\simeq H_{p+q}\left( E^{p}, \pi^{-1}(B^{(p)} \setminus \cup_{i}\{c_{i}\} \right) \\
+			&\simeq H_{p+q}\left( \cup_{i} \pi^{-1}(D^{p}), \cup_{i} \pi^{-1}(D^{p} \setminus \{c_{i}\} \right) \\
+			&\simeq \bigoplus_{i} H_{p+q}\left( \pi^{-1}(D^{p}), \pi^{-1}(D^{p} \setminus \{c_{i}\} \right) \\
+			&\simeq \bigoplus_{i} H_{p+q}\left( \pi^{-1}(D^{p}), \pi^{-1}(\de D^{p}) \right) \,.
+		\end{align*}
+		A meno di approssimazione cellulare,
+		possiamo supporre che $\pi$ sia banale sul disco $D_{i}^{p}$
+		con fibra $F_{i}:= \pi^{-1}(c_{i})$; in questo modo,
+		la \textbf{formula di Künneth} ci dà
+		\begin{align*}
+			H_{p+q}\left( \pi^{-1}(D^{p}), \pi^{-1}(\de D^{p}) \right)
+			&\simeq H_{p+q}(D_{i}^{p} \times F_{i}, \de D^{p} \times F_{i}) \\
+			&\simeq H_{p+q}(D_{i}^{p}, \de D^{p}) \otimes H_{p+q}(F_{i}) \\
+			&\simeq H_{p+q}(F_{i})\,,
+		\end{align*}
+		dove abbiamo sfruttato che l'omologia del disco $D^{p}$
+		relativa al suo bordo è banale, tranne in grado $p$
+		dove è un modulo libero di rango $1$.
+		Segue dunque che
+		\begin{equation*}
+			E^{1}_{p,q} \simeq \bigoplus_{i} H_{q}(F)\,, 
+		\end{equation*}
+		dove $i$ indicizza le celle di $B$.
+		
+		Nel caso in cui $B$ è semplicemente connesso,
+		allora posso trovare una trivializzazione globale,
+		cioè definire una mappa CW da $F$ a $F'$ \todo{Non ho capito} ...
+		Abbiamo quindi che $E^{1}_{p,q} = C^{\mathrm{cell}}_{p}(B) \otimes H_{q}(F)$
+		e il differenziale $d^{1}$ corrisponde al morfismo di connessione indotto
+		dalla tripla $(B^{(p)},B^{(p-1)},B^{(p-2)})$, 
+		cioè il differenziale di $C^{\mathrm{cell}}_{*}(B)$.
+		Questo produce la seconda pagina
+		\begin{equation*}
+			E^{2}_{p,q} = H_{p}\big(B; H_{q}(F)\big)\,.
+		\end{equation*}
+		
+		Se $B$ \emph{non} è semplicemente connesso,
+		allora considero $\widetilde{B}$ il rivestimento universale.
+		Dal procedimento di prima si ottiene così...\todo{finire}
+	\end{proof}
+	
+	\begin{proof}[Dimostrazione alternativa (Dress)]
+		Mostriamo quest'altra dimostrazione che non fa uso della struttura CW.
+		Data $\pi : E \to B$, costruiamo un ``arricchimento'' del
+		complesso delle catene singolari: infatti,
+		definiamo i \textbf{bisimplessi singolari} di $\pi$ come
+		\begin{equation*}
+		 	\mathrm{Sin_{s,t}}(\pi) :=
+		 	\Set{(f,\sigma) | f : \Delta^{s} \times \Delta^{t} \to E, \sigma : \Delta^{s} \to B
+		 	\text{ tale che soddisfino } (\ast) }\,,
+		 \end{equation*} 
+		 dove la condizione $(\ast)$ è che il seguente quadrato commuti
+		 \begin{equation}
+		 \begin{tikzcd}
+		 	\Delta^{s} \times \Delta^{t} \ar[r, "f"] \ar[d] 
+		 	& E \ar[d, "\pi"] \\
+		 	\Delta^{s} \ar[r, "\sigma"] & B\,.
+		 \end{tikzcd}
+		 \end{equation}
+		 Possiamo così definire un funtore
+		 \begin{equation*}
+		 	\mathrm{Sin}_{\bullet,\bullet}(\pi) : \Delta^{op} \times \Delta^{op}
+		 	\longrightarrow \CSet\,,
+		 \end{equation*}
+		 e indichiamo con $R\mathrm{Sin}_{\bullet,\bullet}(\pi)$
+		 l'$R$-modulo libero generato dai bisimplessi singolari.
+		 Possiamo definire due differenziali $\de'$ e $\de''$ su questo modulo:\todo{copia formule}
+		 Come nell'Esempio di Cech-deRham, 
+		 poniamo $d = \de' + (-1)^{q}\de''$ su $R\mathrm{Sin}_{\bullet,\bullet}(\pi)$
+		 e consideriamo due filtrazioni:
+		 \begin{enumerate}
+		 	\item per ``diagonali sinistre'' data da
+		 	\begin{equation*}
+		 		F_{p}\left( \mathrm{Sin}_{\bullet,\bullet}(\pi) \right)_{n} :=
+		 		\bigoplus_{s+t=n\,, t \le p} \mathrm{Sin}_{s,t}(\pi)\,,
+		 	\end{equation*}
+		 	su cui consideriamo il differenziale $d^{0}=\de$.
+		 	Dato un bisimplesso $(f, \sigma) \in \mathrm{Sin}_{s,t}(\pi)$,
+		 	considero $\widetilde{f}$ tramite aggiunzione e considero il diagramma
+		 	\begin{equation*}
+			\begin{tikzcd}
+				\Delta^{s} \ar[dr, dashed] \ar[rrd, "\widetilde{f}", bend left=20pt] 
+				\ar[ddr, "\sigma"', bend right=20pt] & & \\
+				& c^{-1}\left( E^{\Delta^{t}} \right) \ar[d] \ar[r] & E^{\Delta^{t}} \ar[d, "\pi"] \\
+				& B \ar[r, "c"] & B^{\Delta^{t}}\,,
+			\end{tikzcd}
+			\end{equation*}
+			dove $c$ manda $b \in B$ nel $t$-simplesso singolare costante in $b$.
+			Per aggiunzione, i dati $(f,\sigma)$ e $(\widetilde{f},\sigma)$
+			sono equivalenti e quindi, posto $E'_{t} := c^{-1}\left( E^{\Delta^{t}} \right)$,
+			notiamo che 
+			\begin{equation*}
+				R\mathrm{Sin_{s,t}}(\pi) \simeq C_{s}(E'_{t})\,.
+			\end{equation*}
+			Dato che i simplessi singolari sono contraibili,
+			allora $c : B \to B^{\Delta^{t}}$ è un'equivalenza omotopica
+			e quindi $E'_{t}$ è omotopicamente equivalente a $E^{\Delta^{t}}$
+			tramite la mappa $c : E \to E^{\Delta^{t}}$ che manda tutto in un simplesso costante.
+			Ne deduciamo che le catene singolari sono $C_{s}(E'_{t}) \simeq C_{s}(E)$
+			e quindi la prima pagina della successione spettrale è
+			\begin{equation*}
+				E'_{s,t} = H_{s}(E)\,, \quad s,t, \ge 0\,.
+			\end{equation*}
+			Dato che $d^{1} = \pm \de''$, allora concludiamo che
+			\begin{equation*}
+				E^{2}_{p,q} \simeq
+				\begin{cases}
+					0\,, \quad &\text{se } t \ne 0\,; \\
+					H_{s}(E)\,, \quad &\text{se } t = 0\,.
+				\end{cases}
+			\end{equation*}
+			
+			\item Fissato un $s$-simplesso $\sigma$, considero il diagramma
+			\begin{equation*}
+			\begin{tikzcd}
+				\Delta^{s} \times \Delta^{t} \ar[dr, dashed] \ar[rrd, "f", bend left=15pt] 
+				\ar[ddr, "\mathrm{pr_{1}}"', bend right=20pt] & & \\
+				& \sigma^{-1}\left( E \right) \ar[d, "\pi_{\sigma}"'] \ar[r] & E \ar[d, "\pi"] \\
+				& \Delta^{s} \ar[ur, dashed] \ar[r, "\sigma"] & B\,,
+			\end{tikzcd}
+			\end{equation*}
+			e per aggiunzione questo corrisponde a 
+			\begin{equation*}
+			\begin{tikzcd}
+				\Delta^{t} \ar[dr, dashed] \ar[rrd, "f", bend left=15pt] 
+				\ar[ddr, "\mathrm{pr_{1}}"', bend right=20pt] & & \\
+				& j^{-1}(\ast) \ar[d] \ar[r] & E^{\Delta^{s}} \ar[d, "\pi"] \\
+				& \ast \ar[r, "j:\ast \mapsto \sigma"] & B^{\Delta^{s}}\,.
+			\end{tikzcd}
+			\end{equation*}
+			Notiamo che $j^{-1}(\ast) = \Gamma(\Delta^{s},\sigma^{-1}(E))$
+			sono le sezioni da $\Delta^{s}$ in $\sigma^{-1}(E)$
+			e quindi poniamo
+			\begin{equation*}
+				E^{0}_{s,t} = \bigoplus_{\sigma : \Delta_{s} \to B} 
+				C_{t}\left( \Gamma(\Delta^{s},\sigma^{-1}(E)) \right)\,.
+			\end{equation*}
+			La prima pagina che otteniamo è
+			\begin{equation*}
+				E^{1}_{s,t} = \bigoplus_{\sigma : \Delta_{s} \to B} 
+				H_{t}\left( \Gamma(\Delta^{s},\sigma^{-1}(E)) \right)\,,
+			\end{equation*}
+			con il differenziale $d^{1}$ dato dalla somma a segni alterni
+			delle facce del modulo simpliciale $E^{1}_{s,t}$.
+			
+			Un morfismo $\phi : [s'] \to [s]$ nella categoria simpliciale
+			induce una mappa continua
+			\begin{equation*}
+				\phi^{*} : \Gamma(\Delta^{s},\sigma^{-1}(E))
+				\longrightarrow \Gamma(\Delta^{s'},(\sigma \circ \phi)^{-1}(E))
+			\end{equation*}
+			e quindi $\phi^{*}:E^{1}_{s,t} \to E^{1}_{s',t}$.
+			Usando il fatto che $\pi$ è una fibrazione e che $\Delta^{s}$
+			è contraibile, deduciamo che $\sigma^{-1}(E) \to \Delta^{s}$
+			è banale e quindi abbiamo un'equivalenza omotopica
+			\begin{equation*}
+				\Gamma(\Delta^{s}, \sigma^{-1}(E)) \simeq F_{\sigma}\,.
+			\end{equation*}
+			...\todo{finire}
+		 \end{enumerate}
+	\end{proof}
