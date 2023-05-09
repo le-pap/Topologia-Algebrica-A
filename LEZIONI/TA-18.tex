@@ -1,0 +1,381 @@
+ %%% Lezione 18
+
+
+%\lecture[Lez18.]{2023-05-09]
+
+Prima di vedere la dimostazione di questo fatto,
+deduciamo qualche conseguenza interessante:
+otteniamo una nuova versione del Teorema di Hurewicz.
+
+\begin{cor}
+	Sia $\Cc$ un anello di Serre aciclico e $X$ uno spazio \emph{semplicemente connesso}.
+	Per ogni $n \ge 2$, si ha
+	\begin{equation*}
+		\pi_{q}(X, \ast) \in \Cc \iff H_{q}(X) \in \Cc
+	\end{equation*}
+	per ogni $q < n$. In tal caso, la mappa di Hurewicz
+	\begin{equation*}
+		h_{n} : \pi_{n}(X) \longrightarrow H_{n}(X)
+	\end{equation*}
+	è un isomorfismo $\mathrm{mod} \Cc$.
+\end{cor}
+
+Ad esempio, se $\pi_{1}(X,\ast)=0$, allora vale
+\begin{enumerate}
+	\item ...
+	\item ...
+	\item per ogni $q < n$ vale
+	\begin{equation*}
+		\overline{H}_{q}(X;\Q) = \cat{0} \iff \pi_{q}(X;\ast) \otimes \Q = \cat{0}
+	\end{equation*}
+	e la mappa $\pi_{n}(X;\ast) \otimes \Q \to H_{n}(X;\Q)$ è un isomorfismo.
+\end{enumerate}
+
+\begin{ex}
+	L'ipotesi che $X$ sia semplicemetne connesso è necessaria.
+	Se consideriamo $X = S^{1} \vee S^{2}$, allora $H_{q}(X)$ è un
+	gruppo finitamente generato per ogni $q \in \N$, ma invece
+	$\pi_{2}(X;\ast)$ non è finitamente generato:
+	basti pensare che il rivestimento universale $\widetilde{X}$
+	è una retta con infinite sfere attaccate nei punti interi.
+\end{ex}
+
+\begin{prop}\label{magia}
+	Data una fibrazione di Serre $\pi : E \to B$, 
+	con $B,F$ connessi per archi e base $\pi_{1}(B,b_{0})=\cat{0}$.
+	Allora $\pi_{*}:H_{i}(E,F) \to H_{i}(B,b_{0})$ è un isomorfismo
+	$\mathrm{mod}\Cc$ per ogni $i \ge n$.
+\end{prop}
+
+\begin{proof}[Dimostrazione del Teorema~\ref{serre-mod-c}]
+	Consideriamo la fibrazione dei loop
+	\begin{equation*}
+		\Omega X \longrightarrow PX \longrightarrow X
+	\end{equation*}
+	e mostriamo che se $\pi_{q}(X,\ast) \in \Cc$ per ogni $q < n$, 
+	allora $\pi_{n}(X,\ast) \to H_{n}(X)$ è un isomorfismo $\mathrm{mod}\Cc$.
+	Ragioniamo per induzione su $n$.
+	Se $n=2$, allora $\pi_{2}(X;\ast) \simeq H_{2}(X)$
+	per il classico \textbf{Teorema di Hurewicz}.
+	Supponiamo quindi $n>2$ e consideriamo il diagramma commutativo
+	\begin{equation*}
+		\begin{tikzcd}
+			\pi_{q}(X,\ast) \ar[d, "h"]
+			& \pi_{q}(PX,\Omega X) \ar[l, "\sim"'] \ar[r, "\sim"] \ar[d]
+			& \pi_{q-1}(\Omega X, \ast) \ar[d, "\phi"] \\
+			\overline{H}_{q}(X) 
+			& H_{q}(PX, \Omega X) \ar[l, "\psi"] \ar[r, "\sim"]
+			& H_{q-1}(\Omega X)\,.
+		\end{tikzcd}
+	\end{equation*}
+	Se mostriamo che $\phi$ e $\psi$ sono isomorfismi $\mathrm{mod}\Cc$,
+	allora concludiamo che anche $h$ lo è, da cui segue la tesi.
+	
+	Se $\pi_{2}(X,\ast)=0$, allora si ha $\pi_{1}(\Omega X, \ast) = 0$
+	e possiamo applicare il Teorema di Hurewicz per ipotesi induttiva,
+	da cui deduciamo che $phi$ e $\psi$ sono iso.
+	Per $\psi$ usiamo la \hyperref[magia]{Proposizione~\ref{magia}}.
+	Il problema è che in generale \textbf{non} vale $\pi_{2}(X,\ast)=0$,
+	quindi non abbiamo a disposizione l'ipotesi $\pi_{1}(\Omega X, \ast)=0$.
+	Per ovviare a questo problema, ricorriamo alle \textbf{Torri di Whitehead}:
+	consideriamo la fibrazione
+	\begin{equation*}
+		\begin{tikzcd}
+			K:=K \left(\pi_{2}(X,\ast),1\right) \ar[r]
+			& Y \ar[r, "t"] & X\,,
+		\end{tikzcd}
+	\end{equation*}
+	dove $t$ induce isomorfismi tra i gruppi di omotopia $\pi_{q}$, per $q > 2$.
+	Questo ``uccide'' il $\pi_{2}$ di $X$, ma in compenso
+	questo gruppo appare come gruppo fondamentale della fibra $K$.
+	Dato che $\pi_{2}(X,\ast) \in \Cc$ e per ipotesi $\Cc$ è un anello aciclico,
+	allora $H_{i}(K) \in \Cc$ per ogni $i>0$.
+	Quindi $\overline{H}_{i}(Y) \to H_{i}(Y,K)$ è isomorfismo $\mathrm{mod}\Cc$.
+	Usando la \hyperref[magia]{Proposizione~\ref{magia}}, deduciamo che per ogni $i \le n$
+	anche 
+	\begin{equation*}
+		H_{i}(Y,y_{0}) \longrightarrow H_{i}(X,\ast)
+	\end{equation*}
+	è isomorfismo $\mathrm{mod}\Cc$.
+	Siccome $\pi_{i}(Y,y_{0}) \simeq \pi_{i}(X,\ast)$ per $i \ge 3$,
+	applichiamo l'ipotesi induttiva.
+\end{proof}
+
+\begin{cor}
+	Sia $X$ è semplicemente connesso, $p$ primo e $n \ge 2$.
+	Vale 
+	\begin{equation*}
+		\forall_{i<n} \, \pi_{i}(X, \ast) \otimes \Z_{(p)} = \cat{0}
+		\iff \forall_{i<n} \, \overline{H}_{i}(X;\Z_{(p)})= \cat{0}
+	\end{equation*}
+	e si ha un isomorfismo 
+	$\pi_{n}(X, \ast) \otimes \Z_{(p)} \simeq \overline{H}_{i}(X;\Z_{(p)})$.
+	\begin{proof}
+		Usiamo il Teorema di Hurewicz modulo la classe di Serre $\Cc_{p}$,
+		ovvero i gruppi abeliani $A$ tali che $A \otimes \Z_{(p)}=\cat{0}$.
+	\end{proof}
+\end{cor}
+
+\begin{thm}[Hurewicz $\mathrm{mod}\Cc$]\label{hurewicz-mod-c}
+	Sia $\Cc$ un ideale di Serre aciclico e $(X,A)$ una coppia
+	di spazi semplicemente connessi.
+	Per $n \ge 1$ si ha che
+	\begin{equation*}
+		\forall_{2 \le i < n} \, \pi_{i}(X,A) \in \Cc \iff
+		\forall_{2 \le i < n} \, H_{i}(X,A) \in \Cc
+	\end{equation*}
+	e in tal caso la mappa
+	$\pi_{n}(X,A) \to H_{n}(X,A)$ è un isomorfismo $\mathrm{mod}\Cc$.
+	\begin{proof}[Idea di dimostrazione]
+		Boh sono rimasto indietro.\todo{recupera!}
+		\begin{equation*}
+			E^{2}_{s,t} = H_{s}\left(X,A;H_{t}(\Omega X) \right)
+		\end{equation*}
+		Non abbiamo ipotesi sull'omologia di $\Omega X$, ma la
+		condizione che $\Cc$ sia un ideale ci serve per poter fare a meno
+		di ipotesi sull'omologia della fibra,
+		in quanto sia $\otimes$, sia $\ast$, sono operazioni
+		che fanno rimanere in $\Cc$.
+		Dal fatto che $H_{s}(X,A) \in \Cc$, per Künneth e il fatto che $\Cc$
+		è ideale segue che $H_{s}\left(X,A;H_{t}(\Omega X) \right) \in \Cc$,
+		quindi $p_{*}$ è un isomorfismo $\mathrm{mod}\Cc$.
+	\end{proof}
+\end{thm}
+
+\begin{thm}[Whitehead $\mathrm{mod}\Cc$]
+	Sia $\Cc$ un ideale di Serre aciclico e $f:X \to Y$
+	una mappa continua. Per $n \ge 2$, i seguenti fatti sono equivalenti:
+	\begin{rmnumerate}
+		\item per ogni $i \le n-1$, la mappa $f_{\#}:\pi_{i}(X, \ast) \to \pi_{i}(Y,y_{0})$
+		è un isomorfismo $\mathrm{mod}\Cc$, ed è epi per $i=n$;
+		
+		\item per ogni $i \le n-1$, la mappa $f_{*}:H_{i}(X) \to H_{i}(Y)$
+		è un isomorfismo $\mathrm{mod}\Cc$, ed è epi per $i=n$.
+	\end{rmnumerate}
+	\begin{proof}
+		A meno di sostituire $Y$ con il mapping cylinder di $f$,
+		possiamo supporre che $f : X \subset Y$ sia un'inclusione.
+		Consideriamo il diagramma commutativo
+		\begin{equation*}
+			\begin{tikzcd}
+				\pi_{n+1}(Y,X)
+			\end{tikzcd}
+		\end{equation*}
+		
+		La condizione i)  è equivalente alla condizione
+		\begin{equation*}
+			\pi_{i}(Y,X) \in \Cc\,, \quad \text{per ogni } i \le n\,,
+		\end{equation*}
+		ma allora per il \hyperref[hurewicz-mod-c]{Teorema di Hurewicz $\mathrm{mod}\Cc$~\ref{hurewicz-mod-c}} notiamo che equivale a
+		\begin{equation*}
+			H_{i}(Y,X) \in \Cc\,, \quad \text{per ogni } i \le n\,,
+		\end{equation*}
+		ovvero la condizione ii).
+	\end{proof}
+\end{thm}
+
+\begin{lemma}
+	Siano $X,Y$ spazi tali che la loro omologia a coefficienti in $\Z_{(p)}$
+	sia finitamente generata in ogni grado.
+	Se $f : X \to Y$ induce un isomorfismo in $H_{q}(-;\Z_{(p)})$ per ogni $q$,
+	allora $f$ induce isomorfismi $\mathrm{mod}\Cc_{p}$ 
+	in ogni grado dell'omologia singolare
+	a coefficienti in $\Z$.
+	\begin{proof}
+		Notiamo che un omomorfismo di gruppi $\alpha : A \to B$
+		è un isomorfismo $\mathrm{mod}\Cc_{p}$ se e solo se
+		\begin{equation*}
+			\alpha \otimes \cat{1} : A \otimes \Z_{(p)} \longrightarrow B \otimes \Z_{(p)}
+		\end{equation*}
+		è un isomorfismo di gruppi.
+		Dato che $\Z_{(p)}$ è piatto, allora tensorizzando
+		la successione esatta
+		\begin{equation*}
+			\begin{tikzcd}
+				\cat{0} \ar[r]
+				& \ker \alpha \ar[r]
+				& A \ar[r, "\alpha"]
+				& B \ar[r]
+				& \mathrm{coker}\alpha \ar[r]
+				& \cat{0}\,,
+			\end{tikzcd}
+		\end{equation*}
+		otteniamo una nuova successione esatta di gruppi abeliani.
+		
+		Uno $\Z_{(p)}$-modulo finitamente generato è banale
+		se e solo se è banale modulo $p$, quindi
+		se mostriamo che il nucleo e il conucleo della mappa
+		\begin{equation*}
+			f_{*}:H_{*}(X) \longrightarrow H_{*}(Y)
+		\end{equation*}
+		sono banali se tensorizziamo con $- \otimes \Z/p\Z$, allora
+		abbiamo la tesi.
+		
+		Detto $Z$ il mapping cone di $f$, ricordiamo che vale
+		\begin{equation*}
+			\overline{H}_{*}(Z; \Z/p\Z) \simeq H_{*}(C_{f},X; \Z/p\Z)\,.
+		\end{equation*}
+		Siccome $\Z_{(p)}$ è un anello nöetheriano
+		e per ogni $q$ i moduli
+		$H_{q}(X;\Z_{(p)})$ e $H_{q}(Y;\Z_{(p)})$ sono finitamente generati,
+		allora anche $H_{q}(Z;\Z_{(p)})$ è finitamente generato.
+		Dal Teorema dei Coefficienti Universali
+		ricordiamo che
+		\begin{equation*}
+			\overline{H}_{*}(Z;\Z_{(p)}) \otimes \Z/p\Z \hookrightarrow
+			\overline{H}_{*}(Z; \Z/p\Z)\,,
+		\end{equation*}
+		quindi se $H_{*}(Z; \Z/p\Z) = 0$,
+		segue che $\overline{H}_{*}(Z) \otimes \Z_{(p)} = \overline{H}_{*}(Z;\Z_{(p)})=0$.
+		Concludiamo così che la mappa
+		\begin{equation*}
+			f_{*} \otimes \cat{1} : \overline{H}_{*}(X) \otimes \Z_{(p)}
+			\longrightarrow \overline{H}_{*}(Y) \otimes \Z_{(p)}
+		\end{equation*}
+		è un isomorfismo.
+	\end{proof}
+\end{lemma}
+
+\begin{cor}
+	Se $X$ e $Y$ sono spazi semplicaemente connessi,
+	con omologia $H_{q}(-;\Z_{(p)})$ finitamente generata per ogni $q \in \N$.
+	Se $f:X \to Y$ è una mappa continua che induce un isomorfismo
+	in $H_{*}(-;\Z/p\Z)$, allora
+	\begin{equation*}
+		f_{*}:\pi_{q}(X, \ast) \otimes \Z_{(p)}
+		\longrightarrow \pi_{q}(Y, y_{0}) \otimes \Z_{(p)}
+	\end{equation*}
+	è un isomorfismo.
+	\begin{proof}
+		Segue applicando il Lemma + Whitehead mod C.
+	\end{proof}
+\end{cor}
+
+Prima di enunciare il \textbf{Teorema di Serre},
+facciamo alcuni calcoli dell'omologia di spazi classificanti.
+
+\begin{ex}
+	Il \textbf{Teorema di Whitehead} mod $\Cc$ applicato a un gruppo $A \in \Ab_{tor}$
+	ci dice che
+	\begin{equation*}
+		\overline{H}_{*}\left(K(A,n) ; \Q \right) = 0.
+	\end{equation*}
+	Questo è chiaro per $n=1$. Se $n>1$, allora consideriamo la fibrazione
+	\begin{equation*}
+		\begin{tikzcd}
+			K(A,n-1) \ar[r]
+			& PK(A,n) \ar[r]
+			& K(A,n)\,.
+		\end{tikzcd}
+	\end{equation*}
+	Calcoliamo gli anelli di coomologia, per esempio, nel caso di $A=\Z$.
+	Per $n=1$, sappiamo che $K(\Z,1)=\S^{1}$ ha coomologia
+	\begin{equation*}
+		H^{*}\left( K(\Z,1); \Q \right) \simeq \Lambda_{\Q}[\iota_{1}]\,,
+	\end{equation*}
+	con $\iota_{1}$ in grado $1$.
+	Se $n=2$, allora $K(\Z,2) = \C\PP^{\infty}$ e il suo anello di coomologia è
+	\begin{equation*}
+		H^{*}\left( K(\Z,2) ; \Q \right) \simeq \Q[\iota_{2}]\,,
+		\quad \lvert \iota_{2} \rvert = 2\,.
+	\end{equation*}
+	
+	Tutto il calcolo con SS \todo{Copiare e capire}
+	
+	Ripetendo questo procedimento per ogni $n$, si dimostra che
+	\begin{equation*}
+		H^{*}\left( K(\Z,n) ; \Q \right) \simeq
+		\begin{cases}
+			\Lambda_{\Q}[\iota_{n}]\,, \quad &\text{se } n \text{ è dispari}\,; \\
+			\Q[\iota_{n}]\,, \quad &\text{se } n \text{ è spari}\,,
+		\end{cases}
+	\end{equation*}
+	dove $\iota_{n}$ è un generatore in grado $|\iota_{n}|=n$.
+\end{ex}
+
+\begin{thm}[Serre]\label{serre-thm}
+	I gruppi di omotopia della sfera $S^{n}$ sono \textbf{finiti},
+	eccetto $\pi_{0}(S^{n}, \ast) \simeq \Z \simeq \pi_{n}(S^{n},\ast)$.
+	Se $n$ è pari, allora $\pi_{2n-1}(S^{n},\ast)$ è finitamente generato di rango $1$.
+	\begin{proof}
+		Conosciamo già l'omotopia di $S^{1}$.
+		Se $n \ge 2$, allora consideriamo la mappa
+		\begin{equation*}
+			f : S^{n} \longrightarrow K(\Z,n)\,.
+		\end{equation*}
+		Se $n$ è dispari, allora $f_{*}$ induce un isomorfismo
+		in omologia razionale, per cui applicando il
+		Teorema di Whitehead mod C segue che $f$ induce
+		un isomorfismo $\pi_{q}(-) \otimes \cat{1}_{\Q}$.
+		
+		Se $n$ è pari, allora indichiamo la fibra omotopica
+		\begin{equation*}
+			F \hookrightarrow S^{n} \longrightarrow K(\Z,n)\,.
+		\end{equation*}
+		Sappiamo che  l'anello di coomologia di $K(\Z,n)$
+		è un'algebra di polinomi generata in grado $n$ da una classe $\iota_{n}$.
+		Dato che $F$ ha omotopia banale in grado $n-1$ e $n$, allora 
+		sulla colonna $0$ della SS, dopo l'unità $1$ in grado $0$,
+		troviamo una classe $\iota_{2n-1}$ che deve uccidere $\iota_{n}^{2}$,
+		cioè
+		\begin{equation*}
+			d_{2n-1}(\iota_{2n-1}) = \iota^{2}_{n}\,.
+		\end{equation*}
+		Da questo deduciamo che $d_{2n-1}(\iota_{2n-1} \iota_{n}^{k}) = \iota^{(k-1)2}_{n}$.
+		Questo ci dice che
+		\begin{equation*}
+			H^{*}(F;\Q) = H^{*}\left( K(\Z,2n-1);\Q \right)
+			\quad \implies \quad 
+			H^{*}(F) \otimes \Q = H^{*}\left( K(\Z,2n-1)\right) \otimes \Q\,,
+		\end{equation*}
+		da cui concludiamo
+		\begin{equation*}
+			\pi_{q}(S^{n},\ast) \otimes \Q \simeq
+			\begin{cases}
+				\Q\,, \quad &\text{se } q=n,2n-1\,; \\
+				0\,, \quad &\text{altrimenti}.
+			\end{cases}
+		\end{equation*}
+	\end{proof}
+\end{thm}
+
+\begin{oss}
+	La dimostrazione del \hyperref[serre-thm]{Teorema di Serre~\ref{serre-thm}} ci fornisce
+	una tecnica interessante per il calcolo dell'omotopia,
+	che possiamo sfruttare anche per lo studio dei gruppi
+	finiti delle sfere. Consideriamo ad esempio il caso $n=3$
+	e proviamo a calcolare $\pi_{4}(S^{3},\ast)$.
+	Dall'approssimazione di Whitehead
+	\begin{equation*}
+		F := \tau_{\ge 4}S^{3} \longrightarrow
+		S^{3} \longrightarrow K(\Z,3)\,,
+	\end{equation*}
+	tramite la successione di Barret-Puppe otteniamo
+	la fibrazione
+	\begin{equation*}
+		K(\Z,2) \hookrightarrow F \longrightarrow S^{3}\,.
+	\end{equation*}
+	Guardando la successione spettrale\todo{LA SS} in $\Z$ in coomologia,
+	otteniamo
+	\begin{equation*}
+		E_{2}^{\bullet,\bullet} \simeq \Lambda[\sigma] \otimes \Z[\iota_{2}]\,,
+		\quad \lvert \sigma \rvert = 3\,,\, \lvert \iota_{2} \rvert = 2\,.
+	\end{equation*}
+	Per ogni $k$ si ha dunque
+	\begin{equation*}
+		H^{2k+1}(\tau_{\ge 4} S^{3}) \simeq \Z/k\Z
+		\quad \implies \quad
+		H_{2k}(\tau_{\ge 4} S^{3}) \simeq \Z/k\Z\,.
+	\end{equation*}
+	La prima $p$-torsione si ritrova in
+	\begin{equation*}
+		H_{2k}(\tau_{\ge 4} S^{3}) = \Z/p \Z\,,
+	\end{equation*}
+	quindi l'omotopia $\pi_{i}(S^{3},\ast)=0 \, \mathrm{mod}\Cc_{p}$ per $i < 2p$.
+	Siccome $\pi_{2p}(\pi_{i}(S^{3},\ast) \otimes \Z_{(p)} \simeq \Z/p\Z$,
+	per $p=2$ concludiamo
+	\begin{equation*}
+		\pi_{4}(S^{3},\ast) \simeq \Z/2\Z \simeq \pi_{4}(S^{2},\ast)\,,
+	\end{equation*}
+	dove abbiamo sfruttato la fibrazione di Hopf $S^{1} \subset S^{3} \to S^{2}$.
+\end{oss}

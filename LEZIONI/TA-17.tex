@@ -1,0 +1,374 @@
+ %%% Lezione 17
+
+
+\lecture[Descrizione della mappa di trasgressione nella successione spettrale di Serre. Classi di Serre di gruppi abeliani, anelli e ideali di Serre, anelli aciclici. Esempi. Verifica dell'aciclicità di alcune classi. Classi di Serre e successione spettrale di Serre. Enunciato del teorema di Hurewicz modulo classi di Serre.]{2023-05-08}
+
+Come al solito, consideriamo una fibrazione $F \to E \to B$,
+con $B$ e $F$ spazi connessi per archi.
+Consideriamo una sistema locale $H_{*}(\pi^{-1})$ banale\todo{Devo scrivere bene}
+
+\begin{df}
+	Chiamiamo \textbf{trasgressione} l'omomorfismo
+	$d^{n}:E^{n}_{n,0} \to E^{n}_{0,n-1}$.
+	Un elemento $x \in E^{2}_{n,0}$ si dice \textbf{trasgressivo}.
+\end{df}
+
+Quindi gli elementi trasgressivi sono quelli che sopravvivono sino alla pagina $E^{n}_{n,0}$.
+
+\begin{rmk}
+	Consideriamo il caso $n=2$. In questo caso abbiamo
+	\begin{equation*}
+		d^{2}: H_{2}(B) \simeq E^{2}_{2,0} \to E^{2}_{0,1} \simeq H_{1}(F)\,.
+	\end{equation*}
+	In generale abbiamo $E^{n}_{n,0} \subset E^{2}_{n,0} \simeq H_{n-1}(F)$.
+	Consideriamo la succesione esatta lunga
+	\begin{equation*}
+		\begin{tikzcd}
+			\dots \ar[r]
+			& H_{m}(F) \ar[r]
+			& H_{m}(E) \ar[r]
+			& H_{m}(E,F) \ar[r, "\de_{*}"]
+			& H_{m-1}(F) \ar[r]
+			& \dots 
+		\end{tikzcd}
+	\end{equation*}
+	e la proiezione $\pi_{*}:H_{*}(E,F) \to H_{*}(B,b_{0})$.
+\end{rmk}
+
+Il seguente risultato ci permette di dare un'interpretazione a queste trasgressioni.
+In particolare, ci permettono di trovare una costruzione funtoriale.
+
+\begin{thm}
+	La trasgressione nella successione di Serre in omologia coincide con
+	la composizione
+	\begin{equation*}
+		\begin{tikzcd}
+			H_{m}(B) \ar[r]
+			& H_{m}(B,b_{0}) \ar[r, dashed, "\pi_{*}^{-1}"]
+			& H_{m}(E,F) \ar[r, "\de_{*}"]
+			& H_{m-1}(F)\,.
+		\end{tikzcd}
+	\end{equation*}
+	In maniera duale, 
+	la trasgressione nella successione di Serre in coomologia coincide con
+	la composizione
+	\begin{equation*}
+		\begin{tikzcd}
+			H^{m-1}(F) \ar[r, "\delta^{*}"]
+			& H_{m}(E,F) \ar[r, dashed, "(\pi_{*})^{-1}"]
+			& H_{m}(B,b_{0}) \ar[r]
+			& H_{m}(B)\,.
+		\end{tikzcd}
+	\end{equation*}
+	\begin{proof}
+		Dimostriamo solamente il caso dell'omologia.
+		A meno di approssimazione cellulare, supponiamo che $B$ sia un CW complesso;
+		inoltre, siccome $B$ è connesso per archi, possiamo supporre
+		che abbia una soa $0$-cella.
+		Un elemento $x \in E^{n}_{n,0}$ è rappresentato da una xatena
+		\begin{equation*}
+			c \in C_{n}\left( \pi^{-1}(B^{(n)}) \right) \subset C_{n}(E)\,,
+		\end{equation*}
+		con bordo
+		\begin{equation*}
+			\de c \in C_{n-1}\left( \pi^{-1}(B^{(0)}) \right) 
+			= C_{n-1}(F)\,.
+		\end{equation*}
+		In altre parole, $c$ è un ciclo relativo in
+		\begin{equation*}
+			C_{\bullet}\left( \pi^{-1}(B^{(n)}), F \right)\,.
+		\end{equation*}
+		L'identificazione di $E^{n}_{n,0}$ con $H_{n}(B)$
+		si ha tramite la mappa
+		\begin{equation*}
+		\begin{tikzcd}
+			E^{n}_{n,0} \ar[r]
+			& H_{n}\left( \pi^{-1}(B^{(n)}), F \right) \ar[r, dashed, "\pi_{*}"]
+			& H_{*}(B)\,,
+			& {[c]} \ar[r, mapsto] & {[\pi_{\#}c]}\,,
+		\end{tikzcd}
+		\end{equation*}
+		e inoltre $d^{n}:E^{n}_{n,0} \to E^{n}_{0,n-1}$ manda
+		\begin{equation*}
+			H_{n}\left( \pi^{-1}(B^{(n)}), F \right) 
+			\longrightarrow H_{n-1}(F)\,, \quad
+			{[c]} \longmapsto {[\de c]}\,.
+		\end{equation*}
+	\end{proof}
+\end{thm}
+
+
+
+
+
+\section{Classi di Serre}
+
+Sia $X$ uno spazio topologico semplicemente connesso.
+Per i teoremi di Hurewicz, se conosciamo $\overline{H}_{*}(X;\Z)$,
+allora conosciamo anche l'omotopia $\pi_{*}(X,\ast)$.
+In particolare, i coefficienti in $\Z$ ci danno il vantaggio di
+conoscere bene i gruppi in questione, dato che
+abbiamo a disposizione il \textbf{Teorema di struttura per gruppi abeliani}.
+Ma se invece considerassimo i coefficienti in un campo,
+ad esempio $\overline{H}_{*}(X;\Q)$, che cosa possiamo concludere
+per $\pi_{*}(X,\ast) \otimes \Q$? Se l'omologia è un gruppo finito, 
+allora possiamo dedurre qualcosa sui gruppi di omotopia?
+
+\begin{df}
+	Una \textbf{classe di Serre $\Cc$} di gruppi abeliani
+	è una sottocategoria piena di $\Ab$ che contiene il gruppo banale $\cat{0} \in \Cc$,
+	e per ogni successione esatta corta
+	\begin{equation*}
+		\begin{tikzcd}
+			\cat{0} \ar[r] & A \ar[r] & B \ar[r] & C \ar[r] & \cat{0}\,,
+		\end{tikzcd}
+	\end{equation*}
+	allora $A$ e $C$ appartengono a $\Cc$ se e solo se $B \in \Cc$.
+\end{df}
+
+\begin{oss}
+	Una classe di Serre è chiusa per le seguenti operazioni:
+	\begin{rmnumerate}
+		\item isomomorfismo;
+		\item sottogruppi;
+		\item quozienti;
+		\item estensioni.
+	\end{rmnumerate}
+	Inoltre, l'intersezione di classi di Serre
+	è a sua volta una classe di Serre.
+\end{oss}
+
+\begin{ex}
+ 	Alcune classi di Serre interessanti sono:
+ 	\begin{rmnumerate}
+ 		\item i gruppi abeliani finiti $\Ab_{fin}$;
+ 		\item i gruppi abeliani finitamente generati $\Ab_{fg}$;
+ 		\item i gruppi abeliani di torsione $\Ab_{tor}$.
+ 		\item i gruppi abeliani di $p$-torsione $\Ab_{p-tor}$,
+ 		cioè quei gruppi $A$ tali che, per ogni $a \in A$, esiste $n \in \N$
+ 		tale che $p^{n}a=0$.
+ 	\end{rmnumerate}
+\end{ex}
+
+\begin{df}
+	Sia $\Pp$ un insieme di primi in $\Z$. Indichiamo con $\Cc_{\Pp}$
+	la classe dei gruppi abeliani di torsione tali che,
+	se esiste $p \in \Pp$ tale che $p \vert \mathrm{ord}(a)$ per qualche $a \in A$,
+	allora $A = \cat{0}$.
+	Nel caso $\Pp = \{p\}$, allora scriviamo $\Cc_{p} := \Cc_{\{p\}}$.
+\end{df}
+
+Si verifica che $\Cc_{\Pp}$ è una classe di Serre.
+Sia $\Z_{\Pp}$ la localizzazione di $\Z$ al complementare
+dell'unione degli ideali $(p)$, al variare di $p \in \Pp$,
+cioè
+\begin{equation*}
+	\Z_{\Pp} = \left( \Z \setminus \bigcup_{p \in \Pp} (p) \right)^{-1} \Z
+	= \Set{\frac{a}{b} | a \in \Z, b \notin (p)\text{ per ogni } p \in \Pp}\,.
+\end{equation*}
+
+\begin{rmk}
+	Si ha $A \in \Cc_{\Pp}$ se e solo se $A \otimes \Z_{\Pp} = 0$.  
+\end{rmk}
+
+
+\begin{df}
+	Diciamo che $A=\cat{0} \mathrm{mod} \Cc$ se $A \in \Cc$.
+	In maniera simile, diciamo che un omomorfismo
+	di gruppi $f:A \to B$ è un \textbf{monomorfismo} $\mathrm{mod} \Cc$
+	se $\ker f \in \Cc$, e invece è un \textbf{epimorfismo} $\mathrm{mod} \Cc$
+	se $\mathrm{coker} f \in \Cc$. In particolare,
+	$f$ è un isomorfismo $\mathrm{mod} \Cc$ se
+	$\ker f, \mathrm{coker} f \in \Cc$.
+\end{df}
+
+\begin{prop}
+	Sia $\Cc$ una classe di Serre, allora le classi
+	di monomorfismi, epimorfismi e isomorfismi $\mathrm{mod} \Cc$
+	sono chiuse per composizione.
+	Più precisamente, dati $\alpha : A \to B$ e $\beta : B \to C$,
+	se due mappe tra $\alpha, \beta, \beta\alpha$ sono
+	mono/epi/iso $\mathrm{mod} \Cc$, allora anche il terzo lo è.
+	\begin{proof}
+		Tutte le affermazioni seguono dall'esattezza
+		della successione di mappe tratteggiate nel diagrammone
+		pazzo sgravato qui sotto:
+			\begin{equation*}
+			\begin{tikzcd}[column sep=small]
+                     &                                                  & \mathbf{0} \arrow[rd]                     &                                                   &                                  &                                                             & \mathbf{0}                                               &                                                               &            \\
+                     &                                                  &                                           & \ker \beta \arrow[rd] \arrow[rr, dashed]          &                                  & \operatorname{coker} \alpha \arrow[rrdd, dashed] \arrow[ru] &                                                          &                                                               &            \\
+                     &                                                  &                                           &                                                   & B \arrow[rd, "\beta"] \arrow[ru] &                                                             &                                                          &                                                               &            \\
+\mathbf{0} \arrow[r] & \ker \beta\alpha \arrow[rr] \arrow[rruu, dashed] &                                           & A \arrow[ru, "\alpha"] \arrow[rr, "\beta \alpha"] &                                  & C \arrow[rd] \arrow[rr]                                     &                                                          & \operatorname{coker} \beta\alpha \arrow[r] \arrow[ld, dashed] & \mathbf{0} \\
+                     &                                                  & \ker \alpha \arrow[ru] \arrow[lu, dashed] &                                                   &                                  &                                                             & \operatorname{coker} \beta \arrow[rd] \arrow[ld, dashed] &                                                               &            \\
+                     & \mathbf{0} \arrow[ru]                            &                                           & \mathbf{0} \arrow[lu, dashed]                     &                                  & \mathbf{0}                                                  &                                                          & \mathbf{0}                                                    &           
+\end{tikzcd}
+			\end{equation*}
+	\end{proof}
+\end{prop}	
+
+\begin{exercise}
+	Possiamo parlare di successioni esatte corte $\mathrm{mod} \Cc$
+	e vale il \textbf{Lemma dei $5$} $\mathrm{mod} \Cc$.
+\end{exercise}
+
+\begin{rmk}
+	Se $C_{\bullet}$ è un complesso di catene con tutti i termini $C_{n}$ 
+	in una classe di Serre $Cc$, allora $H_{n}(C_{\bullet}) \in \Cc$, per ogni $n \in \Z$.
+	Inoltre, se $F$ è una filtrazione di un gruppo abeliano $A \in \Cc$,
+	allora per ogni $s \in \Z$ anche $\mathrm{gr}_{s}A \in \Cc$.
+	Viceversa, se la filtrazione $F$ è finita e ogni
+	$\mathrm{gr}_{s}A \in \Cc$, allora tutto il gruppo $A$ sta in $\Cc$.
+\end{rmk}	
+
+In particolare, sia $\{E^{r}_{s,t}\}$ una successione spettrale.
+Se $E^{r}_{s,t} \in \Cc$ per ogni $s,t$, allora tutte le pagine
+$E^{r}_{s,t}$ appartengono alla classe $\Cc$ per $r \ge 2$.
+Se la successione è concentrata nel primo quadrante,
+allora anche il limite $E^{\infty}_{s,t}$ è in $\Cc$.
+Se $\{E^{r}_{s,t}\}$ è indotta da una filtrazione 
+su un complesso $C_{\bullet}$ e $E^{r}_{s,t} \in \Cc$ per ogni $s+t=n$,
+allora anche l'omologia $H_{*}(C_{\bullet}) \in \Cc$.
+
+\begin{ex}
+	Se $A \subset X$ e due tra $\overline{H}_{n}(X), \overline{H}_{n}(A), {H}_{n}(X,A)$
+	sono in $\Cc$, allora anche il terzo appartiene alla classe $\Cc$.
+\end{ex}
+
+\begin{df}
+	Una classe di Serre $\Cc$ è un \textbf{anello di Serre}
+	se per ogni coppia di gruppi $A, B \in \Cc$, allora anche 
+	$A \otimes B$ e $A \ast B := \Tor(A,B)$ sono in $\Cc$.
+\end{df}
+
+\begin{df}
+	Una classe di Serre $\Cc$ si dice \textbf{ideale di Serre}
+	se, dato $A \in \Cc$, per ogni gruppo abeliano $B$
+	allora $A \otimes B, A \ast B \in \Cc$.
+\end{df}
+
+\begin{ex}
+	Gli esempi di classi di Serre presentati in precedenza sono tutti anelli di Serre.
+	Senza l'ipotesi ``finitamente generati'' in realtà sono ideali di Serre.
+\end{ex}
+
+Sia $\Cc$ una classe di Serre. Preso un gruppo $A \in \Cc$,
+sappiamo che lo spazio classificante
+\begin{equation*}
+	BA = K(A,1)
+\end{equation*}
+ha omologia in grado $1$ data da $H_{1}(K(A,1)) = A \in \Cc$.
+Motivati da questo esempio, diamo la seguente
+
+\begin{df}
+	Un anello di Serre $\Cc$ si dice \textbf{aciclico}
+	se, per ogni $A \in \Cc$, lo spazio classificante di $A$
+	è aciclico $\mathrm{mod}\Cc$, cioè
+	\begin{equation*}
+	 	\overline{H}_{n}(K(A,1)) \in \Cc\,, \quad n \in \N\,.
+	 \end{equation*} 
+\end{df}
+
+\begin{ex}
+	Verifichiamo che la classe $\Ab_{fin}$ dei gruppi abeliani finiti 
+	è un anello di Serre aciclico.
+	Ricordiamo che la formula di Künneth ci dà
+	\begin{equation*}
+		K(A \ast B,1) = K(A,1) \times K(B,1)\,.
+	\end{equation*}
+	Dato $C_{n}$ un gruppo ciclico di ordine $n$, 
+	allora possiamo immergerlo $C_{n} \subset S^{1}$,
+	che agisce a sinistra su $S^{\infty} \subset \C\PP^{\infty}$.
+	Dunque deduciamo che
+	\begin{equation*}
+		BC_{n} = C_{n }\backslash S^{\infty}= \left(  C_{n }\backslash S^{1}\right) \times_{S^{1}} S^{\infty}\,,
+	\end{equation*}
+	e quindi la fibrazione 
+	$$S^{1} \simeq C_{n} \backslash S^{1} \hookrightarrow S^{1} \backslash S^{\infty}
+	\simeq \C \PP^{\infty}$$
+	ci dà una successione spettrale di Serre
+	dalla quale leggiamo che $H_{1}(BC_{n}) = C_{n}$ e $H^{2}(BC_{n})=C_{n}$.
+	Questo implica che $d_{2}(e) = \pm n x$ e deduciamo che 
+	l'anello di coomologia di $BC_{n}$ è 
+	\begin{equation*}
+		H^{*}(BC_{n}) = \Z[x]/(nx)\,, \quad \text{con } |x| = 2\,.
+	\end{equation*}
+	Questo mostra che l'omologia e la coomologia di $BC_{n}$
+	sono in $\Ab_{fin}$, e quindi $\Ab_{fin}$ è aciclico.
+\end{ex}
+
+\begin{ex}
+	Se $A \in \Ab_{tor}$, allora $A$ è un limite diretto di gruppi finiti.
+	Siccome tutti i suoi sottogruppi sono di torsione,
+	scrivendo anche $K(A,1)$ come limite diretto
+	possiamo vedere che $\overline{H}_{q}(K(A,1))$ è di torsione,
+	quindi $\Ab_{tor}$ è un anello di Serre aciclico.
+	Per un ragionamento analogo, 
+	anche $\Ab_{p-tor} \cap \Ab_{fin}$ e $\Cc_{p}$ sono aciclici.
+\end{ex}
+
+\begin{ex}
+	Dato che $K(\Z,1) = S^{1}$, allora usando il \textbf{Teorema di struttura}
+	e gli esempi precedenti notiamo che anche $\Ab_{fg}$ è aciclico.
+\end{ex}
+
+\begin{rmk}
+	Sia $\Cc$ un ideale di Serre. Se $X$ è uno spazio topologico con
+	\begin{equation*}
+		H_{n}(X; \Z) = \cat{0} = H_{n-1}(X;\Z) \quad \mathrm{mod}\Cc\,,
+	\end{equation*}
+	allora per ogni $M \in \Ab$ si ha $H_{n}(X;M) = \cat{0} \mathrm{mod} \Cc$.
+	Se $\Cc$ è solamente un anello, questa conclusione segue
+	se $M \in \Cc$. 
+\end{rmk}
+
+\begin{prop}
+	Sia $\pi : E \to B$ una fibrazione di Serre, con $B,F$ connessi per archi
+	e $\pi_{1}(B, b_{0})$ agisce banalmente su $H_{*}(F)$.
+	Sia $\Cc$ un ideale di Serre.
+	Se per ogni $t > 0$ si ha $H_{t}(F) \in \Cc$, allora
+	\begin{equation*}
+		\pi_{*}:H_{*}(F) \longrightarrow H_{*}(B)
+	\end{equation*}
+	è un isomorfismo $\mathrm{mod}\Cc$.
+	\begin{proof}
+		Per il \textbf{Teorema dei Coefficienti Universali} si ha
+		\begin{equation*}
+			E^{r}_{s,t} = H_{s}(B;H_{t}(F)) \in \Cc\,, \quad \text{per } t>0\,.
+		\end{equation*}
+		Allora anche $E^{r}_{s,t} \in \Cc$ per $t >0$ e anche il
+		limite $E^{\infty}_{s,t} \in \Cc$. Questo implica che $\pi_{*}$
+		è un isomorfismo $\mathrm{mod}\Cc$.
+	\end{proof}
+\end{prop}
+
+\begin{prop}\label{serre-mod-c}
+	Sia $\pi : E \to B$ una fibrazione di Serre,
+	con $B,F$ connessi per archi e base semplicemente connessa $H_{1}(B)=\cat{0}$.
+	Se $\Cc$ è una classe di Serre tale che $H_{s}(B) \in \Cc$ per ogni $0 < s < n$
+	e $H_{t}(F) \in \Cc$ per $ 0 < t < n-1$. Allora per ogni $i \le n$,
+	la proiezione
+	\begin{equation*}
+			\pi_{*}:H_{i}(E,F) \longrightarrow 
+			H_{i}(B,b_{0}) \in \Cc\,, 
+		\end{equation*}
+		è un isomorfismo $\mathrm{mod}\Cc$.
+		\begin{proof}
+			Usiamo la \textbf{versione relativa}  della successione di Serre.\todo{copia dim.}
+		\end{proof}
+\end{prop}
+
+%Come conseguenza di questo fatto,
+%otteniamo una nuova versione del Teorema di Hurewicz.
+%
+%\begin{cor}
+%	Sia $\Cc$ un anello di Serre aciclico e $X$ uno spazio semplicemente connesso.
+%	Per ogni $n \ge 2$, si ha
+%	\begin{equation*}
+%		\pi_{q}(X, \ast) \in \Cc \iff H_{q}(X) \in \Cc
+%	\end{equation*}
+%	per ogni $q < n$. In tal caso, la mappa di Hurewicz
+%	\begin{equation*}
+%		h_{n} : \pi_{n}(X) \longrightarrow H_{n}(X)
+%	\end{equation*}
+%	è un isomorfismo $\mathrm{mod} \Cc$.
+%\end{cor}
