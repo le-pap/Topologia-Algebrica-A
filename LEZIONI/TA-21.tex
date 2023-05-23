@@ -1,0 +1,226 @@
+%%% Lezione 21
+
+\begin{thm}[Borel]
+	Sia $F \hookrightarrow E \xrightarrow{p} B$ una fibrazione,
+	con base $B$ semplicemente connessa e tale che
+	\begin{itemize}
+		\item $\overline{H}^{*}(E) = 0$;
+		\item $\overline{H}^{*}(F)$ è un anello generato 
+		dalle classi di trasgressione $a_{i} \in H^{m_{i}}(F)$,
+		con $m_{1} \le m_{2} \le \dots$
+		\item i monomi $a_{i_{1}}a_{i_{2}} \dots a_{i_{k}}$, con $i_{1} < \dots < i_{k}$,
+		sono una base di  $\overline{H}^{*}(F)$.
+	\end{itemize}
+	Allora $H^{*}(B)$ è un'algebra polinomiale con generatori $b_{i} \in H^{m_{i}+1}(B)$,
+	ciascuno dei quali è ottenuto come immagine di $a_{i}$ tramite la trasgressione.
+\end{thm}
+
+\begin{oss}
+	La seconda ipotesi del teorema si ritrova in molti casi,
+	ad esempio quando $H^{*}(F)$ è un prodotto tensoriale di anelli della forma
+	\begin{itemize}
+		\item potenza esterna $\Lambda_{\Z/2\Z}[x_{1}, \dots, x_{n}]$,
+		con $a_{i} = x_{i}$;
+		\item algebra polinomiale $\Z/2\Z[x_{1}, \dots, x_{n}]$, con 
+		$a_{i}=x_{j_{i}}^{2^{k_{i}}}$;
+		\item  $\Lambda_{\Z/2\Z}[x]/(x^{2^{k}})$, con $a_{i} = x^{2^{i}}$,
+		per qualche $1 \le i \le n-1$.
+	\end{itemize}
+\end{oss}
+
+\begin{oss}
+	Le operazioni di Steenrod mandano elementi trasgressivi in elementi trasgressivi.
+\end{oss}
+
+\begin{thm}
+	Per $n \ge 2$, l'anello di coomologia $H^{*}(K(\Z,n);\Z/2\Z)$
+	è l'anello di polinomi con generatori $Sq^{I}e_{n}$,
+	dove $e_{n} \in H^{n}(K(\Z,n);\Z/2\Z)$ è la classe fondamentale dello
+	spazio di Eilenberg-MacLane, e $I$ è un multiindice ammissibile con $e(I) < n$.
+\end{thm}
+
+\section{Calcoli di alcuni gruppi di omotopia stabile}
+
+Ricordando che l'isomorfismo di Freudenthal stabilizza all'aumentare della
+dimensione delle sfere, ha senso definire i \textbf{gruppi di omotopia stabile}
+\begin{equation*}
+	\pi_{m}^{s}(S^{n}) := \lim_{k} \pi_{m+k}(S^{n+k})\,.
+\end{equation*}
+Sia $n$ abbastanza grande, in modo tale che $\pi_{k}(S^{n})$ sia stabile per $k$ fissato.
+Allora consideriamo la fibrazione
+\begin{equation*}
+	K(\Z,n-1) \hookrightarrow \tau_{\ge n+1} S^{n} \longrightarrow S^{n}\,,
+\end{equation*}
+dove $\tau_{\ge n+1} S^{n}$ è la sezione di Whitehead che uccide tutti i gruppi
+di omotopia di grado $ \ge n$. Ora che conosciamo la coomologia di $K(\Z,n-1)$,
+possiamo considerare la successione spettrale associata alla fibrazione.
+Vediamo che nella colonna zeresima, tra $n-1$ e $2n+1$ troviamo oggetti
+di rango $1$, e in particolare vediamo che $e$ viene mandato in $s$, 
+il generatore di $H^{n}(S^{n};\Z)$. Questo ci permette di calcolare la
+coomologia $H^{n+k}(K(\Z,n-1);\Z)$, per $k$ abbastanza piccolo (diciamo $k << n$).
+Per studiarlo ulteriormente, possiamo dunque passare
+alla sezione di Whitehead successiva:
+\begin{equation*}
+	\begin{tikzcd}
+		K(\Z/2\Z,n) \ar[r, hook] & \tau_{\ge n+2} S^{n} \ar[d] \\
+		K(\Z,n-1) \ar[r, hook] & \tau_{\ge n+1} S^{n} \ar[d] \\
+		& S^{n}\,,
+	\end{tikzcd}
+\end{equation*}
+dove la fibra è $K(\Z/2\Z,n)$ è dovuta al fatto che sappiamo $\pi_{4}(S^{3}, \ast) \simeq \Z/2$,
+quindi $\pi_{4}^{s}(S^{3}) = \Z/2$.
+Analizzando la magica successione spettrale,
+si osserva che i primi gruppi di coomologia non banali sono
+\begin{equation*}
+	H^{n+2}(\tau_{\ge n+2}S^{n}; \Z/2\Z) = \Z/2\Z\,, 
+	\quad H^{n+3}(\tau_{\ge n+2}S^{n}; \Z/2\Z) = \Z/2\Z \oplus \Z/2\Z\,.
+\end{equation*}
+Queste informazioni non ci permettono di ricavare completamente l'omologia
+a coefficienti in $\Z$, ma possiamo dedurre che
+\begin{equation*}
+	H_{n+2}(\tau_{\ge n+2}S^{n}; \Z) = \Z \oplus T\,, \quad
+	\text{ oppure } \quad 
+	H_{n+2}(\tau_{\ge n+2}S^{n}; \Z) = \Z/2^{s}\Z \oplus T\,,
+\end{equation*}
+dove $T$ è un gruppo con ordine coprimo rispetto a $2$.
+Siccome $\Z$ non è un termine \emph{stabile} nell'omotopia delle sfere,
+deduciamo che la prima situazione non può accadere. Ci chiediamo quindi chi possa essere $s$
+nella potenza del secondo gruppo. Il generatore $w \in H^{n+2}(\tau_{\ge n+2}S^{n}; \Z/2\Z)$
+determina una mappa
+\begin{equation*}
+	f : \tau_{\ge n+2} S^{n} \longrightarrow K(\Z/2\Z, n+2)\,,
+\end{equation*}
+che possiamo usare per fabbricare una fibrazione
+\begin{equation*}
+	\begin{tikzcd}
+		K(\Z/2\Z, n+1) \ar[r, equals] \ar[d] & K(\Z/2\Z, n+1) \ar[d] \\
+		E \ar[r] \ar[d] & PK(\Z/2\Z, n+2) \ar[d] \\
+		\tau_{\ge n+2} S^{n} \ar[r, "f"] & K(\Z/2\Z, n+2)\,.
+	\end{tikzcd}
+\end{equation*}
+Dalla successione di omotopia della colonna di sinistra,
+otteniamo
+\begin{equation*}
+	\begin{tikzcd}[column sep=small]
+		\dots \ar[r] &
+		\pi_{q}\big(K(\Z/2\Z, n+1),\ast \big) \ar[r]
+		& \pi_{q}(E, \ast) \ar[r]
+		& \pi_{q}\big(\tau_{\ge n+2} S^{n}, \ast \big) \ar[r, "\phi"]
+		& \pi_{q-1}\big(K(\Z/2\Z, n+1),\ast \big) \ar[r] & \dots
+	\end{tikzcd}
+\end{equation*}
+dove $\phi$ è suriettiva per $q=n+2$ ed è la mappa nulla altrimenti.
+Ne segue che
+\begin{equation*}
+	\pi_{q}\big(\tau_{\ge n+2} S^{n}, \ast \big) \simeq
+	\begin{cases}
+		0\,, \quad &\text{se } q < n+2\,; \\
+		\pi_{q}(S^{n}, \ast)\,, \quad &\text{se } q > n+2\,; \\
+		\ker \phi\,, \quad &\text{se } q=n+2\,.
+	\end{cases}
+\end{equation*}
+Dalla successione spettrale di $E \to \tau_{\ge n+2} S^{n}$
+si calcola $H_{n+2}(E; \Z/2\Z)=0$, e quindi l'omotopia $\pi_{n+2}(E, \ast)$
+deve essere zero oppure un gruppo di ordine dispari.
+Da questo si conclude che
+\begin{equation*}
+	\pi_{n+2}(S^{n}, \ast) = H_{n+2}(\tau_{\ge n+2}S^{n}; \Z/2\Z) = \Z/2\Z\,.
+\end{equation*}
+Con calcoli analoghi si possono ricavare anche i seguenti risultati:
+\begin{align*}
+	\pi_{5}(S^{2}) &= \Z/2\Z\,, \\
+	\pi_{6}(S^{3}) &= \Z/12\Z\,, \\
+	\pi_{7}(S^{4}) &= \Z \oplus \Z/12\Z\,, \\
+	\pi_{n+3}(S^{n}) &= \Z/22\Z\,, \quad \text{per } n \ge 5\,.
+\end{align*}
+Portare avanti questi calcoli con tecniche elementari diventa sempre più difficile
+all'aumentare della dimensione delle sfere, e quindi non è molto pratico
+per attaccare il problema più in generale.
+Tuttavia, possiamo sviluppare nuove tecniche per il
+calcolo dell'omotopia stabile.
+
+\section{Successione spettrale di Adams}
+
+Sia $\Aa$ un'algebra associativa, non necessariamente commutativa, su un campo $\KK$.
+Idealmente, vorremo usare $\Aa = \Aa_{2}$ l'algebra di Steenrod.
+Se $M$ è un $\Aa$-modulo destro, riusciamo sempre a fabbricare una risoluzione
+\begin{equation*}
+	\dots \longrightarrow P_{2} \longrightarrow P_{1} 
+	\longrightarrow P_{0} \longrightarrow M \longrightarrow 0
+\end{equation*}
+di $\Aa$-moduli destri proiettivi. Dato $N$ un $\Aa$-modulo
+sinistro (risp. destro), possiamo applicare il funtore
+$- \otimes_{\Aa} N$ (risp. $\Hom_{\Aa}(-,N)$)
+e ottenere così una successione
+\begin{equation*}
+	\dots \longrightarrow P_{2} \otimes_{\Aa} N \longrightarrow P_{1} \otimes_{\Aa} N
+	\longrightarrow P_{0} \otimes_{\Aa} N \longrightarrow 0\,,
+\end{equation*}
+che in generale \emph{non} è esatta (similmente con $\Hom$).
+Questo ci permette di definire i funtori
+\begin{equation*}
+	\Tor^{\Aa}_{n} :=
+\end{equation*}
+
+Fissato $p$ primo, poniamo $\Aa = \AA_{p}$ l'algebra delle operazioni coomologiche
+modulo $p$. Per semplicità, consideriamo l'algebra $\Aa = \AA_{2}$
+delle operazioni di Steenrod.
+
+Dato uno spazio $Y$, l'insieme
+\begin{equation*}
+	\pi_{n}^{Y}(X) := [\Sigma^{n} Y , X]_{*}
+\end{equation*}
+ha tutta la dignità di essere un gruppo vero e proprio.
+Il \textbf{Teorema di Freudenthal} fornisce anche in questo
+caso degli isomorfismi di sospensione che stabilizzano, 
+e possiamo dunque definire l'\textbf{omotopia stabile}
+\begin{equation*}
+	(\pi_{k}^{Y})^{s}(X) := \lim_{n} \pi^{Y}_{k+n}(\Sigma^{n} X) 
+	= [\Sigma^{k+n} Y , \Sigma^{n} X]_{*}\,.
+\end{equation*}
+Si osservi che per $Y=S^{0}$ si ottiene la nozione di omotopia stabile vista prima.
+
+Costruiremo una successione spettrale\todo{c'è stato un commento sul fatto che la coomologia di questi spazi, purtroppo, non sarà mai libera. Qui trattiamo un po' con le mani una teoria più generale, che è quella degli spettri topologici}
+\begin{equation*}
+	E_{r}^{s,t} = \Ext_{\Aa}^{s+t}\big( \overline{H}^{*}(X), \overline{H}^{*}(Y) \big)\,.
+\end{equation*}
+Sia $X$ uno spazio topologico e consideriamo una risoluzione libera di $\Aa$-moduli
+\begin{equation*}
+	\begin{tikzcd}
+		0 
+		& \ar[l] \overline{H}^{*}(X) 
+		& \ar[l] B_{0} 
+		& \ar[l] B_{1}
+		& \ar[l] \dots
+	\end{tikzcd}
+\end{equation*}
+Per $N$ abbastanza grande, mostriamo adesso come approssimare il modulo $B_{i}$,
+che è un modulo graduato, con la coomologia di uno spazio topologico
+\emph{fino al grado $n$}, cioè
+\begin{equation*}
+	\overline{H}^{*}(X) \simeq \overline{H}^{*}(\Sigma^{N}X)\,,
+\end{equation*}
+a meno di shift di dimensione.
+Cominciamo prendendo i generatori liberi di $B_{0}$ come $\Aa$-modulo
+e siano $\alpha_{i} \in H^{q_{i}}(X)$ le loro immagini;
+ogni generatore $\iota_{q_{i}}$ induce delle mappe
+\begin{equation*}
+	\alpha_{i} : X \longrightarrow K(\Z/pZ, q_{i})\,, \quad
+	\Sigma^{n}\alpha_{i} : \Sigma^{n} X \longrightarrow K(\Z/pZ, N+q_{i})\,.
+\end{equation*}
+Il vantaggio di aver sospeso $N$ volte è che otteniamo una mappa
+\begin{equation*}
+	\Sigma^{N} X \longrightarrow Y_{0} := \prod_{i} K(\Z/p\Z, N + q_{i})\,,
+\end{equation*}
+dove l'$\Aa$-modulo $\overline{H}^{*}(Y_{0})$ adesso
+è libero nei gradi compresi tra $N$ e $2N$,
+e inoltre $\overline{H}^{q}(Y_{0}) = B_{0}^{q}$ per ogni $q < N$.
+Quindi $X(0) := \Sigma^{N}X \to Y_{0}$ induce una mappa di $\Aa$-moduli
+\begin{equation*}
+	H^{*}(Y_{0}) \longrightarrow H^{*}(\Sigma^{N}X)
+\end{equation*}
+che ``coincide'' con $B_{0} \to H^{*}(X)$ in grado $< N$.
+A meno di passare ai mapping cones, possiamo vedere $X(0) \to Y_{0}$
+come una fibrazione con fibra $X(1)$, e quindi ne possiamo studiare la successione spettrale.
+
+L'ho perso completamente...\todo{AAAAA}

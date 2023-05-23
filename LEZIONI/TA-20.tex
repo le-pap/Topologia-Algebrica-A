@@ -1,0 +1,280 @@
+%%% Lezione 20
+
+\lecture[Lez.20.]{2023-05-16}
+
+\begin{proof}[Dimostrazione del Teorema~\ref{steenrod-uniche}]
+	Dimostriamo l'enunciato per induzione su $n$, il grado della coomologia.
+	Chiamo $iota_{n} \in H^{n}(K_{n})$ la classe fondmentale.
+	
+	Per naturalità, è sufficiente definire $Sq \iota_{n}$, per ogni $i$ e per ogni $n$.
+	Il caso $n=1$ è determinato: siccome sappiamo che $K_{1}=\R\PP^{\infty}$,
+	allora $Sq^{0}\iota_{1} = \iota_{1}, Sq^{1}\iota_{1} = \iota_{1}^{2}$
+	e per $n > 1$ abbiamo $Sq^{i}\iota_{1}=0$.
+	
+	Supponiamo ora $n>1$. Supponiamo di aver definito $\iota^{i}_{n-1}$ per ogni $i$
+	e definiamo $Sq^{i}\iota_{n}$ tramite le trasgressioni studiate in precedenza:
+	consideriamo la fibrazione
+	\begin{equation*}
+		K_{n-1} = \Omega K_{n} \hookrightarrow PK_{n} \longrightarrow K_{n}\,.
+	\end{equation*}
+	La trasgressione è un isomorfismo tra
+	\begin{equation*}
+		H^{n-1}(K_{n-1}) \longrightarrow H^{n}(K_{n})\,, \quad
+		\iota_{n-1} \longmapsto d_{n}(\iota_{n-1}) = \iota_{n}\,.
+	\end{equation*}
+	Per $i < n-1$, allora abbiamo
+	\begin{equation*}
+		d^{0,n+i-1}_{n+1} : H^{n+i-1}(K_{n-1}) \longrightarrow H^{n+i}(K_{n})\,,
+		\quad Sq^{i}(\iota_{n-1}) \longmapsto Sq^{i}(\iota_{n})\,,
+	\end{equation*}
+	dato che per questi indici non incontriamo il quadrante non banale ``in alto a destra''.\todo{disegnettooooo}
+	Per ogni $i < n-1$ definiamo quindi $Sq^{i}(\iota_{n}) := d_{n+i}Sq^{i}(\iota_{n-1})$.
+	A priori, il caso $i=n-1$ potrebbe creare dei problemi: tuttavia,
+	sappiamo che $Sq^{n-1}(\iota_{n-1}) = \iota_{n-1}^{2}$, 
+	quindi calcolandone il differenziale $n$-esimo otteniamo
+	\begin{equation*}
+		d_{n}Sq^{n-1}(\iota_{n-1}) = d_{n}\iota_{n-1}^{2} = 2 \iota_{n-1}\iota_{n} = 0
+	\end{equation*}
+	perché siamo a coefficienti in $\Z/2\Z$. Dunque il differenziale è nullo,
+	da cui deduciamo che $\iota_{n-1}^{2}$ è una classe trasgressiva.
+	Questo ci permette di definire
+	\begin{equation*}
+		Sq^{n-1}(\iota_{n}) := d_{2n-1}(Sq^{n-1}(\iota_{n-1})) = d_{2n-1}\iota_{n-1}^{2}\,,
+		\quad Sq^{n}(\iota_{n}) := \iota_{n}^{2}\,.
+	\end{equation*}
+	Questo dimostra l'esistenza delle operazioni di Steenrod.
+	
+	Ora dimostriamo che queste operazioni hanno la proprietà di stabilità.
+	Sia $f_{n}$ l'omomorfismo
+	\begin{equation*}
+		f_{n} : H^{n+i}(K_{n}) \longrightarrow H^{n+i-1}(K_{n-1})\,, \quad
+		Sq^{i}(\iota_{n}) \longmapsto Sq^{i}(\iota_{n-1})\,.
+	\end{equation*}
+	Per $i > n$ non c'è nulla da dimostrare, mentre per $i<n$ la proprietà vale per costruzione,
+	quindi rimane da studiare il caso $i =n$.
+	\missingfigure{Diagrammoni pazzi.}
+	Definiamo la mappa $i_{n}$ più esplicitamente:
+	una classe $\alpha \in [K(\pi,n), K(\pi,n)]$
+	tramite $\Omega$ viene mandata nella classe di
+	\begin{equation*}
+		\Omega \alpha : \Omega K(\pi,n) \longrightarrow \Omega K(\pi,n) \,,
+		\quad \gamma \mapsto \alpha \circ \gamma\,.
+	\end{equation*}
+	Ma allora applicando la sospensione $\Sigma$, 
+	tramite la proprietà di aggiunzione deduciamo che
+	\begin{equation*}
+		\Sigma \Omega \alpha : \Sigma \Omega K(\pi,n) \longrightarrow K(\pi,n)\,,
+		\quad (t,\gamma) \longmapsto \Sigma \Omega \alpha (t,\gamma) 
+		= \alpha \circ ev(t,\gamma) = \alpha(\gamma(t))\,.
+	\end{equation*}
+	Questo mostra che $i_{n}^{*}(\alpha) = \alpha \circ ev$, cioè $\iota^{*}_{n} = ev^{*}$,
+	ma l'omomorfismo di trasgressione in $\Omega X \to P X \to X$ è l'inverso di
+	\begin{equation*}
+		\overline{H}^{n-1}(\Omega X) = \overline{H}^{n}(\Sigma \Omega X)
+		\overset{\longleftarrow}{ev^{*}} \overline{H}^{n}(X)\,.
+	\end{equation*}
+	Segue che $f_{n}$ è l'inverso della trasgreassione per $i<n$ e quindi
+	per definizione $f_{n}(Sq^{i}\iota_{n}) = Sq^{i}\iota_{n-1}$. 
+	Per $i=n$, ricordiamo che $Sq^{n}(\iota_{n}) = \iota_{n}^{2}$ e
+	$Sq^{n}(\iota_{n-1})=0$, quindi consideriamo il triangolo commutativo
+	\begin{equation*}
+		\begin{tikzcd}[column sep=small]
+			H^{2n}(K_{n}) \ar[rr, "f_{n}"] \ar[dr, "i^{*}_{n}"]
+			& & H^{2n-1}(K_{n-1}) 
+			& & \iota_{n}^{2} \ar[rr, mapsto] \ar[dr, mapsto] & & 0 \\
+			& H^{2n}(\Sigma K_{n-1}) \ar[ur, "\Sigma^{-1}"] & & &
+			& i^{*}_{n}(\iota_{n})^{2}=0 \ar[ur, mapsto] & \,,
+		\end{tikzcd}
+	\end{equation*}
+	dove abbiamo usato che ogni quadrato in una sospensione è zero.
+	
+	Resta da mostrare che vale la formula di Cartan~\ref{formula-cartan}.
+	Siano $\alpha \in H^{m}(X), \beta \in H^{n}(X)$. Se $m=0$ oppure $n=0$,
+	allora non ci sono problemi. Se $k>m+n$, allora $Sq^{k}(\alpha \beta) = 0$
+	e $\sum_{i+j=k}Sq^{i}(\alpha)Sq^{j}(\beta)=0$, quindi va bene.
+	Se $k=m+n$, allora $Sq^{k}(\alpha \beta) = (\alpha \beta)^{2}$, mentre dall'altra parte
+	\begin{equation*}
+		\sum_{i+j=m+n} Sq^{i}(\alpha) Sq^{j}(\beta) = Sq^{m}(\alpha) Sq^{n}(\beta)
+		= \alpha^{2} \beta^{2}\,,
+	\end{equation*}
+	quindi i due termini sono uguali, dato che i coefficienti sono in $\Z/2\Z$.
+	Adesso supponiamo di aver mostrato che la formula vale per $k>m+n-s$, con $s>0$.
+	Dimostriamo che allora vale anche per $k=m+n-s$; questo dimostra la formula per induzione.
+	Consideriamo le proiezioni
+	\begin{equation*}
+		\begin{tikzcd}
+			X & \ar[l, "\pi_{1}"] X \times Y \ar[r, "\pi_{2}"] & Y\,,
+		\end{tikzcd}
+	\end{equation*}
+	e per ogni $\alpha \in H^{*}(X), \beta \in H^{*}(Y)$ definiamo il prodotto
+	$\alpha \cdot \beta := \pi_{1}^{*}(\alpha) \smile \pi_{2}^{*}(\beta)$.
+	La formuladi Cartan equivale a
+	\begin{equation}
+		Sq^{m+n-s}(\alpha \cdot \beta) = \sum_{i+j=m+n-s} Sq^{i}(\alpha) \cdot Sq^{j}(\beta)\,.
+	\end{equation}
+	Se dimostriamo l'dentità per $X,Y$ due qualsiasi CW complessi, allora abbiamo la tesi.
+	Poiché $m,n>0$, prendo $\alpha \in H^{m}(X,x_{0}), \beta \in H^{n}(Y,y_{0})$
+	e ottengo $\alpha \cdot \beta \in H^{m+n}(X \times Y, X \vee Y) = H^{m+n}(X \wedge Y, \ast)$.
+	Per naturalità, posso limitarmi a considerare due classi fondamentali
+	\begin{equation*}
+		\alpha = \iota_{m} \in H^{m}(K_{m}, \ast)\,, \quad
+		\beta = \iota_{n} \in H^{n}(K_{n}, \ast)\,.
+	\end{equation*}
+	Allora il prodotto smash degli spazi classificanti può essere vista come
+	\begin{equation*}
+		\begin{tikzcd}
+			& (\Sigma K_{m-1}) \wedge K_{n} \ar[dl, "i_{m} \wedge \cat{1}_{K_{n}}"] \ar[r, equals]
+			& \Sigma (K_{m-1} \wedge K_{n}) \\
+			K_{m} \wedge K_{n} & & \\
+			& K_{m} \wedge (\Sigma K_{n-1}) \ar[ul, "\cat{1}_{K_{m}} \wedge i_{n}"] \ar[r, equals]
+			& \Sigma (K_{m} \wedge K_{n-1})\,,
+		\end{tikzcd}
+	\end{equation*}
+	e quindi passando in coomologia si ottiene
+	\begin{equation*}
+		\begin{tikzcd}
+			& H^{k}\big((\Sigma K_{m-1}) \wedge K_{n}\big)  \ar[r, "\Sigma^{-1}"]
+			& H^{k-1}(K_{m-1} \wedge K_{n}) \\
+			H^{k}(K_{m} \wedge K_{n}) \ar[ur, "(i_{m} \wedge \cat{1}_{K_{n}})^{*}"]
+			\ar[dr, "(\cat{1}_{K_{m}} \wedge i_{n})^{*}"] 
+			\ar[urr, bend left, "(1)"] \ar[drr, bend right, "(2)"] & & \\
+			& H^{k}\big( K_{m} \wedge (\Sigma K_{n-1}) \big)  \ar[r, "\Sigma^{-1}"]
+			& H^{k-1}(K_{m} \wedge K_{n-1})\,.
+		\end{tikzcd}
+	\end{equation*}
+	Gli omomorfismi nel diagramma commutano con le operazioni di Steenrod.
+	Dimostriamo ora che se $\gamma \in H^{*}(K_{m} \wedge K_{n})$ è annullata
+	sia da $(1)$, sia da $(2)$, allora necessariamente $\gamma=0$.
+	Per mostrarlo, assumo $\gamma = \sum_{i} \alpha_{i} \cdot \beta_{i}$,
+	con $\alpha_{i} \in H^{*}(K_{m})$ e $\beta_{i} \in H^{*}(K_{n})$
+	e numero di termini nella somma più piccolo possibile.
+	Con $\alpha_{i}$ linearmente indipendenti in $H^{*}(K_{m})$
+	e $\beta_{i}$ linearmente indipendenti in $H^{*}(K_{n})$,
+	le mappe $(1)$ e $(2)$ mandano rispettivamente
+	\begin{equation*}
+		\sum_{i} \alpha_{i} \cdot \beta_{i} \mapsto \sum_{i} f^{m}(\alpha_{i}) \cdot \beta_{i}\,,
+		\quad \sum_{i} \alpha_{i} \cdot \beta_{i} \mapsto \sum_{i} \alpha_{i} \cdot f_{n}(\beta_{i})\,,
+	\end{equation*}
+	e se sono entrambi nulli allora deduciamo che ogni $f_{m}(\alpha_{i})=0$ 
+	e $f_{n}(\beta_{i})=0$. Ma se $f_{m}(\alpha) = 0$, 
+	questo implica che $\alpha \in H^{r}(K_{m})$ per qualche $r > 2m$, e il risultato analogo vale per i $\beta$. Se dunque consideriamo
+	\begin{equation*}
+		\Delta = Sq^{m+n-s}(\iota_{m} \cdot \iota_{n}) 
+		- \sum_{i+j=m+n-s} Sq^{i}(\iota_{m}) \cdot Sq^{j}(\iota_{n})\,,
+	\end{equation*}
+	la sua immagine attraverso $(1)$ è 
+	\begin{equation*}
+		Sq^{m+n-s}(\iota_{m-1} \cdot \iota_{n}) 
+		- \sum_{i+j=m+n-s} Sq^{i}(\iota_{m-1}) \cdot Sq^{j}(\iota_{n}) \,,
+	\end{equation*}
+	mentre invece $(2)$ ci dà
+	\begin{equation*}
+		Sq^{m+n-s}(\iota_{m} \cdot \iota_{n-1}) 
+		- \sum_{i+j=m+n-s} Sq^{i}(\iota_{m}) \cdot Sq^{j}(\iota_{n-1})\,.
+	\end{equation*}
+	Dato che $(1) \Delta = 0$ e $(2) \Delta = 0$ per ipotesi induttiva,
+	allora concludiamo che $\Delta = 0$.
+\end{proof}
+
+\begin{df}
+	Indichiamo con $\Aa_{2}$ l'\textbf{algebra delle operazioni coomologiche}
+	generata dalle operazioni di Steenrod $Sq^{n}$,
+	in cui il prodotto è dato dalla composizione.
+\end{df}
+
+L'algebra $\Aa_{2}$ è \emph{tutta} l'algebra di operazioni coomologiche
+stabili di $\Z/2\Z$. Inoltre, si può dimostrare che $\Aa_{2}$ \textbf{non} è libera:
+\begin{thm}[Adams]
+	Per $a < 2b$, vale la relazione
+	\begin{equation*}
+		Sq^{a} Sq^{b} = \sum_{c} \binom{b-c-1}{a-2c} Sq^{a+b-c} Sq^{c}\,,
+	\end{equation*}
+	dove $c$ varia tra $\max (a-b+1, 0)$ e $\lfloor a/2 \rfloor$.
+	Questo sistema di relazioni è \textbf{completo}.
+\end{thm}
+
+\begin{ex}
+	Alcune relazioni in $\Aa_{2}$ sono
+	$Sq^{1} Sq^{2n} = Sq^{2n+1}, Sq^{1} Sq^{2n+1}=0, Sq^{2} Sq^{2} = Sq^{3} Sq^{1}, 
+	Sq^{3} Sq^{2}= 0$.
+\end{ex}
+
+\begin{df}
+	Posto il multiindice $I=(i_{1}, \dots, i_{n})$, definiamo l'operazione
+	\begin{equation*}
+		Sq^{I} := Sq^{i_{1}} Sq^{i_{2}} \dots Sq^{i_{n}}\,.
+	\end{equation*}
+	Se vale $i_{1} \ge 2 i_{2}, i_{2} \ge 2 i_{3}, \dots i_{n-1} \ge 2 i_{n}$,
+	allora $I$ si dice \textbf{ammissibile}
+	e $Sq^{I}$ è un'\textbf{operazione ammissibile}.
+	Chiamo \textbf{eccesso} di $I$ il valore
+	\begin{equation*}
+		e(I) := \sum_{j=1}^{n-1} (i_{j} - 2 i_{j+1})
+		= 2_{i_{1}} - \sum_{j=1}^{n} i_{j}\,.
+	\end{equation*}
+\end{df}
+
+\begin{prop}
+	Una \textbf{base} additiva di $\Aa_{2}$ è data dalle operazioni $Sq^{I}$ ammissibili.
+	\begin{proof}
+		Mostriamo che iterando le relazioni di Adam è possibile riscrivere ogni $Sq^{I}$
+		non ammissibili come somma di ammissibili. Infatti,
+		possiamo ordinare i multiindici $I$ tramite l'ordinamento lessicografico (ricordiamo
+		che è un buon ordinamento), e di conseguenza possiamo ordinare i $Sq^{I}$.
+		Posso applicare le relazioni di Adam solo se $I$ non è ammissibile,
+		quindi applicando le relazioni a $Sq^{I}$ ottengo $Sq^{J_{i}}$
+		minori rispetto all'ordine lex. Siccome basta un numero finito
+		di iterazioni per ricondursi a $Sq^{J_{i}}$, allora deduciamo
+		che le relazioni di Adam sono un sistema completo.
+	\end{proof}
+\end{prop}
+
+\begin{thm}[Serre]
+	L'anello di coomologia $H^{*}(K_{n})$ è un'algebra polinomiale generata dalle classi
+	$Sq^{I}\iota_{n}$, per tutte le sequenze ammissibili $I$ con eccesso $e(I) < n$.
+\end{thm}
+
+\begin{thm}
+	Se $i$ non è una potenza di $2$...
+	Vedi Lemma di Kummer...\todo{scrivi}
+\end{thm}
+
+\begin{cor}
+	L'algebra $\AA_{2}$ è generata (come algebra) dagli $Sq^{2^{i}}$.
+\end{cor}
+
+\begin{oss}
+	Trovare delle relazioni ``abbastanza semplici'' in $\AA_{2}$
+	come algebra è ancora un problema aperto. Più precisamente,
+	sappiamo che relazioni \emph{additive} ci sono, grazie a Adam,
+	tuttavia prendendo questi generatori $Sq^{2^{i}}$ ad oggi
+	non si conoscono delle relazioni  \emph{moltiplicative}
+	che diano una descrizione soddisfacente.
+\end{oss}
+
+\begin{thm}
+	Se $n$ non è  una potenza di $2$, allora non esistono in $\pi_{2n-1}(S^{n})$
+	elementi con invariante di Hopf dispari.
+	\begin{proof}
+		Dato $\alpha \in \pi_{2n-1}(S^{n})$, consideriamo un rappresentante $f \in \alpha$
+		e costruiamo lo spazio $Y := D^{2n} \cup_{f} S^{n}$.
+		La sua coomologia sarà
+		\begin{equation*}
+			H^{q}(Y;\Z/2\Z) \simeq \begin{cases}
+				\Z/2\Z\,, \quad &\text{se } q = 0, n, 2n\,; \\
+				0\,, \quad &\text{altrimenti}.
+			\end{cases}
+		\end{equation*}
+		Ma allora
+		\begin{equation*}
+			H^{n}(Y) \longrightarrow H^{2n}(Y)\,, \quad
+			\alpha \longmapsto \alpha^{2} = Sq^{n}(\alpha)\,,
+		\end{equation*}
+		quindi se $n$ non è una potenza di $2$, possiamo scomporre
+		l'operazione di Steenrod come somma
+		\begin{equation*}
+			Sq^{n}= \sum_{i+j=n} a_{i} Sq^{i}Sq^{j}(\alpha) \in H^{n+j}(Y) = 0\,,
+		\end{equation*}
+		e quindi abbiamo la tesi.
+	\end{proof}
+\end{thm}

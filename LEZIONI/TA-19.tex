@@ -1,0 +1,299 @@
+%%% Lezione 19
+
+\lecture[Lez.19.]{2023-05-15}
+
+\section{Sospensione}
+
+Più volte durante il corso abbiamo usato la classica fibrazione
+\begin{equation*}
+	\Omega X \hookrightarrow PX \longrightarrow X\,.
+\end{equation*}
+Infatti, questa nasce considerando i funtori tra
+spazi topologici puntati
+\begin{equation*}
+	\begin{tikzcd}
+		\cat{Top}_{*} \ar[r, "\Sigma"] & \cat{Top}_{*} \ar[l, "\Omega"]
+	\end{tikzcd}
+\end{equation*}
+che sono tra loro aggiunti: più precisamente, dotando
+gli spazi di funzioni della topologia compatto-aperta,
+per ogni coppia di spazi topologici $X,Y$ abbiamo degli 
+\emph{omeomorfismi} naturali
+\begin{equation*}
+	hom(\Sigma X, Y) \simeq hom(X, \Omega Y)\,,
+\end{equation*}
+dove i morfismi di aggiunzione sono dati esplicitamente da
+\begin{align*}
+	\sigma_{X} : X \longrightarrow \Omega \Sigma X\,, \quad
+	ev_{Y} : \Sigma \Omega Y \longrightarrow Y\,, \\
+	\sigma_{X}(x)(t) := [x,t] \in \Sigma X\,, \quad
+	ev_{Y}(\omega, t) := \omega(t)\,. 
+\end{align*}
+
+\begin{prop}
+	Dato uno spazio $X$ connesso per archi e semplicemente connesso,
+	sia $\{E_{*,*}^{n}\}_{n \ge 2}$ la successione spettrale
+	associata alla fibrazione $\Omega X \hookrightarrow PX \xrightarrow{\pi} X$.
+	L'omomorfismo di trasgressione
+	\begin{equation*}
+		H_{n}(X) = E^{2}_{n,0} \supset E_{n,0}^{n}
+		\overset{\longrightarrow}{d^{n}} E^{n}_{0,n-1} 
+		\longleftarrow E_{0,n-1}^{2} = H_{n-1}(\Omega X)
+	\end{equation*}
+	è indotto dall'inversa della composizione
+	\begin{equation*}
+		\overline{H}_{n-1}(\Omega X) \simeq \overline{H}_{n}(\Sigma \Omega X)
+		\longrightarrow H_{n}(X)\,.
+	\end{equation*}
+	\begin{proof}
+		Considero la mappa\todo{specificare che C indica i cammini liberi}
+		\begin{equation*}
+			\phi : C \Omega X \longrightarrow P X\,, \quad
+			\omega_{t}(u) := \omega(tu)\,,
+		\end{equation*}
+		cioè $\Omega X$ è contraibile in $PX$.
+		Considero allora la valutazione
+		\begin{equation*}
+			ev' : C \Omega X \longrightarrow X\,, \quad
+			ev'(t, \omega) := \omega(t)\,.
+		\end{equation*}
+		Abbiamo quindi il diagramma:
+		\missingfigure{Digramma pazzo sgravato}
+		che mostra che $ev_{*} \circ \Sigma$ è l'inversa della trasgressione
+		$\de_{*} \circ \pi^{-1}_{*} : H_{n}(X) \to H_{n-1}(\Omega X)$.
+	\end{proof}
+\end{prop}
+
+\begin{oss}
+	Possiamo interpretare la valutazione $ev : \Sigma \Omega X \to X$ in 
+	coomologia in un gruppo abeliano $A$ attraverso il seguente diagramma
+	\begin{equation*}
+		\begin{tikzcd}
+			\overline{H}^{n}(X;A) \ar[r] \ar[ddd, "\simeq"]
+			& \overline{H}^{n-1}(\Omega X; A) \ar[d] \\
+			& {[\Omega X, K(A,n-1)]_{*}} \ar[d] \\
+			& {[\Omega X, \Omega K(A,n)]_{*}} \ar[d] \\
+			{[X, K(A,n)]_{*}} \ar[r, "ev^{*}"]
+			& {[\Sigma \Omega X, K(A,n)]_{*}}\,.
+		\end{tikzcd}
+	\end{equation*}
+\end{oss}
+
+\begin{prop}\label{ev-mod-c}
+ 	Sia $\Cc$ un anello di Serre. Siano $n > 1$ e $X$ semplicemente connesso
+ 	tale che $H_{i}(X) \in \Cc$ per ogni $i < n$.
+ 	Allora
+ 	\begin{equation*}
+ 		ev_{*} : \overline{H}_{i-1}(\Omega X) \longrightarrow \overline{H}_{i}(X)
+ 	\end{equation*}
+ 	è un isomorfismo $\mathrm{mod}\Cc$, per ogni $i < 2n-1$, e
+ 	epimorfismo $\mathrm{mod}\Cc$ per $i=2n-1$.
+ 	\begin{proof}
+ 		Per quello che abbiamo visto
+ 		\begin{equation*}
+ 			\overline{H}_{i}(\Omega X) \in \Cc\,, \quad \text{per ogni } i < n-1\,,
+ 		\end{equation*}
+ 		quindi analizzando la sequenza spettrale della fibrazione
+ 		$\Omega X \subset P X \to X$ notiamo che
+ 		\missingfigure{paginetta che vabbé tanto prima che ne stampi una ci rivediamo l'anno prossimo.}
+ 		Solito discorso: in grado $(2n-1,0)$ parte un differenziale che tocca
+ 		un quadrante non banale in posizione $(n,n-1)$, e quindi possiamo
+ 		trovare un epi su un quoziente; più in basso invece abbiamo via libera e i differenzali
+ 		partono dalla riga zero-esima per arrivare, come isomorfismi, alla colonna zero-esima.
+ 		Si ottiene così il triangolo commutativo
+ 		\begin{equation*}
+ 			\begin{tikzcd}
+ 				H_{2n-1}(X) \ar[rr, "\simeq"] & & \frac{H_{2n-2}(\Omega X)}{\operatorname{im}d^{n}} \\
+ 				& H_{2n-2}(\Omega X) \ar[ul, two heads, "ev_{*}"] \ar[ur] & \,.
+ 			\end{tikzcd}
+ 		\end{equation*}
+ 	\end{proof}
+\end{prop}
+
+Se applichiamo il funtore di sospensione alla mappa $\sigma_{X}$ di aggiunzione,
+allora otteniamo il triangolo commutativo
+\begin{equation*}
+	\begin{tikzcd}
+		\Sigma X \ar[rr, "\Sigma \sigma_{X}"] \ar[dr, "\cat{1}_{\Sigma X}"]
+		& & \Sigma \Omega \Sigma X \ar[dl, "ev_{\Sigma X}"] \\
+		& \Sigma X \,,
+	\end{tikzcd}
+\end{equation*}
+che in omologia risotta induce lo spezzamento
+\begin{equation*}
+	\begin{tikzcd}
+		\overline{H}_{i}(X) \ar[d, "\simeq"] \ar[rr, "(\simeq_{X})_{*}"]
+		& & H_{i}(\Omega \Sigma X) \ar[d, "\simeq"] \\
+		\overline{H}_{i+1}(\Sigma X) \ar[rr, "\Sigma (\sigma_{X})_{*}"] \ar[dr, "\simeq"]
+		& & H_{i+1}(\Sigma \Omega \Sigma X)   \ar[dl, "(ev_{X})_{*}"]\\
+		& H_{i+1}(\Sigma X) \,. &
+	\end{tikzcd}
+\end{equation*}
+Per la \hyperref[ev-mod-c]{Proposizione~\ref{ev-mod-C}},
+se $X$ è $(n-1)$-connesso oppure $H_{i}(X) \in \Cc$ per ogni $i < n$,
+allora la mappa 
+\begin{equation*}
+	(ev_{\Sigma X})_{*} : H_{i}(\Omega \Sigma X) \longrightarrow H_{i+1}(\Sigma X)
+\end{equation*}
+è un isomorfismo $\mathrm{mod} \Cc$ per ogni $i < 2n$, come pure $(\sigma_{X})_{*}$.
+Applicando il {Teorema di Whitehead mod C} si ottiene quindi
+\begin{thm}[Sospensione di Freudenthal $\mathrm{mod}\Cc$]
+	Sia $\Cc$ un ideale di Serre aciclico, $n \ge 1$
+	e $X$ uno spazio topologico semplicemente connesso,
+	tale che $\overline{H}_{i}(X) \in \Cc$, per ogni $i < n$. Allora
+	l'omomorfismo di sospensione
+	\begin{equation*}
+		\pi_{i}(X, \ast) \longrightarrow ...
+	\end{equation*}
+\end{thm}
+
+Devo recuperare\todo{finire di copiare.}
+
+\section{Operazioni di Steenrod}
+
+Per il resto della sezione lavoreremo sempre 
+in coomologia a coefficienti in $\Z/2\Z$,
+e per semplicità scriveremo solamente $H^{*}(X)$.
+Che operazioni modulo $2$ conosciamo in coomologia?
+
+\begin{ex}
+	Un esempio banale potrebbe essere semplicemente
+	$x \mapsto x^{m}$, e se $m = 2^{n}$ allora è una mappa additiva.
+\end{ex}
+
+\begin{ex}
+	Ricordiamo che abbiamo già parlato dell'\textbf{omomorfismo di Bockstein}
+	\begin{equation*}
+		\beta_{2} : H^{i}(X) \longrightarrow H^{i+1}(X)\,,
+	\end{equation*}
+	dato dall'omomorfismo di connessione della successione in coomologia,
+	ottenuta applicando il funtore $\Hom(C_{*}(X), - )$ alla successione
+	esatta corta
+	\begin{equation*}
+		\begin{tikzcd}
+			0 \ar[r] & \Z/2\Z \ar[r]
+			& \Z/4\Z \ar[r]
+			& \Z/2\Z \ar[r]
+			& 0\,.
+		\end{tikzcd}
+	\end{equation*}
+\end{ex}
+
+\begin{exercise}
+	Provare a calcolare l'omomorfismo di Bockstein per $X = \R\PP^{2}$
+	e dimostrare che
+	\begin{equation*}
+		\beta_{2} : H^{1}(\R\PP^{2}) \longrightarrow H^{2}(\R\PP^{2})
+	\end{equation*}
+	è un isomorfismo.
+\end{exercise}
+
+\begin{thm}\label{steenrod-uniche}
+	Esiste un'unica famiglia di trasformazioni naturali additive
+	\begin{equation*}
+		Sq^{k} : H^{n}(X) \longrightarrow H^{n+k}(X)\,, \quad \text{con } n,k \ge 0\,,
+	\end{equation*}
+	tali che soddisfino:
+	\begin{itemize}
+		\item $Sq^{0}x = x$ ;
+		\item $Sq^{k}x = x^{2}$ se $|x|=k$;
+		\item $Sq^{k}x = 0$ se $k > |x|$;
+		\item vale la \textbf{formula di Cartan}
+		\begin{equation}\label{formula-cartan}
+			Sq^{k}(x \cup y) = \sum_{i + j = k} Sq^{i}(x) \cup Sq^{j}(y)\,.
+		\end{equation}
+	\end{itemize}
+	Chiameremo queste trasformazioni naturali le \textbf{operazioni di Steenrod}.
+\end{thm}
+
+Se mettiamo insieme tutti quadrati di Steenrod,
+possiamo vedere $Sq$ come un morfismo che si ``spalma''
+su tutto l'anello di coomologia
+\begin{equation*}
+	Sq : H^{*}(X) \longrightarrow H^{*}(X)\,, \quad
+	Sq(x) = Sq^{0}(x) + Sq^{1}(x) + Sq^{2}(x) + \dots
+\end{equation*}
+Allora la formula di Cartan~\eqref{formula-cartan} in questo caso
+diventa la condizione di moltiplicatività
+\begin{equation*}
+	Sq(x \cup y) = Sq(x) \cup Sq(y)\,.
+\end{equation*}
+Per il \textbf{Lemma di Yoneda}, le trasformazioni naturali
+$Sq^{k}$ possono essere rappresentate dalla coomologia
+dello spazio classificante, o meglio
+\begin{equation*}
+	H^{n}(K_{n}) \longrightarrow H^{n+k}(K_{n})\,, \quad K_{n} := K(\Z/2\Z,n)\,.
+\end{equation*}
+
+\begin{prop}
+	Le operazioni di Steenrod sono \textbf{stabili} e, per ogni $n$ e $q$,
+	il seguente diagramma commuta:
+	\begin{equation*}
+		\begin{tikzcd}
+			\overline{H}^{q}(X) \ar[r, "Sq^{n}"] \ar[d, "\Sigma"]
+			& \overline{H}^{q+n}(X) \ar[d, "\Sigma"] \\
+			\overline{H}^{q+1}(\Sigma X) \ar[r, "Sq^{n}"]
+			& \overline{H}^{q+n+1}(\Sigma X)\,.
+		\end{tikzcd}
+	\end{equation*}
+	\begin{proof}
+		La sospensione $\Sigma$ è indotta dal
+		cross product definito dal \textbf{Teorema di Künneth}
+		\begin{equation*}
+			\overline{H}(S^{1},\ast) \otimes \overline{H}^{*}(X,x_{0})
+			\longrightarrow H^{*}(S^{1} \times X, S^{1} \vee X) \simeq \overline{H}^{*}(S^{1} \wedge X)\,, 
+			\quad \omega_{1} \otimes \alpha \longmapsto \pi_{1}^{*}(\omega_{1}) \cup \pi_{2}^{*}(\alpha)\,,
+		\end{equation*}
+		dove $\omega_{1}$ è il generatore della coomologia ridotta di $S^{1}$ in grado $1$.
+		\begin{equation*}
+			\begin{tikzcd}
+				\alpha \ar[r, mapsto] \ar[d, mapsto, "Sq^{n}"]
+				& \pi_{1}^{*}(\omega_{1}) \cup \pi_{2}^{*}(\alpha)
+				\ar[d, mapsto, "Sq^{n}"] \\
+				Sq^{n} \alpha \ar[r, mapsto, dashed]
+				& Sq^{n}(\pi_{1}^{*}(\omega_{1}) \cup \pi_{2}^{*}(\alpha))\,,
+			\end{tikzcd}
+		\end{equation*}
+		dove il termine in basso a destra per la formula di Cartan è proprio
+		\begin{equation*}
+			Sq^{n}(\pi_{1}^{*}(\omega_{1}) \cup \pi_{2}^{*}(\alpha))
+			= \sum_{i+j=n} Sq^{i}(\pi_{1}^{*}(\omega_{1}) \cup Sq^{j}(\pi_{2}^{*}(\alpha))
+			= \pi_{1}^{*}(\omega_{1}) \cup Sq^{n}\pi_{2}^{*}(\alpha)\,,
+		\end{equation*}
+		dove abbiamo usato che $Sq^{n}(\pi_{1}^{*}(\omega_{1}))=0$ per ogni $n > 0$.
+	\end{proof}
+\end{prop}
+
+Conosciamo già un'operazione di Steenrod:
+\begin{prop}
+	La prima operazione di Steenrod è l'omomorfismo di Bockstein, i.e. $Sq^{1}=\beta_{2}$.
+	\begin{proof}
+		Dimostriamo il teorema per induzione su $n$.
+		Facciamo vedere che $Sq^{1}$ è non banale e alza di $1$
+		il grado della coomologia. Siccome soddisfa tutte le proprietà descritte dal
+		teorema e anche $\beta_{2}$ soddisfa le condizioni del teorema,
+		allora per unicità devono essere uguali.
+		Ma lo devo copiare perché non so come scriverlo, c'è la solita paginetta
+		della SS della fibrazione dei loop.
+	\end{proof}
+\end{prop}
+
+\begin{lemma}
+	Il prodotto cup in $H^{*}(\Sigma X)$ è banale
+	in grado $> 0$.
+	\begin{proof}
+		Segue perché la sospensione $\Sigma X$ 
+		si può scrivere come l'unione di due coni
+		$\Sigma X = C_{+}X \cup C_{-}X$,
+		che sono due sottospazi contraibili.
+		Ma allora
+		\begin{equation*}
+			\begin{tikzcd}
+			H^{*}(\Sigma X, \ast) \otimes H^{*}(\Sigma X, \ast)
+			\ar[r, "\smile"] & H^{*}(\Sigma X, \ast) \\
+			H^{*}(\Sigma X, C_{+}X) \otimes H^{*}(\Sigma X, C_{-}X)
+			 \ar[r, "\smile"] & H^{*}(\Sigma X, \Sigma X) = 0 \ar[u] \,.
+			\end{tikzcd}
+		\end{equation*}
+	\end{proof}
+\end{lemma}

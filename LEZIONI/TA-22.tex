@@ -1,0 +1,203 @@
+%%% Lezione 22
+
+Le mappe verticali della colonna a sinistra
+\begin{equation*}
+	\begin{tikzcd}
+		& \dots \ar[d, hook] & \\
+		& X(2) \ar[d, hook] \ar[r] & Y_{2} \\
+		& X(1) \ar[d, hook] \ar[r] & Y_{1} \\
+		\Sigma^{N} X \ar[r, equals] & X(0) \ar[r] & Y_{0} 
+	\end{tikzcd}
+\end{equation*}
+sono inclusioni e possiamo quindi vederle come \emph{fibrazioni}:
+quindi possiamo sostituire la fibra dell'inclusione $X(n+1) \hookrightarrow X(n)$
+con $Z_{n} := \Omega Y_{n}$.
+
+Siccome $\overline{H^{*}} \simeq B_{i}$ come $\Aa$-moduli (a meno di uno shift di $N-i+1$),
+fino al grado $n$, deduciamo allora che anche
+\begin{equation*}
+	\overline{H^{*}}(Z_{i}) \simeq B_{i}
+\end{equation*}
+in dimensione $N-i \le q \le N-i+n$.\todo{Non sto capendo bene questi gradi, devo ricontrollare}
+...
+
+\begin{oss}
+	La mappa della risoluzione libera ci dà
+	\begin{equation*}
+		\overline{H^{*}}(X(i)) \simeq \ker \left( B_{i-1} \longrightarrow B_{i-2} \right)\,.
+	\end{equation*}
+	Analizziamola, ad esempio, per $i=1$:
+	\begin{equation*}
+		\overline{H^{*}}(X(0)) \simeq \ker \left( B_{0} \longrightarrow \overline{H^{*}}(X) \right)
+	\end{equation*}
+	manda i generatori liberi in grado $0$ nei generatori di $\overline{H^{*}}(X)$ in grado $0$,
+	quindi il nucleo di questa mappa è \emph{banale in grado $0$}:
+	se ne deduce che $X(1)$ è uno spazio $1$-connesso.
+	Ripetendo lo stesso ragionemento nei gradi più alti,
+	si deduce che in realtà $X(1)$ è $(N-1)$-connesso.
+	Analogamente anche
+	\begin{equation*}
+		\overline{H^{*}}(X(i)) \simeq \ker \left( B_{i-1} \longrightarrow B_{i-2} \right)\,.
+	\end{equation*}
+	ha $\ker^{j} = 0$ per $j \le i-1$, e shiftando la dimensione opportunamente
+	si vede che $H^{N-1}(X(i))=0$.
+\end{oss}
+
+\section{Coppie esatte}
+
+Supponiamo di avere $D,E$ due $R$-moduli (in particolare ci interesseranno \emph{bigraduati}),
+e un triangolo commutativo del tipo
+\begin{equation*}
+	\begin{tikzcd}
+		D \ar[rr, "i"] & & D \ar[dl, "j"] \\
+		& E \ar[ur, "k"] &
+	\end{tikzcd}
+\end{equation*}
+che è esatto in ogni punto.
+
+\begin{df}
+	Definiamo il dato $\Cc = (D,E,i,j,k)$ una \textbf{coppia esatta}.
+\end{df}
+
+\begin{oss}
+	Se definiamo $d= j \circ k$ (attenzione, \emph{non} $j \circ i \circ k$),
+	allora otteniamo un differenziale in $E$ poiché
+	\begin{equation*}
+		d^{2} = j circ (k \circ j) \circ k = 0\,.
+	\end{equation*}
+\end{oss}
+
+\begin{df}
+	Data una coppia esatta $\Cc = (D,E,i,j,k)$, pongo
+	$d = j \circ k, D':= i(D) = \ker j$ e di conseguenza
+	\begin{align*}
+		E' = H(E,d)\,, \quad j' : D' \to E'\,, \\
+		i' = i\vert_{D'} : D' \to D'\,, \quad ...
+	\end{align*}
+	Allora il dato $\Cc' = (D',E',i',j',k')$
+	si chiama \textbf{coppia derivata} di $\Cc$.
+\end{df}
+
+\begin{prop}
+	La coppia derivata di una coppia esatta è a sua volta
+	una coppia esatta.
+\end{prop}
+
+Le coppie esatte ci permettono di produrre
+successioni spettrali, proprio
+come succedeva nella situazione dei moduli graduati filtrati.
+
+\begin{thm}
+	Dati due $R$-moduli bigraduati $D^{*,*}=\{D^{p,q}\}$ e $E^{*,*}=\{E^{p,q}\}$,
+	con morfismi\footnote{In letteratura si trovano tante convenzioni diverse per i gradi di questi morfismi: la differenza fondamentale sta nel segno $\pm 1$.}
+	\begin{align*}
+		i : D \longrightarrow D\,, \quad &\text{di grado } (-1,-1)\,, \\
+		j : D \longrightarrow E\,, \quad &\text{di grado } (0,0)\,, \\
+		k : E \longrightarrow D\,, \quad &\text{di grado } (0,1)\,,
+	\end{align*}
+	allora $\Cc = (D,E,i,j,k)$ è una coppia esatta.
+\end{thm}
+
+\begin{thm}
+	I dati $\Cc = (D,E,i,j,k)$ di una coppia esatta come nel Teorema
+	precedente determinano una successione spettrale di tipo coomologico
+	$\{E_{r}, d_{r}\}_{r \ge 1}$, con
+	\begin{equation*}
+		E_{r} = \left( E^{*,*} \right)^{r-1}\,, \quad
+		d_{r} = j^{r-1} \circ k^{r-1}\,.
+	\end{equation*}
+\end{thm}
+
+\begin{prop}
+	Descrizione della ss, con mille indici\todo{copiali}.
+	\begin{align*}
+		Z_{r}^{p,*} = k^{-1}\left( \operatorname{im} i^{r-1} : D^{p+r,*} \longrightarrow D^{p+1, *} \right)\,, \\
+		B^{p,*}_{r} = j \left( \ker \left( i^{r-1} : D^{p,*} \longrightarrow D^{p-r+1,*} \right) \right)\,, \\
+		E^{p,*}_{r} = Z^{p,*}_{r}/B^{p,*}_{r}\,.
+	\end{align*}
+	...
+\end{prop}
+
+Quindi ``srotolando'' le definizioni otteniamo un diagramma
+\missingfigure{Paginona}
+dove la successione
+\missingfigure{disegna il diagramma a scala.}
+è una successione \textbf{esatta}. Chiamiamo questa
+sequenza \textbf{diagramma a scala}.
+Notiamo che derivando la coppia,
+otteniamo una mappa $j'$ che sale in diagonale:
+\missingfigure{disegno pagina}
+Ma possiamo continuare a derivare:
+infatti, derivando una seconda volta otteniamo una
+mappa $j''$ che sale in diagonale con questa pendenza:
+\missingfigure{altra pagina}
+
+Applichiamo quindi questa costruzione ai moduli
+\begin{equation*}
+	D^{t,s} = \pi_{N+t-s}\left( X(s) \right)\,,
+	\quad E^{t,s} = \pi_{N+t-s}\left(Y_{s} \right)\,,
+\end{equation*}
+e otteniamo la successione esatta di omotopia
+della \textbf{torre di Adams}: 
+\begin{equation*}
+	\begin{tikzcd}[column sep=tiny, font=\small]
+		\pi_{N+t-s+1}\left( X(s) \right) 	\ar[d]
+		& \dots	
+		& \pi_{N+t-s}\left( X(s) \right) \ar[r, dotted] \ar[d, dotted]
+		& \pi_{N+t-s}\left( Y_{s+1} \right) \ar[r, dotted]
+		& \pi_{N+t-s-1}\left( X(s+1) \right)  \ar[d, dotted] \\
+		\pi_{N+t-s+1}\left( X(s-1) \right) \ar[r]
+		& \pi_{N+t-s+1}\left( Y_{s-1} \right) 	\ar[r]
+		& \pi_{N+t-s}\left( X(s) \right) \ar[r, dotted] \ar[d]
+		& \pi_{N+t-s}\left( Y_{s} \right) \ar[r, dotted]
+		& \pi_{N+t-s-1}\left( X(s+1) \right)  \ar[d, dotted] \\
+		\vdots & \vdots
+		& \pi_{N+t-s}\left( X(s-1) \right) \ar[r] 
+		& \pi_{N+t-s}\left( Y_{s-1} \right) \ar[r]
+		& \pi_{N+t-s-1}\left( X(s) \right) 
+	\end{tikzcd}
+\end{equation*}
+dove le frecce continue sono un pezzo della successione esatta
+descritta dal teorema.
+
+\begin{prop}
+	Consideriamo le seguenti condizioni:
+	\begin{rmnumerate}
+		\item se per ogni $n$, la mappa $i:D^{n+p,p} \to D^{n+p-1,p-1}$ è un isomorfismo,
+		tranne al più per un numero finito di $p$ (equivalentemente, $E^{n+p,p} \ne 0$
+		solo per una quantità finita di $p$), allora $D^{n+p,p}$
+		stabilizza per $p \to + \infty$ a un modulo $D^{n+\infty,+\infty}$
+		e per $n \to - \infty$ stabilizza a $D^{n-\infty,-\infty}$;
+		
+		\item per ogni $n$, $D^{n+p,p}$ è definitivamente nullo per $p \to +\infty$;
+		
+		\item per ogni $n$, $D^{n+p,p}$ è definitivamente nullo per $p \to -\infty$.
+	\end{rmnumerate}
+	Allora:
+	\begin{enumerate}
+		\item se valgono (i) e (ii), $E_{\infty}^{n+p,p}$ è isomorfo a
+		\begin{equation*}
+			F_{n}^{p}/F_{n}^{p-1}\,,
+		\end{equation*}
+		con $F_{n}^{p}:= \operatorname{im}\left( D^{n+p,p} \to D^{n-\infty, -\infty} \right)$,
+		per cui si ha una filtrazione $\dots \subset F^{p}_{n} \subset F^{p-1}_{n} \subset
+		\dots \subset D^{n-\infty, -\infty}$.
+		
+		\item Se valgono (i) e (iii), abbiamo una filtrazione
+		\begin{equation*}
+			\dots \subset G^{p}_{n-1} \subset G^{p-1}_{n-1} \subset 
+			\dots \subset D^{n-1+\infty, +\infty}\,,
+		\end{equation*}
+		data da $G^{p}_{n-1}=\ker\left( D^{n-1+\infty, +\infty} \to D^{n-1+p, p} \right)$,
+		e allora vale
+		\begin{equation*}
+			E_{\infty}^{n+p,p} \simeq G^{p}_{n-1}/G^{p-1}_{n-1}\,.
+		\end{equation*}
+	\end{enumerate}
+\end{prop}
+
+\begin{oss}
+	...
+\end{oss}
+
+
