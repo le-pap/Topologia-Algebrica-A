@@ -1,54 +1,54 @@
 %%% Lecture 6
 
 
-\lecture[Algebra delle operazioni coomologiche stabili. Definizione di algebra di Steenrod. Introduzione alle successioni spettrali: definizioni, filtrazioni, convergenza, modulo graduato associato ad una filtrazione, filtrazioni limitate, limite di una successione spettrale.]{2023-03-14}
-
-
-Se prendiamo un'operazione $\phi \in \cat{Stab}\Theta(r,\pi,G)$, 
-la pensiamo come una famiglia di trasformazioni naturali
-$\phi_{n} \in \Theta(n,n+r,\pi,G) = H^{n+r}(K(\pi,n);G)$ che soddisfa la condizione di
-stabilità $\Sigma \phi = \phi \Sigma$, ovvero gli omomorfismi
-\begin{equation*}
-	\begin{tikzcd}
-		f_{n} \, : \, H^{n+r}(K(\pi,n);G) \ar[r, "i_{n+r}^{*}"]
-		& H^{n+r}(\Sigma K(\pi,n-1);G) \ar[r, "\Sigma^{-1}"]
-		& H^{n+r-1}(K(\pi,n-1);G)\,,
-	\end{tikzcd}
-\end{equation*}
-soddisfano la condizione di stabilità $f_{n}(\phi_{n}) = \phi_{n-1}$,
-dove il primo omomorfismo è indotto da $\cat{1}_{\pi}$
-attraverso la seguente identificazione:
-\begin{equation*}
-	\begin{tikzcd}
-		\Hom_{\cat{Grp}}(\pi,\pi) \ar[r, equals] \ar[d, equals]
-		& H^{n-1}(K(\pi,n-1);\pi) \ar[d, "\Sigma", "\simeq"'] \\
-		H^{n}(K(\pi,n);\pi) \ar[r,"i^{*}_{n}"]
-		& H^{n}(\Sigma K(\pi,n-1);\pi)\,;
-	\end{tikzcd}
-\end{equation*}
-ricordiamo che tramite l'identificazione
-$H^{n-1}(K(\pi,n-1);\pi) \simeq [K(\pi,n-1),K(\pi,n)]_{\ast}$,
-questa classe in coomologia induce un'unica mappa
-$i_{n}:\Sigma K(\pi,n-1) \to K(\pi,n)$ a meno di omomotopia.
-
-\begin{oss}
-	La mappa $i_{n}$ è l'aggiunta di $K(\pi,n-1) \to \Omega K(\pi,n)$,
-	che ricordiamo essere un'equivalenza omotopica debole.
-\end{oss}
-
-Quindi le operazioni stabili si possono vedere come il limite inverso
-\begin{equation*}
-	\cat{Stab}\Theta(r,\pi,G) = \varprojlim_{n}\left( H^{n+r}(K(\pi,n);G),f_{n}\right)\,,
-\end{equation*}
-e nel caso in cui $G$ è un anello, $H^{*}(K(\pi,n);G))$ è un anello
-che \emph{non} induce la moltiplicazione in $\cat{Stab}\Theta(r,\pi,G)$.
-Tuttavia, la composizione di mappe rende  $\bigoplus_{r \ge 0}\cat{Stab}\Theta(r,\pi,G)$
-un \textbf{anello graduato}, unitario e in generale \emph{non} commutativo.
-La coomologia $H^{*}(X;G)$ è un modulo su tale anello e una
-qualsiasi funzione continua $f:X \to Y$ induce un omomorfismo di moduli.
-Inoltre, se $G=k$ è un campo, allora le operazioni coomologiche diventano
-una $k$-algebra, nel caso in cui $G=\Z/p$, con $p$ primo,
-viene chiamata \textbf{algebra di Steenrod} $\AA_{p}$.
+%\lecture[Algebra delle operazioni coomologiche stabili. Definizione di algebra di Steenrod. Introduzione alle successioni spettrali: definizioni, filtrazioni, convergenza, modulo graduato associato ad una filtrazione, filtrazioni limitate, limite di una successione spettrale.]{2023-03-14}
+%
+%
+%Se prendiamo un'operazione $\phi \in \cat{Stab}\Theta(r,\pi,G)$, 
+%la pensiamo come una famiglia di trasformazioni naturali
+%$\phi_{n} \in \Theta(n,n+r,\pi,G) = H^{n+r}(K(\pi,n);G)$ che soddisfa la condizione di
+%stabilità $\Sigma \phi = \phi \Sigma$, ovvero gli omomorfismi
+%\begin{equation*}
+%	\begin{tikzcd}
+%		f_{n} \, : \, H^{n+r}(K(\pi,n);G) \ar[r, "i_{n+r}^{*}"]
+%		& H^{n+r}(\Sigma K(\pi,n-1);G) \ar[r, "\Sigma^{-1}"]
+%		& H^{n+r-1}(K(\pi,n-1);G)\,,
+%	\end{tikzcd}
+%\end{equation*}
+%soddisfano la condizione di stabilità $f_{n}(\phi_{n}) = \phi_{n-1}$,
+%dove il primo omomorfismo è indotto da $\cat{1}_{\pi}$
+%attraverso la seguente identificazione:
+%\begin{equation*}
+%	\begin{tikzcd}
+%		\Hom_{\cat{Grp}}(\pi,\pi) \ar[r, equals] \ar[d, equals]
+%		& H^{n-1}(K(\pi,n-1);\pi) \ar[d, "\Sigma", "\simeq"'] \\
+%		H^{n}(K(\pi,n);\pi) \ar[r,"i^{*}_{n}"]
+%		& H^{n}(\Sigma K(\pi,n-1);\pi)\,;
+%	\end{tikzcd}
+%\end{equation*}
+%ricordiamo che tramite l'identificazione
+%$H^{n-1}(K(\pi,n-1);\pi) \simeq [K(\pi,n-1),K(\pi,n)]_{\ast}$,
+%questa classe in coomologia induce un'unica mappa
+%$i_{n}:\Sigma K(\pi,n-1) \to K(\pi,n)$ a meno di omomotopia.
+%
+%\begin{oss}
+%	La mappa $i_{n}$ è l'aggiunta di $K(\pi,n-1) \to \Omega K(\pi,n)$,
+%	che ricordiamo essere un'equivalenza omotopica debole.
+%\end{oss}
+%
+%Quindi le operazioni stabili si possono vedere come il limite inverso
+%\begin{equation*}
+%	\cat{Stab}\Theta(r,\pi,G) = \varprojlim_{n}\left( H^{n+r}(K(\pi,n);G),f_{n}\right)\,,
+%\end{equation*}
+%e nel caso in cui $G$ è un anello, $H^{*}(K(\pi,n);G))$ è un anello
+%che \emph{non} induce la moltiplicazione in $\cat{Stab}\Theta(r,\pi,G)$.
+%Tuttavia, la composizione di mappe rende  $\bigoplus_{r \ge 0}\cat{Stab}\Theta(r,\pi,G)$
+%un \textbf{anello graduato}, unitario e in generale \emph{non} commutativo.
+%La coomologia $H^{*}(X;G)$ è un modulo su tale anello e una
+%qualsiasi funzione continua $f:X \to Y$ induce un omomorfismo di moduli.
+%Inoltre, se $G=k$ è un campo, allora le operazioni coomologiche diventano
+%una $k$-algebra, nel caso in cui $G=\Z/p$, con $p$ primo,
+%viene chiamata \textbf{algebra di Steenrod} $\AA_{p}$.
 
 
 \chapter{Successioni spettrali}
