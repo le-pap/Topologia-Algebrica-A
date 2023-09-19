@@ -3,45 +3,85 @@
 
 \lecture[Successione spettrale e successione della coppia. Fibrati di Serre e teorema sulla successione spettrale di omologia associata ad un fibrato di Serre. Applicazione al calcolo dell'omologia di alcuni gruppi $SU(n)$. Applicazione al calcolo di alcuni gruppi di omologia dello spazio dei loop su uno spazio $X$ $n$-connesso.]{2023-04-18}
 
-\begin{ex}[Successione di una coppia]
-	Consideriamo uno spazio topologico $X$, su cui prendiamo la filtrazione
+\begin{ex}[\textbf{Successione di una coppia}]
+	Data una  coppia di spazi $(X,Y)$, possiamo considerare
+	l'inclusione $i : Y \subset X$ come una filtrazione	
 	\begin{equation*}
-		\emptyset \subset Y \subset X\,,
+		 X_{-1} \subset X_{0} \subset X_{1}\,,
 	\end{equation*}
-	o in altri termini consideriamo la coppia $(X,Y)$.
-	Questo determina una filtrazione sulle catene singolari di $X$,
+	dove $X_{-1} = \emptyset, X_{0}=Y$ e $X_{1}=X$.
+	Questa % filtrazione
+	determina la filtrazione $C_{*}(Y) \subset C_{*}(X)$ 
+	sulle catene singolari di $X$,
 	dalla quale otteniamo la successione spettrale
-	\begin{equation*}
+	\begin{equation}\label{SS-coppia}
 		E^{1}_{p,q} = H_{p+q}(X_{p},X_{p-1}) = 
 		\begin{cases}
 			H_{q}(Y) \,, \quad &\text{se } p=0\,; \\
 			H_{q+1}(X,Y) \,, \quad &\text{se } p=1\,\\
 			0\,, \quad &\text{altrimenti.}
 		\end{cases}
-	\end{equation*}
+	\end{equation}
 	\missingfigure{Fai disegno}
-	La mappa di bordo sulla prima pagina è
+	Si può verificare che la mappa di bordo sulla prima pagina
 	\begin{equation*}
 		d^{1}: E^{1}_{1,q} \longrightarrow E^{1}_{0,q}\,,
 	\end{equation*}
-	e si può verificare che questo è proprio l'omomorfismo di connessione della coppia
+	coincide con l'omomorfismo di connessione della coppia
 	\begin{equation*}
 		\de : H_{q+1}(X,Y) \longrightarrow H_{q}(Y)\,.
 	\end{equation*}
 	
-	Viceversa, supponiamo di avere il dato della successione spettrale;
+	Viceversa, supponiamo di avere il dato della successione spettrale
+	$(E^{1}_{\bullet, \bullet}, d^{1})$;
 	vogliamo ricostruire la successione della coppia.
-	Il termine limite è per definizione
+	Dato che la prima pagina si concentra in due
+	colonne adiacenti, è chiaro che la successione 
+	collassa alla seconda pagina,
+	quindi il termine limite è $E^{\infty}_{\bullet,\bullet} = E^{2}_{\bullet,\bullet}$.
+	Per il \hyperref[SS-machine]{Teorema~\ref{SS-machine}},
+	calcoliamo il limite per $p=0$ come
 	\begin{equation*}
-		E^{\infty}_{0,q} =
-		\frac{\im \left( H_{q}(Y) \longrightarrow H_{q}(X) \right)}{\im \left( H_{q}(\emptyset) \longrightarrow H_{q}(X) \right)}
-		= \im \left( i: H_{q}(Y) \longrightarrow H_{q}(X) \right)\,,
+		E^{\infty}_{0,q} = \frac{F_{0}H_{*}}{F_{-1}H_{*}}
+		= \frac{\im \left( H_{q}(Y) \to H_{q}(X) \right)}{\im \left( H_{q}(\emptyset) \to H_{q}(X) \right)}
+		= \im \left(H_{q}(Y) \xrightarrow{i^{*}} H_{q}(X) \right)\,,
 	\end{equation*}
-	e l'altro termine non nullo è
+	mentre sulla prima colonna è dato da
 	\begin{equation*}
-		E^{\infty}_{1,q} = \frac{H_{q+1}(X)}{\im \left( i: H_{q+1}(Y) \longrightarrow H_{q+1}(X) \right)}\,.
+		E^{\infty}_{1,q} = \frac{H_{q+1}(X)}{\im \left( i_{*}: H_{q+1}(Y) \to H_{q+1}(X) \right)}\,.
 	\end{equation*}
-	Confrontiamo $E^{\infty}$ con la pagina $E^{2}$:\todo{finisci}
+	D'altra parte la seconda pagina è data da
+	\begin{align*}
+		E^{2}_{1,q} 
+		= \ker \left( H_{q+1}(X,Y) \xrightarrow{\de} H_{q}(Y) \right) \,, \quad
+		E^{2}_{0,q} 
+		= \frac{H_{q}(Y)}{\im \de} \,.
+	\end{align*}
+	Confrontando $E^{\infty}$ con la pagina $E^{2}$ si hanno le identità
+	\begin{align*}
+		E^{2}_{1,q} 
+		&= \ker \left( H_{q+1}(X,Y) \xrightarrow{\de} H_{q}(Y) \right) 
+		= \frac{H_{q+1}(X)}{\im \left(  H_{q+1}(Y) \to H_{q+1}(X) \right)}
+		= E^{\infty}_{1,q}\,, \\
+		E^{2}_{0,q} 
+		&= \frac{H_{q}(Y)}{\im \de} 
+		= \im \left(  H_{q}(Y) \xrightarrow{i^{*}} H_{q}(X) \right)
+		= E^{\infty}_{0,q}\,.
+	\end{align*}
+	dalle quali si ottiene la successione esatta
+	\begin{equation*}
+		\begin{tikzcd}[column sep=small]
+			\cat{0} \ar[r]
+			& \frac{H_{q}(Y)}{\im \left(  H_{q+1}(X,Y) \to H_{q}(Y) \right)} \ar[r]
+			& H_{q}(X) \ar[r]
+			&  \ker \left( H_{q}(X,Y) \xrightarrow{\de} H_{q-1}(Y) \right) \ar[r]
+			& \cat{0}\,,
+		\end{tikzcd}
+	\end{equation*}
+	per ogni $q \in \Z$, 
+	ovvero la successione della coppia $(X,Y)$.
+	Ne segue che la successione della coppia è equivalente alla successione spettrale
+	\eqref{SS-coppia}.
 \end{ex}
 
 
@@ -65,9 +105,10 @@ Ricordiamo la seguente definizione.
 Se $B$ è uno spazio connesso per archi che ammette un rivestimento universale $\widetilde{B}$,
 allora per il \textbf{Teorema di approssimazione} possiamo trovare un'equivalenza
 omotopica debole $f: B' \to B$, con $B'$ un CW complesso. Siccome le fibrazioni
-sono una classe chiusa per pullback, allora anche $f^{*}E \to B'$ 
+sono una classe chiusa per pullback (vedi \hyperref[fib-prop]{Esercizio~\ref{fib-prop}}), 
+allora anche $f^{*}E \to B'$ 
 è una fibrazione di Serre, pertanto assumeremo 
-senza perdita di generalità che la base $B$ sia un CW complesso.
+senza perdita di generalità che la \emph{base $B$ sia un CW complesso}.
 
 Fissato $x \in B$, consideriamo  $E_{x} = \pi^{-1}(x)$ e
 a questa fibra associamo $H_{*}(E_{x})$. 

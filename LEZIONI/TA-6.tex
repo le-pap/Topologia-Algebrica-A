@@ -53,12 +53,20 @@
 
 \chapter{Successioni spettrali}
 
-Vogliamo studiare la (co)omologia di un complesso di (co)catene 
+La teoria delle successioni spettrali ha lo scopo di
+fornire uno strumento per calcolare $H^{*}$ un $R$-modulo graduato,
+$H^{*}$ una $k$-algebra graduata...
+Spesso l'$H^{*}$ che vogliamo studiare è
+la coomologia di un complesso di cocatene:
+una \emph{successione spettrale} ci permette di calcolare 
+la coomologia del complesso
 ``affettandolo'' attraverso delle \emph{filtrazioni},
 le quali ci permetteranno di studiare il complesso come se fosse un \emph{libro}:
-infatti, otterremo tanti bicomplessi chiamati \emph{pagine},
-ognuna delle pagine produrrà un nuovo complesso,
-ciascuno con un nuovo differenziale che ci sposta ``in su'' di una diagonale.
+infatti, otterremo tanti bicomplessi chiamati \emph{pagine} e
+ognuna di queste pagine produrrà un nuovo complesso,
+ciascuno dotato di un nuovo differenziale che ci sposta ``in su'' di una diagonale.
+Se la situazione è favorevole, i differenziali produrranno definitivamente
+(co)omologia banale, e la successione delle pagine si \emph{stabilizza}.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -79,17 +87,16 @@ ciascuno con un nuovo differenziale che ci sposta ``in su'' di una diagonale.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Se la situazione è favorevole, i differenziali produrranno definitivamente
-(co)omologia banale, e la successione delle pagine si \emph{stabilizza}.
+
 
 
 Sia $(C_{\bullet}, d)$ un complesso di catene.
 Ricordiamo che la sua omologia in grado $i$ è il quoziente 
-$H_{i}(C_{\bullet}) = \ker d_{i}/\mathrm{im} d_{i+1}$.
+$H_{i}(C_{\bullet}) = \ker d_{i}/\operatorname{im} d_{i+1}$.
 In presenza di un complesso di cocatene $(C^{\bullet},d)$
 usiamo invece la notazione \emph{crescente},
 e quindi la sua coomologia in grado $i$ è 
-$H^{i}(C^{\bullet}) = \ker d^{i}/\mathrm{im} d^{i-1}$.
+$H^{i}(C^{\bullet}) = \ker d^{i}/\operatorname{im} d^{i-1}$.
 
 \begin{df}
 	Dato un $R$-modulo $A$, una famiglia di sottomoduli 
@@ -112,7 +119,7 @@ $H^{i}(C^{\bullet}) = \ker d^{i}/\mathrm{im} d^{i-1}$.
 
 \begin{ex}
 	Una filtrazione descrescente $F^{\bullet}$ sul gruppo abeliano $A = \Z$ è data da
-	$F^{i}A = \Z$ per $i \le 0$ e $F^{i}A = 2^{i}\Z$ per $i > 0$:
+	$F^{i}A = \Z$ per $i \le 0$ e $F^{i}A = 2^{i}\Z$ per $i > 0$, cioè:
 	\begin{equation*}
 		0 \subset \dots \subset 16\Z \subset 8\Z \subset 4\Z \subset 2\Z \subset \Z\,.
 	\end{equation*}
@@ -136,17 +143,17 @@ $H^{i}(C^{\bullet}) = \ker d^{i}/\mathrm{im} d^{i-1}$.
 	ereditano una naturale struttura di complesso di catene
 	una volta che restringiamo il differenziale:
 	\begin{equation*}
-		d\vert_{F_{p}C_{\bullet}} : F_{p}C_{j} \longmapsto F_{p}C_{j-1}\,.
+		d\vert_{F_{p}C_{\bullet}} : F_{p}C_{j} \longrightarrow F_{p}C_{j-1}\,.
 	\end{equation*}
 
 \begin{df}
 	Dato $(A,F)$ un $R$-modulo filtrato, il suo \textbf{modulo graduato associato} è
 	\begin{itemize}
 		\item l'$R$-modulo $E^{0}(A) = \bigoplus_{p \in \Z} E^{0}_{p}(A)$, 
-		dove $E^{0}_{p}(A) := F_{p}A/F_{p-1}A$ se $F_{\bullet}$ è crescente;
+		dove $$E^{0}_{p}(A) := F_{p}A/F_{p-1}A$$ se $F_{\bullet}$ è crescente;
 		
 		\item l'$R$-modulo $E_{0}(A) = \bigoplus_{p \in \Z} E_{0}^{p}(A)$, 
-		dove $E^{p}_{0}(A) := F^{p}A/F^{p+1}A$ se $F^{\bullet}$ è decrescente.
+		dove $$E^{p}_{0}(A) := F^{p}A/F^{p+1}A$$ se $F^{\bullet}$ è decrescente.
 	\end{itemize}
 \end{df}
 
@@ -163,18 +170,21 @@ $H^{i}(C^{\bullet}) = \ker d^{i}/\mathrm{im} d^{i-1}$.
 	\end{equation*}
 	il modulo $E^{p}_{0}(A)$ non determina il modulo $A$: 
 	questo fatto è conosciuto come il \textbf{problema di estensione}.
-	Infatti, se consideriamo grado per grado $F^{n+m}A \simeq E^{n+m}_{0}(A)$
-	e le successioni esatte corte
+	Infatti, si potrebbe pensare
+	di ricostruire $A$ ``\emph{grado per grado}'''
+	a partire da $F^{n+m}A \simeq E^{n+m}_{0}(A)$ e poi considerando
+	le successioni esatte corte
 	\begin{equation*}
 		\begin{tikzcd}
 			0 \ar[r]
 			& F^{i+1}A \ar[r]
 			& F^{i}A \ar[r]
 			& E^{i}_{0}(A) \ar[r]
-			& 0\,,
+			& 0\,.
 		\end{tikzcd}
 	\end{equation*}
-	in generale il termine $F^{i}A$ \emph{non} è univocamente determinato:
+	Il problema è che in generale il termine 
+	$F^{i}A$ \emph{non} è univocamente determinato:
 	si pensi ad esempio
 	\begin{equation*}
 		\begin{tikzcd}
@@ -196,18 +206,30 @@ $H^{i}(C^{\bullet}) = \ker d^{i}/\mathrm{im} d^{i-1}$.
 		= \mathrm{Ann}\left( F_{p-1}C_{\bullet} \right)\,.
 	\end{equation*}
 	I moduli graduati associati corrispondono alle (co)catene relative agli scheletri di
-	dimensioni successive: più precisamente, abbiamo
+	dimensioni successive: più precisamente, 
+	dalla filtrazione crescente $F_{p}C_{\bullet}$ sulle catene singolari
+	si ottiene %l'anello $E^{0}\left(C_{\bullet}\right)$,
+	il \textbf{complesso delle catene cellulari},
+	infatti in grado $p$ si ha
 	\begin{align*}
-		E^{0}_{p}\left(C_{\bullet}\right) = C_{\bullet}\left( X^{(p)}, X^{(p-1)} \right)\,,
-		\quad E_{0}^{p}\left(C^{\bullet}\right) = C^{\bullet}\left( X^{(p)}, X^{(p-1)} \right)\,.
+		E^{0}_{p}\left(C_{\bullet}\right) 
+		= C_{\bullet}\left( X^{p} \right) / C_{\bullet}\left( X^{p-1} \right) 
+		= C_{\bullet}\left( X^{(p)}, X^{(p-1)} \right)\,,
+	\end{align*}
+	mentre sulle cocatene si ha
+	\begin{align*}
+		E_{0}^{p}\left(C^{\bullet}\right) 
+		&=  \mathrm{Ann}\left( F_{p-1}C_{\bullet} \right) / \mathrm{Ann}\left( F_{p}C_{\bullet} \right) \\
+		&= \Set{\phi \in C_{\bullet}\left( X^{(p)} \right) | C_{\bullet}\left(X^{(p-1)}\right) \subset \ker \phi}
+		= C^{\bullet}\left( X^{(p)}, X^{(p-1)} \right)\,.
 	\end{align*}
 \end{ex}
 
 \begin{df}
 	Data una mappa di complessi $f:D_{\bullet} \to C_{\bullet}$
 	e una filtrazione $F_{\bullet}$ su $C_{\bullet}$,
-	allora definiamo una filtrazione $G_{\bullet}$
-	indotta sul modulo $D_{\bullet}$ da
+	allora definiamo una \textbf{filtrazione $G_{\bullet}$
+	indotta} sul modulo $D_{\bullet}$ da
 	\begin{equation*}
 		G_{p}D_{\bullet} = f^{-1}\left(F_{p}C_{\bullet}\right)\,.
 	\end{equation*}
@@ -220,7 +242,7 @@ $H^{i}(C^{\bullet}) = \ker d^{i}/\mathrm{im} d^{i-1}$.
 	dove
 	\begin{equation*}
 		F_{p}H_{*}(C_{\bullet}) := 
-		\mathrm{im}\left( H_{*}(F_{p}C_{\bullet}) \to H_{*}(C_{\bullet}) \right)
+		\operatorname{im}\left( H_{*}(F_{p}C_{\bullet}) \to H_{*}(C_{\bullet}) \right)
 	\end{equation*}
 	determina una filtrazione crescente su $H_{*}$.
 	In maniera duale, dato un complesso di cocatene 
@@ -243,23 +265,88 @@ $H^{i}(C^{\bullet}) = \ker d^{i}/\mathrm{im} d^{i-1}$.
 	se c'è una mappa $d:E \to E$, tale che $d^{2}=0$ e abbia:
 		\begin{itemize}
 		\item \textbf{bigrado $(-r,r-1)$}, cioè il differenziale
-		in grado $(s,t)$ è $d_{s,t}:E_{s,t} \to E_{s-r,t+r-1}$;
+		in grado $(s,t)$ è $$d_{s,t}:E_{s,t} \to E_{s-r,t+r-1}\,;$$
 		
 		\item oppure \textbf{bigrado $(r,-r+1)$},
 		cioè il differenziale
-		in grado $(s,t)$ è $d^{s,t}:E^{s,t} \to E^{s+r,t-r+1}$.
+		in grado $(s,t)$ è $$d^{s,t}:E^{s,t} \to E^{s+r,t-r+1}\,.$$
 		\end{itemize}
 	Nel primo caso il differenziale ci fa ``scendere'' di diagonale nel bimodulo,
 	nel secondo caso ``saliamo'' sulla diagonale superiore,
-	come rappresentato in figura.
-	\missingfigure{Paginetta}
+	come rappresentato in \hyperref[ss-differenziale]{Figura~\ref{ss-differenziali}}.
 \end{df}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% PAGINETTA
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%\begin{center}
+%	\begin{figure}
+%		\centering
+%		\begin{tikzpicture}
+%			\draw[thick] (-1, -0.7) -- (4,-0.7) (-0.7,-1) -- (-0.7,4);
+%			\draw 
+%			(3,0) node{$\ast$} (3,1) node{$\ast$} (3,2) node{$\ast$} (3,3) node{$\ast$}
+%			(2,0) node{$\ast$} (2,1) node{$\ast$} (2,2) node{$\ast$} (2,3) node{$\ast$}
+%			(1,0) node{$\ast$} (1,1) node{$\ast$} (1,2) node{$\ast$} (1,3) node{$\ast$}
+%			(0,0) node{$\ast$} (0,1) node{$\ast$} (0,2) node{$\ast$} (0,3) node{$\ast$};
+%			\draw 
+%			(-1.2,3) node{$t+2$} 
+%			(-1.2,2) node{$t+1$} 
+%			(-1.2,1) node{$t$} 
+%			(-1.2,0) node{$t-1$}
+%			(0,-1) node{$s-1$} (1,-1) node{$s$} (2,-1) node{$s+1$} (3,-1) node{$s+2$};
+%		\end{tikzpicture}
+%	\end{figure}
+%\end{center}
+%
+%\begin{center}
+%	\begin{figure}
+%		\centering
+%		\begin{tikzpicture}
+%			\draw[thick] (-1.5, -0.5) -- (7,-0.5) (-1,-1) -- (-1,4);
+%			\draw 
+%			(0,3) node{$E_{s-1,t+2}$} (2,3) node{$E_{s,t+2}$} (4,3) node{$E_{s+1,t+2}$} (6,3) node{$E_{s+2,t+2}$}
+%			(0,2) node{$E_{s-1,t+1}$} (2,2) node{$E_{s,t+1}$} (4,2) node{$E_{s+1,t+1}$} (6,2) node{$E_{s+2,t+1}$}
+%			(0,1) node{$E_{s-1,t}$} (2,1) node{$E_{s,t}$} (4,1) node{$E_{s+1,t}$} (6,1) node{$E_{s+2,t}$}
+%			(0,0) node{$E_{s-1,t-1}$} (2,0) node{$E_{s,t-1}$} (4,0) node{$E_{s+1,t-1}$} (6,0) node{$E_{s+2,t-1}$};
+%			\draw 
+%			(-1.5,4) node{$t$} (7,-1) node{$s$};
+%		\end{tikzpicture}
+%	\end{figure}
+%\end{center}
+
+	\begin{figure}
+		\centering
+		\begin{tikzpicture}
+			\draw[very thick, ->] (-1.5, -0.5) -- (7,-0.5);
+			\draw[very thick, ->] (-1,-1) -- (-1,4);
+			\draw 
+			(0,3) node(B){$E^{s,t+1}$} (2,3) node{$\ast$} (4,3) node{$\ast$} (6,3) node{$\ast$}
+			(0,2) node(A){$E^{s,t}$} (2,2) node(C){$E^{s+1,t}$} (4,2) node{$\ast$} (6,2) node{$\ast$}
+			(0,1) node{$\ast$} (2,1) node{$\ast$} (4,1) node(D){$E^{s+2,t-1}$} (6,1) node{$\ast$}
+			(0,0) node{$\ast$} (2,0) node{$\ast$} (4,0) node{$\ast$} (6,0) node(E){$E^{s+3,t-2}$};
+			\draw 
+			(-1.5,4) node{$t$} (7,-1) node{$s$};
+			
+			\draw[->] (A) --node[anchor=east]{$d^{0}$} (B);
+			\draw[->] (A) --node[anchor=south]{$d^{1}$} (C);
+			\draw[->] (A) --node[anchor=south west, pos=0.8]{$d^{2}$} (D);
+			\draw[->] (A) --node[anchor=north east, pos=0.6]{$d^{3}$} (5.2,0);
+			
+		\end{tikzpicture}
+		\caption{I primi differenziali di bigrado $(r,1-r)$ in un bimodulo
+		con notazione coomologica.}
+    	\label{ss-differenziali}
+	\end{figure}
+
 
 
 \begin{oss}
 	Un modulo bigraduato $E_{\bullet,\bullet}$ dà origine ad un complesso di catene
 	\begin{equation*}
-		K_{n} := \bigoplus_{s+t=n} E_{s+t}\,,
+		K_{n} := \bigoplus_{s+t=n} E_{s,t}\,,
 	\end{equation*}
 	e in maniera duale, se il modulo ha la convenzione coomologica $E^{\bullet, \bullet}$,
 	allora dà origine a un complesso di cocatene $K^{\bullet}$.
@@ -269,7 +356,7 @@ Dato un modulo bigraduato $(E_{\bullet,\bullet},d)$,
 dato che $d^{2}=0$, possiamo calcolare la sua omologia $(p,q)$-esima 
 come il quoziente
 \begin{equation*}
-	H_{p,q}(E_{\bullet,\bullet},d) := \dfrac{\ker\left( d : E_{p,q} \to E_{p-r,q+r-1} \right)}{\mathrm{im}\left( d: E_{p+r,q-r+1} \to E_{p,q} \right)}\,,
+	H_{p,q}(E_{\bullet,\bullet},d) := \dfrac{\ker\left( d : E_{p,q} \to E_{p-r,q+r-1} \right)}{\operatorname{im}\left( d: E_{p+r,q-r+1} \to E_{p,q} \right)}\,,
 \end{equation*}
 e la stessa cosa accade per la coomologia di $E^{\bullet,\bullet}$. 
 
@@ -292,7 +379,7 @@ e la stessa cosa accade per la coomologia di $E^{\bullet,\bullet}$.
 
 D'ora in avanti enunceremo definizioni e teoremi per uno solo dei due tipi
 (per lo più il caso coomologico), ma è bene tenere a mente che
-le costruzioni calgono in maniera analoga per entrambe le situazioni.
+le costruzioni valgono in maniera analoga per entrambe le situazioni.
 
 \begin{oss}
 	Per definizione, la pagina $r$-esima $(E_{r}^{\bullet,\bullet},d_{r})$
@@ -304,7 +391,7 @@ Una successione spettrale va pensata come una successione di pagine,
 proprio come in un libro; in quanto tale, vorremmo conoscere
 il suo comportamento ``alla fine'', ovvero studiare il suo \emph{limite}.
 Per ogni $r \ge k$, indichiamo con $Z_{r}=\ker d_{r}$ i \textbf{cocicli} 
-e con $B_{r}=\mathrm{im}d_{r}$ i \textbf{cobordi} del differenziale;
+e con $B_{r}=\operatorname{im}d_{r}$ i \textbf{cobordi} del differenziale;
 dato che $E_{r+1}=Z_{r}/B_{r}$, possiamo vedere il differenziale $(r+1)$-esimo
 come un omomorfismo $d_{r+1} : Z_{r}/B_{r} \to Z_{r}/B_{r}$ e quindi 
 considerare i suoi cocicli $Z_{r+1}$ come un (\emph{quoziente di un})
@@ -332,13 +419,22 @@ e quindi riuscire a aggirare questo problema di calcolo.
 Introduciamo così una nozione di \emph{convergenza}.
 
 \begin{df}
+	Sia $H^{*}$ un $R$-modulo graduato.
 	Una successione spettrale $\Set{(E_{r}^{\bullet,\bullet},d_{r})}_{r \ge k}$
 	si dice \textbf{convergente a $H^{*}$} se esiste 
-	una filtrazione decrescente $F^{\bullet}$ su $H^{*}$ tale che
+	una filtrazione %decrescente 
+	$F^{\bullet}$ su $H^{*}$ tale che
 	\begin{equation*}
 		E_{\infty}^{p,q} \simeq E_{0}^{p}(H^{p+q})\,.
 	\end{equation*}
 \end{df}
+
+\begin{oss}
+	L'idea di \emph{convergenza} di una successione spettrale
+	è che la \emph{digaonale} $p+q=n$ dell'elemento limite
+	vada a ``approssimare'' il sottomodulo $H^{n}$
+	tramite un modulo graduato associato.
+\end{oss}
 
 Sotto opportune ipotesi,
 possiamo trovare delle situazioni dove il limite è più ``addomesticabile'',
@@ -389,3 +485,146 @@ se la successione in $(p,q)$ stabilizza, allora
 %
 %
 %
+
+\begin{ex}
+	Prima di approfondire ulteriormente la teoria dietro alle successioni spettrali,
+	possiamo cominciare a acquisire familiarità con queste tecniche dimostrando il
+	seguente
+	\begin{thm}[\textbf{Successione di Wang}]\label{wang}
+		Sia $\Set{(E_{r}^{\bullet,\bullet},d_{r})}_{r \ge 2}$
+		una successione spettrale nel primo quadrante, tale che
+		per ogni $p \ne 0,n$ si abbia $E_{2}^{p,q} = 0$.
+		Se la successione converge a $H^{*}$, allora esiste una successione esatta lunga
+		\begin{equation*}
+			\begin{tikzcd}
+				\dots \ar[r]
+				& H^{k} \ar[r]
+				& E^{0,k}_{2} \ar[r, "d_{n}"]
+				& E^{n,k-n+1}_{2} \ar[r]
+				& H^{k+1} \ar[r]
+				& \dots
+			\end{tikzcd}
+		\end{equation*}
+		\begin{proof}
+			La pagina $E_{2}^{\bullet,\bullet}$ è concentrata
+			nella $0$-esima e nella $n$-esima colonna, come mostrato in
+			\hyperref[wang-e2]{Figura~\ref{wang-e2}}.
+			Si deduce immediatamente che i differenziali della successione
+			sono tutti nulli, fatta eccezione di $d_{n}$.
+			
+	\begin{figure}
+		\centering
+		\begin{tikzpicture}
+			\fill[opacity=.3] (-1,-0.5) -- (1, -0.5) -- (1,4) -- (-1,4) -- (-1,-0.5);
+			\fill[opacity=.3] (5,-0.5) -- (7, -0.5) -- (7,4) -- (5,4) -- (5,-0.5);
+			\draw[thick] (-1.5, -0.5) -- (7,-0.5) (-1,-1) -- (-1,4);
+			\draw 
+			(0,3) node(A){$E_{2}^{0,q}$} (6,3) node{$E_{2}^{n,q}$}
+			(0,2) node{$\vdots$}  (6,2) node{$\vdots$}
+			(0,1) node{$E_{2}^{0,q-n}$} (6,1) node(B){$E_{2}^{n,q-n}$}
+			(0,0) node{$E_{2}^{0,q-n-1}$} (6,0) node{$E_{2}^{n,q-n-1}$};
+			\draw 
+			(-1.5,4) node{$q$} (0,-1) node{$0$} (6,-1) node{$n$};
+			\draw[->] (A) --node[anchor=south]{$d_{n}$} (B);
+		\end{tikzpicture}
+		\caption{Pagina $E^{\bullet,\bullet}_{2}$ come nelle ipotesi del \hyperref[wang]{Teorema~\ref{wang}}.}
+    	\label{wang-e2}
+	\end{figure}
+			
+			La successione spettrale collassa alla pagina $n+1$
+			e si può dedurre che il limite è
+			\begin{equation*}
+				E^{0,q}_{\infty} \simeq 
+				\ker \left( d_{n} : E^{0,q}_{2} \to E^{n,q-n+1}_{2} \right)\,,
+				\quad 
+				E^{n,q}_{\infty} \simeq 
+				\operatorname{coker}\left( d_{n} : E^{0,n+q-1}_{2} \to E^{n,q}_{2} \right)\,,
+			\end{equation*}
+			quindi per ogni $q \in \Z$ abbiamo la successione esatta
+			\begin{equation}\label{wang-A}
+				\begin{tikzcd}
+					\cat{0} \ar[r]
+					& E^{0,q}_{\infty} \ar[r]
+					& E^{0,q}_{2} \ar[r, "d_{n}"]
+					& E^{n,q-n+1}_{2} \ar[r]
+					& E^{n,q-n+1}_{\infty} \ar[r]
+					& \cat{0} \,.
+				\end{tikzcd}\tag{A}
+			\end{equation}
+			D'altra parte, l'ipotesi che $E^{\bullet,\bullet}_{r}$ converge 
+			a $H^{*}$ ci permette di dedurre informazioni sulla
+			filtrazione $F$ che c'è su questo modulo: infatti,
+			dato che per $p \ne 0,n$ si ha
+			\begin{equation*}
+				\cat{0} \simeq E^{p,q}_{\infty} \simeq 
+				\frac{F^{p}H^{p+q}}{F^{p+1}H^{p+q}}\,,
+			\end{equation*}
+			deduciamo che la filtrazione su $H^{*}$ ha al più due termini:
+			per ogni $k \in \Z$, studiando
+			gli elementi della forma $E^{p,k-p}_{\infty}$ si vede che
+			\begin{equation*}
+				H^{k} = F^{0}H^{k} \supset F^{1}H^{k} = F^{2}H^{k} = \dots
+				= F^{n}H^{k} \supset F^{n+1}H^{k} = \cat{0}\,.
+			\end{equation*}
+			Da questo si deduce che 
+			$E^{0,k}_{\infty} \simeq F^{0}H^{k}/F^{n}H^{k} \simeq H^{k}/E^{n,k-n}_{\infty}$
+			e quindi esiste una successione esatta corta
+			\begin{equation}\label{wang-B}
+				\begin{tikzcd}
+					\cat{0} \ar[r]
+					& E^{n,k-n}_{\infty} \ar[r]
+					& H^{k} \ar[r]
+					& E^{0,k}_{\infty} \ar[r]
+					& \cat{0} \,.
+				\end{tikzcd}\tag{B}
+			\end{equation}
+			``Incollando'' le \eqref{wang-A} con le \eqref{wang-B},
+			otteniamo la \textbf{successione di Wang}, 
+			tratteggiata nel diagramma sottostante:
+			\begin{equation*}
+				\begin{tikzcd}
+					& \cat{0} \ar[d] & & & & \\
+					\dots \ar[r] \ar[dr, dashed] & E^{n,k-n}_{\infty} \ar[d] \ar[r]& \cat{0} & & & \\
+					& H^{k} \ar[d] \ar[dr, dashed] & & & \cat{0} \ar[d] & \\
+					\cat{0} \ar[r] & E^{0,k}_{\infty} \ar[r] \ar[d] & E^{0,k}_{2} \ar[r, "d_{n}", dashed]
+					& E^{n,k-n+1}_{2} \ar[r] \ar[dr, dashed] & E^{n,q-n+1}_{\infty} \ar[r] \ar[d] & \cat{0} \\
+					& \cat{0} & & & H^{k+1} \ar[d] \ar[dr, dashed] & \\
+					& & & \cat{0} \ar[r] & E^{0,k+1}_{\infty} \ar[d] \ar[r] & \dots \\
+					& & & & \cat{0} & \,.
+				\end{tikzcd}
+			\end{equation*}\qedhere
+		\end{proof}
+	\end{thm}
+\end{ex}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
