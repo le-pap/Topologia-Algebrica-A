@@ -22,7 +22,27 @@
 			0\,, \quad &\text{altrimenti.}
 		\end{cases}
 	\end{equation}
-	\missingfigure{Fai disegno}
+	
+	\begin{figure}
+		\centering
+		\begin{tikzpicture}
+			\fill[opacity=.4] (-1,-0.5) -- (2, -0.5) -- (2,4) -- (-1,4) -- (-1,-0.5);
+			\fill[opacity=.2] (2,-0.5) -- (5, -0.5) -- (5,4) -- (2,4) -- (2,-0.5);
+			\draw[thick] (-1.5, -0.5) -- (7,-0.5) (-1,-1) -- (-1,4);
+			\draw 
+			(0.5,3) node(C){$H_{q}(Y)$} (3.5,3) node(D){$H_{q}(X,Y)$}
+			(0.5,2) node{$\vdots$}  (3.5,2) node{$\vdots$}
+			(0.5,1) node(A){$H_{1}(Y)$} (3.5,1) node(B){$H_{1}(X,Y)$}
+			(0.5,0) node(E){$H_{0}(Y)$} (3.5,0) node(F){$H_{0}(X,Y)$};
+			\draw (-1.5,4) node{$q$} (0.5,-1) node{$0$} (3.5,-1) node{$1$};
+			\draw[->] (B) --node[anchor=south]{$d^{1}$} (A);
+			\draw[->] (D) -- (C);
+			\draw[->] (F) -- (E);
+		\end{tikzpicture}
+		\caption{Successione spettrale della coppia $(X,Y)$.}
+    	\label{SS-coppia-disegno}
+	\end{figure}	
+	
 	Si può verificare che la mappa di bordo sulla prima pagina
 	\begin{equation*}
 		d^{1}: E^{1}_{1,q} \longrightarrow E^{1}_{0,q}\,,
@@ -110,12 +130,12 @@ allora anche $f^{*}E \to B'$
 è una fibrazione di Serre, pertanto assumeremo 
 senza perdita di generalità che la \emph{base $B$ sia un CW complesso}.
 
-Fissato $x \in B$, consideriamo  $E_{x} = \pi^{-1}(x)$ e
-a questa fibra associamo $H_{*}(E_{x})$. 
-Adesso vorremmo associare un omomorfismo 
-$\gamma_{*} : H_{*}(E_{x}) \to H_{*}(E_{x'})$
-per ogni cammino
-$\gamma : x \to x'$ in $B$. 
+Fissato $x \in B$, consideriamo la fibra $E_{x} = \pi^{-1}(x)$ e
+la sua omologia $H_{*}(E_{x})$. 
+A ogni cammino
+$\gamma : x \mapsto x'$ in $B$ 
+vorremmo associare un omomorfismo 
+$\gamma_{*} : H_{*}(E_{x}) \to H_{*}(E_{x'})$.
 Presa $\alpha_{0} : A_{x} \to E_{x}$ un'approssimazione CW della fibra su $x$,
 possiamo usare la \eqref{Serre-HLP} induttivamente sullo scheletro di $A_{x}$
 per poter sollevare l'omotopia 
@@ -134,8 +154,9 @@ Allora $\alpha_{1} :A_{x} \to E_{x'}$ induce in omotopia un omomorfismo
 $\gamma_{*} : H_{*}(E_{x}) \to H_{*}(E_{x'})$.
 Notiamo inoltre che se $\gamma \sim \gamma'$ sono omotopi \emph{a estremi fissati},
 allora producono lo stesso omomorfismo in omologia; in particolare,
-se $x=x'$, notiamo allora che $\pi_{1}(B,x)$ agisce su
-$H_{*}(E_{x})$ e si verifica che $\gamma$ è costante induce $\gamma_{*} = \cat{1}_{H_{*}(E_{x})}$.
+se $x=x'$, notiamo che $\pi_{1}(B,x)$ agisce su
+$H_{*}(E_{x})$ e si verifica che se $\gamma$ è costante,
+allora induce $\gamma_{*} = \cat{1}_{H_{*}(E_{x})}$.
 Questo appena descritto è un esempio di \emph{sistema locale}.
 
 \begin{df}
@@ -184,26 +205,26 @@ che ammette rivestimento universale $\widetilde{X}$.
 Allora $\pi_{1}(X,x_{0})$ agisce (da \emph{destra})
 su $\widetilde{X}$ per \textbf{traslazione}, ovvero
 \begin{equation*}
-	\widetilde{X} \times \pi_{1}(X,x_{0})\,, \quad
-	(x,\gamma) \longmapsto x'
+	\widetilde{X} \times \pi_{1}(X,x_{0}) \longrightarrow \widetilde{X} \,, \quad
+	(x,\gamma) \longmapsto x'\,,
 \end{equation*}
-dove $x'$ è \todo{noccapito}
-
+dove $x'$ è il punto di arrivo del sollevamento di $\gamma$.
 In particolare questo induce un'azione \emph{destra} di $\pi_{1}(X,x_{0})$
-sulle catene singolari $C_{*}(\widetilde{X})$ per traslazione,
+sulle catene singolari $C_{*}\left(\widetilde{X}\right)$ per traslazione,
 e si verifica che questa azione commuta con il differenziale $d$.
 
 \begin{df}
-	Dato $x_{0}$ in $X$ connesso per archi, il complesso
+	Sia $X$ connesso per archi e $\Gg$ un sistema locale su $X$.
+	Fissato $x_{0} \in X$, il complesso
 	\begin{equation*}
-		C_{*}(X;\Gg) := C_{*}(\widetilde{X}) \otimes_{\Z[\pi_{1}(X,x_{0})]} G_{x_{0}}
+		C_{*}(X;\Gg) := C_{*}\left(\widetilde{X}\right) \otimes_{\Z[\pi_{1}(X,x_{0})]} G_{x_{0}}
 	\end{equation*}
 	viene chiamato \textbf{complesso delle catene singolari a coefficienti in $\Gg$},
 	il cui bordo è indotto da $d:C_{*}(\widetilde{X}) \to C_{*}(\widetilde{X})$.
 	Passando al duale, definiamo le \textbf{cocatene singolari a coefficienti in $\Gg$}
 	come
 	\begin{equation*}
-		C^{*}(X;\Gg) := \Hom_{\Z[\pi_{1}(X,x_{0})]}\left(C_{*}(\widetilde{X};G_{x_{0}}\right)\,.
+		C^{*}(X;\Gg) := \Hom_{\Z[\pi_{1}(X,x_{0})]}\left(C_{*}\left(\widetilde{X}\right);G_{x_{0}}\right)\,.
 	\end{equation*}
 	L'\textbf{omologia}, risp. la \textbf{coomologia}, a coefficienti
 	in un sistema locale $\Gg$ sarà indicata con
@@ -215,12 +236,12 @@ e si verifica che questa azione commuta con il differenziale $d$.
 
 
 \begin{thm}[\textbf{Successione spettrale di Serre}]\label{Serre-SS}
-	Sia $M$ uno $\Z$-modulo.\todo{Oppure modulo su un qualunque anello?}	
-	Data una fibrazione di Serre $\pi:E \to B$,
+	Sia $M$ un gruppo abeliano.
+	Data una fibrazione di Serre $\pi:E \to B$, con $B$ connesso per archi,
 	esiste una successione spettrale $\Set{(E^{r}_{p,q},d^{r})}_{r \ge 2}$
 	concentrata nel primo quadrante data da
 	\begin{equation*}
-		E_{p,q}^{r} = H_{p}\left(B; \Set{H_{q}(E_{x};M)}\right)\,,
+		E_{p,q}^{2} = H_{p}\left(B; \Set{H_{q}(E_{x};M)}\right)\,,
 	\end{equation*}
 	convergente a $E^{\infty}_{p,q} = F_{p}H_{p+q}(E;M)$,
 	per una qualche filtrazione $F$ dell'omologia 
@@ -239,23 +260,66 @@ vediamo alcuni esempi per capirne il funzionamento.
 	Sia $SU(n)$ il gruppo delle matrici complesse unitarie con determinante $1$.
 	Ad esempio, per $n=2$ abbiamo
 	\begin{equation*}
-		SU(2) : \Set{ \begin{bmatrix} \alpha & \beta \\ \overline{\beta} & \overline{\alpha} \end{bmatrix}	
-		| {|alpha|}^{2}	+ {|\beta|}^{2} = 1 }
+		SU(2) = \Set{ \begin{bmatrix} z & \zeta \\ \overline{\zeta} & \overline{z} \end{bmatrix}	
+		| {|z|}^{2}	+ {|\zeta|}^{2} = 1 }
 		\simeq S^{3}\,.
 	\end{equation*}
 	La topologia di $SU(3)$ invece è più complicata
 	e usiamo il \hyperref[Serre-SS]{Teorema~\ref{Serre-SS}}
-	per studiarne l'omologia. La mappa 
+	per studiarne l'omologia. La mappa che considera la prima colonna
+	\begin{equation*}
+		SU(3) \longrightarrow S^{5}\,, \quad
+		A \longmapsto A \cdot e_{1}
+	\end{equation*}
+	dà luogo a una fibrazione $SU(2) \hookrightarrow SU(3) \to S^{5}$.
+	La pagina 
+	\begin{equation*}
+		E_{p,q}^{2} = H_{p}\left(S^{5}; H_{q}(SU(2))\right)
+	\end{equation*} 
+	della successione spettrale di Serre 
+	associata si concentra solo nelle colonne $p=0,5$ e nelle righe $q=0,3$,
+	come rappresentato in \hyperref[su3]{Figura~\ref{su3}}. 
+	Questo implica che la successione collassa alla seconda pagina,
+	e siccome
+	$E_{\bullet,\bullet}^{\infty} = E_{\bullet,\bullet}^{2}$,
+	si conclude che
+		\begin{equation*}
+		H_{p}\left( SU(3) \right) =
+		\begin{cases}
+			\Z\,, \quad &\text{se } p = 0,3,5,8\,;\\
+			0\,, \quad &\text{altrimenti.}
+		\end{cases}
+	\end{equation*}
 	
-	In maniera analoga possiamo studiare l'omologia
-	di $SU(4)$, infatti presa la fibrazione
+	\begin{figure}
+		\centering
+		\begin{tikzpicture}
+			\fill[opacity=.2] (-1,-0.5) -- (1, -0.5) -- (1,3.5) -- (-1,3.5) -- (-1,-0.5);
+			\fill[opacity=.2] (5,-0.5) -- (7, -0.5) -- (7,3.5) -- (5,3.5) -- (5,-0.5);
+			\draw[thick] (-1.5, -0.5) -- (7,-0.5) (-1,-1) -- (-1,3.5);
+			\draw 
+			(0,3) node(A){$\Z$} (6,3) node{$\Z$}
+			(0,2) node{$0$}  (6,2) node{$0$}
+			(0,1) node{$0$} (6,1) node(B){$0$}
+			(0,0) node{$\Z$} (6,0) node{$\Z$};
+			\draw 
+			(-1.5,3.6) node{$q$} (-1.5,0) node{$0$} (-1.5,3) node{$3$}
+			(0,-1) node{$0$} (6,-1) node{$5$} (7,-1) node{$p$};
+			\draw (0,4.1) node{$H_{*}(SU(2);\Z)$} (8,0) node{$H_{*}(S^{5})$};
+		\end{tikzpicture}
+		\caption{Pagina $E^{\bullet,\bullet}_{2}$ della successione di Serre di $SU(3)$.}
+    	\label{su3}
+	\end{figure}
+	
+	Possiamo studiare l'omologia
+	di $SU(4)$ in maniera analoga: infatti, presa la fibrazione
 	\begin{equation*}
 		SU(3) \hookrightarrow SU(4) \longrightarrow S^{7}\,,
 	\end{equation*}
 	otteniamo la successione spettrale la cui pagina $E^{2}_{\bullet,\bullet}$ 
-	è data da
-	\missingfigure{Pagina}
-	e quindi concludiamo che
+	ha soli $\Z$ concentrati nelle colonne $p=0,7$ e nelle righe $q=0,3,5,8$.
+	Si verifica che la successione collassa a questa pagina,
+	quindi concludiamo che
 	\begin{equation*}
 		H_{p}\left( SU(4) \right) =
 		\begin{cases}
@@ -270,27 +334,32 @@ vediamo alcuni esempi per capirne il funzionamento.
 		SU(4) \hookrightarrow SU(5) \longrightarrow S^{9}\,.
 	\end{equation*}
 	A questo punto $E^{2}_{\bullet,\bullet}$ 
-	è data da
-	\missingfigure{pagina con differenziali non banali}
+	è come in \hyperref[su5]{Figura~\ref{su5}}
 	e notiamo che potrebbero esserci due differenziali non banali.
 	Purtroppo non conosciamo la struttura di $d^{9}$,
 	quindi (per ora) non sappiamo come calcolare $H_{*}\left( SU(5) \right)$.
+	
+%		\begin{figure}
+%		\centering
+%		\begin{tikzpicture}
+%			\fill[opacity=.2] (-1,-0.5) -- (1, -0.5) -- (1,3.5) -- (-1,3.5) -- (-1,-0.5);
+%			\fill[opacity=.2] (5,-0.5) -- (7, -0.5) -- (7,3.5) -- (5,3.5) -- (5,-0.5);
+%			\draw[thick] (-1.5, -0.5) -- (7,-0.5) (-1,-1) -- (-1,3.5);
+%			\draw 
+%			(0,3) node(A){$\Z$} (6,3) node{$\Z$}
+%			(0,2) node{$0$}  (6,2) node{$0$}
+%			(0,1) node{$0$} (6,1) node(B){$0$}
+%			(0,0) node{$\Z$} (6,0) node{$\Z$};
+%			\draw 
+%			(-1.5,3.6) node{$q$} (-1.5,0) node{$0$} (-1.5,3) node{$3$}
+%			(0,-1) node{$0$} (6,-1) node{$5$} (7,-1) node{$p$};
+%			\draw (0,4.1) node{$H_{*}(SU(5);\Z)$} (8,0) node{$H_{*}(S^{9})$};
+%		\end{tikzpicture}
+%		\caption{Pagina $E^{\bullet,\bullet}_{2}$ della successione di Serre di $SU(3)$.}
+%    	\label{su3}
+%	\end{figure}
 \end{ex}
 
-Dato uno spazio topologico $X$, ricordiamo che possiamo costruire la fibrazione
-\begin{equation*}
-	\begin{tikzcd}
-		\Omega X \ar[r] & PX \ar[r, "ev_{1}"] & X\,,
-	\end{tikzcd}
-\end{equation*}
-dove lo spazio dei cammini $PX$ è contraibile. 
-Se supponiamo che $X$ sia $n$-connesso,
-preso il sistema locale $\Set{H_{q}(P_{x_{0}}^{x}X)}$,
-per il  \hyperref[Serre-SS]{Teorema~\ref{Serre-SS}} si ha
-\begin{equation*}
-	E^{2}_{p,q} = H_{q}(X;\Set{H_{q}(P_{x_{0}}^{x}X)})\,,
-\end{equation*}
-e \todo{Finire che non sto capendo}
 
 
 

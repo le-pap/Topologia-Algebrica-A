@@ -3,17 +3,70 @@
 
 \lecture[Omologia dello spazio dei loop su una sfera. Successione spettrale come funtore e teorema di confronto di successioni spettrali. Due dimostrazioni del teorema di successione spettrale di Serre.]{2023-04-24}
 
-	Abbiamo ricavato nuovamente il teorema di Hurewicz
-	per gruppi di omotopia superiore,
-	assumendo il risultato vero solo per $\pi_{1}$.\todo{recupera}
+	Dato uno spazio topologico $X$, ricordiamo che possiamo costruire la fibrazione
+\begin{equation*}
+	\begin{tikzcd}
+		\Omega X \ar[r, hook] & PX \ar[r, "ev_{1}"] & X\,,
+		& ev_{1} : \gamma \ar[r, mapsto] & \gamma(1)\,,
+	\end{tikzcd}
+\end{equation*}
+dove lo spazio dei cammini $PX = \Set{\gamma : I \to X | \gamma(0)=x_{0}}$ è contraibile.
+
+	\begin{prop}
+		Sia $X$ uno spazio $(n-1)$-connesso, cioè
+		\begin{equation*}
+			\pi_{0}(X, x_{0}) = \pi_{1}(X, x_{0}) = \dots = \pi_{n-1}(X, x_{0}) = 0\,.
+		\end{equation*}
+		Allora vale 
+		\begin{equation*}
+			H_{0}(X) = H_{1}(X) = \dots = H_{n-1}(X) = 0
+		\end{equation*}
+		e per ogni $r \le 2n-2$ si hanno isomorfismi $H_{r}(X) = H_{r-1}(\Omega X)$.
+		\begin{proof}
+			Considerato il sistema locale $\Set{H_{q}(P_{x_{0}}^{x}X)}_{x \in X}$,
+			per il  \hyperref[Serre-SS]{Teorema~\ref{Serre-SS}} si ha
+		\begin{equation*}
+			E^{2}_{p,q} = H_{p}(X;H_{q}(\Omega X)) \implies
+			E^{\infty}_{p,q} = F_{p}H_{p+q}(PX) 
+			= \begin{cases}
+					\Z\,, \quad &\text{se } p = q = 0 \,;\\
+					0\,, \quad &\text{altrimenti,}
+				\end{cases}
+		\end{equation*}
+			dato che $PX$ è contraibile. Dall'ipotesi di $(n-1)$-connessione
+			si deduce che 
+		\begin{equation*}
+			d^{r}_{r,0} : E^{r}_{r,0} = H_{r}(X) \longrightarrow E^{r}_{0,r-1} = H_{r-1}(\Omega X)
+		\end{equation*}
+		deve essere un isomorfismo per ogni $r \le 2n - 2$.
+		\missingfigure{pagina}
+		\end{proof}
+	\end{prop}
+
+	Come corollario di questo fatto, possiamo ottenere
+	il teorema di Hurewicz per gruppi di omotopia superiore,
+	assumendo il risultato vero solo per il gruppo fondamentale:
+	
+	\begin{cor}[Teorema di Hurewicz]
+		Dato $n \ge 2$, se $X$ è $(n-1)$-connesso, allora $H_{n}(X) \simeq \pi_{n}(X,x_{0})$.
+		\begin{proof}
+			Ricordando che $H_{1}(Y) \simeq \pi_{1}(Y,\ast)^{\mathrm{ab}}$ per ogni spazio $Y$,
+			è sufficiente notare che
+			\begin{equation*}
+				H_{n}(X) \simeq H_{1}\left( \Omega^{n-1} X \right)
+				\simeq \pi_{1}\left( \Omega^{n-1} X, \ast \right)
+				\simeq \pi_{n}(X, x_{0})\,.
+			\end{equation*}
+		\end{proof}
+	\end{cor}
 	
 	\begin{ex}
 		Studiamo i loop sulla sfera $S^{n}$.
-		Supponiamo che $n > 1$ così da avere la base semlicemente connessa.
+		Supponiamo che $n > 1$ così da avere la base semplicemente connessa.
 		Dalla fibrazione
 		\begin{equation*}
 			\begin{tikzcd}
-				\Omega S^{n} \ar[r] & PS^{n} \ar[r] & S^{n}
+				\Omega S^{n} \ar[r, hook] & PS^{n} \ar[r] & S^{n}
 			\end{tikzcd}
 		\end{equation*}
 		otteniamo la successione spettrale
@@ -21,19 +74,31 @@
 			E^{2}_{p,q} = H_{p}\big(S^{n},H_{q}(\Omega S^{n}) \big)\,.
 		\end{equation*}
 		La colonna $p=0$ è lo $0$-esimo gruppo di omologia di uno spazio connesso
-		a coefficienti in $H_{q}(\Omega S^{n})$, quindi la prima colonna è in realtà
-		l'omologia della fibra $H_{q}(\Omega S^{n})$. 
+		a coefficienti in $H_{*}(\Omega S^{n})$, quindi in realtà la prima colonna è
+		$H_{*}(\Omega S^{n})$. 
 		Tutte le altre colonne hanno gruppi banali, fino a quando
 		$p = n$, in cui ritroviamo l'omologia in grado $n$ di $S^{n}$
-		a coefficienti in $H_{q}(\Omega S^{n})$, che è isomorfa a $\Z$ per $q=n-1$.
+		a coefficienti in $H_{q}(\Omega S^{n})$.
+		Sappiamo che per $q=n-1$ vale $H_{n}\big(S^{n},H_{n-1}(\Omega S^{n}) \simeq \Z$,
+		ma dal momento che la successione converge all'omologia di uno spazio
+		contraibile se ne deduce che
+		\begin{equation*}
+			d^{n}_{n,0} : \Z \longrightarrow E^{n}_{0,n-1} = H_{n-1}(\Omega S^{n})
+		\end{equation*}
+		è un isomorfismo. Questo implica che 
+		$E^{n}_{n,n-1} = H_{n}(S^{n}; H_{n-1}(\Omega S^{n})) \simeq \Z$;
+		con la stessa argomentazione di prima segue che $H_{2n-2}(\Omega S^{n}) \simeq \Z$.
 		\missingfigure{Devo mettere una bella pagina di sta roba.}
 		
-		Procedendo per induzione, questo dimostra che per ogni $k \in \N$
+		Procedendo per induzione, questo dimostra che 
 		l'omologia di $\Omega S^{n}$ è
 		\begin{equation*}
-			H_{k(n-1)}(\Omega S^{n}) \simeq \Z
+			H_{q}(\Omega S^{n}) =
+			\begin{cases}
+				\Z\,, \quad &\text{se } (n-1)|q\,; \\
+				0\,, \quad &\text{altrimenti}.
+			\end{cases}
 		\end{equation*}
-		ed è banale in tutti gli altri gradi.\todo{non ho capito la roba della formula di Künneth e il limite...}
 	\end{ex}
 	
 	
